@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 9 Energy: The Mega Lesson (With Back Button)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- THEME & VARIABLES --- */
+        :root {
+            --primary: #2c3e50;
+            --accent: #8e44ad;
+            --highlight: #f1c40f;
+            --bg-odd: #ffffff;
+            --bg-even: #f4f6f7;
+            --mass: #e67e22; --height: #27ae60; --speed: #2980b9; --joules: #c0392b; --wrong: #e74c3c;
+        }
+        
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; color: var(--primary); padding-bottom: 120px; font-size: 1.6rem; }
+        h1 { font-family: 'Comic Neue', cursive; font-size: 4rem; color: var(--accent); margin: 0 0 15px 0; line-height: 1.1; }
+        h2 { font-family: 'Comic Neue', cursive; font-size: 2.8rem; color: #34495e; margin: 0 0 15px 0; }
+        h3 { font-size: 1.4rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
+        p, li { font-size: 1.6rem; line-height: 1.6; max-width: 900px; margin-bottom: 15px; }
+
+        /* --- SLIDE SETUP --- */
+        section {
+            min-height: 90vh; display: flex; flex-direction: column; align-items: center;
+            padding-top: 50px; padding-bottom: 40px; border-bottom: 4px dashed #bdc3c7;
+            position: relative; background-color: var(--bg-odd); scroll-margin-top: 20px;
+        }
+        section:nth-child(even) { background-color: var(--bg-even); }
+        
+        .module-header { background: var(--primary); color: white; width: 100%; text-align: center; padding: 40px; margin-bottom: 20px; }
+        .module-header h1 { color: white; }
+
+        .teacher-note {
+            background: #fff3cd; border: 2px solid #ffeeba; color: #856404;
+            padding: 10px 20px; border-radius: 8px; font-size: 1.2rem;
+            margin-bottom: 20px; width: 80%; max-width: 800px; text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .teacher-note::before { content: "👨‍🏫 TEACHER SCRIPT: "; font-weight: bold; }
+
+        /* --- INTERACTIVE ELEMENTS --- */
+        .fragment { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; filter: blur(2px); }
+        .fragment.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+        .copy-box {
+            background: #fff; border: 5px solid var(--highlight); border-radius: 15px;
+            padding: 30px; width: 85%; max-width: 900px; margin-top: 20px;
+            position: relative; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .copy-box::before {
+            content: "✍️ WRITE THIS DOWN"; position: absolute; top: -20px; left: 30px;
+            background: var(--highlight); color: black; font-weight: 800; font-size: 1rem;
+            padding: 5px 15px; border-radius: 5px;
+        }
+        .hl { background-color: var(--highlight); padding: 0 8px; border-radius: 4px; font-weight: bold; }
+
+        .math-step {
+            background: white; width: 95%; max-width: 800px; padding: 15px 25px;
+            border-left: 10px solid #bdc3c7; margin: 10px 0; text-align: left;
+            border-radius: 0 10px 10px 0; font-size: 1.4rem; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+        }
+        .math-step.active-step { border-left-color: var(--accent); background: #f4ecf7; transform: scale(1.02); }
+
+        .v-m { color: var(--mass); font-weight: bold; }
+        .v-h { color: var(--height); font-weight: bold; }
+        .v-v { color: var(--speed); font-weight: bold; }
+        .v-j { color: var(--joules); font-weight: bold; }
+
+        .error-card {
+            background: #fdedec; border: 3px dashed var(--wrong); padding: 20px;
+            border-radius: 10px; width: 85%; max-width: 800px; margin: 20px; text-align: left;
+        }
+        .correction {
+            background: #e9f7ef; border-left: 5px solid #27ae60; padding: 15px;
+            margin-top: 15px; border-radius: 5px;
+        }
+
+        /* Nav & Visuals */
+        .control-panel {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: white; padding: 10px; border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; gap: 10px;
+            border: 2px solid #bdc3c7;
+        }
+        .btn-nav { border: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1.1rem; color: white; transition: transform 0.2s; }
+        .btn-nav:hover { transform: translateY(-2px); }
+        .btn-next { background: var(--accent); }
+        .btn-back { background: #e67e22; }
+        .btn-save { background: #27ae60; } 
+        
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 90%; max-width: 800px; }
+        .menu-btn {
+            background: white; border: 3px solid var(--primary); padding: 30px; border-radius: 15px;
+            font-size: 1.5rem; font-weight: bold; cursor: pointer; transition: 0.2s;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .menu-btn:hover { transform: scale(1.05); background: var(--bg-even); border-color: var(--accent); }
+        .menu-icon { font-size: 3rem; }
+
+        .visual-toggle-btn { position: absolute; top: 20px; right: 20px; background: white; border: 2px solid #bdc3c7; color: #7f8c8d; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        .slide-visual-area { display: none; width: 60%; height: 250px; background: #ecf0f1; border: 4px dashed #bdc3c7; margin: 10px 0; align-items: center; justify-content: center; overflow: hidden; }
+        .slide-visual-area.active { display: flex; }
+        .slide-visual-area img { height: 100%; object-fit: contain; }
+        .file-input-hidden { display: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="control-panel">
+        <button class="btn-nav" style="background:#7f8c8d" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">☰ Menu</button>
+        <button class="btn-nav btn-back" onclick="goBack()">⬅ Back</button>
+        <button class="btn-nav btn-next" onclick="revealNext()">Next ➡</button>
+        <button class="btn-nav btn-save" onclick="downloadLesson()">💾</button>
+    </div>
+
+    <section id="menu" style="background:var(--primary); color:white;">
+        <h1>Energy Masterclass</h1>
+        <p>Select a module to begin.</p>
+        
+        <div class="menu-grid">
+            <button class="menu-btn" onclick="goTo('mod1')">
+                <span class="menu-icon">🛹</span>
+                Module 1: Kinetic Energy
+                <span style="font-size:1rem; font-weight:normal; color:#555;">(E-Scooters & Sports)</span>
+            </button>
+            <button class="menu-btn" onclick="goTo('mod2')">
+                <span class="menu-icon">🏋️</span>
+                Module 2: GPE
+                <span style="font-size:1rem; font-weight:normal; color:#555;">(Gym & Heights)</span>
+            </button>
+            <button class="menu-btn" onclick="goTo('mod3')">
+                <span class="menu-icon">📱</span>
+                Module 3: Efficiency
+                <span style="font-size:1rem; font-weight:normal; color:#555;">(Phones & Gaming)</span>
+            </button>
+            <button class="menu-btn" onclick="goTo('mod4')">
+                <span class="menu-icon">🔥</span>
+                Module 4: Boss Battle
+                <span style="font-size:1rem; font-weight:normal; color:#555;">(Mixed Challenge)</span>
+            </button>
+        </div>
+    </section>
+
+    <section id="mod1" class="module-header">
+        <h1>Module 1: Kinetic Energy</h1>
+        <p>The Energy of Movement</p>
+    </section>
+
+    <section>
+        <div class="teacher-note">"Who rode an E-Scooter or bike recently? Today we calculate how dangerous that is."</div>
+        <h3>The Formula</h3>
+        <h2>Kinetic Energy (KE)</h2>
+        <div class="copy-box fragment">
+            <p style="text-align:center; font-size:2.5rem; font-family:'Courier New'; font-weight:bold;">
+                KE = 0.5 × <span class="v-m">m</span> × <span class="v-v">v²</span>
+            </p>
+            <ul>
+                <li><span class="v-m">m</span> = Mass (kg)</li>
+                <li><span class="v-v">v</span> = Velocity (m/s)</li>
+                <li><strong>Crucial Step:</strong> You must SQUARE the speed first!</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <button class="visual-toggle-btn" onclick="toggleVisual(this)">📷 Visual</button>
+        <div class="slide-visual-area" onclick="triggerUpload(this)"><input type="file" class="file-input-hidden" onchange="handleFileSelect(event, this)"><div style="pointer-events:none">Paste Scooter Image</div><img src="" style="display:none"></div>
+
+        <h3>Practice Round</h3>
+        <h2>The E-Scooter</h2>
+        <p>A teenager on an E-scooter (Total Mass <span class="v-m">70kg</span>) travels at <span class="v-v">6 m/s</span>.</p>
+
+        <div class="math-step fragment">
+            <span>1. Square Velocity (<span class="v-v">6²</span>)</span>
+            <span>6 × 6 = <strong>36</strong></span>
+        </div>
+        <div class="math-step fragment">
+            <span>2. Setup Formula</span>
+            <span>0.5 × <span class="v-m">70</span> × 36</span>
+        </div>
+        <div class="math-step fragment active-step">
+            <span>3. Answer</span>
+            <span>35 × 36 = <strong class="v-j">1,260 J</strong></span>
+        </div>
+    </section>
+
+    <section>
+        <div class="teacher-note">"Look at Student Ben's answer. He is wrong. Why?"</div>
+        <h3>Spot the Mistake</h3>
+        <h2>The Fast Car</h2>
+        <p>Scenario: A <span class="v-m">1000kg</span> car moving at <span class="v-v">20 m/s</span>.</p>
+
+        <div class="error-card">
+            <strong>Student Ben's Working:</strong><br>
+            KE = 0.5 × 1000 × 20<br>
+            KE = 500 × 20<br>
+            KE = <strong>10,000 J</strong>
+        </div>
+
+        <div class="correction fragment">
+            <strong>❌ The Error:</strong>
+            <p>Ben forgot to <strong>SQUARE</strong> the velocity!</p>
+            <p>He used 20. He should have used <span class="v-v">400</span> (20²).</p>
+            <p>Correct Answer: 0.5 × 1000 × 400 = <strong class="v-j">200,000 J</strong></p>
+        </div>
+    </section>
+
+    <section>
+        <h3>Real Life Science</h3>
+        <h2>Why Speed Kills</h2>
+        <p>Why is a crash at 60 km/h so much worse than 30 km/h?</p>
+        
+        <div class="math-step fragment">
+            <span>Speed 30 km/h</span>
+            <span>Energy = <span class="v-j">1x</span></span>
+        </div>
+        <div class="math-step fragment">
+            <span>Speed 60 km/h (Double)</span>
+            <span>Energy = <span class="v-j">4x</span></span>
+        </div>
+        <div class="math-step fragment active-step">
+            <span>Speed 90 km/h (Triple)</span>
+            <span>Energy = <span class="v-j">9x</span></span>
+        </div>
+
+        <div class="copy-box fragment">
+            <p>Because of <strong>v²</strong>, small increases in speed create MASSIVE increases in energy. This is why braking distance gets so long at high speeds.</p>
+        </div>
+    </section>
+
+    <section id="mod2" class="module-header" style="background:#27ae60;">
+        <h1>Module 2: GPE</h1>
+        <p>Gravitational Potential Energy</p>
+    </section>
+
+    <section>
+        <div class="teacher-note">"This is energy stored in height. Think of lifting weights at the gym."</div>
+        <h3>The Formula</h3>
+        <h2>GPE</h2>
+        <div class="copy-box fragment">
+            <p style="text-align:center; font-size:2.5rem; font-family:'Courier New'; font-weight:bold;">
+                GPE = <span class="v-m">m</span> × <span class="v-h">g</span> × <span class="v-h">h</span>
+            </p>
+            <ul>
+                <li><span class="v-m">m</span> = Mass (kg)</li>
+                <li><span class="v-h">g</span> = Gravity (We use <strong>10</strong> N/kg)</li>
+                <li><span class="v-h">h</span> = Height (m)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <button class="visual-toggle-btn" onclick="toggleVisual(this)">📷 Visual</button>
+        <div class="slide-visual-area" onclick="triggerUpload(this)"><input type="file" class="file-input-hidden" onchange="handleFileSelect(event, this)"><div style="pointer-events:none">Paste Gym Image</div><img src="" style="display:none"></div>
+
+        <h3>Context: The Gym</h3>
+        <h2>The Deadlift</h2>
+        <p>A bodybuilder lifts a <span class="v-m">100kg</span> barbell to a height of <span class="v-h">2m</span>.</p>
+
+        <div class="math-step fragment">
+            <span>1. Identification</span>
+            <span>m=100, g=10, h=2</span>
+        </div>
+        <div class="math-step fragment">
+            <span>2. Calculation</span>
+            <span>100 × 10 × 2</span>
+        </div>
+        <div class="math-step fragment active-step">
+            <span>3. Answer</span>
+            <strong class="v-j">2,000 J</strong>
+        </div>
+        
+        <p class="fragment" style="margin-top:10px;"><em>If he drops it, that 2,000J turns into sound and impact damage!</em></p>
+    </section>
+
+    <section>
+        <div class="teacher-note">"Why does a phone break more often when you are on a call vs texting?"</div>
+        <h3>Scenario Comparison</h3>
+        <h2>The Phone Drop</h2>
+        <p>Phone Mass = 0.2 kg. Gravity = 10.</p>
+
+        <div class="math-step fragment">
+            <span>A: Dropped from pocket (<span class="v-h">1m</span>)</span>
+            <span>0.2 × 10 × 1 = <strong>2 J</strong></span>
+        </div>
+        <div class="math-step fragment">
+            <span>B: Dropped from ear (<span class="v-h">1.8m</span>)</span>
+            <span>0.2 × 10 × 1.8 = <strong>3.6 J</strong></span>
+        </div>
+
+        <div class="copy-box fragment">
+            <p>Dropping from your ear has nearly <strong>double</strong> the energy. That extra energy is what cracks the screen.</p>
+        </div>
+    </section>
+
+    <section>
+        <h3>Spot the Mistake</h3>
+        <h2>The Skater on the Ramp</h2>
+        <p>A <span class="v-m">50kg</span> skater stands on a <span class="v-h">4m</span> ramp.</p>
+
+        <div class="error-card">
+            <strong>Student Sarah's Working:</strong><br>
+            GPE = 50 × 4<br>
+            GPE = <strong>200 J</strong>
+        </div>
+
+        <div class="correction fragment">
+            <strong>❌ The Error:</strong>
+            <p>Sarah forgot <strong>Gravity (g)</strong>!</p>
+            <p>She did Mass × Height. She needs to multiply by 10.</p>
+            <p>Correct: 50 × 10 × 4 = <strong class="v-j">2,000 J</strong></p>
+        </div>
+    </section>
+
+    <section id="mod3" class="module-header" style="background:#e67e22;">
+        <h1>Module 3: Efficiency</h1>
+        <p>Phones, Consoles & Heat Waste</p>
+    </section>
+
+    <section>
+        <div class="teacher-note">"Why does your phone get hot when you play Roblox/Fortnite? That heat is WASTED energy."</div>
+        <h3>The Concept</h3>
+        <h2>Useful vs Wasted</h2>
+        <div class="copy-box fragment">
+            <ul>
+                <li><strong>Input:</strong> Total energy putting in (Battery/Electricity).</li>
+                <li><strong>Useful:</strong> What you want it to do (Light/Sound/Processor).</li>
+                <li><strong>Wasted:</strong> What you don't want (Heat).</li>
+                <li><strong>Formula:</strong> (Useful ÷ Total) × 100</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <button class="visual-toggle-btn" onclick="toggleVisual(this)">📷 Visual</button>
+        <div class="slide-visual-area" onclick="triggerUpload(this)"><input type="file" class="file-input-hidden" onchange="handleFileSelect(event, this)"><div style="pointer-events:none">Paste Charger Image</div><img src="" style="display:none"></div>
+
+        <h3>Tech Analysis</h3>
+        <h2>Wireless Charging</h2>
+        <p>Wireless chargers are convenient, but are they efficient?</p>
+        <p><strong>Input:</strong> 20 Watts. <strong>Useful (into battery):</strong> 14 Watts.</p>
+
+        <div class="math-step fragment">
+            <span>1. Division (Useful ÷ Total)</span>
+            <span>14 ÷ 20 = <strong>0.7</strong></span>
+        </div>
+        <div class="math-step fragment">
+            <span>2. Percentage</span>
+            <span>0.7 × 100</span>
+        </div>
+        <div class="math-step fragment active-step">
+            <span>3. Answer</span>
+            <strong class="v-j">70% Efficient</strong>
+        </div>
+        
+        <p class="fragment" style="color:#c0392b; font-weight:bold;">Where did the other 30% go? (Heat - that's why the phone gets warm).</p>
+    </section>
+
+    <section>
+        <h3>Gaming Hardware</h3>
+        <h2>PS5 / Xbox Series X</h2>
+        <p>These consoles use about <strong>200 Watts</strong> of power.</p>
+        <p>If the fans are blowing out hot air, is that efficient?</p>
+
+        <div class="copy-box fragment">
+            <p><strong>Scenario:</strong></p>
+            <ul>
+                <li>Input: 200 J/s</li>
+                <li>Useful (Computing/Graphics): 120 J/s</li>
+                <li>Wasted (Heat): 80 J/s</li>
+            </ul>
+        </div>
+
+        <div class="math-step fragment active-step" style="margin-top:20px;">
+            <span>Calculate Efficiency</span>
+            <span>(120 ÷ 200) × 100 = <strong class="v-j">60%</strong></span>
+        </div>
+    </section>
+
+    <section>
+        <h3>Spot the Mistake</h3>
+        <h2>The Magic Motor</h2>
+        <p><strong>Scenario:</strong> A motor uses 100J of electrical energy to lift a box (150J of work).</p>
+
+        <div class="error-card">
+            <strong>Student Tom's Working:</strong><br>
+            Efficiency = (150 ÷ 100) × 100<br>
+            Efficiency = 1.5 × 100<br>
+            Efficiency = <strong>150%</strong>
+        </div>
+
+        <div class="correction fragment">
+            <strong>❌ The Error:</strong>
+            <p><strong>Impossible Physics!</strong> You cannot get out more energy than you put in.</p>
+            <p>Tom either measured wrong or he broke the laws of the universe.</p>
+            <p>Efficiency can NEVER be over 100%.</p>
+        </div>
+    </section>
+
+    <section id="mod4" class="module-header" style="background:#2c3e50;">
+        <h1>Module 4: Boss Battle</h1>
+        <p>Harder Questions & Conservation of Energy</p>
+    </section>
+
+    <section>
+        <div class="teacher-note">"Energy is not created or destroyed. It just changes form."</div>
+        <h3>The Golden Rule</h3>
+        <h2>Conservation of Energy</h2>
+        <div class="fragment" style="font-size:3rem;">Top GPE = Bottom KE</div>
+        <p class="fragment">If a skater has <strong>2000J</strong> of GPE at the top of a ramp...</p>
+        <p class="fragment">They will have <strong>2000J</strong> of KE at the bottom (ignoring friction).</p>
+    </section>
+
+    <section>
+        <h3>Multi-Step Problem</h3>
+        <h2>The Half-Pipe</h2>
+        <p>Skater Mass: <span class="v-m">60kg</span>. Ramp Height: <span class="v-h">5m</span>.</p>
+
+        <div class="math-step fragment">
+            <span>Step 1: Calculate GPE at top</span>
+            <span>60 × 10 × 5 = <strong class="v-j">3,000 J</strong></span>
+        </div>
+        
+        <div class="math-step fragment">
+            <span>Step 2: How much KE at bottom?</span>
+            <span><strong>3,000 J</strong> (It converts!)</span>
+        </div>
+
+        <div class="math-step fragment active-step">
+            <span>Step 3: What happens if they brake?</span>
+            <span>Energy turns into <strong style="color:#c0392b">Heat</strong> (Friction)</span>
+        </div>
+    </section>
+
+    <section>
+        <h3>The Final Boss</h3>
+        <h2>Rearranging the Formula</h2>
+        <div class="teacher-note">Only for advanced students. Skip if class is struggling.</div>
+        <p>We know the GPE is <strong>500J</strong>. The Mass is <strong>5kg</strong>.</p>
+        <p>How <strong>High</strong> is the object?</p>
+
+        <div class="formula-pinned" style="border:2px solid var(--accent); padding:10px; border-radius:5px;">GPE = m × g × h</div>
+
+        <div class="math-step fragment">
+            <span>1. Substitute</span>
+            <span>500 = 5 × 10 × h</span>
+        </div>
+        <div class="math-step fragment">
+            <span>2. Simplify</span>
+            <span>500 = 50 × h</span>
+        </div>
+        <div class="math-step fragment active-step">
+            <span>3. Divide</span>
+            <span>500 ÷ 50 = <strong class="v-h">10 meters</strong></span>
+        </div>
+    </section>
+
+    <section>
+        <h3>Lesson Complete</h3>
+        <h2>Exit Ticket</h2>
+        <div class="copy-box">
+            <ol>
+                <li style="margin-bottom:15px;">Why does doubling speed quadruple energy? (Think of the formula).</li>
+                <li style="margin-bottom:15px;">A phone uses 10J input and gives 8J useful. Calculate efficiency.</li>
+                <li style="margin-bottom:15px;">Name one device that wastes energy as heat.</li>
+            </ol>
+        </div>
+    </section>
+
+    <script>
+        // NAVIGATION LOGIC
+        function revealNext() {
+            const hidden = document.querySelectorAll('.fragment:not(.visible)');
+            if (hidden.length > 0) {
+                const next = hidden[0];
+                next.classList.add('visible');
+                next.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        function goBack() {
+            const visible = document.querySelectorAll('.fragment.visible');
+            if (visible.length > 0) {
+                const lastVisible = visible[visible.length - 1];
+                lastVisible.classList.remove('visible');
+                
+                // Scroll logic for smoother backtracking
+                if (visible.length > 1) {
+                    visible[visible.length - 2].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    lastVisible.closest('section').scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+        
+        function goTo(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowDown' || e.code === 'ArrowRight') { 
+                e.preventDefault(); 
+                revealNext(); 
+            }
+            if (e.code === 'ArrowLeft' || e.code === 'Backspace') {
+                e.preventDefault();
+                goBack();
+            }
+        });
+
+        // VISUAL LOGIC
+        function toggleVisual(btn) {
+            const box = btn.nextElementSibling;
+            if (box.style.display === 'flex') { box.style.display = 'none'; } 
+            else { box.style.display = 'flex'; box.classList.add('active'); }
+        }
+        function triggerUpload(box) { box.querySelector('input').click(); }
+        function handleFileSelect(event, input) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = input.parentElement.querySelector('img');
+                    img.src = e.target.result; img.style.display = 'block';
+                    input.parentElement.querySelector('div').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // SAVE LOGIC
+        function downloadLesson() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Mega_Energy_Lesson.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            alert("Lesson Saved!");
+        }
+    </script>
+</body>
+</html>

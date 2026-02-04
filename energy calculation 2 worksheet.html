@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 9 Energy Masterclass Worksheet (Expanded)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- A4 PRINT SETUP --- */
+        @page { size: A4; margin: 10mm; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f0f0;
+            margin: 0; padding: 20px;
+            color: #222;
+            -webkit-print-color-adjust: exact;
+        }
+        
+        /* The Physical Page */
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout */
+        .columns { column-count: 2; column-gap: 10mm; height: 100%; text-align: justify; }
+
+        /* Typography */
+        h1 { font-family: 'Comic Neue', cursive; font-size: 26px; text-transform: uppercase; border-bottom: 3px solid #8e44ad; padding-bottom: 5px; margin-top: 0; color: #2c3e50; }
+        h2 { font-size: 14px; background: #2c3e50; color: white; padding: 6px 10px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; break-inside: avoid; border-radius: 4px; }
+        h3 { font-size: 13px; color: #8e44ad; margin: 10px 0 5px 0; border-bottom: 1px dashed #ccc; padding-bottom: 2px; break-inside: avoid; font-weight: bold; }
+        p, li, td { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+
+        /* Interactive Answer Zones */
+        .ans {
+            border-bottom: 1px solid #7f8c8d;
+            min-width: 30px;
+            display: inline-block;
+            cursor: pointer;
+            color: transparent;
+            transition: all 0.2s;
+            padding: 0 4px;
+            background: #fdfefe;
+            user-select: none;
+        }
+        .ans:hover { background-color: #fff9c4; }
+        .ans.revealed { color: #c0392b; border-bottom: 1px dotted #c0392b; font-weight: bold; background: transparent; }
+
+        /* Reading/Scaffold Boxes */
+        .reading-box { background: #f4ecf7; border: 1px solid #8e44ad; padding: 10px; margin-bottom: 10px; border-radius: 4px; break-inside: avoid; }
+        .scaffold-box { background: #fff3cd; border-left: 4px solid #f1c40f; padding: 8px; margin-bottom: 10px; font-size: 11px; font-style: italic; color: #555; break-inside: avoid; }
+
+        /* Drawing/Graph Box */
+        .drawing-box {
+            width: 100%; height: 80px;
+            border: 2px dashed #bdc3c7; margin: 10px 0;
+            position: relative; background: #fafafa;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            break-inside: avoid;
+        }
+        .hidden-content { opacity: 0; transition: opacity 0.3s; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column;}
+        .drawing-box.revealed .hidden-content { opacity: 1; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 15px; border: 1px solid #ddd; break-inside: avoid;}
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+        th { background: #ecf0f1; font-weight: bold; }
+
+        /* Screen Controls */
+        @media print {
+            body { background: white; padding: 0; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; height: auto; min-height: 297mm; }
+            .control-panel { display: none !important; }
+            .ans { color: transparent !important; border-bottom: 1px solid #333; } 
+            .ans.revealed { color: #27ae60 !important; }
+        }
+        .control-panel {
+            position: fixed; top: 20px; right: 20px; z-index: 999;
+            background: white; padding: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 8px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        button { cursor: pointer; padding: 8px 15px; background: #2980b9; color: white; border: none; border-radius: 4px; font-weight: bold; }
+        .reset-btn { background: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="control-panel">
+    <div style="font-size:12px; font-weight:bold; color:#555; margin-bottom:5px;">Teacher Controls</div>
+    <button onclick="revealAll()">👁️ Reveal Answers</button>
+    <button class="reset-btn" onclick="hideAll()">❌ Reset Worksheet</button>
+</div>
+
+<div class="page" id="page1">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <div>
+            <h1 style="margin:0; border:none;">Energy Masterclass</h1>
+            <span style="font-size:14px; color: #555;">Topic: Kinetic, GPE & Efficiency</span>
+        </div>
+        <div style="text-align:right; font-size:14px;">
+            Name: ______________________<br>
+            Date: ______________________
+        </div>
+    </div>
+
+    <div class="columns">
+        <h2>Part A: Vocab Match</h2>
+        <p><em>Match the definition to the word (draw lines or label A-D).</em></p>
+        <table>
+            <tr>
+                <td><strong>1. Dissipated</strong></td>
+                <td><span class="ans">[ C ]</span></td>
+                <td>A. Energy stored in height.</td>
+            </tr>
+            <tr>
+                <td><strong>2. Velocity</strong></td>
+                <td><span class="ans">[ D ]</span></td>
+                <td>B. Cannot be created or destroyed.</td>
+            </tr>
+            <tr>
+                <td><strong>3. Conservation</strong></td>
+                <td><span class="ans">[ B ]</span></td>
+                <td>C. Wasted energy (spreading out).</td>
+            </tr>
+            <tr>
+                <td><strong>4. GPE</strong></td>
+                <td><span class="ans">[ A ]</span></td>
+                <td>D. Speed in a direction.</td>
+            </tr>
+        </table>
+
+        <h2>Module 1: Kinetic Energy</h2>
+        <div class="scaffold-box">
+            <strong>Formula:</strong> KE = 0.5 × Mass × (Velocity)²
+        </div>
+        
+        <p><strong>1. Scenario: The Heavy Truck vs. Fast Car</strong></p>
+        <p><em>Which has more energy? Calculate both to check.</em></p>
+        
+        <div style="border:1px solid #ccc; padding:5px; margin-bottom:10px;">
+            <p><strong>Truck:</strong> Mass 2000kg @ 10m/s.</p>
+            <p>Calc: 0.5 × 2000 × <span class="ans">100 (10²)</span> = <span class="ans">100,000</span> J.</p>
+        </div>
+        
+        <div style="border:1px solid #ccc; padding:5px; margin-bottom:10px;">
+            <p><strong>Sports Car:</strong> Mass 1000kg @ 30m/s.</p>
+            <p>Calc: 0.5 × 1000 × <span class="ans">900 (30²)</span> = <span class="ans">450,000</span> J.</p>
+        </div>
+
+        <p><strong>Conclusion:</strong> Which factor increases energy more?</p>
+        <p>Answer: <span class="ans">Speed / Velocity</span> has a bigger effect than mass because it is <span class="ans">Squared (²).</span></p>
+
+        <p><strong>2. Graphing Sketch:</strong></p>
+        <p><em>Sketch the shape of the KE vs Speed graph line.</em></p>
+        <div class="drawing-box" onclick="this.classList.toggle('revealed')">
+            <span style="position:absolute; color:#999;">(Draw Curve)</span>
+            <div class="hidden-content">
+                <svg width="100" height="60">
+                    <line x1="10" y1="50" x2="90" y2="50" stroke="black"/>
+                    <line x1="10" y1="50" x2="10" y2="10" stroke="black"/>
+                    <path d="M10,50 Q40,45 90,10" stroke="blue" fill="none" stroke-width="2"/>
+                    <text x="50" y="40" font-size="8">Curved up</text>
+                </svg>
+            </div>
+        </div>
+
+        <h2>Module 2: GPE (Heights)</h2>
+        <div class="scaffold-box">
+            <strong>Formula:</strong> GPE = Mass × Gravity × Height (g=10)
+        </div>
+
+        <p><strong>1. Scenario: The Bungee Jump</strong></p>
+        <p>A 60kg jumper stands on a ledge 50m high.</p>
+        <p>a) Calculate their GPE at the top:</p>
+        <p>Calc: <span class="ans">60</span> × <span class="ans">10</span> × <span class="ans">50</span> = <span class="ans">30,000</span> J.</p>
+
+        <p>b) They jump! Halfway down (25m), what happens to their GPE?</p>
+        <p>Answer: It has <span class="ans">Halved / Decreased</span>.</p>
+        
+        <p>c) Where did that missing GPE go?</p>
+        <p>Answer: It converted into <span class="ans">Kinetic Energy (Movement)</span>.</p>
+
+        <p><strong>2. Spot the Mistake:</strong></p>
+        <p><em>Tom lifts a 10kg weight. He says he used 20J of energy. He lifted it 2 meters high.</em></p>
+        <p>Check his math: 10kg × 10(g) × 2m = <span class="ans">200 J</span>.</p>
+        <p>Tom is wrong by a factor of <span class="ans">10</span> (he likely forgot Gravity).</p>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 1/2</div>
+</div>
+
+<div class="page" id="page2">
+    <div style="display:flex; justify-content:space-between; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <h1 style="margin:0; border:none; font-size:24px; color:#2c3e50;">Efficiency & Challenge</h1>
+        <div style="font-size:16px; font-weight:bold;">Score: _______ / 25</div>
+    </div>
+
+    <div class="columns">
+        
+        <h2>Module 3: Efficiency & Waste</h2>
+        <div class="scaffold-box">
+            <strong>Formula:</strong> (Useful Energy ÷ Total Input) × 100
+        </div>
+
+        <p><strong>1. Scenario: Gaming PC vs Laptop</strong></p>
+        <p>A Gaming PC draws <strong>500W</strong> from the wall. Only <strong>300W</strong> is used for processing the game. The rest is heat.</p>
+        
+        <p>a) How much energy is wasted as heat?</p>
+        <p>Calc: 500 - 300 = <span class="ans">200</span> Watts.</p>
+
+        <p>b) Calculate the efficiency of the PC:</p>
+        <p>Calc: (<span class="ans">300</span> ÷ <span class="ans">500</span>) × 100 = <span class="ans">60</span> %.</p>
+
+        <p><strong>2. Visualising Waste (Sankey Diagram):</strong></p>
+        <p><em>Draw an arrow splitting into two. The straight arrow is USEFUL. The arrow bending down is WASTED.</em></p>
+        <p>Data: Input 100J -> Useful 20J -> Waste 80J.</p>
+
+        <div class="drawing-box" onclick="this.classList.toggle('revealed')">
+            <span style="position:absolute; color:#999;">(Draw Sankey Diagram)</span>
+            <div class="hidden-content">
+                <svg width="150" height="80">
+                    <path d="M10,30 L50,30" stroke="black" stroke-width="20" fill="none"/>
+                    <text x="10" y="20" font-size="8">100J In</text>
+                    
+                    <path d="M50,25 L140,25" stroke="#27ae60" stroke-width="4" fill="none"/>
+                    <text x="80" y="20" font-size="8" fill="#27ae60">20J Useful</text>
+
+                    <path d="M50,35 Q80,70 140,70" stroke="#c0392b" stroke-width="16" fill="none"/>
+                    <text x="80" y="80" font-size="8" fill="#c0392b">80J Waste</text>
+                </svg>
+            </div>
+        </div>
+        <p><em>Which arrow should be thicker? <span class="ans">The Waste Arrow (80J)</span>.</em></p>
+
+        <h2>Module 4: Boss Battle (Conservation)</h2>
+        
+        <div class="reading-box">
+            <div class="reading-title">Physics Law</div>
+            <p style="margin:0;">"Energy cannot be created or destroyed." This means in a perfect system (no friction), the GPE lost falling = the KE gained moving.</p>
+        </div>
+
+        <p><strong>1. The Pendulum Swing:</strong></p>
+        <p>A pendulum has <strong>50J</strong> of GPE at its highest point.</p>
+        <p>a) What is its Kinetic Energy (KE) at the very bottom?</p>
+        <p>Answer: <span class="ans">50 J</span> (All GPE turns to KE).</p>
+
+        <p>b) What is its KE at the highest point (where it stops for a split second)?</p>
+        <p>Answer: <span class="ans">0 J</span> (It is not moving).</p>
+
+        <p><strong>2. The Rollercoaster Challenge (Reverse Calc):</strong></p>
+        <p>We know a rollercoaster car has <strong>40,000J</strong> of GPE.</p>
+        <p>The Mass of the car is <strong>800kg</strong>.</p>
+        <p>How high is the drop? (Recall: GPE = m × g × h)</p>
+        
+        <p>Step 1: 40,000 = 800 × 10 × h</p>
+        <p>Step 2: 40,000 = <span class="ans">8000</span> × h</p>
+        <p>Step 3: 40,000 ÷ 8000 = <span class="ans">5</span> meters.</p>
+
+        <h2>Exit Ticket</h2>
+        <p><em>Circle True or False.</em></p>
+        <p>1. A LED light is more efficient than an old filament bulb. (<span class="ans">True</span>)</p>
+        <p>2. If you stop moving, your KE is zero. (<span class="ans">True</span>)</p>
+        <p>3. GPE depends on speed. (<span class="ans">False</span>)</p>
+        
+        <p><strong>Reflection:</strong></p>
+        <p>Why do perpetual motion machines (machines that spin forever) not exist?</p>
+        <p style="border-bottom:1px solid #ccc; min-height:18px;" class="ans">Because energy is always dissipated as heat/friction.</p>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 2/2</div>
+</div>
+
+<script>
+    const answers = document.querySelectorAll('.ans');
+    answers.forEach(ans => ans.addEventListener('click', (e) => {
+        e.stopPropagation();
+        ans.classList.toggle('revealed');
+    }));
+
+    function revealAll() {
+        answers.forEach(ans => ans.classList.add('revealed'));
+        document.querySelectorAll('.drawing-box').forEach(b => b.classList.add('revealed'));
+    }
+
+    function hideAll() {
+        answers.forEach(ans => ans.classList.remove('revealed'));
+        document.querySelectorAll('.drawing-box').forEach(b => b.classList.remove('revealed'));
+    }
+</script>
+
+</body>
+</html>
