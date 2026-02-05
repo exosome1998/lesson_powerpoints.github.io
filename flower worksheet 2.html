@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 Australian Pollination Literacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- A4 PRINT SETUP --- */
+        @page { size: A4; margin: 10mm; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f0f0;
+            margin: 0; padding: 20px;
+            color: #222;
+            -webkit-print-color-adjust: exact;
+        }
+        
+        /* The Physical Page */
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout */
+        .columns { column-count: 2; column-gap: 10mm; height: 100%; text-align: justify; }
+
+        /* Typography */
+        h1 { font-family: 'Comic Neue', cursive; font-size: 26px; text-transform: uppercase; border-bottom: 3px solid #2980b9; padding-bottom: 5px; margin-top: 0; color: #2c3e50; }
+        h2 { font-size: 14px; background: #2980b9; color: white; padding: 6px 10px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; break-inside: avoid; border-radius: 4px; }
+        h3 { font-size: 13px; color: #d35400; margin: 10px 0 5px 0; border-bottom: 1px dashed #ccc; padding-bottom: 2px; break-inside: avoid; font-weight: bold; }
+        p, li, td { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+
+        /* Interactive Answer Zones */
+        .ans {
+            border-bottom: 1px solid #7f8c8d;
+            min-width: 30px;
+            display: inline-block;
+            cursor: pointer;
+            color: transparent;
+            transition: all 0.2s;
+            padding: 0 4px;
+            background: #fdfefe;
+            user-select: none;
+        }
+        .ans:hover { background-color: #fff9c4; }
+        .ans.revealed { color: #c0392b; border-bottom: 1px dotted #c0392b; font-weight: bold; background: transparent; }
+
+        /* Reading Passage Box */
+        .reading-box {
+            background: #fcf3cf;
+            border: 1px solid #f1c40f;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .reading-title {
+            font-weight: bold;
+            color: #d35400;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        /* Scaffolding Box */
+        .scaffold-box {
+            background: #eafaf1;
+            border-left: 4px solid #27ae60;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 11px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        /* Verb Definition Box */
+        .verb-box {
+            background: #e8f8f5;
+            border: 1px solid #1abc9c;
+            padding: 5px;
+            margin: 5px 0;
+            font-size: 11px;
+            font-weight: bold;
+            color: #16a085;
+            text-align: center;
+        }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 15px; border: 1px solid #ddd; break-inside: avoid;}
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+        th { background: #ecf0f1; font-weight: bold; }
+
+        /* Screen Controls */
+        @media print {
+            body { background: white; padding: 0; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; height: auto; min-height: 297mm; }
+            .control-panel { display: none !important; }
+            .ans { color: transparent !important; border-bottom: 1px solid #333; } 
+            .ans.revealed { color: #c0392b !important; }
+        }
+        .control-panel {
+            position: fixed; top: 20px; right: 20px; z-index: 999;
+            background: white; padding: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 8px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        button { cursor: pointer; padding: 8px 15px; background: #2980b9; color: white; border: none; border-radius: 4px; font-weight: bold; }
+        .reset-btn { background: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="control-panel">
+    <div style="font-size:12px; font-weight:bold; color:#555; margin-bottom:5px;">Teacher Controls</div>
+    <button onclick="revealAll()">👁️ Reveal Answers</button>
+    <button class="reset-btn" onclick="hideAll()">❌ Reset Worksheet</button>
+</div>
+
+<div class="page" id="page1">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <div>
+            <h1 style="margin:0; border:none;">Australian Pollinators</h1>
+            <span style="font-size:14px; color: #555;">Focus: Science Literacy (Describe, Explain, Evaluate)</span>
+        </div>
+        <div style="text-align:right; font-size:14px;">
+            Name: ______________________<br>
+            Date: ______________________
+        </div>
+    </div>
+
+    <div class="columns">
+        <h2>Part A: Structure Recap</h2>
+        <div class="scaffold-box">
+            <strong>Revision:</strong> Remember, the <strong>Sta-MEN</strong> is male, and the <strong>Carpel</strong> is female.
+        </div>
+        
+        <p><strong>1. Fill in the gaps:</strong></p>
+        <p>The male part of the flower consists of the Anther and the <span class="ans">Filament</span>.</p>
+        <p>The female part consists of the Stigma, Style, and <span class="ans">Ovary</span>.</p>
+        
+        <p><strong>2. Match the function:</strong></p>
+        <table>
+            <tr>
+                <th>Part</th>
+                <th>Function (Click to reveal)</th>
+            </tr>
+            <tr>
+                <td>Anther</td>
+                <td>Produces <span class="ans">Pollen</span></td>
+            </tr>
+            <tr>
+                <td>Stigma</td>
+                <td>Catches <span class="ans">Pollen</span> (Sticky)</td>
+            </tr>
+            <tr>
+                <td>Nectar</td>
+                <td>Sugary food to attract <span class="ans">Pollinators</span></td>
+            </tr>
+        </table>
+
+        <h2>Part B: Insect Pollination</h2>
+        
+        <div class="reading-box">
+            <div class="reading-title">Case Study 1: The Golden Wattle</div>
+            <p style="margin:0;">The Golden Wattle (<em>Acacia pycnantha</em>) is Australia's floral emblem. It has bright yellow, fluffy flowers arranged in small balls. It produces a sweet scent and a moderate amount of sticky pollen. It attracts many small insects, particularly beetles and native bees, which crawl over the flower balls.</p>
+        </div>
+
+        <div class="verb-box">VERB: DESCRIBE = Say what it is (Features)</div>
+        
+        <div class="scaffold-box">
+            <strong>Sentence Starter:</strong> "The Golden Wattle features..." or "It looks like..."
+        </div>
+
+        <p><strong>1. Describe the features of the Golden Wattle that attract insects.</strong></p>
+        <p>The Golden Wattle has <span class="ans">Bright / Yellow</span> flowers that are easily seen. It produces a <span class="ans">Sweet Scent</span> to signal food is available.</p>
+        
+        <div class="verb-box">VERB: EXPLAIN = Say HOW or WHY it works</div>
+
+        <div class="scaffold-box">
+            <strong>Sentence Starter:</strong> "The pollen is sticky <em>because</em>..." or "This allows..."
+        </div>
+
+        <p><strong>2. Explain why the pollen needs to be sticky.</strong></p>
+        <p>The pollen is sticky so that it <span class="ans">Attaches / Sticks</span> to the body of the bee or beetle. This ensures the insect carries it to the next <span class="ans">Flower / Stigma</span>.</p>
+
+        <h2>Part C: Mammal Pollination</h2>
+        
+        <div class="reading-box">
+            <div class="reading-title">Case Study 2: The Banksia & The Possum</div>
+            <p style="margin:0;">Many Australian Banksias are pollinated by mammals, like the Honey Possum or Sugar Glider. These animals are much heavier than bees! To support them, Banksia flowers grow on a tough, woody spike. They produce huge amounts of nectar (energy) and often smell musky or "mouse-like" rather than sweet. They are often dull in color because mammals usually visit at night and use smell, not sight.</p>
+        </div>
+
+        <p><strong>1. Compare the features:</strong></p>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Wattle (Insect)</th>
+                <th>Banksia (Mammal)</th>
+            </tr>
+            <tr>
+                <td><strong>Smell</strong></td>
+                <td>Sweet</td>
+                <td><span class="ans">Musky / Mouse-like</span></td>
+            </tr>
+            <tr>
+                <td><strong>Strength</strong></td>
+                <td>Delicate</td>
+                <td><span class="ans">Strong / Woody</span></td>
+            </tr>
+            <tr>
+                <td><strong>Nectar</strong></td>
+                <td>Small amount</td>
+                <td><span class="ans">Large amount</span></td>
+            </tr>
+        </table>
+
+        <div class="verb-box">VERB: EXPLAIN = Cause and Effect</div>
+
+        <p><strong>2. Explain why the Banksia must be strong and woody.</strong></p>
+        <p>
+            <span class="ans">Because mammals are heavy.</span><br>
+            <span style="font-size:10px; color:#555;">(Click to reveal Answer)</span>
+        </p>
+        <p><em>Scaffold: The Banksia must be strong so it can support the...</em> <span class="ans">Weight of the Possum</span>.</p>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 1/2</div>
+</div>
+
+<div class="page" id="page2">
+    <div style="display:flex; justify-content:space-between; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <h1 style="margin:0; border:none; font-size:24px; color:#2c3e50;">Critical Analysis</h1>
+        <div style="font-size:16px; font-weight:bold;">Score: _______ / 15</div>
+    </div>
+
+    <div class="columns">
+        
+        <h2>Part D: Evaluation Task</h2>
+        <div class="verb-box">VERB: EVALUATE = Make a judgment & support it</div>
+        
+        <div class="scaffold-box">
+            <strong>How to Evaluate:</strong>
+            1. Make a choice (Judgment).<br>
+            2. Give a reason "For" (Pro).<br>
+            3. Give a reason "Against" (Con).<br>
+            4. Conclusion.
+        </div>
+
+        <div class="reading-box">
+            <div class="reading-title">Scenario: The Windy Cliff</div>
+            <p style="margin:0;">Imagine you are planting a garden on a very windy cliff-top in Australia. There are very few insects because the wind blows them away. However, there are many birds and small possums living in the bushes.</p>
+        </div>
+
+        <p><strong>Question: Evaluate which plant would survive best on the cliff: The Wattle (Insect pollinated) or the Banksia (Bird/Mammal pollinated)?</strong></p>
+
+        <p><strong>Step 1: Make your Judgment.</strong></p>
+        <p>I think the <span class="ans">Banksia</span> would be the most successful plant.</p>
+
+        <p><strong>Step 2: Provide Evidence (The "Why").</strong></p>
+        <p><em>Use the word "because" to connect your idea.</em></p>
+        <p>It would succeed because the local pollinators are <span class="ans">Possums / Birds</span>, not insects. Also, insects cannot fly well in the <span class="ans">Wind</span>.</p>
+
+        <p><strong>Step 3: Consider the Alternative (The "Counter").</strong></p>
+        <p>The Wattle would fail because...</p>
+        <p><span class="ans">The wind would blow the insects away.</span></p>
+
+        <h2>Part E: Literacy Challenge</h2>
+        <p><em>Connect the scientific terms to their definitions.</em></p>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:15px;">
+            <div style="border:1px solid #ccc; padding:5px;">
+                <strong>1. Adaptations</strong><br>
+                Definition: <span class="ans">Features that help survival</span>
+            </div>
+            <div style="border:1px solid #ccc; padding:5px;">
+                <strong>2. Pollination</strong><br>
+                Definition: <span class="ans">Moving pollen to stigma</span>
+            </div>
+            <div style="border:1px solid #ccc; padding:5px;">
+                <strong>3. Fertilization</strong><br>
+                Definition: <span class="ans">Joining of pollen + egg</span>
+            </div>
+            <div style="border:1px solid #ccc; padding:5px;">
+                <strong>4. Dispersal</strong><br>
+                Definition: <span class="ans">Spreading seeds away</span>
+            </div>
+        </div>
+
+        <h2>Part F: Bird Pollination (Extension)</h2>
+        <div class="reading-box">
+            <div class="reading-title">The Kangaroo Paw</div>
+            <p style="margin:0;">The Red-and-Green Kangaroo Paw has a long, tubular shape. Insects cannot reach the nectar at the bottom! Only birds with long beaks (like Honeyeaters) can drink the nectar. As the bird pushes its head in, the anthers brush pollen onto the bird's head.</p>
+        </div>
+
+        <p><strong>1. Describe the shape of the flower.</strong></p>
+        <p>It is long and <span class="ans">Tubular</span>.</p>
+
+        <p><strong>2. Explain why this shape stops insects.</strong></p>
+        <p>Insects are too small and don't have long <span class="ans">Beaks / Tongues</span> to reach the nectar.</p>
+        
+        <p><strong>3. Draw a line of logic:</strong></p>
+        <p>Bird drinks nectar -> Pollen rubs on <span class="ans">Head</span> -> Bird flies to next flower -> Pollen rubs on <span class="ans">Stigma</span>.</p>
+
+        <h2>Part G: Exit Ticket</h2>
+        <p><strong>Circle the correct verb for these questions:</strong></p>
+        
+        <p>1. "List the parts of a flower."</p>
+        <p>Is this Describe, Explain, or Recall? -> <span class="ans">Recall</span></p>
+
+        <p>2. "Why does the Banksia smell musky?"</p>
+        <p>Is this Describe or Explain? -> <span class="ans">Explain</span></p>
+
+        <p>3. "Decide if wind pollination is efficient."</p>
+        <p>Is this Explain or Evaluate? -> <span class="ans">Evaluate</span></p>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 2/2</div>
+</div>
+
+<script>
+    const answers = document.querySelectorAll('.ans');
+    answers.forEach(ans => ans.addEventListener('click', (e) => {
+        e.stopPropagation();
+        ans.classList.toggle('revealed');
+    }));
+
+    function revealAll() {
+        answers.forEach(ans => ans.classList.add('revealed'));
+    }
+
+    function hideAll() {
+        answers.forEach(ans => ans.classList.remove('revealed'));
+    }
+</script>
+
+</body>
+</html>
