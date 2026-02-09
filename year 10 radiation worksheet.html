@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Radiation Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- A4 PRINT SETUP --- */
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f0f0; 
+            margin: 0;
+            padding: 20px;
+            color: #222;
+            -webkit-print-color-adjust: exact;
+        }
+        
+        /* The Physical Page */
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 2-Column Layout */
+        .columns {
+            column-count: 2;
+            column-gap: 10mm;
+            height: 100%;
+            text-align: justify;
+        }
+
+        /* Typography - PHYSICS THEME (Red/Orange) */
+        h1 { font-size: 24px; text-transform: uppercase; border-bottom: 3px solid #c0392b; padding-bottom: 5px; margin-top: 0; color: #c0392b; }
+        h2 { font-size: 14px; background: #c0392b; color: white; padding: 6px 10px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; break-inside: avoid; border-radius: 4px; }
+        h3 { font-size: 13px; color: #d35400; margin: 12px 0 5px 0; border-bottom: 1px dashed #ccc; padding-bottom: 2px; break-inside: avoid; font-weight: bold; }
+        p, li, td { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+        
+        /* Interactive Answer Zones */
+        .ans {
+            border-bottom: 1px solid #7f8c8d;
+            min-width: 40px;
+            display: inline-block;
+            cursor: pointer;
+            color: transparent; 
+            transition: all 0.3s;
+            padding: 0 4px;
+            user-select: none;
+            background: #f9f9f9;
+        }
+        .ans:hover { background-color: #fadbd8; }
+        
+        /* Revealed State */
+        .ans.revealed {
+            color: #c0392b; /* Red Text for answers */
+            border-bottom: 1px dotted #c0392b;
+            font-weight: bold;
+            background: transparent;
+        }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 15px; break-inside: avoid; border: 1px solid #ddd; }
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+        th { background: #fadbd8; font-weight: bold; color: #641e16; }
+
+        /* Diagram Box */
+        .graph-container {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #2c3e50;
+            margin: 15px 0;
+            position: relative;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        /* The Hidden Answer Line in Graph */
+        .graph-answer {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        .graph-container.revealed .graph-answer { opacity: 1; }
+
+        /* Control Panel (Screen Only) */
+        @media print {
+            body { background: white; padding: 0; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; height: auto; min-height: 297mm; }
+            .control-panel { display: none !important; }
+            .ans { color: transparent !important; border-bottom: 1px solid #333; } 
+            .ans.revealed { color: #c0392b !important; }
+        }
+
+        .control-panel {
+            position: fixed; top: 20px; right: 20px; z-index: 999;
+            background: white; padding: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 8px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        button { cursor: pointer; padding: 8px 15px; background: #2980b9; color: white; border: none; border-radius: 4px; font-weight: bold; }
+        button:hover { background: #3498db; }
+        .reset-btn { background: #e74c3c; }
+        .reset-btn:hover { background: #c0392b; }
+        
+        /* Math Steps Box */
+        .math-box { background:#fadbd8; padding:10px; border:1px solid #e6b0aa; margin-bottom:15px; border-radius: 5px; font-size: 11px; }
+        
+        /* Equation Highlight */
+        .eqn { font-family: 'Courier New', monospace; background: #eee; padding: 2px 5px; border-radius: 3px; font-weight: bold; font-size: 11px; color: #c0392b; }
+
+    </style>
+</head>
+<body>
+
+<div class="control-panel">
+    <div style="font-size:12px; font-weight:bold; color:#555; margin-bottom:5px;">Teacher Controls</div>
+    <button onclick="revealAll()">👁️ Reveal Answers</button>
+    <button class="reset-btn" onclick="hideAll()">❌ Reset Worksheet</button>
+</div>
+
+<div class="page" id="page1">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <div>
+            <h1 style="margin:0; border:none; font-size: 28px;">Thermal Radiation</h1>
+            <span style="font-size:14px; color: #555;">Topic: Heat Transfer, Surfaces & Cooling</span>
+        </div>
+        <div style="text-align:right; font-size:14px;">
+            Name: ______________________<br>
+            Date: ______________________
+        </div>
+    </div>
+
+    <div class="columns">
+        <h2>A. Literacy: The Vacuum Problem</h2>
+        <p><em>Fill in the blanks using the word bank to apply the concept.</em></p>
+        <p><strong>Bank:</strong> [ Particles, Waves, Vacuum, Infrared ]</p>
+        
+        <p>Conduction and Convection both require <span class="ans">Particles</span> to move heat. However, Space is a <span class="ans">Vacuum</span> (it is empty).</p>
+        <p>Heat from the Sun reaches Earth by travelling as <span class="ans">Waves</span>. This type of invisible light is called <span class="ans">Infrared</span> Radiation.</p>
+        
+        <h3>Thinking: The Thermos Flask</h3>
+        <p>A thermos has a vacuum gap (no air) between the inner and outer wall.</p>
+        <table>
+            <tr>
+                <th style="width: 50%">Question</th>
+                <th>Reasoning</th>
+            </tr>
+            <tr>
+                <td>1. Can conduction happen across the gap?</td>
+                <td><span class="ans">No</span>, because there are no solids touching.</td>
+            </tr>
+            <tr>
+                <td>2. Can convection happen across the gap?</td>
+                <td><span class="ans">No</span>, because there is no air/gas to move.</td>
+            </tr>
+            <tr>
+                <td>3. Can radiation cross the gap?</td>
+                <td><span class="ans">Yes</span>, waves can travel through empty space.</td>
+            </tr>
+        </table>
+
+        <h2>B. Real Life: Surfaces & Survival</h2>
+        <p>Different surfaces behave differently with radiation. Apply the rule: <strong>Black Absorbs/Emits</strong>, <strong>Silver Reflects</strong>.</p>
+        
+        <p><strong>1. The Car Bonnet Scenario:</strong></p>
+        <p>Two cars are parked in the blazing sun. One is Matte Black, one is Shiny Silver.</p>
+        <p>Which car bonnet will fry an egg faster?</p>
+        <p>Answer: The <span class="ans">Black</span> car, because it is a good <span class="ans">Absorber</span> of radiation.</p>
+
+        <p><strong>2. The Marathon Runner:</strong></p>
+        <p>Runners are wrapped in shiny "Foil Blankets" after a race to stop them getting hypothermia (too cold).</p>
+        <p>Why isn't the blanket painted black?</p>
+        <p>Answer: A black blanket would <span class="ans">Emit</span> (give out) their body heat. The foil blanket <span class="ans">Reflects</span> the heat back to their body.</p>
+
+        <h2>C. Numeracy: Rate of Cooling</h2>
+        <div class="math-box">
+            <strong>Formula:</strong><br>
+            Rate of Cooling = Temperature Drop &div; Time Taken
+        </div>
+
+        <p><strong>1. Analyze the Data:</strong></p>
+        <p>A cup of tea starts at <strong>80°C</strong>. After <strong>10 minutes</strong>, it cools down to <strong>40°C</strong>.</p>
+        
+        <p><strong>2. Calculate the Drop:</strong></p>
+        <p>Total Drop = Start - End = <span class="ans">40</span> °C.</p>
+
+        <p><strong>3. Calculate the Rate:</strong></p>
+        <p>How many degrees did it lose <em>per minute</em>?</p>
+        <p><span class="eqn">Rate = 40 ÷ 10</span></p>
+        <p>Answer: <span class="ans">4</span> °C per minute.</p>
+
+        <p><strong>4. Prediction:</strong></p>
+        <p>If the rate stays the same, what will the temperature be after <em>another</em> 2 minutes?</p>
+        <p>Calculation: 40°C - (2 &times; 4) = <span class="ans">32</span> °C.</p>
+
+        <h2>D. Scientific Sketching</h2>
+        <div style="float:right; width: 80px; height: 80px; border:1px solid #ccc; margin:0 0 5px 10px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; font-size:9px; text-align:center;">Draw Here</div>
+        <p><strong>Task:</strong> Draw the heat transfer.</p>
+        <ul>
+            <li>Draw a square (The Object).</li>
+            <li>Draw wavy arrows coming <strong>OUT</strong> of it.</li>
+            <li>Label the arrows "Infrared".</li>
+        </ul>
+        <p><strong>Question:</strong> If this object is hotter than the room, are the arrows going In or Out?</p>
+        <p>Answer: <span class="ans">Out</span> (Emission).</p>
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 1/2</div>
+</div>
+
+<div class="page" id="page2">
+    <div style="display:flex; justify-content:space-between; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <h1 style="margin:0; border:none; font-size: 28px;">Applying The Science</h1>
+        <div style="font-size:16px; font-weight:bold;">Score: _______ / 20</div>
+    </div>
+
+    <div class="columns">
+        
+        <h2>E. Engineering: The Pizza Oven</h2>
+        <p>A traditional pizza oven is made of stone. The chef wants to design a metal one that heats up as fast as possible.</p>
+        
+        <p><strong>1. Design Choice (Color):</strong></p>
+        <p>Should the inside of the oven be painted Matte Black or Shiny Silver?</p>
+        <p>Answer: <span class="ans">Matte Black</span>.</p>
+        <p><strong>Why?</strong> Because black is the best <span class="ans">Absorber</span> of heat.</p>
+
+        <p><strong>2. Design Choice (Shape):</strong></p>
+        <p><em>Click the box to reveal the heat flow.</em></p>
+        <div class="graph-container" onclick="this.classList.toggle('revealed')">
+            <svg width="100%" height="100%" viewBox="0 0 200 100" preserveAspectRatio="none">
+                <path d="M90,90 L100,60 L110,90" fill="orange" stroke="red"/>
+                <rect x="20" y="20" width="10" height="80" fill="#333"/>
+                <rect x="170" y="20" width="10" height="80" fill="#bdc3c7" stroke="#333"/>
+                
+                <text x="25" y="15" font-size="10">Black Wall</text>
+                <text x="160" y="15" font-size="10">Silver Wall</text>
+            </svg>
+            
+            <div class="graph-answer">
+                <path d="M85,70 L35,70" stroke="red" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow)"/>
+                <text x="40" y="65" font-size="10" fill="red">Absorbed</text>
+
+                <path d="M115,70 L165,70 L135,40" fill="none" stroke="blue" stroke-width="2" marker-end="url(#arrow)"/>
+                <text x="130" y="35" font-size="10" fill="blue">Reflected</text>
+            </div>
+        </div>
+
+        <h2>F. Data Analysis: The Cooling Curve</h2>
+        <p>We measured the temperature of boiling water as it cooled down in a beaker.</p>
+        
+        <table>
+            <tr><th>Time (min)</th><th>Temp (°C)</th></tr>
+            <tr><td>0</td><td>100</td></tr>
+            <tr><td>2</td><td>80</td></tr>
+            <tr><td>4</td><td>65</td></tr>
+            <tr><td>6</td><td>55</td></tr>
+            <tr><td>8</td><td>50</td></tr>
+        </table>
+
+        <p><strong>1. Plot the Trend:</strong></p>
+        <p><em>Click to see the line of best fit.</em></p>
+        <div class="graph-container" onclick="this.classList.toggle('revealed')">
+            <div class="axis-label" style="bottom:-15px; left:40%;">Time (min)</div>
+            <div class="axis-label" style="top:40%; left:-25px; transform:rotate(-90deg);">Temp (°C)</div>
+            
+            <svg class="graph-answer" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <line x1="10" y1="90" x2="90" y2="90" stroke="black" stroke-width="1"/>
+                <line x1="10" y1="90" x2="10" y2="10" stroke="black" stroke-width="1"/>
+                
+                <path d="M10,10 Q30,60 90,80" fill="none" stroke="red" stroke-width="2"/>
+                
+                <circle cx="10" cy="10" r="2" fill="black"/>
+                <circle cx="30" cy="30" r="2" fill="black"/>
+                <circle cx="50" cy="45" r="2" fill="black"/>
+                <circle cx="70" cy="55" r="2" fill="black"/>
+                <circle cx="90" cy="60" r="2" fill="black"/>
+            </svg>
+        </div>
+
+        <p><strong>2. Analyze the Shape:</strong></p>
+        <p>Is the line straight or curved?</p>
+        <p>Answer: <span class="ans">Curved</span>.</p>
+        
+        <p><strong>3. Critical Thinking:</strong></p>
+        <p>Does the water cool down faster at the start (100°C) or the end (55°C)?</p>
+        <p>Answer: It cools fastest at the <span class="ans">Start</span> because the difference in temperature is largest.</p>
+
+        <h2>G. Scenario: The Computer Chip</h2>
+        <p>A computer chip gets very hot. Engineers attach a metal "Heat Sink" to cool it down.</p>
+        
+        <p><strong>1. Surface Area Application:</strong></p>
+        <p>The heat sink has lots of fins (spikes). Why?</p>
+        <p>To increase <span class="ans">Surface Area</span> so it can emit more heat.</p>
+        
+        <p><strong>2. Color Choice:</strong></p>
+        <p>What color should the heat sink be painted?</p>
+        <p>[ <span class="ans">Matte Black</span> / Shiny Silver ]</p>
+
+        <h2>H. Exit Ticket</h2>
+        <div style="background:#fff; border:2px solid #c0392b; padding:15px; font-size:12px; line-height:1.6;">
+            <strong>Circle the correct words:</strong><br><br>
+            1. Radiation [ DOES / <span class="ans">DOES NOT</span> ] require particles.<br>
+            2. To keep coffee hot, use a [ Black / <span class="ans">Silver</span> ] cup.<br>
+            3. A hot object emits [ <span class="ans">Infrared</span> / Ultraviolet ] waves.
+        </div>
+
+        <div style="margin-top:20px; border:1px dashed #ccc; padding:10px;">
+            <strong>Self Reflection:</strong><br>
+            I can calculate a rate of cooling: [ Yes / No ]<br>
+            I know which surface absorbs heat best: [ Yes / No ]
+        </div>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 2/2</div>
+</div>
+
+<script>
+    // Toggle individual text answers
+    const answers = document.querySelectorAll('.ans');
+    answers.forEach(ans => {
+        ans.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ans.classList.toggle('revealed');
+        });
+    });
+
+    // Reveal all
+    function revealAll() {
+        answers.forEach(ans => ans.classList.add('revealed'));
+        document.querySelectorAll('.graph-container').forEach(g => g.classList.add('revealed'));
+    }
+
+    // Hide all
+    function hideAll() {
+        answers.forEach(ans => ans.classList.remove('revealed'));
+        document.querySelectorAll('.graph-container').forEach(g => g.classList.remove('revealed'));
+    }
+</script>
+
+</body>
+</html>
