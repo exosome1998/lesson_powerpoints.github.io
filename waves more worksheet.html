@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waves & Frequency: High-Volume Visual Drill</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #444; margin: 0; padding: 20px; color: #1a1a1a; line-height: 1.1; }
+        .page { background: white; width: 210mm; min-height: 297mm; padding: 10mm; margin: 0 auto 15px auto; box-shadow: 0 0 20px rgba(0,0,0,0.5); box-sizing: border-box; display: flex; flex-direction: column; }
+        .header { border-bottom: 3px solid #2c3e50; padding-bottom: 5px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .header h1 { margin: 0; font-size: 18px; color: #2c3e50; text-transform: uppercase; letter-spacing: 1px; }
+        .section-title { background: #2c3e50; color: white; padding: 3px 8px; font-size: 11px; font-weight: bold; border-radius: 2px; margin: 8px 0 4px 0; text-transform: uppercase; }
+        
+        /* Grid Layouts */
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        .q-box { border: 1px solid #ddd; padding: 6px; border-radius: 4px; background: #fff; position: relative; }
+        .rule-card { background: #f0f7ff; border-left: 4px solid #3498db; padding: 6px; font-size: 10px; margin-bottom: 8px; }
+        
+        /* Interactive Elements */
+        .input-line { border-bottom: 1px solid #000; min-width: 30px; display: inline-block; cursor: pointer; color: transparent; transition: 0.1s; font-weight: bold; text-align: center; font-size: 11px; }
+        .input-line.revealed { color: #c0392b; border-bottom: 1.5px solid #c0392b; background: #fff9f9; }
+        
+        /* Wave Visuals */
+        .wave-svg { width: 100%; height: 35px; background: #fafafa; border: 1px solid #eee; margin: 3px 0; }
+        .wave-line { fill: none; stroke: #2980b9; stroke-width: 2.5; stroke-linecap: round; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 10px; margin: 4px 0; }
+        th, td { border: 1px solid #aaa; padding: 4px; text-align: center; }
+        th { background: #f2f2f2; font-weight: bold; }
+
+        .word-problem { font-size: 10px; border-bottom: 1px dashed #eee; padding: 4px 0; margin-bottom: 2px; }
+        .scaffold-step { font-style: italic; color: #666; font-size: 9px; }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .page { box-shadow: none; margin: 0; page-break-after: always; }
+            .input-line { color: transparent !important; border-bottom: 1px solid #000 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="header">
+            <h1>Waves & Frequency: Visual Analysis (Page 1)</h1>
+            <div style="font-size: 11px;">Name: ____________________ Date: ________</div>
+        </div>
+
+        <div class="rule-card">
+            <strong>THE SEMI-CIRCLE RULE:</strong> 1 Semi-circle = <strong>0.5 waves</strong>. 
+            2 Semi-circles (Up + Down) = <strong>1 full wave</strong>. Count the semi-circles and divide by 2!
+        </div>
+
+        <div class="section-title">SECTION 1: VISUAL COUNTING (Determine total waves)</div>
+        <div class="grid-3">
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 20,20 Q 50,0 80,20" class="wave-line"/></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '0.5')">0.5</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 10,20 Q 30,0 50,20 T 90,20" class="wave-line"/></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '1.0')">1.0</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="3" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '1.5')">1.5</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="4" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '2.0')">2.0</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="5" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '2.5')">2.5</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="7" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '3.5')">3.5</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="1" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '0.5')">0.5</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="8" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '4.0')">4.0</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="2" /></svg>
+                Waves: <span class="input-line" onclick="reveal(this, '1.0')">1.0</span>
+            </div>
+        </div>
+
+        <div class="section-title">SECTION 2: FREQUENCY CALCULATION (From Diagrams, Time = 1 Second)</div>
+        <div class="grid-3">
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="12" /></svg>
+                Freq: <span class="input-line" onclick="reveal(this, '6 Hz')">6 Hz</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="6" /></svg>
+                Freq: <span class="input-line" onclick="reveal(this, '3 Hz')">3 Hz</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="2" /></svg>
+                Freq: <span class="input-line" onclick="reveal(this, '1 Hz')">1 Hz</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="1" /></svg>
+                Freq: <span class="input-line" onclick="reveal(this, '0.5 Hz')">0.5 Hz</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="16" /></svg>
+                Freq: <span class="input-line" onclick="reveal(this, '8 Hz')">8 Hz</span>
+            </div>
+            <div class="q-box">
+                <svg class="wave-svg" viewBox="0 0 100 40"><path d="M 0,20 sin" class="auto-wave" data-h="10" /></svg>
+                Freq: <span class="input-line" onclick="reveal(this, '5 Hz')">5 Hz</span>
+            </div>
+        </div>
+
+        <div class="section-title">SECTION 3: RAPID-FIRE MENTAL MATH (Freq = Waves ÷ Time)</div>
+        <table>
+            <tr><th>Semi-circles</th><th>Total Waves</th><th>Time (s)</th><th>Frequency (Hz)</th></tr>
+            <tr><td>20</td><td><span class="input-line" onclick="reveal(this, '10')">10</span></td><td>1 s</td><td><span class="input-line" onclick="reveal(this, '10 Hz')">10 Hz</span></td></tr>
+            <tr><td>4</td><td><span class="input-line" onclick="reveal(this, '2')">2</span></td><td>1 s</td><td><span class="input-line" onclick="reveal(this, '2 Hz')">2 Hz</span></td></tr>
+            <tr><td>12</td><td><span class="input-line" onclick="reveal(this, '6')">6</span></td><td>2 s</td><td><span class="input-line" onclick="reveal(this, '3 Hz')">3 Hz</span></td></tr>
+            <tr><td>2</td><td><span class="input-line" onclick="reveal(this, '1')">1</span></td><td>0.5 s</td><td><span class="input-line" onclick="reveal(this, '2 Hz')">2 Hz</span></td></tr>
+            <tr><td>10</td><td><span class="input-line" onclick="reveal(this, '5')">5</span></td><td>10 s</td><td><span class="input-line" onclick="reveal(this, '0.5 Hz')">0.5 Hz</span></td></tr>
+            <tr><td>1</td><td><span class="input-line" onclick="reveal(this, '0.5')">0.5</span></td><td>0.5 s</td><td><span class="input-line" onclick="reveal(this, '1 Hz')">1 Hz</span></td></tr>
+            <tr><td>40</td><td><span class="input-line" onclick="reveal(this, '20')">20</span></td><td>4 s</td><td><span class="input-line" onclick="reveal(this, '5 Hz')">5 Hz</span></td></tr>
+            <tr><td>6</td><td><span class="input-line" onclick="reveal(this, '3')">3</span></td><td>1.5 s</td><td><span class="input-line" onclick="reveal(this, '2 Hz')">2 Hz</span></td></tr>
+        </table>
+        <div class="rule-card" style="margin-top:5px; border-left-color:#e67e22; background:#fffbf0;">
+            <strong>THINK:</strong> If a wave has high frequency, it looks <strong>tight</strong> (squashed). If it has low frequency, it looks <strong>stretched out</strong>.
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>The Wave Equation: Triangle & Calculation (Page 2)</h1>
+        </div>
+
+        <div class="section-title" style="margin-top:0;">SECTION 4: TRIANGLE SCAFFOLDING</div>
+        <div style="display: flex; align-items: center; justify-content: space-around; background: #fafafa; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+            <div style="text-align: center;">
+                <svg viewBox="0 0 100 100" style="height:60px;"><polygon points="50,5 95,95 5,95" fill="none" stroke="#000" stroke-width="2"/><line x1="25" y1="60" x2="75" y2="60" stroke="#000"/><line x1="50" y1="60" x2="50" y2="95" stroke="#000"/><text x="50" y="50" text-anchor="middle" font-weight="bold" font-size="20">v</text><text x="25" y="85" text-anchor="middle" font-size="18">f</text><text x="75" y="85" text-anchor="middle" font-size="18">λ</text></svg>
+                <div style="font-size: 8px; margin-top:5px;">To find <strong>v</strong>: f × λ</div>
+            </div>
+            <div style="font-size: 10px; line-height: 1.4;">
+                <strong>v</strong> = Velocity / Speed (m/s)<br>
+                <strong>f</strong> = Frequency (Hz)<br>
+                <strong>λ</strong> = Wavelength (m)
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 8px; border: 1px solid #ccc; padding: 4px;">
+                    To find <strong>f</strong>: v ÷ λ<br>To find <strong>λ</strong>: v ÷ f
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">SECTION 5: THE EXTENDED CALCULATION GRID</div>
+        <table>
+            <tr><th>Find Variable</th><th>Given Value 1</th><th>Given Value 2</th><th>Working & Answer (With Units!)</th></tr>
+            <tr><td>Speed (v)</td><td>f = 12 Hz</td><td>λ = 3 m</td><td><span class="input-line" onclick="reveal(this, '36 m/s')">36 m/s</span></td></tr>
+            <tr><td>Speed (v)</td><td>f = 200 Hz</td><td>λ = 0.1 m</td><td><span class="input-line" onclick="reveal(this, '20 m/s')">20 m/s</span></td></tr>
+            <tr><td>Frequency (f)</td><td>v = 50 m/s</td><td>λ = 5 m</td><td><span class="input-line" onclick="reveal(this, '10 Hz')">10 Hz</span></td></tr>
+            <tr><td>Wavelength (λ)</td><td>v = 100 m/s</td><td>f = 25 Hz</td><td><span class="input-line" onclick="reveal(this, '4 m')">4 m</span></td></tr>
+            <tr><td>Speed (v)</td><td>f = 0.2 Hz</td><td>λ = 50 m</td><td><span class="input-line" onclick="reveal(this, '10 m/s')">10 m/s</span></td></tr>
+            <tr><td>Frequency (f)</td><td>v = 340 m/s</td><td>λ = 0.5 m</td><td><span class="input-line" onclick="reveal(this, '680 Hz')">680 Hz</span></td></tr>
+            <tr><td>Wavelength (λ)</td><td>v = 1500 m/s</td><td>f = 300 Hz</td><td><span class="input-line" onclick="reveal(this, '5 m')">5 m</span></td></tr>
+            <tr><td>Speed (v)</td><td>f = 60 Hz</td><td>λ = 2 m</td><td><span class="input-line" onclick="reveal(this, '120 m/s')">120 m/s</span></td></tr>
+            <tr><td>Frequency (f)</td><td>v = 12 m/s</td><td>λ = 4 m</td><td><span class="input-line" onclick="reveal(this, '3 Hz')">3 Hz</span></td></tr>
+            <tr><td>Wavelength (λ)</td><td>v = 300,000,000 m/s</td><td>f = 100,000,000 Hz</td><td><span class="input-line" onclick="reveal(this, '3 m')">3 m</span></td></tr>
+            <tr><td>Speed (v)</td><td>f = 5 Hz</td><td>λ = 0.2 m</td><td><span class="input-line" onclick="reveal(this, '1 m/s')">1 m/s</span></td></tr>
+        </table>
+
+        <div class="section-title">SECTION 6: WORD STORIES (High-Volume Word Problems)</div>
+        <div class="grid-2">
+            <div>
+                <div class="word-problem">
+                    <strong>1. The Ultrasound:</strong> A medical scanner uses a wave with frequency 2,000,000 Hz. The speed in the body is 1540 m/s. <br>
+                    <span class="scaffold-step">Wavelength? (λ = v ÷ f)</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '0.00077 m')">0.00077 m</span>
+                </div>
+                <div class="word-problem">
+                    <strong>2. The Seismic Wave:</strong> An earthquake wave travels at 5000 m/s. If its wavelength is 2500 m... <br>
+                    <span class="scaffold-step">Frequency? (f = v ÷ λ)</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '2 Hz')">2 Hz</span>
+                </div>
+                <div class="word-problem">
+                    <strong>3. The Ripples:</strong> A stone dropped in a pond creates 24 semi-circles in 4 seconds. The wavelength is 0.5 m. <br>
+                    <span class="scaffold-step">First find f, then v.</span> <br>
+                    Speed: <span class="input-line" onclick="reveal(this, '1.5 m/s')">1.5 m/s</span>
+                </div>
+                <div class="word-problem">
+                    <strong>4. The Deep Bass:</strong> A speaker emits a low note with wavelength 10m. Sound speed is 340 m/s. <br>
+                    <span class="scaffold-step">Calculate f.</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '34 Hz')">34 Hz</span>
+                </div>
+            </div>
+            <div>
+                <div class="word-problem">
+                    <strong>5. The Piano Wire:</strong> A middle C note vibrates at 262 Hz. If the speed of sound is 344 m/s... <br>
+                    <span class="scaffold-step">Calculate λ.</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '1.31 m')">1.31 m</span>
+                </div>
+                <div class="word-problem">
+                    <strong>6. The Radio Tower:</strong> A station broadcasts at 90,000,000 Hz. The speed is 300,000,000 m/s. <br>
+                    <span class="scaffold-step">Calculate λ.</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '3.33 m')">3.33 m</span>
+                </div>
+                <div class="word-problem">
+                    <strong>7. The Bat:</strong> A bat emits a 40,000 Hz chirp. The wavelength is 0.0085 m. <br>
+                    <span class="scaffold-step">Find the speed of sound.</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '340 m/s')">340 m/s</span>
+                </div>
+                <div class="word-problem">
+                    <strong>8. The Tsunami:</strong> A massive wave has a wavelength of 200,000 m and f = 0.001 Hz. <br>
+                    <span class="scaffold-step">How fast is it moving?</span> <br>
+                    Ans: <span class="input-line" onclick="reveal(this, '200 m/s')">200 m/s</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">SECTION 7: MULTI-STEP CHALLENGE</div>
+        <div class="q-box" style="font-size: 10px;">
+            A wave diagram is shown with <strong>30 semi-circles</strong>. These pass a point in <strong>3 seconds</strong>. The distance between two crests (λ) is <strong>12 meters</strong>. <br>
+            A) Total Waves: <span class="input-line" onclick="reveal(this, '15')">15</span> <br>
+            B) Frequency: <span class="input-line" onclick="reveal(this, '5 Hz')">5 Hz</span> <br>
+            C) Wave Speed: <span class="input-line" onclick="reveal(this, '60 m/s')">60 m/s</span>
+        </div>
+    </div>
+
+    <script>
+        function reveal(el, text) {
+            el.classList.add('revealed');
+            el.innerText = text;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const waves = document.querySelectorAll('.auto-wave');
+            waves.forEach(path => {
+                const humps = parseFloat(path.dataset.h);
+                const svg = path.closest('svg');
+                const vb = svg.getAttribute('viewBox').split(' ');
+                const w = parseFloat(vb[2]);
+                const h = parseFloat(vb[3]);
+                const mid = h / 2;
+                const amp = (h / 2) - 4;
+
+                let d = [];
+                for (let i = 0; i <= 100; i++) {
+                    let x = (i / 100) * w;
+                    // sin wave logic
+                    let y = mid - (amp * Math.sin( (i/100) * humps * Math.PI ));
+                    d.push(`${i===0?'M':'L'} ${x},${y}`);
+                }
+                path.setAttribute('d', d.join(' '));
+                path.classList.add('wave-line');
+            });
+        });
+    </script>
+</body>
+</html>
