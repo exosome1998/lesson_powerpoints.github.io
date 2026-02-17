@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lesson 9: Energy Efficiency (Rich Content)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           1. CORE THEME (Electric Orange)
+           ========================================= */
+        :root {
+            --primary: #d35400;    /* Dark Orange */
+            --bg-color: #fdf2e9;   /* Very Light Orange */
+            --highlight: #f1c40f;  /* Bright Yellow */
+            --correct: #27ae60;    /* Green */
+            --wrong: #c0392b;      /* Red */
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            padding-bottom: 120px;
+            padding-top: 60px;
+            overflow-x: hidden;
+        }
+
+        .container-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        h1 { font-family: 'Comic Neue'; color: var(--primary); margin: 5px 0; font-size: 2.5rem; }
+        h2 { font-family: 'Comic Neue'; border-bottom: 4px solid var(--highlight); display: inline-block; font-size: 2rem; margin: 10px 0; }
+        
+        /* =========================================
+           2. SLIDE LAYOUT
+           ========================================= */
+        .slide {
+            min-height: 80vh;
+            width: 100%;
+            padding: 20px;
+            border-bottom: 10px solid var(--primary);
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+
+        .slide-number {
+            position: absolute; bottom: 5px; right: 10px;
+            font-size: 1rem; color: #ccc;
+        }
+
+        /* MISSION GRID LAYOUT */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .mission-box {
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mission-icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* =========================================
+           3. INTERACTIVE ELEMENTS
+           ========================================= */
+        .group-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fragment {
+            opacity: 0; transform: translateY(10px); transition: all 0.3s ease;
+            visibility: hidden; height: 0; overflow: hidden; width: 100%;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .fragment.visible {
+            opacity: 1; transform: translateY(0); visibility: visible;
+            height: auto; overflow: visible; margin-bottom: 15px;
+        }
+
+        /* WORD BANK */
+        .word-bank {
+            background: #fcf3cf; border: 2px solid var(--primary);
+            padding: 15px; border-radius: 10px; margin-bottom: 20px;
+            display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;
+        }
+        .wb-item {
+            background: white; padding: 5px 15px; border-radius: 5px;
+            font-weight: bold; color: var(--primary); box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+
+        /* MULTIPLE CHOICE BTNS */
+        .tf-btn {
+            width: 100%; max-width: 700px; padding: 15px; margin: 8px 0;
+            font-size: 1.3rem; background: white; border: 2px solid var(--primary);
+            border-radius: 10px; cursor: pointer; text-align: left;
+            transition: 0.2s; box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+        .tf-btn:hover { background: #fdebd0; }
+        .tf-btn.correct { background: var(--correct); color: white; border-color: var(--correct); }
+        .tf-btn.wrong { background: var(--wrong); color: white; border-color: var(--wrong); }
+
+        /* =========================================
+           4. NOTE TAKING (MINIMALIST)
+           ========================================= */
+        .note-container { width: 100%; max-width: 800px; margin-top: 15px; }
+
+        .note-header {
+            background: var(--highlight); color: black;
+            padding: 5px 20px; font-weight: 800; font-size: 1.2rem;
+            border: 2px solid black; border-bottom: none;
+            border-radius: 10px 10px 0 0; display: inline-block; margin-left: 15px;
+        }
+
+        .note-body {
+            background: #fffcf0; border: 3px solid black;
+            border-radius: 10px; padding: 20px;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.1);
+            font-size: 1.4rem; line-height: 1.6; text-align: left;
+        }
+
+        .cloze {
+            background-color: var(--primary); 
+            color: var(--primary); /* Hidden Text */
+            border-radius: 4px; padding: 0 8px; cursor: pointer;
+            user-select: none; font-weight: bold; display: inline-block;
+            min-width: 80px; text-align: center; border: 2px solid var(--primary);
+        }
+        .cloze.revealed {
+            background-color: white; 
+            color: var(--correct); /* Revealed Text */
+            border-color: var(--correct); border-bottom: 4px solid var(--correct);
+        }
+
+        /* =========================================
+           5. MATH REVEAL ELEMENTS
+           ========================================= */
+        .math-step { 
+            background: #fff; padding: 20px; margin: 15px 0; 
+            border-radius: 8px; border-left: 6px solid var(--primary);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05); font-size: 1.3rem;
+            text-align: left; width: 100%; max-width: 700px;
+        }
+
+        .math-reveal {
+            background-color: #34495e; color: #34495e; /* Hides text */
+            border-radius: 4px; padding: 0 6px; cursor: pointer;
+            user-select: none; font-weight: bold; border: 1px solid #34495e;
+            transition: all 0.2s;
+        }
+        .math-reveal:hover { opacity: 0.9; }
+        
+        .math-reveal.revealed {
+            background-color: transparent; 
+            color: #c0392b; /* Red text for emphasis */
+            border-bottom: 2px solid #c0392b; border-top:none; border-left:none; border-right:none;
+        }
+
+        .fraction {
+            display: inline-block; vertical-align: middle; text-align: center; margin: 0 5px;
+        }
+        .fraction .top { display: block; border-bottom: 2px solid black; padding: 0 5px; }
+        .fraction .bottom { display: block; padding: 0 5px; }
+
+        /* =========================================
+           6. VISUALS & NAV
+           ========================================= */
+        .visual-box {
+            width: 100%; max-width: 600px;
+            background: white; border: 3px solid var(--primary);
+            border-radius: 10px; margin: 10px 0; padding: 10px;
+            display: flex; justify-content: center;
+        }
+        .visual-box svg { width: 100%; height: auto; max-height: 250px; }
+
+        .camera-btn {
+            position: absolute; top: 15px; right: 15px;
+            background: white; border: 2px solid var(--primary);
+            font-size: 1.2rem; width: 45px; height: 45px;
+            border-radius: 50%; cursor: pointer; display: flex;
+            justify-content: center; align-items: center; z-index: 50;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .visual-paste-area {
+            width: 90%; display: none; border: 3px dashed #bdc3c7;
+            background: #f8f9fa; padding: 10px; text-align: center;
+            margin-bottom: 15px; border-radius: 8px;
+        }
+        .visual-paste-area img { max-width: 100%; max-height: 200px; display: block; margin: 0 auto; }
+
+        #nav-bar {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 600px; height: 70px;
+            background: var(--primary); display: flex; justify-content: center;
+            align-items: center; gap: 15px; z-index: 10000;
+            border-radius: 35px; border: 3px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn {
+            background: var(--primary); color: white; border: 2px solid white;
+            padding: 8px 20px; font-size: 1.1rem; border-radius: 30px;
+            font-weight: bold; cursor: pointer; min-width: 100px;
+        }
+        .nav-btn.secondary { background: #7f8c8d; }
+        .nav-btn.save { background: var(--correct); }
+
+        #top-save-btn {
+            position: fixed; top: 10px; right: 10px;
+            background: var(--correct); color: white; border: 2px solid white;
+            padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;
+            z-index: 10001; font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="top-save-btn" onclick="saveLesson()">💾 Save</button>
+
+    <div id="nav-bar">
+        <button class="nav-btn secondary" onclick="goBack()">⬅️ Back</button>
+        <button class="nav-btn" onclick="goNext()">Next ➡️</button>
+        <button class="nav-btn save" onclick="saveLesson()">💾 Save</button>
+    </div>
+
+    <div class="container-wrapper">
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h1>💡 Do Now</h1>
+            <p>Match the unit to the concept.</p>
+            
+            <div class="word-bank">
+                <div class="wb-item">Degrees (°C)</div>
+                <div class="wb-item">Joules (J)</div>
+                <div class="wb-item">Watts (W)</div>
+                <div class="wb-item">Seconds (s)</div>
+            </div>
+
+            <div class="note-container fragment visible">
+                <div class="note-body">
+                    <p>Energy = <span class="cloze" onclick="reveal(this)">JOULES (J)</span>.</p>
+                    <p>Power = <span class="cloze" onclick="reveal(this)">WATTS (W)</span>.</p>
+                    <p>Temperature = <span class="cloze" onclick="reveal(this)">DEGREES (°C)</span>.</p>
+                </div>
+            </div>
+            <div class="slide-number">1 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h1>Today's Mission</h1>
+            
+            <div class="mission-grid">
+                <div class="mission-box">
+                    <div class="mission-icon">⚡</div>
+                    <div><strong>1. Globes</strong><br>Types & Evolution</div>
+                </div>
+                <div class="mission-box">
+                    <div class="mission-icon">📊</div>
+                    <div><strong>2. Analysis</strong><br>Power vs Brightness</div>
+                </div>
+                <div class="mission-box">
+                    <div class="mission-icon">💰</div>
+                    <div><strong>3. Cost</strong><br>Lifetime & Value</div>
+                </div>
+                <div class="mission-box">
+                    <div class="mission-icon">🗺️</div>
+                    <div><strong>4. Sankey</strong><br>Visualising Loss</div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>1. Lumens vs Watts</h2>
+            <p>We used to buy bulbs by <strong>Watts</strong> (Power).</p>
+            <p>But modern bulbs use less power for the same light.</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 1/8</div>
+                    <div class="note-body">
+                        <strong>Watts:</strong> How much electricity it <span class="cloze" onclick="reveal(this)">USES</span>.
+                        <br><strong>Lumens:</strong> How much light it <span class="cloze" onclick="reveal(this)">MAKES</span>.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>2. The Transformation</h2>
+            <p>What happens inside the bulb?</p>
+            
+            <div class="visual-box">
+                <svg viewBox="0 0 300 150">
+                    <text x="20" y="80" font-weight="bold">Electrical</text>
+                    <line x1="100" y1="75" x2="180" y2="75" stroke="black" stroke-width="3" marker-end="url(#arrow)"/>
+                    <text x="200" y="50" fill="#f1c40f" font-weight="bold">LIGHT (Useful)</text>
+                    <text x="200" y="110" fill="#c0392b" font-weight="bold">HEAT (Wasted)</text>
+                    <path d="M180,75 L200,50" stroke="black" stroke-width="2"/>
+                    <path d="M180,75 L200,100" stroke="black" stroke-width="2"/>
+                </svg>
+            </div>
+            <div class="slide-number">4 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Useful Energy</h2>
+            <p>Do we want a light globe to be a heater?</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 2/8</div>
+                    <div class="note-body">
+                        The purpose of a lamp is to make <span class="cloze" onclick="reveal(this)">LIGHT</span>.
+                        <br>Any Heat produced is <span class="cloze" onclick="reveal(this)">WASTED</span> energy.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Why is Heat bad?</h2>
+            <p>It's not just about electricity bills.</p>
+            
+            <div class="fragment" style="width:100%; max-width:700px; text-align:left;">
+                <ul style="font-size:1.3rem; line-height:1.8;">
+                    <li><strong>Safety:</strong> Old bulbs get hot enough to burn skin or start fires.</li>
+                    <li><strong>Air Conditioning:</strong> If your lights are hot, your AC has to work harder to cool the room.</li>
+                </ul>
+            </div>
+            <div class="slide-number">6 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>3. The Globes 
+
+[Image of light bulbs]
+</h2>
+            <p>We are analyzing 4 types today.</p>
+            
+            <div class="fragment" style="width: 100%; max-width: 800px; text-align: left;">
+                <ul style="font-size: 1.3rem; line-height: 1.8;">
+                    <li><strong>Incandescent:</strong> Old, hot, glass wire.</li>
+                    <li><strong>Halogen:</strong> Gas-filled, slightly better.</li>
+                    <li><strong>CFL:</strong> Curly tube (Fluorescent).</li>
+                    <li><strong>LED:</strong> Digital chip.</li>
+                </ul>
+            </div>
+            <div class="slide-number">7 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Type A: Incandescent</h2>
+            <p>The "Heater" that makes light.</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 3/8</div>
+                    <div class="note-body">
+                        Incandescent globes push electricity through a wire until it glows <span class="cloze" onclick="reveal(this)">RED HOT</span>.
+                        <br>90% of energy is lost as Heat.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">8 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Type B & C: Halogen and CFL</h2>
+            <p>The transition technology.</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 4/8</div>
+                    <div class="note-body">
+                        <strong>CFLs</strong> are efficient but contain poisonous <span class="cloze" onclick="reveal(this)">MERCURY</span>.
+                        <br>They are hard to recycle.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">9 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Type D: LED</h2>
+            <p>Light Emitting Diode.</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 5/8</div>
+                    <div class="note-body">
+                        LEDs turn electricity directly to light without needing to get <span class="cloze" onclick="reveal(this)">HOT</span>.
+                        <br>They are the most efficient.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">10 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>4. Virtual Experiment Data</h2>
+            <p><strong>Note:</strong> All globes produce the SAME brightness (800 Lumens).</p>
+            
+            <table style="width:90%; font-size:1.2rem; border-collapse: collapse; margin-bottom: 20px; border: 2px solid var(--primary);">
+                <tr style="background:var(--primary); color:white;">
+                    <th style="padding:10px;">Globe</th>
+                    <th style="padding:10px;">Power (Watts)</th>
+                    <th style="padding:10px;">Temp (°C)</th>
+                </tr>
+                <tr>
+                    <td style="padding:10px;">Incandescent</td>
+                    <td>60 W</td>
+                    <td>120°C</td>
+                </tr>
+                <tr style="background:#f2f2f2;">
+                    <td style="padding:10px;">Halogen</td>
+                    <td>42 W</td>
+                    <td>140°C</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px;">CFL</td>
+                    <td>15 W</td>
+                    <td>60°C</td>
+                </tr>
+                 <tr style="background:#f2f2f2;">
+                    <td style="padding:10px;">LED</td>
+                    <td>9 W</td>
+                    <td>30°C</td>
+                </tr>
+            </table>
+            <div class="slide-number">11 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Analysis: Power Draw</h2>
+            <p>Look at the table.</p>
+            
+            <div class="fragment" style="width:100%; max-width:600px; margin-top:20px;">
+                <p><strong>Which globe uses the most electricity?</strong></p>
+                <button class="tf-btn" onclick="this.classList.add('correct')">Incandescent (60W)</button>
+                <button class="tf-btn" onclick="this.classList.add('wrong')">LED (9W)</button>
+            </div>
+            <div class="slide-number">12 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Analysis: Safety</h2>
+            <p>Look at the Temperature column.</p>
+            
+            <div class="fragment" style="width:100%; max-width:600px; margin-top:20px;">
+                <p><strong>Which globe is safe to touch after 5 minutes?</strong></p>
+                <button class="tf-btn" onclick="this.classList.add('wrong')">Incandescent (120°C)</button>
+                <button class="tf-btn" onclick="this.classList.add('correct')">LED (30°C)</button>
+            </div>
+            <div class="slide-number">13 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>The "Missing" Energy</h2>
+            <p>The LED uses 9W. The Incandescent uses 60W.</p>
+            <p>They make the same light. Where is the extra 51W?</p>
+            
+            <div class="fragment" style="background:#fff; padding:20px; border:2px solid var(--primary); border-radius:10px;">
+                <p>It is being transformed into <span style="color:var(--wrong); font-weight:bold;">HEAT</span>.</p>
+                <p>This proves that the Incandescent globe is essentially a heater that gives off a little light.</p>
+            </div>
+            <div class="slide-number">14 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Dissipation</h2>
+            <p>Where does that heat go?</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 6/8</div>
+                    <div class="note-body">
+                        Wasted heat spreads out into the air.
+                        <br>This is called <span class="cloze" onclick="reveal(this)">DISSIPATION</span>.
+                        <br>It is impossible to get this energy back.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">15 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>5. Efficiency Calculations</h2>
+            <p>How good is the machine at its job?</p>
+            <p>We calculate this as a Percentage (%).</p>
+            <div class="slide-number">16 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>The Formula</h2>
+            <p>Copy this carefully.</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 7/8</div>
+                    <div class="note-body" style="font-size: 1.6rem;">
+                        Efficiency = <span class="fraction"><span class="top">Useful Energy</span><span class="bottom">Total Energy</span></span> &times; 100
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">17 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Example: Incandescent</h2>
+            <p>Total: <strong>60 J</strong>. Useful Light: <strong>3 J</strong>.</p>
+            
+            <div class="fragment math-step">
+                <p>1. Formula: <span class="fraction"><span class="top">Useful</span><span class="bottom">Total</span></span> &times; 100</p>
+                <hr style="border:0; border-top:1px dashed #ccc;">
+                <p>2. Substitute: <span class="fraction"><span class="top">3</span><span class="bottom">60</span></span> &times; 100</p>
+                <p>3. Calculate: 0.05 &times; 100</p>
+                <p>4. Answer: <span class="math-reveal" onclick="toggleMath(this)">5</span> %</p>
+            </div>
+            <div class="slide-number">18 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Example: LED</h2>
+            <p>Total: <strong>10 J</strong>. Useful Light: <strong>9 J</strong>.</p>
+            
+            <div class="fragment math-step">
+                <p>1. Formula: <span class="fraction"><span class="top">Useful</span><span class="bottom">Total</span></span> &times; 100</p>
+                <p>2. Substitute: <span class="fraction"><span class="top">9</span><span class="bottom">10</span></span> &times; 100</p>
+                <p>3. Answer: <span class="math-reveal" onclick="toggleMath(this)">90</span> %</p>
+            </div>
+            <div class="slide-number">19 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>6. The Hidden Cost</h2>
+            <p>LEDs are expensive to buy ($5) vs Old Bulbs ($1).</p>
+            <p>Why buy LEDs?</p>
+            
+            <div class="fragment" style="width:100%; max-width:700px; text-align:left;">
+                <p><strong>1. Lifespan:</strong></p>
+                <ul>
+                    <li>Old Bulb: Lasts 1,000 hours.</li>
+                    <li>LED: Lasts 25,000 hours.</li>
+                </ul>
+                <p>You would need to buy <strong>25 old bulbs</strong> to equal one LED!</p>
+            </div>
+            <div class="slide-number">20 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Running Cost</h2>
+            <p>Running a house for 1 year:</p>
+            
+            <div class="fragment" style="display:flex; gap:10px; width:100%; justify-content:center;">
+                <div style="background:white; border:2px solid #ccc; padding:10px; width:45%;">
+                    <strong>Old Bulbs</strong>
+                    <br>Cost to Run:
+                    <br><span style="color:var(--wrong); font-size:1.5rem; font-weight:bold;">$300</span>
+                </div>
+                <div style="background:white; border:2px solid var(--correct); padding:10px; width:45%;">
+                    <strong>LEDs</strong>
+                    <br>Cost to Run:
+                    <br><span style="color:var(--correct); font-size:1.5rem; font-weight:bold;">$45</span>
+                </div>
+            </div>
+            <div class="slide-number">21 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Energy Rating Labels </h2>
+            <p>Have you seen this sticker on fridges?</p>
+            
+            <div class="fragment" style="margin-top:20px;">
+                <p><strong>More Stars</strong> = More Efficient.</p>
+                <p>This means less wasted energy and cheaper bills.</p>
+            </div>
+            <div class="slide-number">22 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>7. Sankey Diagrams </h2>
+            <p>Visualising the wasted energy.</p>
+            
+            <div class="visual-box">
+                <svg viewBox="0 0 300 150">
+                    <rect x="10" y="60" width="80" height="30" fill="#2c3e50"/>
+                    <text x="20" y="80" fill="white" font-size="10">Electrical (100J)</text>
+                    <path d="M90,60 L200,60 L200,70 L90,70" fill="#f1c40f"/>
+                    <text x="210" y="70" font-size="10">Useful</text>
+                    <path d="M90,70 L200,70 L200,140 L90,90" fill="#c0392b"/>
+                    <text x="210" y="110" font-size="10">Wasted</text>
+                </svg>
+            </div>
+            <div class="slide-number">23 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Reading Arrows</h2>
+            <p>The <strong>WIDTH</strong> tells the story.</p>
+            
+            <div class="fragment group-wrapper">
+                <div class="note-container">
+                    <div class="note-header">Note 8/8</div>
+                    <div class="note-body">
+                        <strong>Thick Arrow</strong> = Lots of energy.
+                        <br><strong>Thin Arrow</strong> = Little energy.
+                        <br>Downward Arrow = <span class="cloze" onclick="reveal(this)">WASTED</span>.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">24 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Draw: Inefficient Bulb</h2>
+            <p>Input: 100J. Light: 10J. Heat: 90J.</p>
+            <p>Draw the Sankey in your book.</p>
+            
+            <div class="fragment" style="margin-top:20px;">
+                <button class="tf-btn" onclick="this.innerHTML='✅ <strong>The Downward (Heat) arrow should be very THICK.</strong>'; this.classList.add('correct');">Check Answer</button>
+            </div>
+            <div class="slide-number">25 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Draw: Efficient LED</h2>
+            <p>Input: 100J. Light: 90J. Heat: 10J.</p>
+            
+            <div class="fragment" style="margin-top:20px;">
+                <button class="tf-btn" onclick="this.innerHTML='✅ <strong>The Straight (Light) arrow should be very THICK.</strong>'; this.classList.add('correct');">Check Answer</button>
+            </div>
+            <div class="slide-number">26 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Environment</h2>
+            <p>Electricity usually comes from burning Coal.</p>
+            
+            <div class="fragment" style="background:#fff; border:2px solid var(--primary); padding:15px; border-radius:10px;">
+                <p>Wasting electricity = Burning more coal.</p>
+                <p>This releases <strong>Carbon Dioxide (CO2)</strong>.</p>
+                <p>Efficient lights help stop Climate Change.</p>
+            </div>
+            <div class="slide-number">27 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h2>Summary: Cloze Passage</h2>
+            <p>Tap the words to complete the summary.</p>
+            
+            <div class="note-container fragment visible" style="max-width: 90%;">
+                <div class="note-body" style="font-size: 1.3rem;">
+                    Energy cannot be created or destroyed, only <span class="cloze" onclick="reveal(this)">TRANSFORMED</span>.
+                    <br><br>
+                    Old globes are inefficient because they produce too much <span class="cloze" onclick="reveal(this)">HEAT</span>.
+                    <br><br>
+                    LEDs are more <span class="cloze" onclick="reveal(this)">EFFICIENT</span> because most energy becomes light.
+                </div>
+            </div>
+            <div class="slide-number">28 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h1>🎫 Exit Ticket Part 1</h1>
+            
+            <div class="fragment" style="width:100%; max-width:600px; margin-top:20px;">
+                <p><strong>1. Which globe reached 140°C?</strong></p>
+                <button class="tf-btn" onclick="this.classList.add('correct')">Halogen</button>
+                <button class="tf-btn" onclick="this.classList.add('wrong')">LED</button>
+            </div>
+            
+            <div class="fragment" style="width:100%; max-width:600px; margin-top:20px;">
+                <p><strong>2. If Useful is 20J and Total is 100J...</strong></p>
+                <button class="tf-btn" onclick="this.classList.add('wrong')">80%</button>
+                <button class="tf-btn" onclick="this.classList.add('correct')">20%</button>
+            </div>
+            <div class="slide-number">29 / 30</div>
+        </section>
+
+        <section class="slide">
+            <button class="camera-btn" onclick="toggleVisual(this)">📷</button>
+            <div class="visual-paste-area">Paste Image (Ctrl+V)</div>
+            <h1>🎫 Exit Ticket Part 2</h1>
+            
+            <div class="fragment" style="width:100%; max-width:600px; margin-top:20px;">
+                <p><strong>3. Why do LEDs save money?</strong></p>
+                <button class="tf-btn" onclick="this.classList.add('wrong')">They are cheaper to buy.</button>
+                <button class="tf-btn" onclick="this.classList.add('correct')">They last longer & use less power.</button>
+            </div>
+
+            <p style="margin-top:30px;">Click <strong>SAVE</strong> at the top right!</p>
+            <div class="slide-number">30 / 30</div>
+        </section>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+
+        function getActiveSlideIndex() {
+            let index = 0; let minDistance = Infinity;
+            slides.forEach((slide, i) => {
+                const rect = slide.getBoundingClientRect();
+                const dist = Math.abs(rect.top);
+                if (dist < minDistance && dist < window.innerHeight / 1.5) {
+                    minDistance = dist; index = i;
+                }
+            });
+            return index;
+        }
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function goNext() {
+            const index = getActiveSlideIndex();
+            const currentSlide = slides[index];
+            const hiddenFragments = currentSlide.querySelectorAll('.fragment:not(.visible)');
+            if (hiddenFragments.length > 0) {
+                hiddenFragments[0].classList.add('visible');
+            } else {
+                scrollToSlide(index + 1);
+            }
+        }
+
+        function goBack() {
+            const index = getActiveSlideIndex();
+            const currentSlide = slides[index];
+            const visibleFragments = Array.from(currentSlide.querySelectorAll('.fragment.visible'));
+            if (visibleFragments.length > 0) {
+                visibleFragments[visibleFragments.length - 1].classList.remove('visible');
+            } else {
+                scrollToSlide(index - 1);
+            }
+        }
+
+        function reveal(el) { 
+            if(el.classList.contains('revealed')) { el.classList.remove('revealed'); } 
+            else { el.classList.add('revealed'); } 
+        }
+
+        function toggleMath(el) {
+            if(el.classList.contains('revealed')) {
+                el.classList.remove('revealed');
+            } else {
+                el.classList.add('revealed');
+            }
+        }
+
+        function toggleVisual(btn) {
+            const container = btn.nextElementSibling;
+            container.style.display = (container.style.display === 'block') ? 'none' : 'block';
+            if(container.style.display === 'block') container.innerText = "Paste Image (Ctrl+V)";
+        }
+
+        document.addEventListener('paste', (e) => {
+            const index = getActiveSlideIndex();
+            const activeSlide = slides[index];
+            const container = activeSlide.querySelector('.visual-paste-area');
+            if (!container) return;
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        container.style.display = 'block';
+                        container.innerHTML = `<img src="${event.target.result}">`;
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if(e.code === 'ArrowRight' || e.code === 'Space') { e.preventDefault(); goNext(); }
+            if(e.code === 'ArrowLeft') { e.preventDefault(); goBack(); }
+        });
+
+        function saveLesson() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], {type: 'text/html'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Lesson9_Energy_Rich.html';
+            a.click();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Reproduction Worksheet</title>
+    <style>
+        @page { size: A4; margin: 10mm; }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #111;
+            margin: 0 auto;
+            max-width: 210mm;
+            background: #fff;
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .page {
+            height: 276mm; /* Printable A4 height */
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 5px;
+        }
+        .header {
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        h1 { margin: 0; color: #1b5e20; font-size: 18pt; text-transform: uppercase; }
+        .sub-head { font-style: italic; color: #555; font-size: 10pt; }
+        
+        /* Grid for Reading Sections */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 Columns */
+            gap: 15px;
+            row-gap: 10px;
+            flex-grow: 1;
+        }
+        
+        .section-box {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width-box {
+            grid-column: span 2;
+            background-color: #fff9c4;
+            border: 1px solid #fbc02d;
+            border-left: 5px solid #f57f17;
+        }
+
+        h2 {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            font-size: 11pt;
+            margin: 0 0 5px 0;
+            padding: 4px;
+            border-radius: 3px;
+        }
+        
+        p { margin: 0 0 5px 0; font-size: 9.5pt; line-height: 1.3; text-align: justify; }
+        .vocab { font-weight: bold; color: #d84315; }
+        .example { font-size: 9pt; color: #444; font-style: italic; margin-top: auto; }
+
+        /* SVG Styling */
+        .svg-container {
+            width: 100%;
+            height: 90px;
+            background: #fff;
+            margin: 5px 0;
+            display: flex;
+            justify-content: center;
+            border: 1px dashed #ccc;
+        }
+        svg { height: 100%; width: auto; }
+
+        /* --- QUESTION PAGE STYLES --- */
+        .two-col-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 5px;
+            height: 100%;
+        }
+        .q-section { margin-bottom: 15px; border-bottom: 1px dotted #eee; padding-bottom: 10px; }
+        .q-title { font-weight: bold; font-size: 11pt; border-bottom: 2px solid #333; margin-bottom: 8px; padding-bottom: 2px; background: #eee; padding-left: 5px;}
+        .question { margin-bottom: 12px; font-size: 10pt; }
+        
+        /* Interactive Answer Styles */
+        .clickable-area {
+            cursor: pointer;
+            margin-top: 5px;
+            min-height: 20px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+        .clickable-area:hover {
+            background-color: #f0f0f0;
+        }
+        .ans-lines {
+            display: block;
+        }
+        .lines {
+            border-bottom: 1px solid #aaa;
+            display: block;
+            width: 100%;
+            height: 18px;
+        }
+        .ans-text {
+            display: none;
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 10pt;
+            padding: 2px 5px;
+            background: #ffebee;
+            border: 1px dashed #ef9a9a;
+        }
+
+        /* Print formatting */
+        @media print {
+            .clickable-area:hover { background-color: transparent; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="header">
+            <h1>Plant Cloning: Asexual Reproduction</h1>
+            <span class="sub-head">Unit: Biology | Year 8</span>
+        </div>
+
+        <div style="background:#eef; padding:8px; border-left:4px solid #3f51b5; margin-bottom:10px; font-size:10pt;">
+            <strong>Introduction:</strong> Most plants reproduce using seeds (sexual reproduction), but some have a "shortcut" called <strong>Asexual Reproduction</strong>. A single parent plant uses its own cells to grow a new offspring. Because there is no mixing of DNA, the new plant is a <strong>clone</strong> (genetically identical) of the parent. This is often called <span class="vocab">Vegetative Propagation</span>.
+        </div>
+
+        <div class="grid-container">
+            
+            <div class="section-box">
+                <h2>1. Stolons (Runners)</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M10,80 L190,80" stroke="#8d6e63" stroke-width="2"/> <path d="M40,80 Q40,40 40,30" stroke="green" stroke-width="3"/> <circle cx="40" cy="25" r="10" fill="green"/>
+                        <path d="M40,75 Q100,40 160,75" stroke="#4caf50" stroke-width="2" fill="none"/> <path d="M160,80 L160,50" stroke="green" stroke-width="3"/> <circle cx="160" cy="45" r="6" fill="green"/>
+                        <text x="85" y="55" font-size="10" fill="#2e7d32">Runner</text>
+                    </svg>
+                </div>
+                <p><strong>Stolons</strong> are specialized stems that grow horizontally <em>above</em> the ground. As they stretch out, they form "nodes". When a node touches the soil, it grows adventitious roots down and leaves up, creating a self-sufficient clone.</p>
+                <div class="example">Ex: Strawberry plants carpet a garden using runners.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>2. Rhizomes</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M10,40 L190,40" stroke="#8d6e63" stroke-width="2"/> <path d="M50,70 Q90,60 110,80 T160,70" stroke="#795548" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <path d="M70,65 L70,20" stroke="green" stroke-width="3"/> <path d="M140,70 L140,30" stroke="green" stroke-width="3"/> <path d="M70,75 L70,90 M140,75 L140,90" stroke="#5d4037" stroke-width="1"/> <text x="10" y="90" font-size="10" fill="#5d4037">Underground Stem</text>
+                    </svg>
+                </div>
+                <p><strong>Rhizomes</strong> are stems that grow horizontally <em>underground</em>. They are thick and fleshy because they store energy (starch). New upward shoots push through the soil surface from the rhizome's nodes to form new plants.</p>
+                <div class="example">Ex: Ginger, Bamboo, and Turmeric.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>3. Suckers</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M10,70 L190,70" stroke="#8d6e63" stroke-width="2"/>
+                        <rect x="30" y="20" width="20" height="50" fill="#795548"/> <circle cx="40" cy="20" r="25" fill="#2e7d32"/> <path d="M40,70 L160,90" stroke="#5d4037" stroke-width="4"/> <path d="M130,85 L130,50" stroke="#4caf50" stroke-width="3"/> <circle cx="130" cy="45" r="8" fill="#4caf50"/>
+                        <text x="135" y="40" font-size="10" fill="black">Sucker</text>
+                    </svg>
+                </div>
+                <p><strong>Suckers</strong> (or root sprouts) emerge directly from the <span class="vocab">roots</span> of a parent plant. If a tree is damaged, chopped down, or highly stressed, it activates dormant buds on its roots to send up new shoots nearby.</p>
+                <div class="example">Ex: Cherry trees and Blackberry bushes.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>4. Bulbs</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M10,60 L190,60" stroke="#8d6e63" stroke-width="2"/>
+                        <path d="M90,60 C90,20 110,20 110,60" fill="#e1bee7" stroke="purple"/>
+                        <path d="M95,60 C95,30 105,30 105,60" fill="none" stroke="purple"/>
+                        <path d="M110,60 C110,40 120,40 120,60" fill="#e1bee7" stroke="purple"/>
+                        <path d="M100,60 L100,80 M115,60 L115,75" stroke="#5d4037"/>
+                        <text x="125" y="50" font-size="10" fill="purple">Offset</text>
+                    </svg>
+                </div>
+                <p>A <strong>Bulb</strong> is an underground structure with a tiny central stem wrapped in thick, fleshy storage leaves (layers). Small "offset" baby bulbs grow attached to the base of the parent and can be separated.</p>
+                <div class="example">Ex: Onions, Tulips, Garlic, and Daffodils.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>5. Tubers</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M10,50 L190,50" stroke="#8d6e63" stroke-width="2"/>
+                        <ellipse cx="100" cy="75" rx="40" ry="20" fill="#ffcc80" stroke="#e65100"/>
+                        <circle cx="80" cy="70" r="1" fill="black"/>
+                        <circle cx="100" cy="80" r="1" fill="black"/>
+                        <circle cx="120" cy="70" r="1" fill="black"/>
+                        <path d="M120,70 L125,40" stroke="green" stroke-width="2"/>
+                        <text x="130" y="45" font-size="10" fill="black">Eye (Bud)</text>
+                    </svg>
+                </div>
+                <p><strong>Tubers</strong> are swollen, underground stems stuffed with starch. They feature small bumps called "eyes", which are actually dormant buds. Each single eye can sprout into a completely new plant.</p>
+                <div class="example">Ex: Potatoes (Stem tuber) and Yams.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>6. Plantlets</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M50,90 Q40,20 150,90" fill="none" stroke="green" stroke-width="2"/>
+                        <circle cx="70" cy="55" r="3" fill="red"/>
+                        <line x1="70" y1="55" x2="70" y2="65" stroke="#aaa"/>
+                        <circle cx="90" cy="40" r="3" fill="red"/>
+                        <line x1="90" y1="40" x2="90" y2="50" stroke="#aaa"/>
+                        <circle cx="110" cy="45" r="3" fill="red"/>
+                        <text x="120" y="30" font-size="10" fill="black">Leaf Margin</text>
+                    </svg>
+                </div>
+                <p><strong>Plantlets</strong> are unique miniature clones that develop directly on the edges of the parent plant's leaves. They grow their own tiny roots while still attached, eventually dropping off to take root instantly.</p>
+                <div class="example">Ex: Kalanchoe (Mother of Thousands) and Spider Plant.</div>
+            </div>
+
+            <div class="section-box full-width-box">
+                <h2>The Big Picture: Advantages, Disadvantages & Artificial Propagation</h2>
+                <p><strong>Pros & Cons of Cloning:</strong> Asexual reproduction is incredibly efficient. A plant does not need to waste energy making nectar, colorful petals, or waiting for bees to pollinate it. It can rapidly take over a patch of ideal soil. However, the major disadvantage is a lack of <strong>genetic variety</strong>. Because every plant is a clone, a single disease or pest that can kill one plant will likely wipe out the entire population.</p>
+                <p><strong>Artificial Propagation (Human Intervention):</strong> Humans have learned to hijack these natural cloning abilities for farming. We use <strong>Cuttings</strong> (snipping off a piece of stem and placing it in water until it grows roots) and <strong>Grafting</strong> (taping a branch from an excellent fruit tree onto the roots of a strong tree). Without artificial cloning, the apples, grapes, and bananas you buy at the store wouldn't taste the same every time!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>Comprehension & Analysis</h1>
+            <span class="sub-head">Teacher Mode: Click the lines to reveal/hide answers.</span>
+        </div>
+
+        <div class="two-col-questions">
+            
+            <div class="col">
+                <div class="q-section">
+                    <div class="q-title">Part A: Key Terminology</div>
+                    
+                    <div class="question">
+                        1. Define <strong>Asexual Reproduction</strong> in your own words.
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Reproduction requiring only one parent, producing genetically identical offspring (clones) without seeds.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        2. Why are the offspring of asexual reproduction referred to as "clones"?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Because they contain the exact same DNA / genetic code as the single parent plant.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        3. What is the physical difference between a <strong>Stolon</strong> and a <strong>Rhizome</strong>?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">A stolon grows horizontally ABOVE the ground. A rhizome grows horizontally UNDER the ground.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part B: True or False</div>
+                    <div class="question">
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            4. A potato is a swollen root structure. 
+                            <br><strong>[ T / F ]</strong> <span class="ans-text">False (It is a swollen stem / Tuber)</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            5. Asexual reproduction increases genetic diversity. 
+                            <br><strong>[ T / F ]</strong> <span class="ans-text">False (It creates zero genetic diversity)</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            6. Humans use artificial propagation to grow fruit. 
+                            <br><strong>[ T / F ]</strong> <span class="ans-text">True (Using cuttings and grafting)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part C: Identification</div>
+                    <p style="font-size: 9.5pt; margin-bottom: 5px;">Identify the method used by the following plants:</p>
+                    <div class="question">
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            7. Strawberry: <span class="lines" style="width: 150px; display:inline-block; height:12px;"></span>
+                            <span class="ans-text">Stolon / Runner</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            8. Cherry Tree: <span class="lines" style="width: 145px; display:inline-block; height:12px;"></span>
+                            <span class="ans-text">Sucker (Roots)</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            9. Kalanchoe: <span class="lines" style="width: 155px; display:inline-block; height:12px;"></span>
+                            <span class="ans-text">Plantlets</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            10. Onion: <span class="lines" style="width: 175px; display:inline-block; height:12px;"></span>
+                            <span class="ans-text">Bulb</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="q-section">
+                    <div class="q-title">Part D: Diagram Analysis</div>
+                    <div class="question">
+                        11. Observe the "Rhizome" diagram on Page 1. Why are there shoots coming up at regular intervals? What structure is located at the base of each shoot?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                             <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Shoots emerge from NODES. These are the growth points on the stem.</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        12. In the "Tuber" diagram, what would happen if you cut the "eye" out?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                             <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The plant would not grow from that spot because the eye contains the bud.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="q-section">
+                    <div class="q-title">Part E: Scientific Analysis</div>
+                    
+                    <div class="question">
+                        13. Look at the diagram of the <strong>Bulb</strong>. Why do you think the bulb is made of thick, fleshy layers? What is their function?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The layers act as a food storage unit. They store energy (starch) so the plant can survive dormant periods like cold winters.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        14. <strong>Scenario:</strong> A farmer plants a massive field of potatoes using tubers cut from a single parent plant. A new fungus disease arrives in the wind. 
+                        <br>What will likely happen to the rest of the field? Explain why.
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The entire field will likely be wiped out. Because all the potatoes are clones, they share the exact same genetic weaknesses. If the disease kills one, it can kill them all.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        15. If you wanted a plant to rapidly cover a large, bare patch of soil in your garden, would you choose a plant that uses <strong>Bulbs</strong> or a plant that uses <strong>Stolons</strong>? Explain your reasoning based on the text.
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Stolons. Stolons are specialized for rapid horizontal spreading above ground. Bulbs mostly stay in one place, slowly producing small offsets right next to the parent.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        16. What are the "eyes" on a potato tuber? If you cut a potato in half, making sure both halves have at least one eye, and plant them, what will happen?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The eyes are dormant buds. Both halves will sprout their own stems and grow into two separate, identical potato plants.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part F: Artificial Propagation</div>
+                    <div class="question">
+                        17. Why do humans use <strong>Grafting</strong> for fruit trees instead of planting seeds from the fruit?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Seeds create random genetic mixes (might taste bad). Grafting clones the parent, guaranteeing the fruit tastes exactly the same.</span>
+                        </div>
+                    </div>
+                     <div class="question">
+                        18. Describe the process of taking a "Cutting."
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Snipping a piece of stem from a parent plant and placing it in water/soil until it grows new roots.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top:auto; text-align:center; font-size:10pt; color:#666; border-top: 1px dashed #ccc; padding-top: 10px;">
+            <em>Total Score: _______ / 25</em>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleAns(element) {
+            const ansText = element.querySelector('.ans-text');
+            const ansLines = element.querySelector('.ans-lines');
+            
+            // Check if answer is currently visible
+            const isVisible = ansText.style.display === 'block';
+            
+            if (!isVisible) {
+                // Show Answer, Hide Lines
+                ansText.style.display = 'block';
+                if(ansLines) ansLines.style.display = 'none';
+            } else {
+                // Hide Answer, Show Lines
+                ansText.style.display = 'none';
+                if(ansLines) ansLines.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>

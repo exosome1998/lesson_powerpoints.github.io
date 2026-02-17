@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Energy Efficiency: Scientific Skills Worksheet</title>
+    <style>
+        @page { size: A4; margin: 10mm; }
+        body {
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #222;
+            background: #e0e0e0;
+            margin: 0; padding: 0;
+        }
+        .page {
+            width: 210mm;
+            height: 296mm;
+            padding: 12mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            column-count: 2;
+            column-gap: 20px;
+            column-fill: auto;
+            page-break-after: always;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* TYPOGRAPHY */
+        h1 {
+            column-span: all;
+            text-align: center;
+            color: #d35400;
+            font-size: 18pt;
+            margin: 0 0 15px 0;
+            border-bottom: 3px solid #d35400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h2 {
+            background-color: #fcece4;
+            color: #d35400;
+            font-size: 11pt;
+            padding: 4px 8px;
+            margin: 10px 0 8px 0;
+            border-left: 4px solid #d35400;
+            break-after: avoid;
+            font-weight: bold;
+        }
+        
+        .q-block { margin-bottom: 12px; break-inside: avoid; }
+        .q-text { font-weight: bold; font-size: 10pt; margin-bottom: 2px; }
+        .sub-text { font-size: 9pt; margin-left: 5px; margin-bottom: 2px; font-style: italic; color: #555; }
+
+        /* --- WRITING SPACE & INTERACTIVITY --- */
+        .writing-space {
+            position: relative;
+            cursor: pointer;
+            margin-top: 2px;
+            padding-bottom: 5px;
+        }
+        .writing-space:hover .line { border-color: #d35400; }
+        
+        .line {
+            display: block;
+            width: 100%;
+            height: 24px;
+            border-bottom: 1.5px solid #aaa;
+            margin-bottom: 2px;
+        }
+
+        /* HIDDEN TEXT ANSWER */
+        .ans-overlay {
+            display: none;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            color: #c0392b;
+            font-family: 'Comic Sans MS', 'Cursive', sans-serif;
+            font-size: 11pt;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 0 5px;
+            line-height: 24px;
+            pointer-events: none;
+        }
+
+        /* HIDDEN SVG DIAGRAMS */
+        .svg-overlay {
+            display: none;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.8);
+            pointer-events: none;
+        }
+
+        /* TABLES & GRAPHS */
+        table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 10px; break-inside: avoid; }
+        th, td { border: 1px solid #777; padding: 4px; text-align: center; }
+        th { background: #eee; }
+
+        /* GRAPH CONTAINER */
+        .graph-container {
+            width: 100%;
+            height: 220px;
+            border: 2px solid #333;
+            background-image: 
+                linear-gradient(#ccc 1px, transparent 1px),
+                linear-gradient(90deg, #ccc 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative;
+            margin: 5px 0;
+            break-inside: avoid;
+            cursor: pointer;
+        }
+        .graph-container:hover { border-color: #d35400; }
+        
+        .axis-label { position: absolute; font-size: 8pt; font-weight: bold; background: white; padding: 2px; }
+        .y-axis { top: 50%; left: -15px; transform: translateY(-50%) rotate(-90deg); }
+        .x-axis { bottom: -15px; left: 50%; transform: translateX(-50%); }
+
+        .click-hint {
+            position: absolute; right: 2px; bottom: 2px;
+            font-size: 7pt; color: #999; font-style: italic; pointer-events: none;
+        }
+
+        /* PRINT SETTINGS */
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; border: none; height: auto; }
+            .click-hint { display: none; }
+            .graph-container, .writing-space { cursor: default; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1>Energy Efficiency Investigation</h1>
+
+        <h2>Part A: Experimental Data Analysis</h2>
+        <div class="q-block">
+            <div class="sub-text"><strong>Scenario:</strong> Temperature rise over 10 minutes (Room Temp = 20°C).</div>
+            <table>
+                <tr><th>Time (mins)</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th><th>10</th></tr>
+                <tr><td><strong>Incandescent (°C)</strong></td><td>20</td><td>60</td><td>95</td><td>115</td><td>122</td><td>125</td></tr>
+                <tr><td><strong>LED (°C)</strong></td><td>20</td><td>22</td><td>24</td><td>25</td><td>26</td><td>26</td></tr>
+            </table>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">1. Graphing Skills:</div>
+            <div class="sub-text">Plot the data below. <span style="color:red">X = Incandescent</span>, <span style="color:blue">O = LED</span>.</div>
+            
+            <div class="graph-container" onclick="toggleAns(this)">
+                <div class="axis-label y-axis">Temperature (°C)</div>
+                <div class="axis-label x-axis">Time (mins)</div>
+                <div class="click-hint">[Click Grid to Reveal Plot]</div>
+                
+                <svg class="svg-overlay" viewBox="0 0 300 200" preserveAspectRatio="none">
+                    <polyline points="10,190 66,130 122,70 178,40 234,30 290,25" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+                    <text x="10" y="190" fill="#c0392b" font-size="14" text-anchor="middle" alignment-baseline="middle">x</text>
+                    <text x="66" y="130" fill="#c0392b" font-size="14" text-anchor="middle" alignment-baseline="middle">x</text>
+                    <text x="122" y="70" fill="#c0392b" font-size="14" text-anchor="middle" alignment-baseline="middle">x</text>
+                    <text x="178" y="40" fill="#c0392b" font-size="14" text-anchor="middle" alignment-baseline="middle">x</text>
+                    <text x="234" y="30" fill="#c0392b" font-size="14" text-anchor="middle" alignment-baseline="middle">x</text>
+                    <text x="290" y="25" fill="#c0392b" font-size="14" text-anchor="middle" alignment-baseline="middle">x</text>
+                    <text x="200" y="20" fill="#c0392b" font-size="10">Incandescent</text>
+
+                    <polyline points="10,190 66,187 122,184 178,182 234,180 290,180" fill="none" stroke="#2980b9" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="10" cy="190" r="3" fill="none" stroke="#2980b9" stroke-width="2"/>
+                    <circle cx="66" cy="187" r="3" fill="none" stroke="#2980b9" stroke-width="2"/>
+                    <circle cx="122" cy="184" r="3" fill="none" stroke="#2980b9" stroke-width="2"/>
+                    <circle cx="178" cy="182" r="3" fill="none" stroke="#2980b9" stroke-width="2"/>
+                    <circle cx="234" cy="180" r="3" fill="none" stroke="#2980b9" stroke-width="2"/>
+                    <circle cx="290" cy="180" r="3" fill="none" stroke="#2980b9" stroke-width="2"/>
+                    <text x="200" y="170" fill="#2980b9" font-size="10">LED</text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">2. Describe the trend for the Incandescent globe.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">Rapid increase in temperature for the first 6 minutes,<br>then it levels off (plateaus) at 125°C.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">3. Calculate the total temperature rise for the LED.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">Final (26) - Start (20) = 6°C total rise.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">4. Explain what this proves about energy transformation.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">Incandescent globes transform most electrical energy into<br>Heat (Waste), making them very inefficient.</div>
+            </div>
+        </div>
+
+        <h2>Part B: Cost Analysis (Numeracy)</h2>
+        <div class="q-block">
+            <div class="sub-text"><strong>Data:</strong> House has 20 lights. Electricity cost: $0.30 per unit.</div>
+            <table>
+                <tr><th>Feature</th><th>Old Bulb</th><th>LED Bulb</th></tr>
+                <tr><td>Power</td><td>60 W</td><td>9 W</td></tr>
+                <tr><td>Lifespan</td><td>1,000 hrs</td><td>25,000 hrs</td></tr>
+                <tr><td>Cost to Buy</td><td>$1.00</td><td>$5.00</td></tr>
+            </table>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">5. Cost to Buy (Initial Outlay):</div>
+            <div class="sub-text">Calculate cost to fill the whole house (20 lights) for both.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">Old: 20 x $1 = $20.00 | LED: 20 x $5 = $100.00</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">6. The "Hidden" Replacement Cost:</div>
+            <div class="sub-text">How many Old Bulbs do you need to buy to equal ONE LED?</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">25,000 ÷ 1,000 = 25 Old Bulbs.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">7. Calculate the REAL cost of Old Bulbs over 25,000 hours.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">25 bulbs x $1.00 = $25.00 total replacement cost.</div>
+            </div>
+        </div>
+
+        <h2>Part C: Scientific Drawing</h2>
+        <div class="q-block">
+            <div class="q-text">8. Draw a Sankey Diagram for a CFL Globe.</div>
+            <div class="sub-text">Input: 20J. Useful: 10J. Wasted: 10J. (Ensure arrows are to scale).</div>
+            
+            <div class="graph-container" style="height:120px; background:white; border:1px solid #999;" onclick="toggleAns(this)">
+                <div class="click-hint">[Click Box to Reveal Diagram]</div>
+                <svg class="svg-overlay" viewBox="0 0 300 120" preserveAspectRatio="none">
+                    <rect x="10" y="40" width="60" height="40" fill="#2c3e50" stroke="black"/>
+                    <text x="15" y="65" fill="white" font-size="12">20J</text>
+                    
+                    <path d="M70,40 L180,40 L180,60 L70,60" fill="#f1c40f" opacity="0.8"/>
+                    <text x="190" y="55" fill="black" font-size="12">10J Light</text>
+                    
+                    <path d="M70,60 L180,60 L180,110 L160,110 L160,80 L70,80" fill="#c0392b" opacity="0.8"/>
+                    <text x="190" y="100" fill="black" font-size="12">10J Heat</text>
+                    
+                    <text x="100" y="20" fill="red" font-size="10" font-family="Comic Sans MS">(Equal Widths)</text>
+                </svg>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page">
+        <h1>Scientific Inquiry & Application</h1>
+
+        <h2>Part D: Experimental Design</h2>
+        
+        <div class="q-block">
+            <div class="q-text">9. Identify the variables.</div>
+            <div class="sub-text">Independent (Change):</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">Type of light globe (Incandescent vs LED).</div>
+            </div>
+            <div class="sub-text">Dependent (Measure):</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">Surface Temperature (°C).</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">10. Controlled Variables (Fair Test):</div>
+            <div class="sub-text">List TWO things kept constant.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">1. Starting room temperature.<br>2. Time the lights were left on.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">11. Reliability vs Validity:</div>
+            <div class="sub-text">Why repeat the test 3 times?</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">To improve Reliability. It helps identify outliers (mistakes)<br>and provides a more accurate average.</div>
+            </div>
+        </div>
+
+        <h2>Part E: Advanced Efficiency</h2>
+        <div class="q-block">
+            <div class="sub-text"><strong>Formula:</strong> Efficiency (%) = (Useful ÷ Total) × 100</div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">12. Calculate Efficiency: CFL Globe</div>
+            <div class="sub-text">Input: 15J. Useful Light: 4J.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">(4 ÷ 15) × 100 = 26.6% Efficient.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">13. Calculate Efficiency: LED Globe</div>
+            <div class="sub-text">Input: 10J. Useful Light: 8.5J.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">(8.5 ÷ 10) × 100 = 85% Efficient.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">14. Comparison:</div>
+            <div class="sub-text">How many times more efficient is the LED (85%) than Incandescent (5%)?</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <div class="ans-overlay">85 ÷ 5 = 17 times more efficient.</div>
+            </div>
+        </div>
+
+        <h2>Part F: Critical Thinking</h2>
+
+        <div class="q-block">
+            <div class="q-text">15. The "Rebound Effect":</div>
+            <div class="sub-text">LEDs are cheap to run, so people leave them on longer. Explain the problem.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">If used longer, total energy use stays high,<br>cancelling out savings and creating CO2 pollution.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">16. Safety & Disposal:</div>
+            <div class="sub-text">CFLs contain Mercury. Why is this a problem?</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">Mercury is toxic. If broken or thrown in landfill,<br>it poisons the environment.</div>
+            </div>
+        </div>
+
+        <div class="q-block">
+            <div class="q-text">17. Future Tech: Bioluminescence</div>
+            <div class="sub-text">Scientists are making lights from bacteria. Give one pro and one con.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">Pro: No electricity needed (Natural).<br>Con: Might not be bright enough for reading.</div>
+            </div>
+        </div>
+
+        <h2>Conclusion</h2>
+        <div class="q-block">
+            <div class="q-text">18. Summarise the relationship between Power (Watts) and Heat.</div>
+            <div class="writing-space" onclick="toggleAns(this)">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+                <div class="ans-overlay">Direct link: Globes that require High Power (Watts) for the same brightness<br>waste that extra energy as Heat.<br>Low Power (LED) = Low Heat.</div>
+            </div>
+        </div>
+
+        <div style="text-align:center; font-size:9pt; margin-top:20px; color:#888;">
+            Science Skills: Graphing • Numeracy • Variable Control • Ethical Reasoning
+        </div>
+    </div>
+
+    <script>
+        function toggleAns(element) {
+            // Find overlay in clicked element
+            let overlay = element.querySelector('.ans-overlay') || element.querySelector('.svg-overlay');
+            
+            // Allow clicking the overlay itself to hide it
+            if (element.classList.contains('ans-overlay') || element.classList.contains('svg-overlay')) {
+                overlay = element;
+            }
+
+            if (overlay) {
+                if (overlay.style.display === 'block') {
+                    overlay.style.display = 'none';
+                } else {
+                    overlay.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

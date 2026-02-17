@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artificial Plant Cloning Worksheet</title>
+    <style>
+        @page { size: A4; margin: 10mm; }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #111;
+            margin: 0 auto;
+            max-width: 210mm;
+            background: #fff;
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .page {
+            height: 276mm; /* Printable A4 height */
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 5px;
+        }
+        .header {
+            border-bottom: 2px solid #1565c0; /* Blue theme for artificial */
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        h1 { margin: 0; color: #0d47a1; font-size: 18pt; text-transform: uppercase; }
+        .sub-head { font-style: italic; color: #555; font-size: 10pt; }
+        
+        /* Grid for Reading Sections */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 Columns */
+            gap: 15px;
+            row-gap: 10px;
+            flex-grow: 1;
+        }
+        
+        .section-box {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width-box {
+            grid-column: span 2;
+            background-color: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-left: 5px solid #1976d2;
+        }
+
+        h2 {
+            background-color: #e1f5fe;
+            color: #0277bd;
+            font-size: 11pt;
+            margin: 0 0 5px 0;
+            padding: 4px;
+            border-radius: 3px;
+        }
+        
+        p { margin: 0 0 5px 0; font-size: 9.5pt; line-height: 1.3; text-align: justify; }
+        .vocab { font-weight: bold; color: #c62828; }
+        .example { font-size: 9pt; color: #444; font-style: italic; margin-top: auto; }
+
+        /* SVG Styling */
+        .svg-container {
+            width: 100%;
+            height: 100px;
+            background: #fff;
+            margin: 5px 0;
+            display: flex;
+            justify-content: center;
+            border: 1px dashed #ccc;
+        }
+        svg { height: 100%; width: auto; }
+
+        /* --- QUESTION PAGE STYLES --- */
+        .two-col-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 5px;
+            height: 100%;
+        }
+        .q-section { margin-bottom: 15px; border-bottom: 1px dotted #eee; padding-bottom: 10px; }
+        .q-title { font-weight: bold; font-size: 11pt; border-bottom: 2px solid #333; margin-bottom: 8px; padding-bottom: 2px; background: #eee; padding-left: 5px;}
+        .question { margin-bottom: 12px; font-size: 10pt; }
+        
+        /* Interactive Answer Styles */
+        .clickable-area {
+            cursor: pointer;
+            margin-top: 5px;
+            min-height: 20px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+        .clickable-area:hover {
+            background-color: #f0f0f0;
+        }
+        .ans-lines {
+            display: block;
+        }
+        .lines {
+            border-bottom: 1px solid #aaa;
+            display: block;
+            width: 100%;
+            height: 18px;
+        }
+        .ans-text {
+            display: none;
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 10pt;
+            padding: 2px 5px;
+            background: #ffebee;
+            border: 1px dashed #ef9a9a;
+        }
+
+        /* Print formatting */
+        @media print {
+            .clickable-area:hover { background-color: transparent; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="header">
+            <h1>Artificial Cloning of Plants</h1>
+            <span class="sub-head">Unit: Horticulture & Biology</span>
+        </div>
+
+        <div style="background:#eef; padding:8px; border-left:4px solid #1565c0; margin-bottom:10px; font-size:10pt;">
+            <strong>Introduction:</strong> While plants clone themselves naturally, humans have developed techniques to force this process. This is called <strong>Artificial Propagation</strong>. Gardeners and farmers use these methods to ensure that every new plant has the exact same fruit size, taste, and disease resistance as the parent. There are four main methods: Cuttings, Layering, Grafting, and Budding.
+        </div>
+
+        <div class="grid-container">
+            
+            <div class="section-box">
+                <h2>1. Cuttings</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M60,90 L90,90 L100,50 L50,50 Z" fill="#d7ccc8" stroke="#5d4037" stroke-width="2"/> <path d="M75,50 L75,20" stroke="green" stroke-width="3"/> <path d="M75,30 Q90,10 100,30" fill="none" stroke="green" stroke-width="2"/> <circle cx="75" cy="20" r="3" fill="green"/>
+                        <path d="M75,50 L70,65 M75,50 L80,65" stroke="#fff" stroke-width="2"/> <text x="110" y="40" font-size="10" fill="black">Roots form here</text>
+                        <path d="M110,45 L85,60" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    </svg>
+                </div>
+                <p>This is the simplest method. A piece of the parent plant (usually a stem, root, or leaf) is cut off. The cut end is often dipped in <span class="vocab">rooting hormone</span> powder to encourage growth and then placed in moist soil. The cutting eventually develops its own roots and becomes an independent plant.</p>
+                <div class="example">Used for: Lavender, Rosemary, Jade Plant.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>2. Layering</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M10,80 L190,80" stroke="#8d6e63" stroke-width="2"/> <path d="M30,80 L30,40" stroke="brown" stroke-width="4"/> <circle cx="30" cy="30" r="15" fill="green"/> <path d="M30,70 Q60,95 90,70" stroke="brown" stroke-width="3" fill="none"/> <path d="M90,70 L90,50" stroke="brown" stroke-width="3"/> <circle cx="90" cy="45" r="10" fill="green"/> <path d="M60,80 L60,90 M65,80 L65,90" stroke="black" stroke-width="1"/> <text x="50" y="30" font-size="10" fill="black">Stem bent underground</text>
+                    </svg>
+                </div>
+                <p>In layering, a stem is encouraged to grow roots <em>while still attached</em> to the parent plant. A low-hanging branch is bent down and buried in the soil. Once roots form at the buried point, the stem is cut from the parent. <strong>Air Layering</strong> involves wrapping a branch in damp moss to grow roots in mid-air!</p>
+                <div class="example">Used for: Climbing roses, Jasmine, Honeysuckle.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>3. Grafting</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <text x="10" y="20" font-size="10" fill="#c62828">SCION (Top)</text>
+                        <text x="10" y="90" font-size="10" fill="#c62828">STOCK (Roots)</text>
+                        
+                        <path d="M100,100 L100,60" stroke="brown" stroke-width="10"/>
+                        <path d="M100,60 L80,90 M100,60 L120,90" stroke="brown" stroke-width="2"/> <path d="M100,60 L100,20" stroke="#8d6e63" stroke-width="10"/>
+                        <circle cx="100" cy="15" r="15" fill="green"/>
+                        
+                        <line x1="90" y1="55" x2="110" y2="65" stroke="white" stroke-width="2"/>
+                        <rect x="92" y="50" width="16" height="20" fill="none" stroke="blue" stroke-dasharray="2,2"/>
+                        <text x="120" y="60" font-size="9" fill="blue">Tape/Wax</text>
+                    </svg>
+                </div>
+                <p>Grafting joins two different plants together. The top part (the <span class="vocab">Scion</span>) is selected for good fruit/flowers. The bottom part (the <span class="vocab">Rootstock</span>) is selected for strong roots and disease resistance. The two are cut, joined, and taped until their tissues heal together.</p>
+                <div class="example">Used for: Apples, Citrus trees, Avocados.</div>
+            </div>
+
+            <div class="section-box">
+                <h2>4. Budding (Shield Grafting)</h2>
+                <div class="svg-container">
+                    <svg viewBox="0 0 200 100">
+                        <path d="M60,10 L60,90" stroke="brown" stroke-width="12"/> <line x1="60" y1="40" x2="60" y2="60" stroke="#fdd835" stroke-width="2"/> <line x1="55" y1="40" x2="65" y2="40" stroke="#fdd835" stroke-width="2"/> <path d="M120,40 Q130,50 120,60" fill="brown" stroke="black"/> <circle cx="125" cy="50" r="4" fill="green"/> <text x="75" y="30" font-size="10" fill="black">T-Cut in Bark</text>
+                        <text x="135" y="55" font-size="10" fill="black">Bud Shield</text>
+                        <path d="M110,50 L75,50" stroke="black" stroke-width="1" marker-end="url(#arrow)"/>
+                    </svg>
+                </div>
+                <p>Budding is a specific type of grafting. Instead of using a whole stick for the scion, a single <strong>bud</strong> is sliced from the parent tree. A "T-shaped" cut is made in the bark of the rootstock, and the single bud is slipped inside and taped shut. It is very efficient as one branch can provide many buds.</p>
+                <div class="example">Used for: Rose bushes, Stone fruits (Peaches, Plums).</div>
+            </div>
+
+            <div class="section-box full-width-box">
+                <h2>Why Go to All This Trouble?</h2>
+                <p><strong>1. Consistency:</strong> Apple seeds are genetically random. If you plant a seed from a delicious Honeycrisp apple, the tree that grows will likely produce small, sour fruit. To get Honeycrisp apples, you <strong>must</strong> graft a Honeycrisp branch onto a tree.</p>
+                <p><strong>2. Speed:</strong> A cutting or grafted tree is already "mature." It will produce fruit in 1-3 years, whereas a tree grown from seed might take 10 years.</p>
+                <p><strong>3. Resilience:</strong> We can graft a delicate French grape vine onto wild American roots (rootstock) that are immune to soil diseases. This gives us the best of both worlds: good fruit and tough roots.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>Worksheet: Artificial Propagation</h1>
+            <span class="sub-head">Teacher Mode: Click the lines to reveal/hide answers.</span>
+        </div>
+
+        <div class="two-col-questions">
+            
+            <div class="col">
+                <div class="q-section">
+                    <div class="q-title">Part A: Key Terminology</div>
+                    <p style="font-size:9pt; margin-bottom:5px;">Define the following terms:</p>
+                    
+                    <div class="question">
+                        1. <strong>Scion</strong>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The top part of a graft that produces the leaves, flowers, and fruit (the desired variety).</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        2. <strong>Rootstock</strong>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The bottom part of a graft that provides the root system and disease resistance.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        3. <strong>Rooting Hormone</strong>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">A chemical powder/gel applied to the cut end of a stem to stimulate new root growth.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part B: True or False</div>
+                    <div class="question">
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            4. Grafting combines genetic traits to create a hybrid DNA.
+                            <br><strong>[ T / F ]</strong> <span class="ans-text">False (The DNA stays separate; they just grow together).</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            5. Layering involves removing the stem from the parent immediately.
+                            <br><strong>[ T / F ]</strong> <span class="ans-text">False (It stays attached until roots form).</span>
+                        </div>
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            6. Budding uses a single bud instead of a whole twig.
+                            <br><strong>[ T / F ]</strong> <span class="ans-text">True.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part C: Application</div>
+                    <div class="question">
+                        7. You want to grow a new Rosemary bush from your neighbor's plant. Which method is easiest?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <span class="lines"></span>
+                            <span class="ans-text">Cuttings.</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        8. You have a wild plum tree with strong roots but bad fruit. You want it to grow sweet peaches. Which method do you use?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <span class="lines"></span>
+                            <span class="ans-text">Grafting (or Budding).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part D: Sequencing</div>
+                    <p style="font-size:9pt; margin-bottom:5px;">Number the steps of "Budding" (1-3):</p>
+                    <div class="question">
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            ___ Tape the wound shut to heal.
+                            <br>___ Cut a "T" shape in the rootstock bark.
+                            <br>___ Slide the bud shield into the cut.
+                            <br>
+                            <span class="ans-text">Order: 3, 1, 2.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="q-section">
+                    <div class="q-title">Part E: Scientific Analysis</div>
+                    
+                    <div class="question">
+                        9. <strong>The "Apple Seed" Problem:</strong> If you plant a seed from a Granny Smith apple, the tree that grows will not produce Granny Smith apples. Explain why.
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">Seeds are sexual reproduction (random DNA mix). To get the same apple, you need a clone (grafting).</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        10. Why is <strong>Layering</strong> considered safer for the plant than taking a <strong>Cutting</strong>?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">In layering, the new plant is still attached to the parent, so it continues receiving water/nutrients while growing roots.</span>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        11. In grafting, why is it critical that the tissues of the Scion and Rootstock line up perfectly?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">The internal transport tubes (xylem/phloem) must connect so water can move from the roots to the leaves.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part F: Diagram Identification</div>
+                    <div class="question">
+                        12. In the "Budding" diagram, what shape is cut into the bark of the rootstock?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <span class="lines"></span>
+                            <span class="ans-text">A "T" shape.</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        13. In the "Grafting" diagram, what holds the two pieces together while they heal?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <span class="lines"></span>
+                            <span class="ans-text">Tape or Wax.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="q-section">
+                    <div class="q-title">Part G: Troubleshooting</div>
+                    <div class="question">
+                        14. <strong>Scenario:</strong> A student takes a cutting, strips all the leaves off, and puts it in dry soil. It dies. Identify two mistakes.
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">1. Soil must be moist. 2. Some leaves are needed for energy (though too many cause water loss).</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        15. <strong>Critical Thinking:</strong> Can you graft an Apple branch onto an Orange tree? Why or why not?
+                        <div class="clickable-area" onclick="toggleAns(this)">
+                            <div class="ans-lines">
+                                <span class="lines"></span><span class="lines"></span>
+                            </div>
+                            <span class="ans-text">No. They are too genetically different (incompatible). You must graft related species (e.g., Orange on Lemon).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top:auto; text-align:center; font-size:10pt; color:#666; border-top: 1px dashed #ccc; padding-top: 10px;">
+            <em>Total Score: _______ / 25</em>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleAns(element) {
+            const ansText = element.querySelector('.ans-text');
+            const ansLines = element.querySelector('.ans-lines');
+            
+            const isVisible = ansText.style.display === 'block';
+            
+            if (!isVisible) {
+                ansText.style.display = 'block';
+                if(ansLines) ansLines.style.display = 'none';
+            } else {
+                ansText.style.display = 'none';
+                if(ansLines) ansLines.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
