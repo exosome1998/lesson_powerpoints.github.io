@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Software Engineering Assessment Scaffolds</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 40px; background-color: #f4f7f6; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 40px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #003366; text-align: center; text-transform: uppercase; border-bottom: 3px solid #003366; padding-bottom: 10px; }
+        h2 { background: #003366; color: white; padding: 10px; margin-top: 30px; font-size: 1.2em; border-radius: 4px; }
+        h3 { color: #004080; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 25px; }
+        .scaffold-note { background: #e7f3fe; border-left: 6px solid #2196F3; padding: 15px; margin: 15px 0; font-style: italic; font-size: 0.9em; }
+        .checklist { list-style: none; padding: 0; }
+        .checklist li::before { content: "☐ "; color: #003366; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
+        th { background-color: #f9f9f9; font-weight: bold; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; font-family: 'Courier New', Courier, monospace; }
+        .page-break { margin-top: 50px; border-top: 2px dashed #bbb; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Component A: Technical Security Report</h1>
+    <p><strong>Instructions:</strong> Use the headings below to structure your formal report. Fill in the sections based on your audit and development work.</p>
+
+    <h2>Section 1: Executive Summary & Scope</h2>
+    <div class="scaffold-note">
+        Identify the problem and the boundaries of your solution (Module 7).
+    </div>
+    <h3>1.1 Project Overview</h3>
+    <p>[Write 2-3 sentences explaining that you were hired to fix the Social PWA and what the main goals were.]</p>
+    <h3>1.2 Requirements Definition</h3>
+    <ul class="checklist">
+        <li>Identify the "Needs": What must the app do to be secure?</li>
+        <li>Identify "Boundaries": What parts of the system did you NOT fix?</li>
+    </ul>
+
+    <h2>Section 2: Technical Security Audit (Module 5)</h2>
+    <div class="scaffold-note">
+        Show the results of your White, Grey, and Black box testing.
+    </div>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Vulnerability Name</th>
+            <th>Test Method (W/G/B Box)</th>
+            <th>Severity</th>
+            <th>Description of Risk</th>
+        </tr>
+        <tr>
+            <td>01</td>
+            <td>e.g., SQL Injection in Login</td>
+            <td>White Box (Code Review)</td>
+            <td>Critical</td>
+            <td>Attacker can bypass login and see all user data.</td>
+        </tr>
+        <tr>
+            <td>02</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+    </table>
+
+    <h2>Section 3: Data Dictionary (Module 5 & 7)</h2>
+    <div class="scaffold-note">
+        Define your secure data structures. This proves you planned your security (Module 7) and implemented it correctly (Module 5).
+    </div>
+    
+    <table>
+        <tr>
+            <th>Field Name</th>
+            <th>Data Type</th>
+            <th>Size/Format</th>
+            <th>Constraints</th>
+            <th>Security Purpose</th>
+        </tr>
+        <tr>
+            <td><code>user_pwd</code></td>
+            <td>String (Hashed)</td>
+            <td>255 chars</td>
+            <td>NOT NULL</td>
+            <td>Prevents plain-text password theft.</td>
+        </tr>
+        <tr>
+            <td><code>auth_token</code></td>
+            <td>JSON Object</td>
+            <td>N/A</td>
+            <td>Unique/Secure</td>
+            <td>Manages secure sessions for the user.</td>
+        </tr>
+    </table>
+
+    <h2>Section 4: Impact & Evaluation</h2>
+    <div class="scaffold-note">
+        Discuss the "why" behind your engineering.
+    </div>
+    <h3>4.1 Legal & Ethical Issues</h3>
+    <p>[Explain how your patches help the company follow the <strong>Privacy Act</strong> and protect user <strong>Intellectual Property</strong>.]</p>
+    <h3>4.2 Security by Design</h3>
+    <p>[Explain how you embedded privacy into the design (e.g., proactive sanitization) rather than just reacting to bugs.]</p>
+
+    <div class="page-break"></div>
+
+    <h1>Component C: Engineering Evidence PPT</h1>
+    <p><strong>Instructions:</strong> Create one slide for each heading below. Include screenshots of your GitHub activity to prove your management.</p>
+
+    <h2>Slide 1: Management Roadmap (Module 7)</h2>
+    <div class="scaffold-note">
+        Show that you planned your time effectively.
+    </div>
+    <ul class="checklist">
+        <li><strong>Visual:</strong> Screenshot of your <strong>GitHub Timeline/Roadmap</strong>.</li>
+        <li><strong>Explanation:</strong> How did you schedule your tasks over the 4 weeks? Mention if you used Waterfall or Agile iterations.</li>
+    </ul>
+
+    <h2>Slide 2: Project Tracking (Module 7)</h2>
+    <div class="scaffold-note">
+        Show how you used your CASE tools.
+    </div>
+    <ul class="checklist">
+        <li><strong>Visual:</strong> Screenshot of your <strong>GitHub Kanban Board</strong> (specifically the 'Done' column).</li>
+        <li><strong>Explanation:</strong> Explain how you moved vulnerabilities from "Issue/Backlog" to "Completed Patch."</li>
+    </ul>
+    
+
+    <h2>Slide 3: Technical Spotlight: Defensive Logic (Module 5)</h2>
+    <div class="scaffold-note">
+        This is your "Before and After" code moment.
+    </div>
+    <ul class="checklist">
+        <li><strong>Visual:</strong> Code snippet showing <strong>Input Validation</strong> or <strong>Sanitisation</strong>.</li>
+        <li><strong>Explanation:</strong> Explain the logic! How does this code stop an XSS or CSRF attack?</li>
+    </ul>
+
+    <h2>Slide 4: System Resilience & QA (Module 5 & 7)</h2>
+    <div class="scaffold-note">
+        Prove that your patches actually work.
+    </div>
+    <ul class="checklist">
+        <li><strong>Visual:</strong> Screenshot of a <strong>Test Plan</strong> or a scan report (e.g., ZAP or Lighthouse).</li>
+        <li><strong>Explanation:</strong> Compare the "Actual Output" with the "Expected Output." Does the app still crash if you enter bad data?</li>
+    </ul>
+
+    <h2>Slide 5: Professional Reflection</h2>
+    <div class="scaffold-note">
+        The "Expert Advice" part of the rubric.
+    </div>
+    <ul class="checklist">
+        <li><strong>Content:</strong> Summarize the benefits of your engineering to the client enterprise.</li>
+        <li><strong>Future Advice:</strong> What should the client do next to maintain security (Maintenance phase)?</li>
+    </ul>
+</div>
+
+</body>
+</html>

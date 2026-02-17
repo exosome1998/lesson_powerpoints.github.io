@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    body { font-family: 'Times New Roman', serif; line-height: 1.5; color: #000; margin: 40px; padding: 30px; border: 1px solid #000; }
+    .header { text-align: center; border-bottom: 3px double #000; margin-bottom: 25px; padding-bottom: 10px; }
+    h1 { margin: 0; font-size: 26px; text-transform: uppercase; }
+    h2 { font-size: 18px; margin: 5px 0; font-style: italic; }
+    
+    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
+    .info-table td, .info-table th { border: 1px solid #000; padding: 10px; vertical-align: top; font-size: 13px; }
+    .info-table th { background-color: #f2f2f2; text-align: left; width: 22%; }
+
+    h3 { background-color: #1a1a1a; color: #fff; padding: 10px; font-size: 15px; text-transform: uppercase; margin-top: 25px; }
+    .section-content { padding: 10px; font-size: 14px; text-align: justify; }
+    
+    .steps-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .steps-table th, .steps-table td { border: 1px solid #000; padding: 10px; font-size: 12px; vertical-align: top; }
+    .steps-table th { background-color: #333; color: #fff; width: 25%; }
+
+    .rubric-table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+    .rubric-table th, .rubric-table td { border: 1px solid #000; padding: 8px; font-size: 11px; vertical-align: top; }
+    .rubric-table th { background-color: #e0e0e0; text-align: center; font-weight: bold; }
+    .criteria-header { background-color: #f2f2f2; font-weight: bold; width: 15%; }
+    .band-header { font-weight: bold; text-align: center; background-color: #f9f9f9; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Marsden High School</h1>
+    <h2>Year 12 Software Engineering | Assessment Notification</h2>
+</div>
+
+<table class="info-table">
+    <tr>
+        <th>Course:</th><td>Software Engineering</td>
+        <th>Year:</th><td>12 HSC</td>
+    </tr>
+    <tr>
+        <th>Topic:</th><td>Secure Social PWA Engineering & Project Management</td>
+        <th>Task Type:</th><td>Managed Technical Solution & Engineering Portfolio</td>
+    </tr>
+    <tr>
+        <th colspan="1">Outcomes Assessed:</th>
+        <td colspan="3">
+            <strong>SE-12-01:</strong> justifies methods used to plan, develop and engineer software solutions<br>
+            <strong>SE-12-02:</strong> applies structural elements to develop programming code<br>
+            <strong>SE-12-04:</strong> evaluates practices to safely and securely collect, use and store data<br>
+            <strong>SE-12-06:</strong> justifies the selection and use of tools and resources to design, develop, manage and evaluate software<br>
+            <strong>SE-12-07:</strong> designs, develops and implements safe and secure programming solutions<br>
+            <strong>SE-12-09:</strong> applies methods to manage and document the development of a software project
+        </td>
+    </tr>
+    <tr>
+        <th>Issue Date:</th><td>26-Feb-2025</td>
+        <th>Progress Check:</th><td>18-Mar-2025 (Kanban Review)</td>
+    </tr>
+    <tr>
+        <th>Due Date:</th><td>26-Mar-2025</td>
+        <th>Weighting:</th><td>20%</td>
+    </tr>
+</table>
+
+<h3>Project Description</h3>
+<div class="section-content">
+    <p>Your client, <strong>‘The Vulnerable Social Media Group’</strong>, has engaged you as a software engineering security specialist to provide expert advice on the security and privacy of their Progressive Web App (PWA). This application facilitates private messaging, user profiles, and image sharing, but is currently in a "debugging" phase with significant architectural flaws.</p>
+    
+    <p>This project requires a dual-focus engineering approach. You must apply <strong>Module 7</strong> principles to manage the software engineering lifecycle (Agile workflows, version control, and collaboration) and <strong>Module 5</strong> concepts to engineer a secure software architecture (defensive programming, API security, and session management).</p>
+
+    <p><strong>You are required to:</strong></p>
+    <ul>
+        <li>Run a range of security tests and scans, along with a white/grey/black box analysis of the application.</li>
+        <li>Implement defensive data input handling practices, including input validation, sanitisation, and error handling.</li>
+        <li>Design, develop and implement secure code to minimize vulnerabilities in user action controls such as XSS, CSRF, and broken authentication.</li>
+        <li>Manage the entire project using <strong>GitHub Projects</strong> (Kanban and Timeline) to schedule and track the development of your patches.</li>
+    </ul>
+</div>
+
+<h3>Submission Details</h3>
+<div class="section-content">
+    <p>Students are to submit three distinct components—A, B and C.</p>
+    <ul>
+        <li><strong>Component A (40 Marks) - Technical Security Report:</strong> A professionally written report including an overview of your technical analysis, a data dictionary, impact assessments of discovered vulnerabilities, and expert advice on ‘Privacy by Design’ and ‘Security by Design’ approaches.</li>
+        <li><strong>Component B (50 Marks) - Engineering Portfolio & Repository:</strong> A link to a GitHub repository containing your patched source code. The repository must show clear version control history and a <strong>GitHub Kanban Board</strong> documenting the transition of security issues from 'Backlog' to 'Patched'.</li>
+        <li><strong>Component C (10 Marks) - Engineering Evidence PPT:</strong> A structured PowerPoint presentation that replaces the live pitch. You must justify your selection of tools (ZAP, GitHub), your engineering methodology (Agile/Waterfall/WAgile), and provide "Code Spotlights" justifying your most complex security patches.</li>
+    </ul>
+</div>
+
+
+
+<h3>Steps to Success</h3>
+<table class="steps-table">
+    <tr>
+        <th>Phase</th>
+        <th>What I need to do</th>
+    </tr>
+    <tr>
+        <td><strong>1. Audit & Analysis (Mod 5 & 7)</strong></td>
+        <td>
+            1. Experiment with the unsecure PWA to locate weaknesses in code and data handling.<br>
+            2. Conduct a security audit using special tools (Lighthouse, ZAP) and document White, Grey, and Black box testing processes.<br>
+            3. <strong>Define the problem:</strong> Log every vulnerability found as a <em>GitHub Issue</em>, defining need, opportunities, and boundaries.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>2. Sprint Planning (Mod 7)</strong></td>
+        <td>
+            1. Research and choose an <strong>Agile iteration workflow</strong> or Waterfall approach and justify it in your documentation.<br>
+            2. Schedule and track tasks using a <strong>GitHub Timeline/Gantt chart</strong>.<br>
+            3. Identify user specifications and write a requirements definition for the client.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>3. Secure Development (Mod 5)</strong></td>
+        <td>
+            1. Apply defensive data input handling: implement validation and sanitisation to stop XSS and SQL injection.<br>
+            2. Secure the API and session management to mitigate CSRF and broken authentication vulnerabilities.<br>
+            3. Use <strong>Version Control</strong> (Commits/Pull Requests) to manage the security of your programming code.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>4. Evaluation & Impact (Mod 5 & 7)</strong></td>
+        <td>
+            1. Test and evaluate the security and resilience of your software by comparing actual vs. expected outputs.<br>
+            2. Create a comprehensive <strong>Data Dictionary</strong> for the new secure data structures.<br>
+            3. Evaluate the social, ethical, and legal issues (e.g., Privacy Act, Copyright) affecting the enterprise and its users.
+        </td>
+    </tr>
+</table>
+
+
+
+<h3>Marking Rubric</h3>
+<table class="rubric-table">
+    <tr>
+        <th class="criteria-header">Criteria</th>
+        <th class="band-header">Limited</th>
+        <th class="band-header">Basic</th>
+        <th class="band-header">Sound</th>
+        <th class="band-header">High</th>
+        <th class="band-header">Outstanding</th>
+    </tr>
+    <tr>
+        <td class="criteria-header"><strong>Management & Approach (Module 7)</strong></td>
+        <td>Labels basic software development steps.</td>
+        <td>Identifies Agile or Waterfall steps and creates a simple task list.</td>
+        <td>Applies fundamental steps and uses a functional Kanban board to track patches.</td>
+        <td>Explains the Agile workflow and uses GitHub tools to schedule and track the solution.</td>
+        <td><strong>Critically justifies</strong> the engineering methodology and masters CASE tools for scheduling, tracking, and version control history.</td>
+    </tr>
+    <tr>
+        <td class="criteria-header"><strong>Secure Programming (Module 5)</strong></td>
+        <td>Labels missing code or errors in the solution.</td>
+        <td>Modifies basic code to solve simple security tasks.</td>
+        <td>Creates functional code with 2FA, CSRF protection, and basic control structures.</td>
+        <td>Develops secure code using correct parameter passing, sanitisation, and input validation.</td>
+        <td><strong>Engineers industry-standard</strong> secure solutions; justifies efficient session management and API logic to mitigate critical vulnerabilities.</td>
+    </tr>
+    <tr>
+        <td class="criteria-header"><strong>Documentation & Impact (Report/PPT)</strong></td>
+        <td>Identifies a 'Data dictionary' and security strategies.</td>
+        <td>Populates an incomplete 'Data dictionary' and defines basic data structures.</td>
+        <td>Creates a functional 'Data dictionary' and discusses legal/social impacts.</td>
+        <td>Explains legal (Privacy Act) and social impacts of software implementation in detail.</td>
+        <td><strong>Provides expert advice</strong>; critically justifies every technical, ethical, and legal decision with professional-grade precision.</td>
+    </tr>
+</table>
+
+
