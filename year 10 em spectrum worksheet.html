@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Year 10 Science: EM Spectrum Worksheet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Roboto+Mono:wght@700&display=swap');
+        
+        body { font-family: 'Roboto', sans-serif; background: #444; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+
+        /* MAXIMIZED A4 PAGE */
+        .page { 
+            width: 210mm; height: 297mm; background: white; 
+            padding: 6mm 7mm; box-sizing: border-box; 
+            margin-bottom: 15px; position: relative;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5); overflow: hidden;
+            display: grid; grid-template-columns: 1fr 1fr; column-gap: 15px; grid-template-rows: auto 1fr;
+        }
+
+        /* HEADER AREA */
+        .full-header { grid-column: span 2; border-bottom: 3px solid #222; margin-bottom: 8px; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .h-title { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; letter-spacing: -1px; }
+        .h-info { font-size: 1rem; font-weight: bold; }
+
+        /* CONTENT MODULES */
+        .module { border: 2px solid #222; border-radius: 4px; padding: 6px; margin-bottom: 8px; break-inside: avoid; }
+        .mod-header { 
+            background: #8e44ad; color: white; padding: 4px 8px; /* Physics Purple */
+            font-size: 1rem; font-weight: 900; text-transform: uppercase; 
+            margin: -6px -6px 6px -6px; border-radius: 2px 2px 0 0;
+            display: flex; justify-content: space-between;
+        }
+
+        /* QUESTION TEXT */
+        p { font-size: 0.95rem; margin: 0 0 5px 0; line-height: 1.25; font-weight: 400; color: #111; }
+        strong { font-weight: 900; color: #8e44ad; }
+        
+        /* INTERACTIVE ANSWERS */
+        .line { 
+            border-bottom: 1.5px solid #000; 
+            display: inline-block; 
+            min-width: 45px; 
+            height: 16px; 
+            vertical-align: bottom; 
+            margin: 0 3px; 
+            padding: 0 4px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .line-long { min-width: 120px; }
+        
+        /* DATA TABLES & GRIDS */
+        .q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px; }
+        .tf-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 5px 0; }
+        .tf-table td { border: 1.5px solid #222; padding: 4px; text-align: left; }
+        .box-tick { width: 18px; height: 18px; border: 1.5px solid #000; display: inline-block; vertical-align: middle; }
+
+        /* MATH AREAS */
+        .math-zone { 
+            background: #f4e8f7; border-left: 5px solid #8e44ad; 
+            padding: 6px; margin: 6px 0; font-family: 'Roboto Mono', monospace; 
+            font-size: 1rem; color: #000;
+        }
+        .symbol { font-size: 1.2rem; color: #2980b9; }
+
+        /* --- INTERACTIVE CLASSES --- */
+        .answer {
+            color: transparent; /* Hidden by default */
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.1s ease-in-out;
+        }
+        .answer.revealed {
+            color: #c0392b; /* Reveals in red */
+        }
+        .mcq {
+            color: inherit;
+            cursor: pointer;
+        }
+        .mcq.revealed {
+            color: #c0392b;
+            font-weight: 900;
+        }
+
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; } }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Part 1: The EM Spectrum & Wave Concepts</div>
+        <div class="h-info">Name: _______________________ Class: ______ Score: ____/48</div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 1: Wave Basics</span> <span>/8</span></div>
+            <p style="text-align: center;"></p>
+            <p><strong>1.</strong> The distance between two peaks is the <span class="line-long answer">wavelength</span> (&lambda;).</p>
+            <p><strong>2.</strong> The number of waves per second is the <span class="line-long answer">frequency</span> (f).</p>
+            <p><strong>3.</strong> Do EM waves need particles (a medium) to travel? [ &nbsp; ] Yes [ <span class="answer">✓</span> ] No</p>
+            <p><strong>4.</strong> EM waves can travel through the empty <span class="line answer">vacuum</span> of space.</p>
+            <p><strong>5.</strong> Sound needs air, but light is pure <span class="line answer">energy</span>.</p>
+            <div class="q-grid">
+                <div><strong>6.</strong> 5 waves per second = <br> ( <span class="mcq">5 Hz</span> / 5 m )</div>
+                <div><strong>7.</strong> Wavelength is measured in: <br> ( Hz / <span class="mcq">Meters</span> )</div>
+            </div>
+            <p><strong>8.</strong> An exploding star makes a flash but no <span class="line answer">sound</span>.</p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 2: The Universal Speed Limit</span> <span>/8</span></div>
+            <p><strong>1.</strong> ALL EM waves travel at the speed of <span class="line answer">light</span>.</p>
+            <p><strong>2.</strong> The speed of light is <span class="line-long answer">300,000,000</span> m/s.</p>
+            <p><strong>3.</strong> The symbol for the speed of light is the letter <span class="line answer">c</span>.</p>
+            <p><strong>4. The Seesaw Rule:</strong> Wavelength and Frequency are <span class="line-long answer">inverse</span>.</p>
+            <p><strong>5.</strong> If Frequency goes UP, Wavelength goes ( <span class="mcq">DOWN</span> / UP ).</p>
+            <p><strong>6.</strong> A wave with a very short wavelength has a very <span class="line answer">high</span> frequency.</p>
+            <p><strong>7.</strong> Radio waves and Visible Light race. Who wins? <span class="line-long answer">It is a tie</span>.</p>
+            <p><strong>8.</strong> Both Radio and Light travel at <span class="line-long answer">300,000,000</span> m/s.</p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 3: Low Energy Waves</span> <span>/8</span></div>
+            <p><strong>1.</strong> The wave with the lowest frequency is <span class="line answer">Radio</span>.</p>
+            <p><strong>2.</strong> Radio waves have the ( <span class="mcq">Longest</span> / Shortest ) wavelength.</p>
+            <p><strong>3.</strong> Used for radar and heating food: <span class="line-long answer">Microwaves</span>.</p>
+            <p><strong>4.</strong> Infrared (IR) radiation is felt by humans as <span class="line answer">Heat</span>.</p>
+            <table class="tf-table">
+                <tr><td><strong>Statement</strong></td><td style="text-align:center;"><strong>T</strong></td><td style="text-align:center;"><strong>F</strong></td></tr>
+                <tr><td><strong>5.</strong> TV Remotes use Infrared waves.</td><td style="text-align:center;"><span class="answer">✓</span></td><td></td></tr>
+                <tr><td><strong>6.</strong> Microwaves cannot pass through clouds.</td><td></td><td style="text-align:center;"><span class="answer">✓</span></td></tr>
+                <tr><td><strong>7.</strong> Radio waves are generally safe for humans.</td><td style="text-align:center;"><span class="answer">✓</span></td><td></td></tr>
+                <tr><td><strong>8.</strong> Thermal cameras detect Microwaves.</td><td></td><td style="text-align:center;"><span class="answer">✓</span></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 4: Visible & High Energy</span> <span>/8</span></div>
+            <p style="text-align: center;"></p>
+            <p><strong>1.</strong> The only part of the spectrum humans can see is <span class="line-long answer">Visible Light</span>.</p>
+            <p><strong>2.</strong> Fiber <span class="line answer">Optic</span> cables use light pulses for fast internet.</p>
+            <p><strong>3.</strong> The wave that causes sunburns is <span class="line-long answer">Ultraviolet (UV)</span>.</p>
+            <p><strong>4.</strong> Tanning beds and fake bank note checkers use <span class="line answer">UV</span> light.</p>
+            <p><strong>5.</strong> Passes through skin but blocked by bone: <span class="line answer">X-Ray</span>.</p>
+            <p><strong>6.</strong> The wave with the highest frequency is <span class="line answer">Gamma</span>.</p>
+            <p><strong>7.</strong> Gamma rays have the ( Longest / <span class="mcq">Shortest</span> ) wavelength.</p>
+            <p><strong>8.</strong> Gamma is used in hospitals to kill <span class="line answer">cancer</span> cells.</p>
+        </div>
+
+        <div class="module" style="background: #fdf2e9; border: 3px solid #e67e22;">
+            <div class="mod-header" style="background:#e67e22;"><span>Level 5: Ionizing Radiation Danger</span> <span>/8</span></div>
+            <p><strong>1.</strong> High frequency waves (UV, X-Ray, Gamma) have dangerous energy.</p>
+            <p><strong>2.</strong> They are known as <strong>Ionizing</strong> <span class="line-long answer">Radiation</span>.</p>
+            <p><strong>3.</strong> Ionizing means they can remove <span class="line answer">electrons</span> from atoms.</p>
+            <p><strong>4.</strong> This process damages our <span class="line answer">DNA</span>.</p>
+            <p><strong>5.</strong> Damaged cells from ionization can lead to <span class="line answer">cancer</span>.</p>
+            <p><strong>6.</strong> The dentist leaves the room during an X-Ray because the radiation is <span class="line-long answer">Ionizing</span>.</p>
+            <p><strong>7.</strong> Does Radio have enough energy to be ionizing? [ &nbsp; ] Yes [ <span class="answer">✓</span> ] No</p>
+            <p><strong>8.</strong> UV light burns us because it is ( <span class="mcq">Ionizing</span> / Slow ).</p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 6: Vocabulary Match</span> <span>/8</span></div>
+            <p><em>Match the technology to the correct EM Wave:</em></p>
+            <p><strong>1.</strong> Airport Luggage Security &rarr; <span class="line-long answer">X-Ray</span></p>
+            <p><strong>2.</strong> Sterilizing medical tools &rarr; <span class="line-long answer">Gamma</span></p>
+            <p><strong>3.</strong> AM/FM Car signals &rarr; <span class="line-long answer">Radio</span></p>
+            <p><strong>4.</strong> Police Helicopter Heat Cameras &rarr; <span class="line-long answer">Infrared</span></p>
+            <p><strong>5.</strong> High-speed internet cables &rarr; <span class="line-long answer">Visible Light</span></p>
+            <p><strong>6.</strong> Speed Cameras (Radar) &rarr; <span class="line-long answer">Microwave</span></p>
+            <p><strong>7.</strong> Lowest Energy &rarr; <span class="line-long answer">Radio</span></p>
+            <p><strong>8.</strong> Highest Energy &rarr; <span class="line-long answer">Gamma</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Part 2: The Wave Equation Bootcamp</div>
+        <div class="h-info">Speed (v) = Frequency (f) &times; Wavelength (&lambda;)</div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 7: The Formula Triangle</span> <span>/8</span></div>
+            <p><strong>Rule:</strong> <strong>v</strong> is on top. <strong>f</strong> and <span class="symbol">&lambda;</span> are on the bottom.</p>
+            <p><strong>1.</strong> To find <strong>v</strong>, we ( <span class="mcq">Multiply</span> / Divide ) f and <span class="symbol">&lambda;</span>.</p>
+            <p><strong>2.</strong> To find <strong>&lambda;</strong>, we divide v by <span class="line answer">f</span>.</p>
+            <p><strong>3.</strong> Standard unit for <strong>v</strong> is <span class="line-long answer">m/s</span>.</p>
+            <p><strong>4.</strong> Standard unit for <strong>&lambda;</strong> is <span class="line-long answer">meters (m)</span>.</p>
+            <p><strong>5.</strong> Frequency is measured in <span class="line answer">Hertz</span>.</p>
+            <p><strong>6.</strong> What does the 'v' stand for? <span class="line-long answer">Velocity (Speed)</span></p>
+            <p><strong>7.</strong> <strong>Triangle Check:</strong> What is at the top? <span class="line answer">v</span></p>
+            <p><strong>8.</strong> Draw the triangle here: <br><br> [ &nbsp; <span class="answer">v / (f &times; &lambda;)</span> &nbsp; ] </p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 8: Calculating Speed (v)</span> <span>/8</span></div>
+            <p><strong>Formula:</strong> <span class="symbol">v = f &times; &lambda;</span></p>
+            <div class="math-zone"><strong>1.</strong> f = 10 Hz, &lambda; = 5 m <br> <strong>v = 10 &times; 5 = <span class="line answer">50</span> m/s</strong></div>
+            <div class="math-zone"><strong>2.</strong> f = 100 Hz, &lambda; = 3 m <br> <strong>v = <span class="line answer">100</span> &times; <span class="line answer">3</span> = <span class="line answer">300</span> m/s</strong></div>
+            <div class="math-zone"><strong>3.</strong> f = 50 Hz, &lambda; = 2 m <br> <strong>v = <span class="line answer">50</span> &times; <span class="line answer">2</span> = <span class="line answer">100</span> m/s</strong></div>
+            <p><strong>4.</strong> For ALL EM Waves, v is always <span class="line-long answer">300,000,000</span> m/s.</p>
+            <p><strong>5.</strong> Sound in air travels at 340 m/s. Light travels ( <span class="mcq">Faster</span> / Slower ).</p>
+            <p><strong>6.</strong> Calculate: f = 3, &lambda; = 10. v = <span class="line answer">30</span>.</p>
+            <p><strong>7.</strong> If v = 50, and f = 10, then &lambda; = <span class="line answer">5</span>.</p>
+            <p><strong>8.</strong> If speed is constant, multiplying f by 2 means dividing &lambda; by <span class="line answer">2</span>.</p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 9: Calculating Wavelength</span> <span>/8</span></div>
+            <p><strong>Formula:</strong> <span class="symbol">&lambda; = v &divide; f</span></p>
+            <div class="math-zone"><strong>1.</strong> v = 300 m/s, f = 100 Hz <br> <strong>&lambda; = 300 &divide; 100 = <span class="line answer">3</span> m</strong></div>
+            <div class="math-zone"><strong>2.</strong> v = 1500 m/s, f = 500 Hz <br> <strong>&lambda; = <span class="line answer">1500</span> &divide; <span class="line answer">500</span> = <span class="line answer">3</span> m</strong></div>
+            <div class="math-zone"><strong>3.</strong> v = 340 m/s, f = 170 Hz <br> <strong>&lambda; = <span class="line answer">340</span> &divide; <span class="line answer">170</span> = <span class="line answer">2</span> m</strong></div>
+            <p><strong>4.</strong> To divide easily, you can cancel out the <span class="line answer">zeros</span>.</p>
+            <p><strong>5.</strong> A high frequency wave has a ( <span class="mcq">Shorter</span> / Longer ) wavelength.</p>
+            <p><strong>6.</strong> Wavelength of a 10Hz wave at 20m/s = <span class="line answer">2</span> m.</p>
+            <p><strong>7.</strong> &lambda; = 100 &divide; 20 = <span class="line answer">5</span> m.</p>
+            <p><strong>8.</strong> Wavelength is distance per <span class="line answer">wave</span>.</p>
+        </div>
+
+        <div class="module" style="background: #fff8f8; border: 3px solid #c0392b;">
+            <div class="mod-header" style="background:#c0392b;"><span>Level 10: The Master Challenge</span> <span>/8</span></div>
+            <p style="text-align:center; color:#c0392b; font-weight:900;">!!! HUGE NUMBERS: CANCEL THE ZEROS !!!</p>
+            <p><em>Use the speed of light: v = 300,000,000 m/s</em></p>
+            <div class="math-zone"><strong>1.</strong> Cancel zeros: 300,000,000 &divide; 1,500,000 = <span class="line answer">200</span></div>
+            <div class="math-zone"><strong>2.</strong> Cancel zeros: 300,000,000 &divide; 100,000,000 = <span class="line answer">3</span></div>
+            <p><strong>3. Prove the Microwave:</strong> v = 300,000,000. f = 2,500,000,000.</p>
+            <p>Sub: &lambda; = 300,000,000 &divide; 2,500,000,000 = <span class="line answer">0.12</span> m.</p>
+            <p><strong>4. Find &lambda;:</strong> v = 300,000,000. f = 100,000,000.</p>
+            <p>Sub: &lambda; = 300,000,000 &divide; 100,000,000 = <span class="line answer">3</span> m.</p>
+            <p><strong>5. Find f:</strong> v = 300,000,000. &lambda; = 3 m.</p>
+            <p>Sub: f = 300,000,000 &divide; 3 = <span class="line answer">100,000,000</span> Hz.</p>
+            <p><strong>6. Find f:</strong> v = 300,000,000. &lambda; = 150 m.</p>
+            <p>Sub: f = 300,000,000 &divide; 150 = <span class="line answer">2,000,000</span> Hz.</p>
+            <p><strong>7.</strong> 0.12 m is equal to <span class="line answer">12</span> cm.</p>
+            <p><strong>8. Boss:</strong> v=3E8, f=1E8. &lambda; = <span class="line answer">3</span> m.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select all elements designated as interactive answers
+        const answerElements = document.querySelectorAll('.answer, .mcq');
+        
+        answerElements.forEach(element => {
+            element.addEventListener('click', function() {
+                this.classList.toggle('revealed');
+            });
+        });
+    });
+</script>
+</body>
+</html>
