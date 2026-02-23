@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lesson: EM Spectrum Applications (Visual & Animated)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           1. CORE THEME (Physics Purple)
+           ========================================= */
+        :root {
+            --primary: #8e44ad;    /* Purple */
+            --bg-color: #f4f6f7;   
+            --highlight: #f1c40f;  
+            --correct: #27ae60;    
+            --wrong: #c0392b;      
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            padding-bottom: 120px;
+            padding-top: 60px;
+            overflow-x: hidden;
+        }
+
+        .container-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 10px; box-sizing: border-box; }
+        h1 { font-family: 'Comic Neue'; color: var(--primary); margin: 5px 0; font-size: 2.5rem; text-align: center; }
+        h2 { font-family: 'Comic Neue'; border-bottom: 4px solid var(--highlight); display: inline-block; font-size: 2rem; margin: 10px 0; }
+        
+        /* =========================================
+           2. SLIDE LAYOUT
+           ========================================= */
+        .slide {
+            min-height: 80vh; width: 100%; padding: 20px; padding-top: 40px;
+            border-bottom: 10px solid var(--primary); background: white;
+            display: flex; flex-direction: column; align-items: center;
+            position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 40px; border-radius: 8px;
+        }
+        .slide-number { position: absolute; bottom: 5px; right: 10px; font-size: 1rem; color: #ccc; }
+
+        .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; margin-top: 20px; }
+        .mission-box {
+            background: white; border: 3px solid var(--primary); border-radius: 10px; padding: 15px;
+            text-align: center; font-size: 1.2rem; box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .mission-icon { font-size: 2.5rem; margin-bottom: 5px; }
+
+        /* =========================================
+           3. MEDIA CONTROLS & PASTE AREA
+           ========================================= */
+        .slide-controls { position: absolute; top: 15px; right: 15px; display: flex; gap: 10px; z-index: 50; }
+        .ctrl-btn {
+            background: white; border: 2px solid var(--primary); color: var(--text-dark);
+            font-size: 1.2rem; width: 45px; height: 45px; border-radius: 8px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.2s;
+        }
+        .ctrl-btn:hover { background: #f4e8f7; transform: translateY(-2px); }
+        
+        .visual-paste-area {
+            width: 100%; max-width: 800px; display: none; border: 3px dashed var(--primary);
+            background: #f8f9fa; padding: 30px 20px; text-align: center; color: #7f8c8d;
+            margin: 15px auto; border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .visual-paste-area:hover { background: #f4e8f7; border-color: var(--primary); color: var(--primary); }
+        .visual-paste-area img { max-width: 100%; max-height: 400px; display: block; margin: 0 auto; border-radius: 5px; }
+        
+        .default-visual-container { width: 100%; display: flex; flex-direction: column; align-items: center; transition: 0.3s; text-align: center; }
+
+        /* =========================================
+           4. INTERACTIVE ELEMENTS
+           ========================================= */
+        .fragment {
+            opacity: 0; transform: translateY(10px); transition: all 0.3s ease;
+            visibility: hidden; height: 0; overflow: hidden; width: 100%;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .fragment.visible {
+            opacity: 1; transform: translateY(0); visibility: visible;
+            height: auto; overflow: visible; margin-bottom: 15px;
+        }
+
+        .data-table { width: 100%; max-width: 800px; border-collapse: collapse; margin-top: 15px; font-size: 1.2rem; }
+        .data-table th, .data-table td { border: 2px solid var(--primary); padding: 10px; text-align: left; }
+        .data-table th { background-color: #f4e8f7; color: var(--primary); text-align: center; font-size: 1.3rem;}
+
+        .mini-table { width: 100%; max-width: 600px; font-size: 1.1rem; border-collapse: collapse; margin-bottom: 10px; border: 2px solid var(--primary); background: white; }
+        .mini-table th, .mini-table td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+        .mini-table th { background: var(--primary); color: white; }
+
+        .tf-btn {
+            width: 100%; max-width: 700px; padding: 15px; margin: 8px 0;
+            font-size: 1.2rem; background: white; border: 2px solid var(--primary);
+            border-radius: 10px; cursor: pointer; text-align: left; transition: 0.2s; box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+        .tf-btn:hover { background: #f4e8f7; }
+        .tf-btn.correct { background: var(--correct); color: white; border-color: var(--correct); }
+        .tf-btn.wrong { background: var(--wrong); color: white; border-color: var(--wrong); }
+
+        .highlight-yellow {
+            background-color: var(--highlight); padding: 15px; border-radius: 6px; font-weight: 600; color: #000;
+            display: flex; flex-direction: column; margin: 15px 0; border: 2px solid #d4ac0d; box-shadow: 3px 3px 0 rgba(0,0,0,0.1); width: 100%; max-width: 800px; font-size: 1.2rem;
+        }
+        .write-it-down::before {
+            content: "✍️ WRITE IT DOWN:"; font-weight: 800; color: #c0392b; text-align: center;
+            font-family: 'Comic Neue', sans-serif; display: block; margin-bottom: 5px; border-bottom: 2px dashed #d4ac0d; padding-bottom: 5px;
+        }
+        .highlight-yellow ul { margin: 5px 0 0 20px; padding: 0; }
+        .highlight-yellow li { margin-bottom: 5px; }
+
+        .cloze {
+            background-color: var(--primary); color: var(--primary); border-radius: 4px; padding: 0 8px; cursor: pointer;
+            user-select: none; font-weight: bold; display: inline-block; min-width: 80px; text-align: center; border: 2px solid var(--primary);
+        }
+        .cloze.revealed { background-color: white; color: var(--correct); border-color: var(--correct); border-bottom: 4px solid var(--correct); }
+
+        .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 800px; margin-top: 15px; }
+        .reveal-box {
+            background: #fff; border: 3px solid var(--primary); border-radius: 10px; padding: 15px; text-align: center; cursor: pointer;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1); transition: 0.2s; display: flex; flex-direction: column; justify-content: center; min-height: 120px;
+        }
+        .reveal-box:hover { background: #f4e8f7; transform: translateY(-2px); }
+        .reveal-box h3 { margin-top: 0; color: var(--primary); border-bottom: 2px dashed #ccc; padding-bottom: 5px; font-size: 1.3rem;}
+        .reveal-box p { font-size: 1.1rem; margin: 5px 0;}
+        .reveal-content { display: none; margin-top: 10px; padding-top: 10px; border-top: 2px solid var(--primary); color: var(--correct); font-weight: bold; font-size: 1.2rem; }
+        .reveal-box.active .reveal-content { display: block; animation: fadeIn 0.4s ease; }
+        .reveal-box.active { background: #f4e8f7; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .math-step { 
+            background: #fff; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 6px solid var(--primary);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05); font-size: 1.3rem; text-align: left; width: 100%; max-width: 700px;
+        }
+
+        /* =========================================
+           5. ANIMATIONS & SVG STYLES
+           ========================================= */
+        .visual-box {
+            width: 100%; max-width: 700px; background: white; border: 3px solid var(--primary);
+            border-radius: 10px; margin: 10px 0; padding: 15px; display: flex; justify-content: center; overflow: hidden; background: #e8f4f8;
+        }
+        .visual-box svg { width: 100%; height: auto; max-height: 220px; }
+        
+        /* Animation Keyframes */
+        @keyframes wave-move { 0% { opacity: 0; transform: translateX(-10px); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateX(20px); } }
+        .anim-wave { animation: wave-move 1.5s infinite linear; }
+        .anim-wave-2 { animation: wave-move 1.5s infinite linear 0.5s; }
+        .anim-wave-3 { animation: wave-move 1.5s infinite linear 1s; }
+
+        @keyframes pulse-signal { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }
+        .anim-pulse { animation: pulse-signal 2s infinite ease-in-out; transform-origin: center; }
+
+        @keyframes shoot-light { to { stroke-dashoffset: 0; } }
+        .anim-light { stroke-dasharray: 600; stroke-dashoffset: 600; animation: shoot-light 2s linear infinite; }
+
+        @keyframes beam-down { 0% { opacity: 0; transform: translateY(-10px); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(15px); } }
+        .anim-beam { animation: beam-down 1.5s infinite linear; }
+
+        /* Navigation */
+        #nav-bar {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; height: 70px; background: var(--primary);
+            display: flex; justify-content: center; align-items: center; gap: 15px; z-index: 10000; border-radius: 35px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .nav-btn { background: var(--primary); color: white; border: 2px solid white; padding: 8px 20px; font-size: 1.1rem; border-radius: 30px; font-weight: bold; cursor: pointer; min-width: 100px; }
+        .nav-btn.secondary { background: #7f8c8d; }
+        .nav-btn.save { background: var(--correct); }
+    </style>
+</head>
+<body>
+
+    <div id="nav-bar">
+        <button class="nav-btn secondary" onclick="goBack()">⬅️ Back</button>
+        <button class="nav-btn" onclick="goNext()">Next ➡️</button>
+        <button class="nav-btn save" onclick="saveLesson()">💾 Save</button>
+    </div>
+
+    <div class="container-wrapper">
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h1>💡 DO NOW: Recall the Spectrum</h1>
+                <p>Click the boxes to remember facts from last lesson.</p>
+                <div class="grid-2x2">
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>1. Radio Waves</h3>
+                        <p>High or low energy?</p>
+                        <div class="reveal-content">Low Energy (Safe!)</div>
+                    </div>
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>2. Visible Light</h3>
+                        <p>What is special about it?</p>
+                        <div class="reveal-content">Only wave we can SEE.</div>
+                    </div>
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>3. X-Rays & Gamma</h3>
+                        <p>Safe or dangerous?</p>
+                        <div class="reveal-content">Dangerous! (Ionizing)</div>
+                    </div>
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>4. Speed</h3>
+                        <p>How fast are all EM waves?</p>
+                        <div class="reveal-content">Speed of Light</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">1 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h2>Today's Mission</h2>
+                <p>How do we use EM Waves every day?</p>
+                
+                <div class="mission-grid">
+                    <div class="mission-box">
+                        <div class="mission-icon">📱</div>
+                        <div><strong>1. Phones</strong><br>Talking to friends</div>
+                    </div>
+                    <div class="mission-box">
+                        <div class="mission-icon">📶</div>
+                        <div><strong>2. Wi-Fi</strong><br>Home internet</div>
+                    </div>
+                    <div class="mission-box">
+                        <div class="mission-icon">💡</div>
+                        <div><strong>3. Fiber Optics</strong><br>Super fast cables</div>
+                    </div>
+                    <div class="mission-box">
+                        <div class="mission-icon">🛰️</div>
+                        <div><strong>4. GPS</strong><br>Maps & Space</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h2>1. Radio & Microwaves</h2>
+            
+            <div class="default-visual-container">
+                <p>We use <strong>low-energy waves</strong> to send messages.</p>
+                
+                <div class="visual-box">
+                    <svg viewBox="0 0 400 150">
+                        <path d="M 80 130 L 100 40 L 120 130 Z" fill="#7f8c8d"/>
+                        <circle cx="100" cy="35" r="8" fill="#e74c3c" class="anim-pulse"/>
+                        <rect x="300" y="80" width="30" height="50" rx="4" fill="#2c3e50"/>
+                        <rect x="305" y="85" width="20" height="35" fill="#ecf0f1"/>
+                        <path d="M 130 35 Q 150 50 130 65" fill="none" stroke="#2980b9" stroke-width="4" class="anim-wave"/>
+                        <path d="M 150 25 Q 180 50 150 75" fill="none" stroke="#2980b9" stroke-width="4" class="anim-wave-2"/>
+                        <path d="M 170 15 Q 210 50 170 85" fill="none" stroke="#2980b9" stroke-width="4" class="anim-wave-3"/>
+                        <text x="140" y="110" font-size="14" fill="#2c3e50" font-weight="bold">Invisible Data Traveling Fast!</text>
+                    </svg>
+                </div>
+                
+                <table class="data-table">
+                    <tr><th>Why use them?</th></tr>
+                    <tr><td>1. <strong>Safe:</strong> They do not cause cancer.</td></tr>
+                    <tr><td>2. <strong>Distance:</strong> They travel very far.</td></tr>
+                    <tr><td>3. <strong>Power:</strong> They pass through walls easily.</td></tr>
+                </table>
+
+                <div class="highlight-yellow write-it-down fragment visible">
+                    <ul>
+                        <li>Radio & Microwaves carry phone signals.</li>
+                        <li>They are safe, invisible, and very fast.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">3 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h2>🧠 Check Your Understanding</h2>
+                
+                <p>Why don't we use <strong>X-Rays</strong> or <strong>Gamma Rays</strong> to send messages to our phones?</p>
+                
+                <div class="fragment visible">
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">They are too slow.</button>
+                    <button class="tf-btn" onclick="this.classList.add('correct')">They have high energy (ionizing). Using them would cause cancer.</button>
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">They cannot go through space.</button>
+                </div>
+            </div>
+            <div class="slide-number">4 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h2>2. The "Cell" Network</h2>
+            
+            <div class="default-visual-container">
+                <p>Your phone talks to a big antenna (Cell Tower).</p>
+                
+                <div class="visual-box">
+                    <svg viewBox="0 0 300 150">
+                        <polygon points="50,20 100,20 125,60 100,100 50,100 25,60" fill="#d1f2eb" stroke="#1abc9c" stroke-width="2"/>
+                        <polygon points="125,60 175,60 200,100 175,140 125,140 100,100" fill="#fcf3cf" stroke="#f1c40f" stroke-width="2"/>
+                        <polygon points="200,20 250,20 275,60 250,100 200,100 175,60" fill="#ebdef0" stroke="#9b59b6" stroke-width="2"/>
+                        <rect x="70" y="50" width="4" height="20" fill="black"/> <circle cx="72" cy="50" r="4" fill="red" class="anim-pulse"/>
+                        <rect x="145" y="90" width="4" height="20" fill="black"/> <circle cx="147" cy="90" r="4" fill="red" class="anim-pulse"/>
+                        <rect x="220" y="50" width="4" height="20" fill="black"/> <circle cx="222" cy="50" r="4" fill="red" class="anim-pulse"/>
+                        <text x="100" y="15" font-size="12" fill="#2c3e50" font-weight="bold">Moving between cells...</text>
+                    </svg>
+                </div>
+                
+                <div class="highlight-yellow write-it-down fragment visible">
+                    <ul>
+                        <li>Cities are divided into small areas called <strong>"Cells"</strong>.</li>
+                        <li>Each cell has one Tower.</li>
+                        <li>Your phone switches towers as you move.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">5 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h2>🧠 Check Your Understanding</h2>
+                
+                <p>You are talking on your phone in a moving car. What happens to your signal?</p>
+                
+                <div class="fragment visible">
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">Your phone stays connected to the exact same tower forever.</button>
+                    <button class="tf-btn" onclick="this.classList.add('correct')">Your phone automatically switches to a new tower as you drive.</button>
+                </div>
+            </div>
+            <div class="slide-number">6 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h2>3. Wi-Fi & Bluetooth</h2>
+            
+            <div class="default-visual-container">
+                <p>We use weaker waves for short distances inside a house.</p>
+
+                <div class="visual-box">
+                    <svg viewBox="0 0 300 120">
+                        <rect x="40" y="60" width="60" height="20" rx="3" fill="#34495e"/>
+                        <line x1="50" y1="60" x2="45" y2="30" stroke="#34495e" stroke-width="3"/>
+                        <line x1="90" y1="60" x2="95" y2="30" stroke="#34495e" stroke-width="3"/>
+                        <circle cx="70" cy="70" r="3" fill="#2ecc71" class="anim-pulse"/>
+                        <rect x="220" y="50" width="40" height="30" rx="2" fill="#95a5a6"/>
+                        <rect x="210" y="80" width="60" height="5" rx="2" fill="#7f8c8d"/>
+                        <path d="M 110 50 Q 150 40 190 60" fill="none" stroke="#2ecc71" stroke-width="3" stroke-dasharray="5,5" class="anim-wave"/>
+                        <text x="120" y="90" font-size="12" font-weight="bold" fill="#7f8c8d">Short Distance Only!</text>
+                    </svg>
+                </div>
+                
+                <div class="highlight-yellow write-it-down fragment visible">
+                    <ul>
+                        <li>Wi-Fi and Bluetooth use <strong>Microwaves</strong>.</li>
+                        <li>They use very low power, so they only work nearby.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">7 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h2>🧠 Check Your Understanding</h2>
+                
+                <p>If you want to download a movie to your iPad while sitting on an airplane (with no cell towers), what connection does the airplane offer?</p>
+                
+                <div class="fragment visible">
+                    <button class="tf-btn" onclick="this.classList.add('correct')">Wi-Fi (The airplane has a router inside for short distances).</button>
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">Bluetooth (Bluetooth is too weak for big movies).</button>
+                </div>
+            </div>
+            <div class="slide-number">8 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h2>4. Fiber Optics (Fast Internet)</h2>
+            
+            <div class="default-visual-container">
+                <p>To send internet across the ocean, we use cables instead of air.</p>
+
+                <div class="visual-box">
+                    <svg viewBox="0 0 400 120">
+                        <rect x="20" y="30" width="360" height="60" fill="rgba(52, 152, 219, 0.1)" stroke="#3498db" stroke-width="4"/>
+                        <polyline points="20,60 80,30 140,90 200,30 260,90 320,30 380,60" fill="none" stroke="#f1c40f" stroke-width="6" class="anim-light"/>
+                        <text x="100" y="20" font-size="14" font-weight="bold" fill="#3498db">Glass / Plastic Cable</text>
+                    </svg>
+                </div>
+                
+                <div class="highlight-yellow write-it-down fragment visible">
+                    <ul>
+                        <li>Fiber Optic cables are thin <strong>glass tubes</strong>.</li>
+                        <li>They use pulsing <strong>Visible Light</strong> to send data.</li>
+                        <li>Light bounces inside the tube very fast.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">9 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h2>🧠 Check Your Understanding</h2>
+                
+                <p>Most modern home internet (NBN) uses Fiber Optics instead of copper wires. Why?</p>
+                
+                <div class="fragment visible">
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">Because glass is heavier than metal.</button>
+                    <button class="tf-btn" onclick="this.classList.add('correct')">Because it uses Light. Light travels super fast, meaning fast internet!</button>
+                </div>
+            </div>
+            <div class="slide-number">10 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h2>5. Satellites and GPS</h2>
+            
+            <div class="default-visual-container">
+                <p>To talk to space, signals must pass through clouds and rain.</p>
+                
+                <div class="visual-box">
+                    <svg viewBox="0 0 300 180">
+                        <rect x="130" y="20" width="40" height="20" fill="#95a5a6"/>
+                        <rect x="90" y="25" width="30" height="10" fill="#2980b9"/>
+                        <rect x="180" y="25" width="30" height="10" fill="#2980b9"/>
+                        <path d="M 80 100 Q 100 70 150 80 Q 200 70 220 100 Q 240 120 180 120 L 120 120 Q 60 120 80 100" fill="#bdc3c7" opacity="0.8"/>
+                        <rect x="130" y="150" width="40" height="20" rx="3" fill="#e74c3c"/>
+                        <circle cx="140" cy="170" r="5" fill="#333"/> <circle cx="160" cy="170" r="5" fill="#333"/>
+                        <line x1="150" y1="40" x2="150" y2="150" stroke="#e67e22" stroke-width="4" stroke-dasharray="10,10" class="anim-beam"/>
+                    </svg>
+                </div>
+                
+                <div class="highlight-yellow write-it-down fragment visible">
+                    <ul>
+                        <li><strong>Microwaves</strong> can pass straight through clouds.</li>
+                        <li>We use them for GPS Maps and Satellite TV.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">11 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <div class="default-visual-container">
+                <h2>🧠 Check Your Understanding</h2>
+                
+                <p>If you are using maps to drive in a heavy rainstorm, why doesn't the signal drop completely?</p>
+                
+                <div class="fragment visible">
+                    <button class="tf-btn" onclick="this.classList.add('correct')">GPS uses Microwaves. They pass through clouds easily.</button>
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">GPS uses Visible Light, so rain washes it away.</button>
+                </div>
+            </div>
+            <div class="slide-number">12 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h2>Summary: Cloze Text</h2>
+            <p>Tap the words to complete the summary.</p>
+            
+            <div class="default-visual-container">
+                <div class="math-step fragment visible" style="border-left: none; text-align: center;">
+                    Mobile phones use <span class="cloze" onclick="reveal(this)">RADIO</span> signals to talk to local cell <span class="cloze" onclick="reveal(this)">TOWERS</span>.
+                    <br><br>
+                    To connect to the internet over short distances at home, we use <span class="cloze" onclick="reveal(this)">WI-FI</span>. 
+                    <br><br>
+                    Super fast internet uses pulses of <span class="cloze" onclick="reveal(this)">LIGHT</span> bouncing inside <span class="cloze" onclick="reveal(this)">FIBER</span> glass cables.
+                    <br><br>
+                    To get directions on a map, our phones connect to <span class="cloze" onclick="reveal(this)">SATELLITES</span> using GPS.
+                </div>
+            </div>
+            <div class="slide-number">13 / 14</div>
+        </section>
+
+        <section class="slide">
+            <div class="slide-controls">
+                <button class="ctrl-btn" onclick="toggleDefaultVisual(this)">👁️</button>
+                <button class="ctrl-btn" onclick="togglePasteArea(this)">🖼️</button>
+            </div>
+            <div class="visual-paste-area" onclick="triggerUpload(this)">📁 Click to upload or Ctrl+V <input type="file" style="display:none;" onchange="handleFileUpload(event, this)"></div>
+
+            <h1>🎫 EXIT TICKET</h1>
+            <p>Test your knowledge before you save!</p>
+            
+            <div class="default-visual-container">
+                <div class="grid-2x2">
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>1. Safe Waves</h3>
+                        <p>Are Radio waves safe or ionizing?</p>
+                        <div class="reveal-content">Safe</div>
+                    </div>
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>2. Glass Cables</h3>
+                        <p>What travels inside Fiber Optics?</p>
+                        <div class="reveal-content">Visible Light</div>
+                    </div>
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>3. Network</h3>
+                        <p>What do we call the phone areas in a city?</p>
+                        <div class="reveal-content">Cells</div>
+                    </div>
+                    <div class="reveal-box" onclick="this.classList.toggle('active')">
+                        <h3>4. Space</h3>
+                        <p>Why do GPS satellites use Microwaves?</p>
+                        <div class="reveal-content">They pass through clouds.</div>
+                    </div>
+                </div>
+                
+                <p style="margin-top:30px;"><strong>Great Job! Hit SAVE below.</strong></p>
+            </div>
+            <div class="slide-number">14 / 14</div>
+        </section>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+
+        // Navigation
+        function getActiveSlideIndex() {
+            let index = 0; let minDistance = Infinity;
+            slides.forEach((slide, i) => {
+                const rect = slide.getBoundingClientRect();
+                const dist = Math.abs(rect.top);
+                if (dist < minDistance && dist < window.innerHeight / 1.5) {
+                    minDistance = dist; index = i;
+                }
+            });
+            return index;
+        }
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function goNext() {
+            const index = getActiveSlideIndex();
+            const currentSlide = slides[index];
+            const hiddenFragments = currentSlide.querySelectorAll('.fragment:not(.visible)');
+            if (hiddenFragments.length > 0) {
+                hiddenFragments[0].classList.add('visible');
+            } else {
+                scrollToSlide(index + 1);
+            }
+        }
+
+        function goBack() {
+            const index = getActiveSlideIndex();
+            const currentSlide = slides[index];
+            const visibleFragments = Array.from(currentSlide.querySelectorAll('.fragment.visible'));
+            if (visibleFragments.length > 0) {
+                visibleFragments[visibleFragments.length - 1].classList.remove('visible');
+            } else {
+                scrollToSlide(index - 1);
+            }
+        }
+
+        function reveal(el) { 
+            if(el.classList.contains('revealed')) { el.classList.remove('revealed'); } 
+            else { el.classList.add('revealed'); } 
+        }
+
+        // Image Paste Controls
+        function toggleDefaultVisual(btn) {
+            const slide = btn.closest('.slide');
+            const defaultVis = slide.querySelector('.default-visual-container');
+            if (defaultVis) defaultVis.style.display = (defaultVis.style.display === 'none') ? 'flex' : 'none';
+        }
+
+        function togglePasteArea(btn) {
+            const slide = btn.closest('.slide');
+            const pasteArea = slide.querySelector('.visual-paste-area');
+            if (pasteArea) pasteArea.style.display = (pasteArea.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function triggerUpload(el) {
+            const input = el.querySelector('input[type="file"]');
+            if(input) input.click();
+        }
+
+        function handleFileUpload(event, input) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const area = input.parentElement;
+                    area.innerHTML = `<img src="${e.target.result}"><input type="file" style="display:none;" onchange="handleFileUpload(event, this)">`;
+                    const slide = area.closest('.slide');
+                    const defaultVis = slide.querySelector('.default-visual-container');
+                    if(defaultVis) defaultVis.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.addEventListener('paste', (e) => {
+            const index = getActiveSlideIndex();
+            const activeSlide = slides[index];
+            const area = activeSlide.querySelector('.visual-paste-area');
+            if (!area) return;
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        area.style.display = 'block'; 
+                        area.innerHTML = `<img src="${event.target.result}"><input type="file" style="display:none;" onchange="handleFileUpload(event, this)">`;
+                        const defaultVis = activeSlide.querySelector('.default-visual-container');
+                        if(defaultVis) defaultVis.style.display = 'none';
+                    };
+                    reader.readAsDataURL(blob);
+                    break;
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if(e.code === 'ArrowRight' || e.code === 'Space') { e.preventDefault(); goNext(); }
+            if(e.code === 'ArrowLeft') { e.preventDefault(); goBack(); }
+        });
+
+        function saveLesson() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], {type: 'text/html'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Year_10_EM_Applications_Animated.html';
+            a.click();
+        }
+    </script>
+</body>
+</html>

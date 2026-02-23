@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Year 10 Science: EM Wave Applications & Math</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Roboto+Mono:wght@700&display=swap');
+        
+        body { font-family: 'Roboto', sans-serif; background: #444; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+
+        /* MAXIMIZED A4 PAGE */
+        .page { 
+            width: 210mm; height: 297mm; background: white; 
+            padding: 6mm 7mm; box-sizing: border-box; 
+            margin-bottom: 15px; position: relative;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5); overflow: hidden;
+            display: grid; grid-template-columns: 1fr 1fr; column-gap: 15px; grid-template-rows: auto 1fr;
+        }
+
+        /* HEADER AREA */
+        .full-header { grid-column: span 2; border-bottom: 3px solid #222; margin-bottom: 6px; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .h-title { font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: -1px; }
+        .h-info { font-size: 0.95rem; font-weight: bold; }
+
+        /* CONTENT MODULES */
+        .module { border: 2px solid #222; border-radius: 4px; padding: 5px; margin-bottom: 6px; break-inside: avoid; }
+        .mod-header { 
+            background: #8e44ad; color: white; padding: 3px 6px; 
+            font-size: 0.95rem; font-weight: 900; text-transform: uppercase; 
+            margin: -5px -5px 5px -5px; border-radius: 2px 2px 0 0;
+            display: flex; justify-content: space-between;
+        }
+
+        /* QUESTION TEXT */
+        p { font-size: 0.9rem; margin: 0 0 4px 0; line-height: 1.25; font-weight: 400; color: #111; }
+        strong { font-weight: 900; color: #8e44ad; }
+        .image-placeholder { font-style: italic; color: #7f8c8d; font-size: 0.8rem; display: block; text-align: center; margin: 3px 0; border: 1px dashed #ccc; padding: 3px;}
+        
+        /* INTERACTIVE ANSWERS */
+        .line { 
+            border-bottom: 1.5px solid #000; 
+            display: inline-block; 
+            min-width: 40px; 
+            height: 15px; 
+            vertical-align: bottom; 
+            margin: 0 2px; 
+            padding: 0 3px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .line-long { min-width: 100px; }
+        
+        /* DATA TABLES & GRIDS */
+        .q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+        .tf-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 4px 0; }
+        .tf-table th { background: #f4e8f7; border: 1.5px solid #222; padding: 3px; text-align: center; color: #8e44ad; }
+        .tf-table td { border: 1.5px solid #222; padding: 3px; text-align: left; }
+        .tf-table.center td { text-align: center; }
+
+        /* MATH AREAS */
+        .math-zone { 
+            background: #f4e8f7; border-left: 4px solid #8e44ad; 
+            padding: 4px; margin: 3px 0; font-family: 'Roboto Mono', monospace; 
+            font-size: 0.85rem; color: #000;
+        }
+        .symbol { font-size: 1.1rem; color: #2980b9; font-weight: bold; }
+
+        /* --- INTERACTIVE CLASSES --- */
+        .answer {
+            color: transparent; 
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.1s ease-in-out;
+        }
+        .answer.revealed { color: #c0392b; }
+        .mcq { color: inherit; cursor: pointer; }
+        .mcq.revealed { color: #c0392b; font-weight: 900; }
+
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; } }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Part 1: Mobile Networks & Short Waves</div>
+        <div class="h-info">Name: _______________________ Class: ______ Score: ____/32</div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 1: Communicating with Waves</span> <span>/8</span></div>
+            <p><strong>1.</strong> We use ( <span class="mcq">low</span> / high ) energy waves to send messages.</p>
+            <p><strong>2.</strong> Radio waves and Microwaves are completely <span class="line answer">safe</span>.</p>
+            <p><strong>3.</strong> They can travel very ( <span class="mcq">far</span> / short ) distances.</p>
+            <p><strong>4.</strong> They easily pass through air, rain, and <span class="line answer">walls</span>.</p>
+            <p><strong>5.</strong> These waves are completely <span class="line-long answer">invisible</span> to the human eye.</p>
+            <p><strong>6.</strong> Do Radio waves cause cancer? [ &nbsp; ] Yes [ <span class="answer">✓</span> ] No</p>
+            <p><strong>7.</strong> Mobile phones use Radio and <span class="line-long answer">Microwaves</span>.</p>
+            <p><strong>8.</strong> Phone signals travel at the speed of <span class="line answer">light</span>.</p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 2: The Cell Network</span> <span>/8</span></div>
+            <span class="image-placeholder"></span>
+            <p><strong>1.</strong> Cities are divided into small areas called <span class="line answer">Cells</span>.</p>
+            <p><strong>2.</strong> Each area has a large antenna called a Cell <span class="line answer">Tower</span>.</p>
+            <p><strong>3.</strong> Your mobile phone talks to the ( <span class="mcq">closest</span> / furthest ) tower.</p>
+            <p><strong>4.</strong> As you drive in a car, your phone automatically <span class="line answer">switches</span> towers.</p>
+            <p><strong>5.</strong> A mobile phone acts like a two-way <span class="line answer">radio</span>.</p>
+            <p><strong>6.</strong> If you drive to a farm with no towers, you will lose your <span class="line answer">signal</span>.</p>
+            <p><strong>7.</strong> The shape usually used to draw cell areas is a <span class="line-long answer">hexagon</span>.</p>
+            <p><strong>8.</strong> True or False: You stay connected to just one tower all day. ( <span class="mcq">False</span> )</p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 3: Wi-Fi & Bluetooth</span> <span>/8</span></div>
+            <span class="image-placeholder"></span>
+            <p><strong>1.</strong> Wi-Fi connects devices over ( long / <span class="mcq">short</span> ) distances.</p>
+            <p><strong>2.</strong> We mostly use Wi-Fi inside a <span class="line answer">house</span> or building.</p>
+            <p><strong>3.</strong> Bluetooth connects things like wireless <span class="line-long answer">headphones</span>.</p>
+            <p><strong>4.</strong> These devices use very ( <span class="mcq">low</span> / high ) power waves.</p>
+            <p><strong>5.</strong> If you walk too far down the street, your home Wi-Fi will <span class="line answer">drop</span>.</p>
+            <p><strong>6.</strong> Wi-Fi routers send invisible <span class="line-long answer">Microwaves</span>.</p>
+            <p><strong>7.</strong> Does Bluetooth work across a whole city? [ &nbsp; ] Yes [ <span class="answer">✓</span> ] No</p>
+            <p><strong>8.</strong> Wi-Fi distance is usually measured in <span class="line answer">meters</span>.</p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 4: Fiber Optics (Fast Internet)</span> <span>/8</span></div>
+            <p><strong>1.</strong> To send internet across the ocean, we use <span class="line answer">cables</span>.</p>
+            <p><strong>2.</strong> Fiber Optic cables are made of thin <span class="line answer">glass</span> or plastic.</p>
+            <p><strong>3.</strong> They use pulses of Visible <span class="line answer">Light</span> to send data.</p>
+            <p><strong>4.</strong> The light <span class="line answer">bounces</span> off the inside walls of the tube.</p>
+            <p><strong>5.</strong> Because it uses light, it provides super <span class="line answer">fast</span> internet.</p>
+            <p><strong>6.</strong> Modern home internet (like the NBN) uses Fiber <span class="line answer">Optics</span>.</p>
+            <p><strong>7.</strong> Does light travel fast or slow inside these tubes? ( <span class="mcq">Fast</span> )</p>
+            <p><strong>8.</strong> Old, slow internet cables used solid <span class="line answer">metal</span> wires.</p>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Part 2: Applications Data & Wave Math</div>
+        <div class="h-info">Name: _______________________ Class: ______ Score: ____/32</div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 5: Reading Data Tables</span> <span>/8</span></div>
+            <p><em>Analyze the table to answer the questions below.</em></p>
+            <table class="tf-table center">
+                <tr><th>Technology</th><th>Frequency (Hz)</th><th>Wavelength (m)</th><th>Speed (m/s)</th></tr>
+                <tr><td><strong>AM Radio</strong></td><td>1,000,000</td><td>300 m</td><td>300,000,000</td></tr>
+                <tr><td><strong>FM Radio</strong></td><td>100,000,000</td><td>3 m</td><td>300,000,000</td></tr>
+                <tr><td><strong>Wi-Fi</strong></td><td>5,000,000,000</td><td>0.06 m</td><td>300,000,000</td></tr>
+            </table>
+            <br>
+            <p><strong>1.</strong> Which technology has the highest frequency? <span class="line-long answer">Wi-Fi</span></p>
+            <p><strong>2.</strong> Which technology has the longest wavelength? <span class="line-long answer">AM Radio</span></p>
+            <p><strong>3.</strong> As frequency gets bigger, wavelength gets <span class="line-long answer">smaller</span>.</p>
+            <p><strong>4.</strong> What happens to the Speed of all 3 waves? <span class="line-long answer">It stays the same</span>.</p>
+            <p><strong>5.</strong> The wavelength of Wi-Fi is 0.06m. This equals <span class="line answer">6</span> cm.</p>
+            <p><strong>6.</strong> AM Radio waves can easily bend around <span class="line-long answer">buildings</span>.</p>
+            <p><strong>7.</strong> FM Radio has a ( <span class="mcq">higher</span> / lower ) frequency than AM Radio.</p>
+            <p><strong>8.</strong> All of these waves are part of the EM <span class="line-long answer">Spectrum</span>.</p>
+        </div>
+
+        <div class="module">
+            <div class="mod-header"><span>Level 6: Graphing the Seesaw Rule</span> <span>/8</span></div>
+            
+            <div style="text-align: center; margin: 4px 0;">
+                <svg viewBox="0 0 250 110" style="width: 100%; max-width: 240px; background: white;">
+                    <line x1="30" y1="5" x2="30" y2="85" stroke="#000" stroke-width="2" />
+                    <line x1="30" y1="85" x2="230" y2="85" stroke="#000" stroke-width="2" />
+                    <path d="M 40 15 Q 45 75 220 80" fill="none" stroke="#8e44ad" stroke-width="3" />
+                    <text x="10" y="70" font-size="11" font-family="sans-serif" font-weight="bold" transform="rotate(-90 15,70)">Wavelength (m)</text>
+                    <text x="80" y="100" font-size="11" font-family="sans-serif" font-weight="bold">Frequency (Hz)</text>
+                </svg>
+            </div>
+
+            <p><strong>1.</strong> The graph shape shows an ( <span class="mcq">inverse</span> / direct ) relationship.</p>
+            <p><strong>2.</strong> Far right of the graph (high frequency) = very <span class="line answer">short</span> wavelength.</p>
+            <p><strong>3.</strong> High frequency waves have ( <span class="mcq">more</span> / less ) energy.</p>
+            <p><strong>4.</strong> Extreme high frequency (Gamma) is dangerous because it is <span class="line answer">ionizing</span>.</p>
+            <p><strong>5.</strong> Left side of the graph (low frequency) is <span class="line answer">safe</span> for humans.</p>
+            <p><strong>6.</strong> Radio waves would be located on the ( <span class="mcq">left</span> / right ) side.</p>
+            <p><strong>7.</strong> X-Rays would be located on the ( left / <span class="mcq">right</span> ) side.</p>
+            <p><strong>8.</strong> "Seesaw Rule": When one goes up, the other goes <span class="line answer">down</span>.</p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="module">
+            <div class="mod-header"><span>Level 7: Calculating Wave Speed</span> <span>/8</span></div>
+            <p><strong>Formula:</strong> <span class="symbol">v = f &times; &lambda;</span></p>
+            
+            <div class="math-zone"><strong>1. Walkie-Talkie:</strong> f = 50,000, &lambda; = 6,000<br> <strong>v = 50,000 &times; 6,000 = <span class="line-long answer">300,000,000</span> m/s</strong></div>
+            
+            <div class="math-zone"><strong>2. Satellite:</strong> f = 3,000,000, &lambda; = 100<br> <strong>v = 3,000,000 &times; 100 = <span class="line-long answer">300,000,000</span> m/s</strong></div>
+            
+            <p><strong>3.</strong> Pattern: For all EM waves, speed (v) is <span class="line-long answer">300,000,000</span> m/s.</p>
+            <p><strong>4.</strong> Light goes around the Earth 7.5 times in 1 <span class="line answer">second</span>.</p>
+            <p><strong>5.</strong> Which is faster: Sound or Wi-Fi? <span class="line answer">Wi-Fi</span>.</p>
+            <p><strong>6.</strong> Sound (v=340, f=170): &lambda; = 340 &divide; 170 = <span class="line answer">2</span> m.</p>
+            <p><strong>7.</strong> Can humans hear EM waves directly? ( <span class="mcq">No</span> )</p>
+            <p><strong>8.</strong> We use speakers to turn them into <span class="line answer">sound</span> waves.</p>
+        </div>
+
+        <div class="module" style="background: #fff8f8; border: 3px solid #c0392b;">
+            <div class="mod-header" style="background:#c0392b;"><span>Level 8: Wavelength Bootcamp</span> <span>/8</span></div>
+            <p style="text-align:center; color:#c0392b; font-weight:900; margin-bottom: 2px;">Formula: <span class="symbol">&lambda; = v &divide; f</span></p>
+            
+            <div class="math-zone"><strong>1. FM Radio:</strong> v = 300,000,000, f = 100,000,000<br> <strong>&lambda; = 300,000,000 &divide; 100,000,000 = <span class="line answer">3</span> m</strong></div>
+            
+            <div class="math-zone"><strong>2. AM Radio:</strong> v = 300,000,000, f = 1,000,000<br> <strong>&lambda; = 300,000,000 &divide; 1,000,000 = <span class="line answer">300</span> m</strong></div>
+            
+            <p><strong>3. Formula for f:</strong> <span class="symbol">f = v &divide; &lambda;</span></p>
+            <p><strong>4.</strong> v = 300,000,000. &lambda; = 150m. f = <span class="line-long answer">2,000,000</span> Hz.</p>
+            <p><strong>5.</strong> v = 300,000,000. &lambda; = 5m. f = <span class="line-long answer">60,000,000</span> Hz.</p>
+            <p><strong>6.</strong> Higher frequency numbers mean more <span class="line answer">energy</span>.</p>
+            <p><strong>7.</strong> 1,000,000 Hz is 1 <span class="line-long answer">MegaHertz (MHz)</span>.</p>
+            <p><strong>8. Boss:</strong> v = 3E8, f = 3E8. &lambda; = <span class="line answer">1</span> m.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const answerElements = document.querySelectorAll('.answer, .mcq');
+        answerElements.forEach(element => {
+            element.addEventListener('click', function() {
+                this.classList.toggle('revealed');
+            });
+        });
+    });
+</script>
+</body>
+</html>
