@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 7 Science: Variables Worksheet (Expanded)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- A4 PRINT SETUP --- */
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f0f0; 
+            margin: 0;
+            padding: 20px;
+            color: #222;
+            -webkit-print-color-adjust: exact;
+        }
+        
+        /* The Physical Page */
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 2-Column Layout */
+        .columns {
+            column-count: 2;
+            column-gap: 10mm;
+            height: 100%;
+            text-align: justify;
+        }
+
+        /* Typography - SCIENCE THEME (Blue) */
+        h1 { font-size: 24px; text-transform: uppercase; border-bottom: 3px solid #2980b9; padding-bottom: 5px; margin-top: 0; color: #2980b9; }
+        h2 { font-size: 14px; background: #2980b9; color: white; padding: 6px 10px; margin-top: 15px; margin-bottom: 10px; font-weight: bold; break-inside: avoid; border-radius: 4px; }
+        h3 { font-size: 13px; color: #16a085; margin: 12px 0 5px 0; border-bottom: 1px dashed #ccc; padding-bottom: 2px; break-inside: avoid; font-weight: bold; }
+        p, li, td { font-size: 11px; line-height: 1.5; margin-bottom: 6px; }
+        
+        /* Interactive Answer Zones */
+        .ans {
+            border-bottom: 1px solid #7f8c8d;
+            min-width: 30px;
+            display: inline-block;
+            cursor: pointer;
+            color: transparent; 
+            transition: all 0.3s;
+            padding: 0 4px;
+            user-select: none;
+            background: #f9f9f9;
+        }
+        .ans:hover { background-color: #d6eaf8; }
+        
+        /* Revealed State */
+        .ans.revealed {
+            color: #c0392b; /* Red Text for answers */
+            border-bottom: 1px dotted #c0392b;
+            font-weight: bold;
+            background: transparent;
+        }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 15px; break-inside: avoid; border: 1px solid #ddd; }
+        th, td { border: 1px solid #ccc; padding: 5px; text-align: left; }
+        th { background: #d6eaf8; font-weight: bold; color: #154360; }
+
+        /* Diagram Box */
+        .graph-container {
+            width: 100%;
+            height: 120px;
+            border: 2px solid #2c3e50;
+            margin: 15px 0;
+            position: relative;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        /* The Hidden Answer Line in Graph */
+        .graph-answer {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        .graph-container.revealed .graph-answer { opacity: 1; }
+
+        /* Control Panel (Screen Only) */
+        @media print {
+            body { background: white; padding: 0; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; height: auto; min-height: 297mm; }
+            .control-panel { display: none !important; }
+            .ans { color: transparent !important; border-bottom: 1px solid #333; } 
+            .ans.revealed { color: #333 !important; }
+        }
+
+        .control-panel {
+            position: fixed; top: 20px; right: 20px; z-index: 999;
+            background: white; padding: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 8px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        button { cursor: pointer; padding: 8px 15px; background: #2980b9; color: white; border: none; border-radius: 4px; font-weight: bold; }
+        button:hover { background: #3498db; }
+        .reset-btn { background: #e74c3c; }
+        .reset-btn:hover { background: #c0392b; }
+        
+        .variable-help {
+            font-size: 10px; font-style: italic; color: #666; border: 1px dashed #999; padding: 5px; margin-bottom: 10px;
+        }
+
+        .true-false {
+            display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 2px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="control-panel">
+    <div style="font-size:12px; font-weight:bold; color:#555; margin-bottom:5px;">Teacher Controls</div>
+    <button onclick="revealAll()">👁️ Reveal Answers</button>
+    <button class="reset-btn" onclick="hideAll()">❌ Reset Worksheet</button>
+</div>
+
+<div class="page" id="page1">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <div>
+            <h1 style="margin:0; border:none; font-size: 28px;">Scientific Variables</h1>
+            <span style="font-size:14px; color: #555;">Topic: Experimental Design & Data</span>
+        </div>
+        <div style="text-align:right; font-size:14px;">
+            Name: ______________________<br>
+            Date: ______________________
+        </div>
+    </div>
+
+    <div class="columns">
+        <h2>A. Definitions (Recall)</h2>
+        <p><em>Use the word bank to complete the definitions.</em></p>
+        <div class="variable-help"><strong>Bank:</strong> [ Measure, Same, Change, Independent, Dependent ]</div>
+        
+        <p>1. The <strong>Independent Variable</strong> is the variable that I <span class="ans">Change</span> at the start of the experiment.</p>
+        <p>2. The <strong>Dependent Variable</strong> is the variable that I <span class="ans">Measure</span> at the end (the result).</p>
+        <p>3. The <strong>Controlled Variables</strong> are the things I keep the <span class="ans">Same</span> to make it a fair test.</p>
+
+        <h2>B. Literacy: Spot the Variable</h2>
+        <p><em>Read the stories. Identify the Independent (Change) and Dependent (Measure) variables.</em></p>
+        
+        <h3>Story 1 (Easy)</h3>
+        <p>"A student changes the <strong>temperature of the water</strong> to see how fast <strong>sugar dissolves</strong>."</p>
+        <ul>
+            <li>Independent (Change): <span class="ans">Water Temperature</span></li>
+            <li>Dependent (Measure): <span class="ans">Speed of dissolving</span></li>
+        </ul>
+
+        <h3>Story 2 (Medium)</h3>
+        <p>"Sarah wants to see if <strong>adding fertilizer</strong> makes plants grow taller. She gives Plant A 0ml, Plant B 5ml, and Plant C 10ml. After 2 weeks, she measures the <strong>height</strong>."</p>
+        <ul>
+            <li>Independent: <span class="ans">Amount of Fertilizer</span></li>
+            <li>Dependent: <span class="ans">Height of Plant</span></li>
+            <li>Controlled: <span class="ans">Type of Plant / Soil</span></li>
+        </ul>
+
+        <h3>Story 3 (Hard)</h3>
+        <p>"An engineer tests three different <strong>brands of phone battery</strong>. He puts them into the <strong>same phone</strong> playing the same video. He records the <strong>time until the phone dies</strong>."</p>
+        <ul>
+            <li>Independent: <span class="ans">Brand of Battery</span></li>
+            <li>Dependent: <span class="ans">Time lasted</span></li>
+            <li>Controlled: <span class="ans">The Phone / Video</span></li>
+        </ul>
+
+        <h2>C. Fair Testing</h2>
+        
+        <h3>Scenario 1: The Race</h3>
+        <p><strong>Story:</strong> Ben wants to see who runs fastest. He wears running shoes. He makes Tom wear heavy boots. They run 100m. Ben wins.</p>
+        <p>1. Is this a fair test? <span class="ans">No</span>.</p>
+        <p>2. Why? Because the <span class="ans">Footwear / Shoes</span> was not kept the same.</p>
+
+        <h3>Scenario 2: Fix the Experiment</h3>
+        <p><strong>Story:</strong> Jenny wants to test if <strong>hot water</strong> cleans dishes faster than cold water. She uses hot water with <strong>lots of soap</strong>, and cold water with <strong>no soap</strong>.</p>
+        <p>3. Jenny made a mistake! She changed two things:</p>
+        <ol>
+            <li>The Temperature (Good)</li>
+            <li>The <span class="ans">Amount of Soap</span> (Bad)</li>
+        </ol>
+        <p>4. To make it fair, she must use the <span class="ans">Same</span> amount of soap in both bowls.</p>
+
+        <h2>D. From Question to Variables</h2>
+        <p><em>Look at the scientific questions below. Circle or identify the variables.</em></p>
+        
+        <h3>Q1: "Does the angle of a ramp affect how far a car rolls?"</h3>
+        <ul>
+            <li>IV (Change): <span class="ans">Angle of ramp</span></li>
+            <li>DV (Measure): <span class="ans">Distance car rolls</span></li>
+        </ul>
+
+        <h3>Q2: "Does the size of a parachute affect how slowly it falls?"</h3>
+        <ul>
+            <li>IV (Change): <span class="ans">Size of parachute</span></li>
+            <li>DV (Measure): <span class="ans">Speed of fall</span></li>
+        </ul>
+
+        <h3>Q3: "How does the amount of sleep affect student test scores?"</h3>
+        <ul>
+            <li>IV (Change): <span class="ans">Amount of Sleep</span></li>
+            <li>DV (Measure): <span class="ans">Test Score</span></li>
+        </ul>
+
+        <h2>E. True or False?</h2>
+        <div class="true-false">
+            <span>1. In a fair test, you change everything.</span>
+            <strong><span class="ans">False</span></strong>
+        </div>
+        <div class="true-false">
+            <span>2. The Dependent variable is the result.</span>
+            <strong><span class="ans">True</span></strong>
+        </div>
+        <div class="true-false">
+            <span>3. Controlled variables must stay the same.</span>
+            <strong><span class="ans">True</span></strong>
+        </div>
+        <div class="true-false">
+            <span>4. You can have two Independent variables.</span>
+            <strong><span class="ans">False</span></strong>
+        </div>
+        <div class="true-false">
+            <span>5. Graphs usually show the IV on the bottom.</span>
+            <strong><span class="ans">True</span></strong>
+        </div>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 1/2</div>
+</div>
+
+<div class="page" id="page2">
+    <div style="display:flex; justify-content:space-between; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
+        <h1 style="margin:0; border:none; font-size: 28px;">Data: Tables & Graphs</h1>
+        <div style="font-size:16px; font-weight:bold;">Score: _______ / 20</div>
+    </div>
+
+    <div class="columns">
+        
+        <h2>F. Variables in Tables</h2>
+        <div class="variable-help"><strong>Rule:</strong> Independent (Left) | Dependent (Right)</div>
+        
+        <h3>Table 1: Cooling Tea</h3>
+        <table>
+            <tr>
+                <th>Time (mins)</th>
+                <th>Temperature (°C)</th>
+            </tr>
+            <tr><td>0</td><td>90</td></tr>
+            <tr><td>2</td><td>80</td></tr>
+            <tr><td>4</td><td>70</td></tr>
+        </table>
+        <p>1. Which variable is the <strong>Independent</strong> (Change)?</p>
+        <p>Answer: <span class="ans">Time</span> (Left Column).</p>
+        <p>2. Which variable is the <strong>Dependent</strong> (Measure)?</p>
+        <p>Answer: <span class="ans">Temperature</span> (Right Column).</p>
+
+        <h3>Table 2: Paper Helicopters</h3>
+        <table>
+            <tr>
+                <th>Wing Length (cm)</th>
+                <th>Time to Fall (s)</th>
+            </tr>
+            <tr><td>2 cm</td><td>1.2</td></tr>
+            <tr><td>4 cm</td><td>1.8</td></tr>
+            <tr><td>6 cm</td><td>2.5</td></tr>
+        </table>
+        <p>3. What did the student <strong>Change</strong>?</p>
+        <p>Answer: <span class="ans">Wing Length</span>.</p>
+        <p>4. What did the student <strong>Measure</strong>?</p>
+        <p>Answer: <span class="ans">Time to Fall</span>.</p>
+
+        <h2>G. Variables in Graphs</h2>
+        <div class="variable-help"><strong>Rule:</strong> Independent (Bottom/X) | Dependent (Side/Y)</div>
+
+        <p><strong>Graph 1: Stretching a Spring</strong></p>
+        <p><em>Click the box to reveal the correct axes labels.</em></p>
+        <div class="graph-container" onclick="this.classList.toggle('revealed')">
+            <svg width="100%" height="100%" viewBox="0 0 200 100" preserveAspectRatio="none">
+                <line x1="20" y1="80" x2="180" y2="80" stroke="black" stroke-width="2"/>
+                <line x1="20" y1="80" x2="20" y2="10" stroke="black" stroke-width="2"/>
+                <path d="M20,80 L180,20" stroke="blue" stroke-width="2"/>
+            </svg>
+            <div class="graph-answer">
+                <div style="position:absolute; bottom:5px; width:100%; text-align:center; font-size:10px; color:#c0392b; font-weight:bold;">Weight Added (Independent)</div>
+                <div style="position:absolute; top:40%; left:-30px; transform:rotate(-90deg); font-size:10px; color:#c0392b; font-weight:bold;">Length (Dependent)</div>
+            </div>
+        </div>
+
+        <p>1. The variable on the <strong>Bottom Axis (X)</strong> is the:</p>
+        <p>[ <span class="ans">Independent</span> / Dependent ]</p>
+
+        <p><strong>Graph 2: Plant Growth</strong></p>
+        <p>A student grew plants in different amounts of light.</p>
+        
+        <div class="graph-container" style="cursor:default;">
+             <svg width="100%" height="100%" viewBox="0 0 200 100" preserveAspectRatio="none">
+                <line x1="20" y1="80" x2="180" y2="80" stroke="black" stroke-width="2"/>
+                <line x1="20" y1="80" x2="20" y2="10" stroke="black" stroke-width="2"/>
+                <text x="100" y="95" text-anchor="middle" font-size="8">Light Intensity (Lux)</text>
+                <text x="10" y="50" text-anchor="middle" font-size="8" transform="rotate(-90 10,50)">Height (cm)</text>
+                <rect x="40" y="60" width="20" height="20" fill="green"/>
+                <rect x="80" y="40" width="20" height="40" fill="green"/>
+                <rect x="120" y="20" width="20" height="60" fill="green"/>
+            </svg>
+        </div>
+        <p>2. What did the student <strong>Measure</strong> (Y-Axis)?</p>
+        <p>Answer: <span class="ans">Height</span>.</p>
+        
+        <p>3. What did the student <strong>Change</strong> (X-Axis)?</p>
+        <p>Answer: <span class="ans">Light Intensity</span>.</p>
+
+        <h2>H. Exit Ticket</h2>
+        <div style="background:#fff; border:2px solid #333; padding:15px; font-size:12px; line-height:1.6;">
+            <strong>Circle the correct words:</strong><br><br>
+            1. The one thing I change is the [ <span class="ans">Independent</span> / Dependent ] variable.<br>
+            2. To make a test fair, I must keep variables the [ Different / <span class="ans">Same</span> ].<br>
+            3. In a table, the Dependent variable is on the [ Left / <span class="ans">Right</span> ].
+        </div>
+
+    </div>
+    <div style="position:absolute; bottom:10px; right:20px; font-size:10px; color:#999;">Page 2/2</div>
+</div>
+
+<script>
+    // Toggle individual text answers
+    const answers = document.querySelectorAll('.ans');
+    answers.forEach(ans => {
+        ans.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ans.classList.toggle('revealed');
+        });
+    });
+
+    // Reveal all
+    function revealAll() {
+        answers.forEach(ans => ans.classList.add('revealed'));
+        document.querySelectorAll('.graph-container').forEach(g => g.classList.add('revealed'));
+    }
+
+    // Hide all
+    function hideAll() {
+        answers.forEach(ans => ans.classList.remove('revealed'));
+        document.querySelectorAll('.graph-container').forEach(g => g.classList.remove('revealed'));
+    }
+</script>
+
+</body>
+</html>
