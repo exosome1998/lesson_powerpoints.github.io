@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 10 Science: Light Ray Geometry</title>
+    <style>
+        body { background-color: #f0f0f0; font-family: 'Arial', sans-serif; margin: 0; padding: 20px; }
+        .page {
+            width: 210mm; min-height: 297mm; padding: 10mm 15mm; margin: 0 auto 15mm auto;
+            background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); box-sizing: border-box;
+            position: relative; page-break-after: always; font-size: 13px;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .page { margin: 0; box-shadow: none; padding: 10mm; border: none; }
+            .no-print, .answer, .svg-ans { display: none !important; }
+            .blank span { display: none !important; }
+            .write-line { border-bottom-color: #999 !important; }
+        }
+        h1 { text-align: center; font-size: 18px; border-bottom: 2px solid #333; margin: 0 0 10px 0; padding-bottom: 5px; }
+        h2 { font-size: 14px; color: #2c3e50; border-left: 4px solid #3498db; padding-left: 8px; margin: 10px 0 5px 0; }
+        .q-box { cursor: pointer; padding: 4px 6px; margin-bottom: 4px; line-height: 1.4; border-radius: 4px; border: 1px solid transparent; }
+        .q-box:hover { background: #f9f9f9; border-color: #eee; }
+        .answer { color: #e74c3c; display: none; font-weight: bold; font-size: 12px; margin-top: 2px; }
+        .blank { border-bottom: 1px solid #000; min-width: 50px; display: inline-block; text-align: center; color: #e74c3c; font-weight: bold; }
+        .blank span { display: none; }
+        .svg-container { text-align: center; margin: 5px 0; border: 1px solid #eee; padding: 5px; cursor: pointer; }
+        .svg-container:hover { background: #f9f9f9; }
+        .controls { text-align: center; margin-bottom: 20px; }
+        button { padding: 8px 15px; cursor: pointer; background: #2c3e50; color: white; border: none; border-radius: 4px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mc-row { display: flex; justify-content: space-between; margin-top: 3px; font-size: 12px; color: #333; }
+        .mc-row span { flex: 1; }
+        .write-line { border-bottom: 1px solid #ccc; height: 18px; width: 100%; margin-top: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="controls no-print">
+    <button onclick="toggleAll()">Toggle All Answers</button>
+    <button onclick="window.print()">Print Worksheet (Answers Hidden)</button>
+</div>
+
+<div class="page">
+    <h1>Worksheet 1: Reflection Ray Tracing</h1>
+    <p style="margin: 0 0 10px 0;"><strong>Note:</strong> All angles are measured from the <strong>Normal</strong> unless stated otherwise.</p>
+
+    <h2>1. Basic Reflection (Easy)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <svg width="200" height="120" viewBox="0 0 200 150">
+                <line x1="10" y1="130" x2="190" y2="130" stroke="black" stroke-width="3"/>
+                <line x1="100" y1="20" x2="100" y2="130" stroke="gray" stroke-dasharray="4"/>
+                <line x1="40" y1="40" x2="100" y2="130" stroke="blue" stroke-width="2"/>
+                <text x="75" y="115" font-size="12">30°</text>
+                <g class="answer svg-ans">
+                    <line x1="100" y1="130" x2="160" y2="40" stroke="red" stroke-width="2" stroke-dasharray="2"/>
+                    <text x="110" y="115" fill="red" font-size="12">30°</text>
+                </g>
+            </svg>
+            <p style="margin:2px 0;">Find the angle of reflection.</p>
+            <span class="answer">Ans: 30°</span>
+        </div>
+        <div class="svg-container" onclick="toggleThis(this)">
+            <svg width="200" height="120" viewBox="0 0 200 150">
+                <line x1="10" y1="130" x2="190" y2="130" stroke="black" stroke-width="3"/>
+                <line x1="100" y1="20" x2="100" y2="130" stroke="gray" stroke-dasharray="4"/>
+                <line x1="30" y1="80" x2="100" y2="130" stroke="blue" stroke-width="2"/>
+                <text x="40" y="125" font-size="12">20°</text>
+                <g class="answer svg-ans">
+                    <text x="75" y="115" fill="red" font-size="12">70°</text>
+                    <text x="110" y="115" fill="red" font-size="12">70°</text>
+                </g>
+            </svg>
+            <p style="margin:2px 0;">Find angle of incidence (i) and reflection (r).</p>
+            <span class="answer">Ans: i=70°, r=70°</span>
+        </div>
+    </div>
+
+    <h2>2. Mirror Rotation & Applications (Medium)</h2>
+    <div class="svg-container" onclick="toggleThis(this)">
+        <svg width="300" height="140" viewBox="0 0 300 200">
+            <line x1="50" y1="180" x2="250" y2="180" stroke="black" stroke-width="3"/>
+            <line x1="50" y1="180" x2="50" y2="20" stroke="black" stroke-width="3"/>
+            <line x1="200" y1="20" x2="50" y2="100" stroke="blue" stroke-width="2"/>
+            <text x="65" y="90" font-size="10">40°</text>
+            <g class="answer svg-ans">
+                <line x1="50" y1="100" x2="150" y2="180" stroke="red" stroke-width="2"/>
+                <line x1="150" y1="180" x2="250" y2="100" stroke="red" stroke-width="2"/>
+                <text x="120" y="170" fill="red" font-size="10">50°</text>
+            </g>
+        </svg>
+        <p style="margin:2px 0;">A ray hits the vertical mirror at 40° to the normal. Complete the path as it hits the second mirror.</p>
+        <span class="answer">Ans: Ray reflects at 40°, then hits floor mirror at 50° incidence, reflecting at 50°.</span>
+    </div>
+
+    <h2>3. Multiple Choice Quick-Fire</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>1. The angle of incidence is strictly measured between the incident ray and the:</strong>
+        <div class="mc-row"><span>A) Mirror surface</span> <span>B) Normal line</span> <span>C) Reflected ray</span> <span>D) Focal point</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>2. An image formed by a standard flat (plane) mirror is always:</strong>
+        <div class="mc-row"><span>A) Real & inverted</span> <span>B) Real & upright</span> <span>C) Virtual & inverted</span> <span>D) Virtual & upright</span></div>
+        <span class="answer">Ans: D</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>3. Which type of reflection occurs when light hits a rough surface like paper?</strong>
+        <div class="mc-row"><span>A) Specular</span> <span>B) Diffuse</span> <span>C) Converging</span> <span>D) Total Internal</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+
+    <h2>4. Short Answer Concepts</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        State the primary Law of Reflection mathematically:
+        <div class="write-line"></div>
+        <span class="answer">Ans: i = r (Angle of incidence = Angle of reflection)</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        What happens to the angle of reflection if a ray hits a mirror perfectly perpendicular (90°) to the surface?
+        <div class="write-line"></div>
+        <span class="answer">Ans: 0° (It bounces straight back along the normal).</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Explain "lateral inversion" in a plane mirror.
+        <div class="write-line"></div>
+        <span class="answer">Ans: Left and right appear reversed in the reflection.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        A fixed light ray hits a mirror. If the mirror is rotated 15° clockwise, how many degrees does the reflected ray rotate?
+        <div class="write-line"></div>
+        <span class="answer">Ans: 30° (It rotates twice the angle of the mirror).</span>
+    </div>
+</div>
+
+<div class="page">
+    <h1>Worksheet 2: Refraction Pathways</h1>
+
+    <h2>1. Bending Directions (Easy)</h2>
+    <div class="word-bank" style="border:1px dashed #ccc; padding:5px; text-align:center; margin-bottom:5px;">
+        TOWARDS NORMAL | AWAY FROM NORMAL | NO BENDING
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">a) Air to Glass (Low to High Density): <span class="blank"><span>TOWARDS NORMAL</span></span></div>
+    <div class="q-box" onclick="toggleThis(this)">b) Water to Air (High to Low Density): <span class="blank"><span>AWAY FROM NORMAL</span></span></div>
+    <div class="q-box" onclick="toggleThis(this)">c) Ray hitting boundary exactly along the normal: <span class="blank"><span>NO BENDING</span></span></div>
+
+    <h2>2. Complete the Diagram (Medium)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Glass to Air</strong><br>
+            <svg width="180" height="120" viewBox="0 0 180 150">
+                <rect x="0" y="75" width="180" height="75" fill="#e0f7fa"/>
+                <line x1="0" y1="75" x2="180" y2="75" stroke="black"/>
+                <line x1="90" y1="10" x2="90" y2="140" stroke="gray" stroke-dasharray="3"/>
+                <line x1="40" y1="130" x2="90" y2="75" stroke="blue" stroke-width="2"/>
+                <g class="answer svg-ans">
+                    <line x1="90" y1="75" x2="160" y2="20" stroke="red" stroke-width="2"/>
+                    <text x="110" y="50" fill="red">Bends Away</text>
+                </g>
+            </svg>
+        </div>
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Air to Plastic</strong><br>
+            <svg width="180" height="120" viewBox="0 0 180 150">
+                <rect x="0" y="75" width="180" height="75" fill="#fff9c4"/>
+                <line x1="0" y1="75" x2="180" y2="75" stroke="black"/>
+                <line x1="90" y1="10" x2="90" y2="140" stroke="gray" stroke-dasharray="3"/>
+                <line x1="30" y1="20" x2="90" y2="75" stroke="blue" stroke-width="2"/>
+                <g class="answer svg-ans">
+                    <line x1="90" y1="75" x2="120" y2="140" stroke="red" stroke-width="2"/>
+                    <text x="110" y="110" fill="red">Bends Toward</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div class="svg-container" onclick="toggleThis(this)">
+        <strong>The Glass Prism</strong><br>
+        <svg width="300" height="120" viewBox="0 0 300 150">
+            <polygon points="100,130 150,30 200,130" fill="none" stroke="black" stroke-width="2"/>
+            <line x1="20" y1="100" x2="125" y2="80" stroke="blue" stroke-width="2"/>
+            <g class="answer svg-ans">
+                <line x1="125" y1="80" x2="175" y2="80" stroke="red" stroke-width="2"/>
+                <line x1="175" y1="80" x2="250" y2="120" stroke="red" stroke-width="2"/>
+            </g>
+        </svg>
+        <p style="margin:2px 0;">Trace the ray as it enters and exits the equilateral glass prism.</p>
+        <span class="answer">Ans: Bends toward normal entering (horizontal), bends away from normal exiting (downwards).</span>
+    </div>
+
+    <h2>3. Multiple Choice Quick-Fire</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>1. Light travels the fastest in which of the following mediums?</strong>
+        <div class="mc-row"><span>A) Diamond</span> <span>B) Water</span> <span>C) Vacuum</span> <span>D) Glass</span></div>
+        <span class="answer">Ans: C</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>2. Refraction fundamentally occurs because light changes its _____ when crossing boundaries.</strong>
+        <div class="mc-row"><span>A) Speed</span> <span>B) Mass</span> <span>C) Color</span> <span>D) Frequency</span></div>
+        <span class="answer">Ans: A</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>3. The ratio of the speed of light in a vacuum to its speed in a material is called the:</strong>
+        <div class="mc-row"><span>A) Critical angle</span> <span>B) Focal length</span> <span>C) Incident index</span> <span>D) Refractive index</span></div>
+        <span class="answer">Ans: D</span>
+    </div>
+
+    <h2>4. Short Answer Concepts</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        If a material has a very high refractive index, what does this tell you about the speed of light inside it?
+        <div class="write-line"></div>
+        <span class="answer">Ans: Light travels very slowly.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Rank the following from lowest to highest optical density: Water, Diamond, Air, Glass.
+        <div class="write-line"></div>
+        <span class="answer">Ans: Air < Water < Glass < Diamond</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        If a light ray travels straight through a glass block without bending at all, what must its angle of incidence be?
+        <div class="write-line"></div>
+        <span class="answer">Ans: 0° (It is traveling directly along the normal).</span>
+    </div>
+</div>
+
+<div class="page">
+    <h1>Worksheet 3: Lenses and TIR</h1>
+
+    <h2>1. Lens Behavior (Easy)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Convex Lens (Converging)</strong><br>
+            <svg width="150" height="90">
+                <path d="M 75 10 Q 95 50 75 90 Q 55 50 75 10" fill="#e3f2fd" stroke="blue"/>
+                <line x1="10" y1="30" x2="65" y2="30" stroke="black"/>
+                <line x1="10" y1="70" x2="65" y2="70" stroke="black"/>
+                <g class="answer svg-ans">
+                    <line x1="85" y1="30" x2="130" y2="50" stroke="red"/>
+                    <line x1="85" y1="70" x2="130" y2="50" stroke="red"/>
+                </g>
+            </svg>
+        </div>
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Concave Lens (Diverging)</strong><br>
+            <svg width="150" height="90">
+                <path d="M 60 10 Q 75 50 60 90 L 90 90 Q 75 50 90 10 Z" fill="#e3f2fd" stroke="blue"/>
+                <line x1="10" y1="30" x2="68" y2="30" stroke="black"/>
+                <line x1="10" y1="70" x2="68" y2="70" stroke="black"/>
+                <g class="answer svg-ans">
+                    <line x1="82" y1="30" x2="130" y2="10" stroke="red"/>
+                    <line x1="82" y1="70" x2="130" y2="90" stroke="red"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <h2>2. Total Internal Reflection (Medium)</h2>
+    <div class="svg-container" onclick="toggleThis(this)">
+        <svg width="300" height="120" viewBox="0 0 300 150">
+            <rect x="50" y="80" width="200" height="60" fill="#e0f7fa" stroke="black"/>
+            <line x1="150" y1="50" x2="150" y2="140" stroke="gray" stroke-dasharray="3"/>
+            <line x1="70" y1="130" x2="150" y2="80" stroke="blue" stroke-width="2"/>
+            <text x="120" y="110" font-size="10">60°</text>
+            <g class="answer svg-ans">
+                <line x1="150" y1="80" x2="230" y2="130" stroke="red" stroke-width="2"/>
+                <text x="170" y="70" fill="red">Critical Angle = 42°</text>
+            </g>
+        </svg>
+        <p style="margin:2px 0;">If the critical angle for this glass is 42°, trace the blue incident ray.</p>
+        <span class="answer">Ans: Total Internal Reflection occurs (60° > 42°). Ray reflects back into glass at 60°.</span>
+    </div>
+
+    <h2>3. Multiple Choice Quick-Fire</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>1. Total Internal Reflection ONLY occurs when light moves from:</strong>
+        <div class="mc-row"><span>A) Air to Water</span> <span>B) High to Low density</span> <span>C) Low to High density</span> <span>D) Air to Vacuum</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>2. The point where all parallel light rays meet after passing through a convex lens is the:</strong>
+        <div class="mc-row"><span>A) Vertex</span> <span>B) Normal</span> <span>C) Critical Point</span> <span>D) Focal Point</span></div>
+        <span class="answer">Ans: D</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>3. Which lens type is typically used in a magnifying glass?</strong>
+        <div class="mc-row"><span>A) Concave</span> <span>B) Convex</span> <span>C) Plano-concave</span> <span>D) Meniscus</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>4. If the incident angle equals the critical angle, the angle of refraction is:</strong>
+        <div class="mc-row"><span>A) 0°</span> <span>B) 45°</span> <span>C) 90°</span> <span>D) 180°</span></div>
+        <span class="answer">Ans: C</span>
+    </div>
+
+    <h2>4. Short Answer Concepts</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        Define "Focal Length".
+        <div class="write-line"></div>
+        <span class="answer">Ans: The distance from the exact center of the lens to the focal point.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Name one major real-world technology that relies heavily on Total Internal Reflection.
+        <div class="write-line"></div>
+        <span class="answer">Ans: Fiber optic cables (or periscopes / endoscopes).</span>
+    </div>
+</div>
+
+<div class="page">
+    <h1>Worksheet 4: Challenge & Application</h1>
+
+    <h2>1. The Multi-Medium Challenge (Hard)</h2>
+    <div class="svg-container" onclick="toggleThis(this)">
+        <svg width="400" height="180" viewBox="0 0 400 250">
+            <rect x="50" y="50" width="300" height="50" fill="#e3f2fd" stroke="black"/>
+            <text x="360" y="80" font-size="10">Water</text>
+            <rect x="50" y="100" width="300" height="50" fill="#bbdefb" stroke="black"/>
+            <text x="360" y="130" font-size="10">Glass</text>
+            <rect x="50" y="150" width="300" height="50" fill="#fff9c4" stroke="black"/>
+            <text x="360" y="180" font-size="10">Plastic</text>
+            <line x1="100" y1="10" x2="150" y2="50" stroke="blue" stroke-width="2"/>
+            <g class="answer svg-ans">
+                <line x1="150" y1="50" x2="180" y2="100" stroke="red" stroke-width="2"/>
+                <line x1="180" y1="100" x2="190" y2="150" stroke="red" stroke-width="2"/>
+                <line x1="190" y1="150" x2="220" y2="200" stroke="red" stroke-width="2"/>
+                <text x="210" y="45" fill="red" font-size="10">Bends in stages</text>
+            </g>
+        </svg>
+        <p style="margin:2px 0;">Order of Density: Air < Water < Plastic < Glass. Trace the path of the ray through all layers.</p>
+        <span class="answer">Ans: 1. Bends toward normal (Water). 2. Bends MORE toward normal (Glass). 3. Bends AWAY from normal (Plastic).</span>
+    </div>
+
+    <h2>2. Multiple Choice Quick-Fire</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>1. A mirage on a hot road is primarily an optical illusion caused by:</strong>
+        <div class="mc-row"><span>A) Dispersion</span> <span>B) Refraction & TIR</span> <span>C) Light scattering</span> <span>D) Absorption</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>2. White light spreading into a rainbow through a prism (dispersion) happens because:</strong>
+        <div class="mc-row"><span>A) Glass is painted</span> <span>B) Colors have diff speeds</span> <span>C) Light creates heat</span> <span>D) Prism reflects</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>3. The human eye contains which type of lens naturally?</strong>
+        <div class="mc-row"><span>A) Concave</span> <span>B) Convex</span> <span>C) Cylindrical</span> <span>D) Plano-concave</span></div>
+        <span class="answer">Ans: B</span>
+    </div>
+
+    <h2>3. Application Short Answers</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>The "Invisible" Rod:</strong> If a glass pyrex rod is placed in cooking oil with the exact same refractive index as the glass, what happens to light passing through?
+        <div class="write-line"></div>
+        <span class="answer">Ans: No refraction occurs; the rod seemingly disappears/becomes invisible.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Why do swimming pools look shallower than they actually are?
+        <div class="write-line"></div>
+        <span class="answer">Ans: Refraction bends light away from the normal as it leaves water, tricking the brain into seeing a higher image.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Why are diamonds cut with so many precise, angled facets?
+        <div class="write-line"></div>
+        <span class="answer">Ans: To trap light via Total Internal Reflection, forcing it to bounce around before exiting out the top (sparkle).</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        A ray hits a mirror at 30° to the normal. If the mirror is moved 5cm backward (staying parallel), does the angle of reflection change?
+        <div class="write-line"></div>
+        <span class="answer">Ans: No. Reflection angle depends strictly on surface orientation, not distance.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Why is the word "AMBULANCE" printed backward on the front of emergency vehicles?
+        <div class="write-line"></div>
+        <span class="answer">Ans: Due to lateral inversion, drivers looking in their rear-view mirrors will read the word correctly.</span>
+    </div>
+</div>
+
+<script>
+    function toggleThis(el) {
+        const ans = el.querySelectorAll('.answer, .svg-ans');
+        const blanks = el.querySelectorAll('.blank span');
+        ans.forEach(a => a.style.display = (a.style.display === 'block' || a.style.display === 'inline') ? 'none' : 'block');
+        blanks.forEach(b => b.style.display = (b.style.display === 'inline') ? 'none' : 'inline');
+    }
+
+    let show = false;
+    function toggleAll() {
+        show = !show;
+        document.querySelectorAll('.answer, .svg-ans').forEach(a => a.style.display = show ? 'block' : 'none');
+        document.querySelectorAll('.blank span').forEach(b => b.style.display = show ? 'inline' : 'none');
+    }
+</script>
+
+</body>
+</html>
