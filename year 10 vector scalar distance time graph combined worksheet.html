@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 10 Science: Distance-Time & Displacement Graphs</title>
+    <style>
+        body { background-color: #f0f0f0; font-family: 'Arial', sans-serif; margin: 0; padding: 20px; }
+        .page {
+            width: 210mm; min-height: 297mm; padding: 10mm 15mm; margin: 0 auto 15mm auto;
+            background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); box-sizing: border-box;
+            position: relative; page-break-after: always; font-size: 13px;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .page { margin: 0; box-shadow: none; padding: 10mm; border: none; }
+            .no-print, .answer, .svg-ans { display: none !important; }
+            .blank span { display: none !important; }
+            .write-line { border-bottom-color: #999 !important; }
+        }
+        h1 { text-align: center; font-size: 18px; border-bottom: 2px solid #333; margin: 0 0 10px 0; padding-bottom: 5px; }
+        h2 { font-size: 14px; color: #2c3e50; border-left: 4px solid #3498db; padding-left: 8px; margin: 10px 0 5px 0; }
+        .q-box { cursor: pointer; padding: 4px 6px; margin-bottom: 4px; line-height: 1.4; border-radius: 4px; border: 1px solid transparent; }
+        .q-box:hover { background: #f9f9f9; border-color: #eee; }
+        .answer { color: #e74c3c; display: none; font-weight: bold; font-size: 12px; margin-top: 2px; }
+        .blank { border-bottom: 1px solid #000; min-width: 50px; display: inline-block; text-align: center; color: #e74c3c; font-weight: bold; }
+        .blank span { display: none; }
+        .svg-container { text-align: center; margin: 5px 0; border: 1px solid #eee; padding: 5px; cursor: pointer; }
+        .svg-container:hover { background: #f9f9f9; }
+        .controls { text-align: center; margin-bottom: 20px; }
+        button { padding: 8px 15px; cursor: pointer; background: #2c3e50; color: white; border: none; border-radius: 4px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mc-row { display: flex; justify-content: space-between; margin-top: 3px; font-size: 12px; color: #333; }
+        .mc-row span { flex: 1; }
+        .write-line { border-bottom: 1px solid #ccc; height: 18px; width: 100%; margin-top: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="controls no-print">
+    <button onclick="toggleAll()">Toggle All Answers</button>
+    <button onclick="window.print()">Print Worksheet (Answers Hidden)</button>
+</div>
+
+<!-- WORKSHEET 1 -->
+<div class="page">
+    <h1>Worksheet 1: Scalars, Vectors & The Map</h1>
+    <p style="margin: 0 0 10px 0;"><strong>Note:</strong> Pay attention to whether a measurement requires a direction!</p>
+
+    <h2>1. The Fundamentals (Easy)</h2>
+    <div class="word-bank" style="border:1px dashed #ccc; padding:5px; text-align:center; margin-bottom:5px;">
+        SCALAR | VECTOR | DISTANCE | DISPLACEMENT | MAGNITUDE
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">a) A number with size but NO direction is a: <span class="blank"><span>SCALAR</span></span></div>
+    <div class="q-box" onclick="toggleThis(this)">b) A number with size AND direction is a: <span class="blank"><span>VECTOR</span></span></div>
+    <div class="q-box" onclick="toggleThis(this)">c) The full length of the actual path you walked is called: <span class="blank"><span>DISTANCE</span></span></div>
+    <div class="q-box" onclick="toggleThis(this)">d) The straight-line shortcut from start to finish is called: <span class="blank"><span>DISPLACEMENT</span></span></div>
+    <div class="q-box" onclick="toggleThis(this)">e) The scientific word for "size" or "amount" is: <span class="blank"><span>MAGNITUDE</span></span></div>
+
+    <h2>2. Calculating the Map (Medium)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <svg width="250" height="150" viewBox="0 0 250 150">
+                <circle cx="30" cy="120" r="5" fill="#2c3e50"/>
+                <text x="15" y="140" font-weight="bold">Start</text>
+                <circle cx="150" cy="120" r="5" fill="#e67e22"/>
+                <text x="145" y="140" font-weight="bold">Point B</text>
+                <circle cx="150" cy="30" r="5" fill="#2c3e50"/>
+                <text x="145" y="20" font-weight="bold">End</text>
+                
+                <path d="M 30 120 L 150 120 L 150 30" fill="none" stroke="#e67e22" stroke-width="3" stroke-dasharray="6"/>
+                <text x="80" y="110" font-size="11">4 meters East</text>
+                <text x="160" y="80" font-size="11">3 meters North</text>
+
+                <g class="answer svg-ans">
+                    <line x1="30" y1="120" x2="150" y2="30" stroke="#0277bd" stroke-width="3"/>
+                    <text x="60" y="60" fill="#0277bd" font-weight="bold">5m (Displacement)</text>
+                </g>
+            </svg>
+        </div>
+        <div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>a)</strong> Calculate the total <strong>Distance</strong> traveled from Start to End.
+                <div class="write-line"></div>
+                <span class="answer">Ans: 4m + 3m = 7 meters.</span>
+            </div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>b)</strong> The straight-line <strong>Displacement</strong> is 5m. Is this a scalar or a vector?
+                <div class="write-line"></div>
+                <span class="answer">Ans: Vector (It has a direction: North-East).</span>
+            </div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>c)</strong> Draw the Displacement arrow on the map diagram to the left.
+                <span class="answer"><br>Ans: (See diagram - solid blue line from Start to End).</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>3. Sort the Quantities</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        Write <strong>(S)</strong> for Scalar or <strong>(V)</strong> for Vector next to each measurement:
+        <div class="grid" style="margin-top: 5px;">
+            <div>1. Mass (50 kg) <span class="blank"><span>(S)</span></span></div>
+            <div>2. Velocity (10 m/s North) <span class="blank"><span>(V)</span></span></div>
+            <div>3. Time (60 seconds) <span class="blank"><span>(S)</span></span></div>
+            <div>4. Force (5 Newtons Down) <span class="blank"><span>(V)</span></span></div>
+            <div>5. Speed (25 km/h) <span class="blank"><span>(S)</span></span></div>
+            <div>6. Displacement (-15 m) <span class="blank"><span>(V)</span></span></div>
+        </div>
+    </div>
+
+    <h2>4. Application Short Answers</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        You run exactly one lap around a 400m circular track and stop exactly where you started. What is your total Distance?
+        <div class="write-line"></div>
+        <span class="answer">Ans: 400 meters.</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        For the same scenario above, what is your total Displacement? Explain why.
+        <div class="write-line"></div>
+        <span class="answer">Ans: 0 meters. Your start and end points are the exact same place, so there is no straight-line shortcut.</span>
+    </div>
+</div>
+
+<!-- WORKSHEET 2 -->
+<div class="page">
+    <h1>Worksheet 2: Distance-Time Graphs</h1>
+
+    <h2>1. Reading the Lines (Easy)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Comparing Speeds</strong><br>
+            <svg width="200" height="120" viewBox="0 0 200 120">
+                <line x1="20" y1="100" x2="180" y2="100" stroke="black" stroke-width="2"/>
+                <line x1="20" y1="10" x2="20" y2="100" stroke="black" stroke-width="2"/>
+                <path d="M 20 100 L 100 20" fill="none" stroke="red" stroke-width="3"/>
+                <text x="105" y="25" font-weight="bold">A</text>
+                <path d="M 20 100 L 160 50" fill="none" stroke="blue" stroke-width="3"/>
+                <text x="165" y="55" font-weight="bold">B</text>
+            </svg>
+            <p style="margin:2px 0;">Which object is moving faster? Why?</p>
+            <span class="answer">Ans: Object A. Its line is steeper, meaning it covers more distance in less time.</span>
+        </div>
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Returning Home</strong><br>
+            <svg width="200" height="120" viewBox="0 0 200 120">
+                <line x1="20" y1="100" x2="180" y2="100" stroke="black" stroke-width="2"/>
+                <line x1="20" y1="10" x2="20" y2="100" stroke="black" stroke-width="2"/>
+                <path d="M 20 20 L 100 20 L 160 100" fill="none" stroke="green" stroke-width="3"/>
+                <text x="60" y="15" font-weight="bold">X</text>
+                <text x="140" y="65" font-weight="bold">Y</text>
+            </svg>
+            <p style="margin:2px 0;">What is happening at section X and section Y?</p>
+            <span class="answer">Ans: X = Parked / Not moving. Y = Moving at a steady speed back toward the start.</span>
+        </div>
+    </div>
+
+    <h2>2. Calculating Speed from a Graph (Medium)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <svg width="220" height="160" viewBox="0 0 220 160">
+                <line x1="30" y1="130" x2="200" y2="130" stroke="black" stroke-width="2"/>
+                <line x1="30" y1="10" x2="30" y2="130" stroke="black" stroke-width="2"/>
+                <!-- Grid lines -->
+                <line x1="30" y1="70" x2="200" y2="70" stroke="#eee" stroke-dasharray="2"/>
+                <line x1="110" y1="10" x2="110" y2="130" stroke="#eee" stroke-dasharray="2"/>
+                
+                <text x="110" y="145" font-size="10" text-anchor="middle">5</text>
+                <text x="190" y="145" font-size="10" text-anchor="middle">10</text>
+                <text x="100" y="155" font-weight="bold" font-size="11">Time (s)</text>
+                
+                <text x="15" y="75" font-size="10">20</text>
+                <text x="15" y="15" font-size="10">40</text>
+                <g transform="translate(10, 80) rotate(-90)"><text x="0" y="0" font-weight="bold" font-size="11">Distance (m)</text></g>
+                
+                <path d="M 30 130 L 110 70 L 190 70" fill="none" stroke="#8e44ad" stroke-width="3"/>
+            </svg>
+        </div>
+        <div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>a)</strong> How far did the object travel in the first 5 seconds?
+                <div class="write-line"></div>
+                <span class="answer">Ans: 20 meters.</span>
+            </div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>b)</strong> Use the formula <strong>Speed = Distance ÷ Time</strong> to calculate the speed during the first 5 seconds.
+                <div class="write-line"></div>
+                <span class="answer">Ans: 20m ÷ 5s = 4 m/s.</span>
+            </div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>c)</strong> What is the object doing between 5 and 10 seconds?
+                <div class="write-line"></div>
+                <span class="answer">Ans: Standing still (speed is 0 m/s).</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>3. Analyze the Full Journey (Medium)</h2>
+    <div class="svg-container" onclick="toggleThis(this)" style="margin-bottom: 10px;">
+        <svg width="450" height="150" viewBox="0 0 450 150">
+            <line x1="30" y1="130" x2="430" y2="130" stroke="black" stroke-width="3"/>
+            <line x1="30" y1="10" x2="30" y2="130" stroke="black" stroke-width="3"/>
+            <text x="210" y="145" font-weight="bold">Time ➡️</text>
+            <g transform="translate(15, 100) rotate(-90)"><text x="0" y="0" font-weight="bold">Distance ⬆️</text></g>
+            
+            <path d="M 30 130 L 100 50 L 180 50 L 250 20 L 380 130" fill="none" stroke="#27ae60" stroke-width="3"/>
+            
+            <text x="55" y="80" font-weight="bold" fill="#000">A</text>
+            <text x="135" y="40" font-weight="bold" fill="#000">B</text>
+            <text x="205" y="25" font-weight="bold" fill="#000">C</text>
+            <text x="320" y="80" font-weight="bold" fill="#000">D</text>
+        </svg>
+    </div>
+    <div class="grid">
+        <div class="q-box" onclick="toggleThis(this)">Which section shows the object moving the <strong>fastest away</strong> from the start? <span class="blank"><span>C</span></span></div>
+        <div class="q-box" onclick="toggleThis(this)">Which section shows the object <strong>parked/stopped</strong>? <span class="blank"><span>B</span></span></div>
+        <div class="q-box" onclick="toggleThis(this)">Which section shows the object <strong>returning home</strong>? <span class="blank"><span>D</span></span></div>
+        <div class="q-box" onclick="toggleThis(this)">Which section is <strong>slower: A or C</strong>? <span class="blank"><span>A</span></span></div>
+    </div>
+</div>
+
+<!-- WORKSHEET 3 -->
+<div class="page">
+    <h1>Worksheet 3: Displacement-Time Graphs</h1>
+    <p style="margin: 0 0 10px 0;"><strong>Note:</strong> Because displacement is a vector, we can graph movement <em>backwards past the start line</em> using negative values.</p>
+
+    <h2>1. Crossing the Origin (Medium)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <svg width="220" height="180" viewBox="0 0 220 180">
+                <!-- X axis in the middle -->
+                <line x1="30" y1="90" x2="200" y2="90" stroke="black" stroke-width="2"/>
+                <!-- Y axis -->
+                <line x1="30" y1="10" x2="30" y2="170" stroke="black" stroke-width="2"/>
+                
+                <text x="5" y="55" font-size="12" font-weight="bold">+10m</text>
+                <text x="15" y="95" font-size="12" font-weight="bold">0m</text>
+                <text x="5" y="135" font-size="12" font-weight="bold">-10m</text>
+
+                <!-- Grid lines -->
+                <line x1="30" y1="50" x2="200" y2="50" stroke="#eee" stroke-dasharray="2"/>
+                <line x1="30" y1="130" x2="200" y2="130" stroke="#eee" stroke-dasharray="2"/>
+
+                <path d="M 30 90 L 80 50 L 130 50 L 180 130" fill="none" stroke="#d32f2f" stroke-width="3"/>
+                <circle cx="130" cy="50" r="4" fill="black"/>
+                <circle cx="155" cy="90" r="4" fill="black"/>
+                
+                <text x="95" y="40" font-weight="bold">Stage 2</text>
+                <text x="185" y="145" font-weight="bold">End</text>
+            </svg>
+        </div>
+        <div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>a)</strong> What does the "0m" line represent on the Y-axis?
+                <div class="write-line"></div>
+                <span class="answer">Ans: The starting position (the origin).</span>
+            </div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>b)</strong> During "Stage 2", what is the object doing?
+                <div class="write-line"></div>
+                <span class="answer">Ans: Standing still 10 meters away from the start.</span>
+            </div>
+            <div class="q-box" onclick="toggleThis(this)">
+                <strong>c)</strong> At the "End" point, where is the object located compared to where it started?
+                <div class="write-line"></div>
+                <span class="answer">Ans: It is 10 meters BEHIND its starting point (-10m).</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>2. Distance vs Displacement - The Same Journey Side-by-Side</h2>
+    <p style="font-size: 12px; margin: 5px 0;">A student walks 5m forwards, stops, then walks 10m backwards.</p>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Graph A: Distance-Time</strong><br>
+            <svg width="200" height="140" viewBox="0 0 200 140">
+                <line x1="30" y1="120" x2="180" y2="120" stroke="black" stroke-width="2"/>
+                <line x1="30" y1="20" x2="30" y2="120" stroke="black" stroke-width="2"/>
+                <line x1="30" y1="80" x2="180" y2="80" stroke="#eee" stroke-dasharray="2"/>
+                <line x1="30" y1="40" x2="180" y2="40" stroke="#eee" stroke-dasharray="2"/>
+                <text x="10" y="85" font-size="10">5m</text>
+                <text x="5" y="45" font-size="10">15m</text>
+                <path d="M 30 120 L 80 80 L 120 80 L 170 40" fill="none" stroke="#e67e22" stroke-width="3"/>
+            </svg>
+        </div>
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Graph B: Displacement-Time</strong><br>
+            <svg width="200" height="140" viewBox="0 0 200 140">
+                <line x1="30" y1="70" x2="180" y2="70" stroke="black" stroke-width="2"/>
+                <line x1="30" y1="10" x2="30" y2="130" stroke="black" stroke-width="2"/>
+                <line x1="30" y1="30" x2="180" y2="30" stroke="#eee" stroke-dasharray="2"/>
+                <line x1="30" y1="110" x2="180" y2="110" stroke="#eee" stroke-dasharray="2"/>
+                <text x="5" y="35" font-size="10">+5m</text>
+                <text x="15" y="75" font-size="10">0m</text>
+                <text x="5" y="115" font-size="10">-5m</text>
+                <path d="M 30 70 L 80 30 L 120 30 L 170 110" fill="none" stroke="#0277bd" stroke-width="3"/>
+            </svg>
+        </div>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        Why does Graph A end at 15m, but Graph B ends at -5m? Explain the difference.
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <span class="answer">Ans: Distance (Graph A) totals all steps (5m + 10m = 15m). Displacement (Graph B) tracks position relative to start (5m forward, then 10m back lands you at -5m).</span>
+    </div>
+
+    <h2>3. True or False Challenges</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>1. A distance graph line can NEVER slope downwards.</strong>
+        <div class="mc-row"><span>A) True</span> <span>B) False</span></div>
+        <span class="answer">Ans: A (True. Distance totals can only increase or stay the same).</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        <strong>2. A flat line below the X-axis on a displacement graph means you are moving backwards.</strong>
+        <div class="mc-row"><span>A) True</span> <span>B) False</span></div>
+        <span class="answer">Ans: B (False. A flat line ALWAYS means stopped. You are just stopped in a negative position).</span>
+    </div>
+</div>
+
+<!-- WORKSHEET 4 -->
+<div class="page">
+    <h1>Worksheet 4: Acceleration & Graph Drawing</h1>
+
+    <h2>1. Curves and Changing Speeds (Medium)</h2>
+    <div class="grid">
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Graph A</strong><br>
+            <svg width="200" height="120" viewBox="0 0 200 120">
+                <line x1="20" y1="100" x2="180" y2="100" stroke="black" stroke-width="2"/>
+                <line x1="20" y1="10" x2="20" y2="100" stroke="black" stroke-width="2"/>
+                <path d="M 20 100 Q 140 100, 160 20" fill="none" stroke="#8e44ad" stroke-width="3"/>
+            </svg>
+            <p style="margin:2px 0;">Is this object accelerating or decelerating?</p>
+            <span class="answer">Ans: Accelerating.</span>
+        </div>
+        <div class="svg-container" onclick="toggleThis(this)">
+            <strong>Graph B</strong><br>
+            <svg width="200" height="120" viewBox="0 0 200 120">
+                <line x1="20" y1="100" x2="180" y2="100" stroke="black" stroke-width="2"/>
+                <line x1="20" y1="10" x2="20" y2="100" stroke="black" stroke-width="2"/>
+                <path d="M 20 100 Q 60 20, 180 20" fill="none" stroke="#2980b9" stroke-width="3"/>
+            </svg>
+            <p style="margin:2px 0;">Is this object accelerating or decelerating?</p>
+            <span class="answer">Ans: Decelerating (Slowing down as it flattens).</span>
+        </div>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        How do you know an object is accelerating just by looking at the line?
+        <div class="write-line"></div>
+        <span class="answer">Ans: The line is getting steeper over time.</span>
+    </div>
+
+    <h2>2. Draw the Journey (Hard)</h2>
+    <div class="q-box" onclick="toggleThis(this)" style="padding-bottom: 20px;">
+        <strong>Scenario:</strong> You are mapping a <strong>Distance-Time</strong> graph for a car. 
+        <br>1. The car drives at a steady, moderate speed for 10 seconds.
+        <br>2. It stops at a red light for 5 seconds.
+        <br>3. It drives away extremely fast for 5 seconds.
+        <br><br>
+        <em>Draw the lines on the blank graph below, then click to reveal the correct shape.</em>
+        <div class="svg-container" style="border: none; background: none; box-shadow: none;">
+            <svg width="350" height="160" viewBox="0 0 350 160" style="border: 1px dashed #ccc; padding: 10px; background: #fff;">
+                <line x1="40" y1="140" x2="320" y2="140" stroke="black" stroke-width="2"/>
+                <line x1="40" y1="10" x2="40" y2="140" stroke="black" stroke-width="2"/>
+                <text x="140" y="155" font-size="11">10s</text>
+                <text x="210" y="155" font-size="11">15s</text>
+                <text x="280" y="155" font-size="11">20s</text>
+                <text x="15" y="75" font-size="11" transform="rotate(-90 15,75)">Distance</text>
+                
+                <g class="answer svg-ans">
+                    <!-- 0 to 10s: moderate slope -->
+                    <!-- 10 to 15s: flat -->
+                    <!-- 15 to 20s: very steep -->
+                    <path d="M 40 140 L 150 90 L 220 90 L 290 20" fill="none" stroke="#c0392b" stroke-width="3"/>
+                    <text x="90" y="105" fill="#c0392b" font-size="10">Moderate</text>
+                    <text x="175" y="80" fill="#c0392b" font-size="10">Stop</text>
+                    <text x="230" y="50" fill="#c0392b" font-size="10">Fast (Steep!)</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <h2>3. Final Application Concepts</h2>
+    <div class="q-box" onclick="toggleThis(this)">
+        A GPS watch tracks a runner. The runner goes 5km East, then 5km West back to her house. The watch says she burned 500 calories. Does the calorie burn depend on her Distance or Displacement? Explain.
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <span class="answer">Ans: Distance. Her body expended energy for the entire 10km path walked. If it relied on displacement (0km), it would say she burned 0 calories!</span>
+    </div>
+    <div class="q-box" onclick="toggleThis(this)">
+        If you drop a ball from a roof, it speeds up as it falls due to gravity. What would the Distance-Time graph of its fall look like?
+        <div class="write-line"></div>
+        <span class="answer">Ans: A curve bending upwards (getting steeper), showing acceleration.</span>
+    </div>
+</div>
+
+<script>
+    function toggleThis(el) {
+        const ans = el.querySelectorAll('.answer, .svg-ans');
+        const blanks = el.querySelectorAll('.blank span');
+        ans.forEach(a => a.style.display = (a.style.display === 'block' || a.style.display === 'inline') ? 'none' : 'block');
+        blanks.forEach(b => b.style.display = (b.style.display === 'inline') ? 'none' : 'inline');
+    }
+
+    let show = false;
+    function toggleAll() {
+        show = !show;
+        document.querySelectorAll('.answer, .svg-ans').forEach(a => a.style.display = show ? 'block' : 'none');
+        document.querySelectorAll('.blank span').forEach(b => b.style.display = show ? 'inline' : 'none');
+    }
+</script>
+
+</body>
+</html>
