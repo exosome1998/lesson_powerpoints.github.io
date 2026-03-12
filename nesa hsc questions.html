@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Secure Software Architecture - Practice Exam</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; }
+        .header { background-color: #002664; color: white; padding: 15px 20px; font-weight: bold; font-size: 1.2em; text-align: center; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .section-title { color: #002664; border-bottom: 2px solid #002664; padding-bottom: 5px; margin-top: 40px; }
+        .question-box { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .q-title { font-size: 1.1em; font-weight: bold; color: #333; margin-bottom: 10px; }
+        .scenario { background-color: #eef2f5; padding: 10px; border-left: 4px solid #002664; margin-bottom: 15px; font-size: 0.95em; font-style: italic; }
+        select { width: 100%; padding: 10px; font-size: 1em; border-radius: 4px; border: 1px solid #ccc; }
+        textarea { width: 100%; box-sizing: border-box; border: 1px solid #ccc; padding: 10px; font-family: monospace; font-size: 14px; resize: vertical; border-radius: 4px; }
+        .text-answer { background-color: #fff; color: #000; font-family: Arial, sans-serif; }
+        .code-input { background-color: #2d2d2d; color: #f8f8f2; outline: none; border: none; }
+        .split-pane { display: flex; gap: 10px; margin-top: 15px; }
+        .pane { flex: 1; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
+        .pane-header { background: #e0e0e0; padding: 8px; font-size: 0.9em; font-family: monospace; font-weight: bold; }
+        .output { width: 100%; box-sizing: border-box; min-height: 150px; background-color: #000; color: #0f0; padding: 10px; font-family: monospace; white-space: pre-wrap; margin: 0; }
+        button { background-color: #002664; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background-color: #001a45; }
+        .submit-btn { background-color: #28a745; font-size: 1.2em; padding: 15px 30px; display: block; margin: 40px auto; width: 80%; }
+        .submit-btn:hover { background-color: #218838; }
+        #status { color: #d9534f; font-weight: bold; margin-bottom: 20px; text-align: center; font-size: 1.1em;}
+    </style>
+</head>
+<body>
+
+    <div class="header">Industry Simulation: Secure Software Architecture (Year 12)</div>
+
+    <div class="container">
+        <div id="status">⏳ Booting Enterprise Python Environment... Please wait.</div>
+        
+        <div style="margin-bottom: 30px; background: #eef; padding: 15px; border-radius: 5px;">
+            <label><strong>Your FULL Name:</strong></label><br>
+            <input type="text" id="student_name" placeholder="Enter your full name" style="width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; font-size: 1em;">
+        </div>
+
+        <h2 class="section-title">Part A: Operational Scenarios (Multiple Choice)</h2>
+
+        <div class="question-box">
+            <div class="q-title">1. CI/CD Pipeline Integration</div>
+            <div class="scenario">Scenario: A fintech startup is building a payment gateway. The DevSecOps lead wants to integrate security testing into their GitHub Actions pipeline so that vulnerabilities are detected in the source code before the program is even compiled or deployed.</div>
+            <select id="q1_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Dynamic Application Security Testing (DAST)</option>
+                <option value="B">Static Application Security Testing (SAST)</option>
+                <option value="C">Black-box Penetration Testing</option>
+                <option value="D">End-to-End UI Testing</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">2. Healthcare Data Architecture</div>
+            <div class="scenario">Scenario: A hospital is developing a patient portal. The lead architect insists that data masking, encryption-at-rest, and minimal data collection are built into the initial database schemas from day one, rather than patching them in after the app is built.</div>
+            <select id="q2_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Security by Obscurity</option>
+                <option value="B">Privacy by Design</option>
+                <option value="C">Disaster Recovery</option>
+                <option value="D">Dynamic Patching</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">3. Malware Analysis Automation</div>
+            <div class="scenario">Scenario: An enterprise email server receives thousands of attachments daily. To prevent ransomware, the architecture automatically executes and analyzes suspicious executable files in a tightly isolated, restricted virtual environment before delivering the email to the user.</div>
+            <select id="q3_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Sandboxing</option>
+                <option value="B">Load Balancing</option>
+                <option value="C">Cross-Site Scripting (XSS)</option>
+                <option value="D">Session Management</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">4. E-Commerce Vulnerability</div>
+            <div class="scenario">Scenario: A malicious user posts a product review on an e-commerce site. Instead of text, they input hidden HTML and JavaScript tags. When other customers view the product page, the script executes in their browser and steals their active login cookies.</div>
+            <select id="q4_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Cross-Site Request Forgery (CSRF)</option>
+                <option value="B">Cross-Site Scripting (XSS)</option>
+                <option value="C">SQL Injection (SQLi)</option>
+                <option value="D">Denial of Service (DoS)</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">5. Cloud Infrastructure Outage</div>
+            <div class="scenario">Scenario: A massive power grid failure takes down a cloud provider's primary data center in Sydney. Within seconds, the system's architecture automatically fails over to a secondary data center in Melbourne, ensuring the bank's services experience zero downtime.</div>
+            <select id="q5_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Business Continuity</option>
+                <option value="B">Hardening Systems</option>
+                <option value="C">Data Input Sanitization</option>
+                <option value="D">Penetration Testing</option>
+            </select>
+        </div>
+
+        <h2 class="section-title">Part B: Architectural Analysis (Short Response)</h2>
+
+        <div class="question-box">
+            <div class="q-title">6. User Capability & Secure Design</div>
+            <div class="scenario">Scenario: You are designing a mobile banking app for a demographic of elderly users who often use weak, easily guessed passwords (like "password123") and struggle with complex password rotation rules.</div>
+            <p>Describe how this specific end-user capability influences your secure design features (e.g., what alternative security measures would you implement?).</p>
+            <textarea id="q6_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">7. Defensive Error Handling</div>
+            <div class="scenario">Scenario: A logistics company's tracking API crashes when a user types letters instead of numbers. The web page currently displays the raw Python stack trace and internal database table names to the user.</div>
+            <p>Explain why this is a severe architectural security risk and how defensive error handling should be implemented to fix it.</p>
+            <textarea id="q7_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">8. Broken Session Management</div>
+            <div class="scenario">Scenario: An online streaming platform notices that if a user logs in on a public library computer, closes the browser window (without clicking 'Logout'), and walks away, the next person to open the browser is automatically logged into the first user's account.</div>
+            <p>Describe how the system's session management architecture must be changed to prevent this vulnerability.</p>
+            <textarea id="q8_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">9. Enterprise ROI on Security</div>
+            <div class="scenario">Scenario: A government defense contractor is hesitant to invest heavily in a "security by design" approach, arguing that it will slow down initial software development and cost too much upfront.</div>
+            <p>Evaluate two long-term benefits to the enterprise of implementing these safe and secure development practices that justify the initial cost.</p>
+            <textarea id="q9_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <h2 class="section-title">Part C: Live Operational Refactoring (Coding)</h2>
+        <p><em>Questions 10-13 contain insecure legacy code from a real-world scenario. You must refactor (rewrite) the code to make it secure. Questions 14-15 require you to build an OOP architecture from scratch. Click "Run Code" to test.</em></p>
+
+        <div class="question-box">
+            <div class="q-title">10. Refactor: HR Data Protection (Cryptography)</div>
+            <div class="scenario">Scenario: A corporate HR system is currently storing employee passwords in plain text. If the database is breached, all passwords are exposed.</div>
+            <p><strong>Task:</strong> Refactor the `HRSystem` class. Import `hashlib`. Modify `set_password` to store a SHA-256 hash of the password. Modify `verify_password` to hash the attempt before comparing it.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q10_code" class="code-input" rows="14">
+class HRSystem:
+    def __init__(self, emp_id):
+        self.emp_id = emp_id
+        self.password = None
+
+    def set_password(self, pwd):
+        # INSECURE: Storing plain text
+        self.password = pwd
+
+    def verify_password(self, attempt):
+        # INSECURE: Comparing plain text
+        return attempt == self.password
+
+# Test code:
+hr = HRSystem("EMP_001")
+hr.set_password("Admin123!")
+print("Login Valid:", hr.verify_password("Admin123!"))
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q10_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q10_code', 'q10_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">11. Refactor: IoT Sensor Input Handling</div>
+            <div class="scenario">Scenario: A smart warehouse IoT system accepts temperature sensor updates via an API. The current code accepts any data type (even malicious strings), causing backend calculations to crash.</div>
+            <p><strong>Task:</strong> Refactor `update_temp`. Validate that the input is an `int` or `float`. Furthermore, validate that the temperature is logically between -50 and 150 degrees. Raise a `ValueError` if it fails either check.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q11_code" class="code-input" rows="13">
+class IoTSensor:
+    def __init__(self):
+        self.current_temp = 0
+
+    def update_temp(self, temp_input):
+        # INSECURE: Blindly trusting input
+        self.current_temp = temp_input
+        print(f"Temperature updated to {self.current_temp}")
+
+# Test code:
+sensor = IoTSensor()
+sensor.update_temp(22.5) # Valid
+sensor.update_temp("DROP TABLE") # This should be blocked by your new code!
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q11_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q11_code', 'q11_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">12. Refactor: Exception Management (File Attacks)</div>
+            <div class="scenario">Scenario: A legal firm's document viewer crashes and exposes the underlying server directory structure (a security risk) if a user requests a file that has been deleted or moved.</div>
+            <p><strong>Task:</strong> Refactor `read_document`. Wrap the file execution in a `try...except` block. Catch the `FileNotFoundError` and return a safe, generic message like "Document unavailable" instead of crashing.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q12_code" class="code-input" rows="12">
+class DocumentViewer:
+    def read_document(self, filename):
+        # INSECURE: No exception handling. Will crash on bad input.
+        with open(filename, 'r') as file:
+            return file.read()
+
+# Test code:
+viewer = DocumentViewer()
+# The following line will crash the program. Fix the class above so it doesn't!
+print(viewer.read_document("missing_contract.txt"))
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q12_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q12_code', 'q12_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">13. Refactor: Implementing a Safe API</div>
+            <div class="scenario">Scenario: A hospital's patient database API currently returns sensitive user data to anyone who calls the function, without verifying their identity.</div>
+            <p><strong>Task:</strong> Refactor `get_patient_record`. Add an `api_key` parameter. Check if the provided key matches `"MED-SEC-99"`. If it doesn't, return `"Access Denied"`. If it does, return the data.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q13_code" class="code-input" rows="13">
+class HospitalAPI:
+    def __init__(self):
+        self.records = {"Patient_1": "Blood Type O", "Patient_2": "Allergic to Penicillin"}
+
+    def get_patient_record(self, patient_id):
+        # INSECURE: No authentication/API key check before releasing data!
+        return self.records.get(patient_id, "Not found")
+
+# Test code:
+api = HospitalAPI()
+# Update the call below to include the API key once you change the method signature
+print(api.get_patient_record("Patient_1")) 
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q13_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q13_code', 'q13_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">14. Build: Role-Based Access Control (RBAC)</div>
+            <div class="scenario">Scenario: An Industrial Control System (ICS) for a power plant needs a secure command module. Only authorized roles can trigger critical systems.</div>
+            <p><strong>Task:</strong> Create an OOP class `ICSController` from scratch. 
+            <br>1. Include an `__init__(self, username, role)` constructor. 
+            <br>2. Create a method `trigger_shutdown(self)`. 
+            <br>3. Inside the method, if the `role` is exactly `"Chief_Engineer"`, print `"Shutdown Initiated"`. Otherwise, print `"Action Blocked: Insufficient Privileges"`.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Build from scratch)</div>
+                    <textarea id="q14_code" class="code-input" rows="14">
+# Write your ICSController class here:
+
+
+
+# Use this to test:
+# user1 = ICSController("Alice", "Intern")
+# user1.trigger_shutdown()
+# user2 = ICSController("Bob", "Chief_Engineer")
+# user2.trigger_shutdown()
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q14_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q14_code', 'q14_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">15. Build: Brute Force Protection (State Tracking)</div>
+            <div class="scenario">Scenario: A corporate VPN gateway is under a brute-force attack from external IP addresses constantly guessing passwords.</div>
+            <p><strong>Task:</strong> Create a class `VPNGateway` from scratch.
+            <br>1. The constructor should initialize an empty dictionary `self.failed_attempts = {}` to track IPs.
+            <br>2. Create `log_attempt(self, ip_address, success_bool)`.
+            <br>3. If `success_bool` is False, add/increment the failure count for that IP in the dictionary.
+            <br>4. If an IP reaches 3 failures, any subsequent attempts (even if True) must return `"IP Blocked"`. If True and under 3 failures, return `"Access Granted"`. If False and under 3, return `"Login Failed"`. </p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Build from scratch)</div>
+                    <textarea id="q15_code" class="code-input" rows="16">
+# Write your VPNGateway class here:
+
+
+
+# Use this to test:
+# vpn = VPNGateway()
+# print(vpn.log_attempt("192.168.1.5", False)) # Fail 1
+# print(vpn.log_attempt("192.168.1.5", False)) # Fail 2
+# print(vpn.log_attempt("192.168.1.5", False)) # Fail 3
+# print(vpn.log_attempt("192.168.1.5", True))  # Should be Blocked!
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q15_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q15_code', 'q15_output')">Run Code</button>
+        </div>
+
+        <button class="submit-btn" onclick="saveAsTxt()">💾 Save Architectural Assessment as .TXT</button>
+
+    </div>
+
+    <script>
+        let pyodide;
+
+        async function initPyodide() {
+            pyodide = await loadPyodide();
+            document.getElementById("status").innerText = "✅ Enterprise Environment Ready. You may begin the simulation.";
+            document.getElementById("status").style.color = "green";
+        }
+        initPyodide();
+
+        async function runCode(inputId, outputId) {
+            if (!pyodide) {
+                document.getElementById(outputId).innerText = "Engine loading... please wait.";
+                return;
+            }
+            const code = document.getElementById(inputId).value;
+            const outputDiv = document.getElementById(outputId);
+            outputDiv.innerText = "Executing logic...";
+            
+            try {
+                pyodide.runPython(`
+import sys
+import io
+sys.stdout = io.StringIO()
+                `);
+                
+                await pyodide.runPythonAsync(code);
+                
+                let stdout = pyodide.runPython("sys.stdout.getvalue()");
+                outputDiv.innerText = stdout || "Execution complete (No output returned).";
+            } catch (err) {
+                outputDiv.innerText = err;
+            }
+        }
+
+        function saveAsTxt() {
+            const name = document.getElementById("student_name").value || "Anonymous_Engineer";
+            
+            const answers = {
+                "Q1": document.getElementById("q1_ans").value,
+                "Q2": document.getElementById("q2_ans").value,
+                "Q3": document.getElementById("q3_ans").value,
+                "Q4": document.getElementById("q4_ans").value,
+                "Q5": document.getElementById("q5_ans").value,
+                "Q6": document.getElementById("q6_ans").value,
+                "Q7": document.getElementById("q7_ans").value,
+                "Q8": document.getElementById("q8_ans").value,
+                "Q9": document.getElementById("q9_ans").value,
+                "Q10": document.getElementById("q10_code").value,
+                "Q10_out": document.getElementById("q10_output").innerText,
+                "Q11": document.getElementById("q11_code").value,
+                "Q11_out": document.getElementById("q11_output").innerText,
+                "Q12": document.getElementById("q12_code").value,
+                "Q12_out": document.getElementById("q12_output").innerText,
+                "Q13": document.getElementById("q13_code").value,
+                "Q13_out": document.getElementById("q13_output").innerText,
+                "Q14": document.getElementById("q14_code").value,
+                "Q14_out": document.getElementById("q14_output").innerText,
+                "Q15": document.getElementById("q15_code").value,
+                "Q15_out": document.getElementById("q15_output").innerText,
+            };
+
+            let content = `INDUSTRY SIMULATION: SECURE ARCHITECTURE EXAM\nEngineer: ${name}\n`;
+            content += `=====================================================\n\n`;
+            
+            content += `--- PART A: OPERATIONAL SCENARIOS ---\n`;
+            for(let i=1; i<=5; i++) { content += `Q${i}: ${answers['Q'+i]}\n`; }
+            
+            content += `\n--- PART B: ARCHITECTURAL ANALYSIS ---\n`;
+            for(let i=6; i<=9; i++) { content += `Q${i}:\n${answers['Q'+i]}\n\n`; }
+            
+            content += `--- PART C: LIVE OPERATIONAL REFACTORING ---\n`;
+            for(let i=10; i<=15; i++) { 
+                content += `>>> Q${i} Source Code:\n${answers['Q'+i]}\n\n`; 
+                content += `>>> Q${i} Execution Output:\n${answers['Q'+i+'_out']}\n\n`;
+                content += `-----------------------------------------------------\n\n`;
+            }
+
+            const blob = new Blob([content], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${name.replace(/\s+/g, '_')}_Operations_Exam.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
