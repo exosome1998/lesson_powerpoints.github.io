@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Year 10 Physics: Newton's 3 Laws (Worksheet)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; background: #555; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .page { width: 210mm; height: 297mm; background: white; padding: 8mm; box-sizing: border-box; margin-bottom: 20px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; }
+        .full-header { border-bottom: 4px solid #1565c0; margin-bottom: 6px; padding-bottom: 3px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
+        .h-title { font-weight: 900; font-size: 1.35rem; text-transform: uppercase; color: #1565c0; letter-spacing: -0.5px; }
+        .h-info { font-size: 0.85rem; font-weight: bold; color: #333; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; height: 100%; align-content: start; }
+        .col { display: flex; flex-direction: column; gap: 6px; } 
+        .module { border: 2px solid #333; border-radius: 6px; padding: 5px 8px; background: #fff; display: flex; flex-direction: column; }
+        .mod-header { background: #1565c0; color: white; padding: 2px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin: -5px -8px 4px -8px; border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; }
+        .mod-header.numeracy { background: #c2185b; }
+        .mod-header.master { background: #fbc02d; color: #000; }
+        .mod-header.extra { background: #555; }
+        p { font-size: 0.78rem; margin: 0 0 2px 0; line-height: 1.25; color: #222; } 
+        strong { font-weight: 900; color: #1565c0; }
+        .diagram-container { background: #f5f5f5; border: 1px dashed #bbb; border-radius: 4px; margin: 2px 0 4px 0; display: flex; justify-content: center; align-items: center; height: 48px; width: 100%; overflow: hidden; }
+        svg { display: block; max-height: 100%; width: 100%; object-fit: contain; }
+        .line { border-bottom: 1.5px solid #000; display: inline-block; min-width: 40px; height: 12px; text-align: center; font-weight: 700; color: transparent; cursor: pointer; transition: color 0.1s; }
+        .line.revealed { color: #d32f2f; border-bottom-color: #d32f2f; }
+        .mcq { cursor: pointer; color: inherit; font-weight: 400; }
+        .mcq.revealed { color: #d32f2f; font-weight: 900; text-decoration: underline; }
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; height: 100vh; } }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="full-header">
+            <div class="h-title">Part 1: Forces & Inertia</div>
+            <div class="h-info">Score: _______ / 48</div>
+        </div>
+
+        <div class="content-grid">
+            <div class="col">
+                <div class="module">
+                    <div class="mod-header"><span>L1: What is a Force?</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <rect x="30" y="10" width="40" height="40" fill="#95a5a6" stroke="#333" stroke-width="2"/>
+                            <path d="M 80 30 L 120 30" fill="none" stroke="#0277bd" stroke-width="4" marker-end="url(#a-blue)"/>
+                            <text x="100" y="25" font-size="8" font-weight="bold" fill="#0277bd" text-anchor="middle">PULL</text>
+                            <rect x="140" y="10" width="40" height="40" fill="#95a5a6" stroke="#333" stroke-width="2"/>
+                            <path d="M 90 30 L 130 30" fill="none" stroke="#d32f2f" stroke-width="4" marker-end="url(#a-red)"/>
+                            <text x="110" y="42" font-size="8" font-weight="bold" fill="#d32f2f" text-anchor="middle">PUSH</text>
+                            <defs>
+                                <marker id="a-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0277bd"/></marker>
+                                <marker id="a-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#d32f2f"/></marker>
+                            </defs>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> A force is simply a <span class="line answer">Push</span>, pull, or twist.</p>
+                    <p><strong>2.</strong> Forces can make objects speed up, slow down, or change <span class="line answer">Direction</span>.</p>
+                    <p><strong>3.</strong> We measure force in standard units called <span class="line answer">Newtons</span>.</p>
+                    <p><strong>4.</strong> The symbol used for this unit is ( <span class="mcq">N</span> / F ).</p>
+                    <p><strong>5.</strong> Forces are vectors, meaning they have a size and a <span class="line answer">Direction</span>.</p>
+                    <p><strong>6.</strong> Gravity is a constant ( Push / <span class="mcq">Pull</span> ) force downwards.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L2: Contact vs Non-Contact</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <circle cx="50" cy="30" r="15" fill="#f1c40f" stroke="#000"/>
+                            <path d="M 15 30 L 35 30" fill="none" stroke="#333" stroke-width="2" marker-end="url(#a-black)"/>
+                            <text x="50" y="55" font-size="7" font-weight="bold" text-anchor="middle">CONTACT</text>
+                            
+                            <rect x="120" y="20" width="20" height="20" fill="#e74c3c"/> <rect x="140" y="20" width="20" height="20" fill="#3498db"/>
+                            <rect x="170" y="25" width="10" height="10" fill="#95a5a6"/>
+                            <path d="M 160 30 L 140 30" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="2 2" marker-end="url(#a-black)"/>
+                            <text x="140" y="55" font-size="7" font-weight="bold" text-anchor="middle">NON-CONTACT</text>
+                            <defs><marker id="a-black" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/></marker></defs>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> Kicking a ball is a <span class="line answer">Contact</span> force.</p>
+                    <p><strong>2.</strong> Magnetism is a <span class="line answer">Non-Contact</span> force.</p>
+                    <p><strong>3.</strong> Friction only happens when surfaces ( <span class="mcq">Touch</span> / Separate ).</p>
+                    <p><strong>4.</strong> Gravity pulls you down without touching you. It is <span class="line answer">Non-Contact</span>.</p>
+                    <p><strong>5.</strong> Air resistance pushing against a car is a ( <span class="mcq">Contact</span> / Non-Contact ) force.</p>
+                    <p><strong>6.</strong> Static electricity repelling hair is <span class="line answer">Non-Contact</span>.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header numeracy"><span>L3: Net Force (Balanced)</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <rect x="80" y="10" width="40" height="40" fill="#95a5a6" stroke="#333"/>
+                            <path d="M 75 30 L 40 30" fill="none" stroke="#d32f2f" stroke-width="3" marker-end="url(#a-red)"/>
+                            <text x="55" y="25" font-size="7" font-weight="bold" fill="#d32f2f" text-anchor="middle">10 N</text>
+                            <path d="M 125 30 L 160 30" fill="none" stroke="#0277bd" stroke-width="3" marker-end="url(#a-blue)"/>
+                            <text x="145" y="25" font-size="7" font-weight="bold" fill="#0277bd" text-anchor="middle">10 N</text>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> "Net Force" means the <span class="line answer">Total</span> overall force.</p>
+                    <p><strong>2.</strong> If 10N pulls left and 10N pulls right, the Net Force is <span class="line answer">0</span> N.</p>
+                    <p><strong>3.</strong> When Net Force is zero, the forces are <span class="line answer">Balanced</span>.</p>
+                    <p><strong>4.</strong> A balanced object will ( Accelerate / <span class="mcq">Stay Still</span> ).</p>
+                    <p><strong>5.</strong> If it was already moving, it keeps moving at a <span class="line answer">Constant</span> speed.</p>
+                    <p><strong>6.</strong> Balanced forces ( Do / <span class="mcq">Do Not</span> ) change an object's motion.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L4: Newton's 1st Law</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <line x1="20" y1="50" x2="180" y2="50" stroke="#333" stroke-width="2"/>
+                            <rect x="50" y="10" width="40" height="40" fill="#bdc3c7" stroke="#333" stroke-width="2" rx="4"/>
+                            <text x="70" y="35" font-size="10" font-weight="bold" text-anchor="middle">Zzz...</text>
+                            <path d="M 120 50 Q 130 30 140 50 Z" fill="#7f8c8d"/>
+                            <line x1="60" y1="40" x2="100" y2="40" stroke="#d35400" stroke-width="3"/>
+                            <circle cx="70" cy="45" r="5" fill="#333"/><circle cx="90" cy="45" r="5" fill="#333"/>
+                            <circle cx="80" cy="20" r="10" fill="#f1c40f" stroke="#000"/>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> The 1st Law is often called the Law of <span class="line answer">Inertia</span>.</p>
+                    <p><strong>2.</strong> Objects are "lazy" and want to keep doing <span class="line answer">Exactly</span> what they are doing.</p>
+                    <p><strong>3.</strong> An object at rest will stay at <span class="line answer">Rest</span>.</p>
+                    <p><strong>4.</strong> An object in motion stays in motion unless acted on by an ( <span class="mcq">Unbalanced</span> / Balanced ) force.</p>
+                    <p><strong>5.</strong> When a skateboard hits a rock, the rider flies ( <span class="mcq">Forward</span> / Backward ).</p>
+                    <p><strong>6.</strong> The heavier an object is, the ( <span class="mcq">More</span> / Less ) inertia it has.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="module">
+                    <div class="mod-header"><span>L5: Inertia in Space</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <circle cx="100" cy="60" r="20" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                            <text x="100" y="55" font-size="6" font-weight="bold" fill="#fff" text-anchor="middle">EARTH</text>
+                            <circle cx="100" cy="60" r="45" fill="none" stroke="#ccc" stroke-width="1" stroke-dasharray="3 3"/>
+                            <circle cx="100" cy="15" r="8" fill="#bdc3c7" stroke="#95a5a6"/>
+                            <path d="M 100 25 L 100 40" fill="none" stroke="#0277bd" stroke-width="2" marker-end="url(#a-blue)"/>
+                            <path d="M 110 15 L 135 15" fill="none" stroke="#d32f2f" stroke-width="2" marker-end="url(#a-red)"/>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> The Moon's inertia makes it want to fly in a <span class="line answer">Straight</span> line.</p>
+                    <p><strong>2.</strong> Earth's <span class="line answer">Gravity</span> pulls it inwards.</p>
+                    <p><strong>3.</strong> Forward speed plus inward pull creates a curved <span class="line answer">Orbit</span>.</p>
+                    <p><strong>4.</strong> If Earth vanished, the Moon would fly away in a ( Curve / <span class="mcq">Straight line</span> ).</p>
+                    <p><strong>5.</strong> Satellites use this same principle to circle the <span class="line answer">Earth</span>.</p>
+                    <p><strong>6.</strong> In space, objects ( Do / <span class="mcq">Do not</span> ) need engines to keep moving at a steady speed.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header numeracy"><span>L6: Newton's 2nd Law</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <polygon points="100,5 50,55 150,55" fill="#ffeb3b" stroke="#333" stroke-width="2"/>
+                            <line x1="75" y1="30" x2="125" y2="30" stroke="#333" stroke-width="2"/>
+                            <line x1="100" y1="30" x2="100" y2="55" stroke="#333" stroke-width="2"/>
+                            <text x="100" y="25" font-size="16" font-weight="bold" text-anchor="middle">F</text>
+                            <text x="82" y="48" font-size="14" font-weight="bold" text-anchor="middle">m</text>
+                            <text x="118" y="48" font-size="14" font-weight="bold" text-anchor="middle">a</text>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> The 2nd Law connects Force, Mass, and <span class="line answer">Acceleration</span>.</p>
+                    <p><strong>2.</strong> The formula is written as F = m <span class="line answer">×</span> a.</p>
+                    <p><strong>3.</strong> To find Acceleration, the equation is a = F ( <span class="mcq">÷</span> / × ) m.</p>
+                    <p><strong>4.</strong> Mass must be measured in <span class="line answer">Kilograms</span> (kg).</p>
+                    <p><strong>5.</strong> Acceleration is measured in meters per second squared (<span class="line answer">m/s²</span>).</p>
+                    <p><strong>6.</strong> 1 Newton of force moves 1 kg at a rate of ( <span class="mcq">1</span> / 10 ) m/s².</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L7: F=ma (Changing Mass)</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <line x1="10" y1="25" x2="190" y2="25" stroke="#333" stroke-width="1"/>
+                            <line x1="10" y1="55" x2="190" y2="55" stroke="#333" stroke-width="1"/>
+                            <rect x="50" y="10" width="15" height="15" fill="#3498db" stroke="#333"/>
+                            <text x="57.5" y="20" font-size="5" fill="#fff" font-weight="bold" text-anchor="middle">10kg</text>
+                            <path d="M 25 17 L 45 17" fill="none" stroke="#d32f2f" stroke-width="2" marker-end="url(#a-red)"/>
+                            <path d="M 70 17 L 130 17" fill="none" stroke="#2ecc71" stroke-width="3" marker-end="url(#a-green)"/>
+                            
+                            <rect x="50" y="35" width="20" height="20" fill="#2c3e50" stroke="#333"/>
+                            <text x="60" y="47" font-size="5" fill="#fff" font-weight="bold" text-anchor="middle">1000kg</text>
+                            <path d="M 25 45 L 45 45" fill="none" stroke="#d32f2f" stroke-width="2" marker-end="url(#a-red)"/>
+                            <path d="M 75 45 L 85 45" fill="none" stroke="#2ecc71" stroke-width="1" marker-end="url(#a-green)"/>
+                            <defs><marker id="a-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2ecc71"/></marker></defs>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> If you push a light box and heavy box with the <span class="line answer">Same</span> force...</p>
+                    <p><strong>2.</strong> The light 10kg box will have a ( <span class="mcq">Huge</span> / Tiny ) acceleration.</p>
+                    <p><strong>3.</strong> The heavy 1000kg box will have a <span class="line answer">Tiny</span> acceleration.</p>
+                    <p><strong>4.</strong> This proves that more mass requires <span class="line answer">More</span> force to move.</p>
+                    <p><strong>5.</strong> Acceleration is ( <span class="mcq">Inversely</span> / Directly ) proportional to mass.</p>
+                    <p><strong>6.</strong> A fully loaded truck is much ( <span class="mcq">Harder</span> / Easier ) to stop.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L8: F=ma (Changing Force)</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <line x1="10" y1="25" x2="190" y2="25" stroke="#333" stroke-width="1"/>
+                            <line x1="10" y1="55" x2="190" y2="55" stroke="#333" stroke-width="1"/>
+                            <rect x="50" y="10" width="30" height="10" fill="#e67e22" rx="2"/>
+                            <circle cx="55" cy="22" r="3"/><circle cx="75" cy="22" r="3"/>
+                            <path d="M 25 15 L 45 15" fill="none" stroke="#d32f2f" stroke-width="1" marker-end="url(#a-red)"/>
+                            <path d="M 85 15 L 105 15" fill="none" stroke="#2ecc71" stroke-width="1" marker-end="url(#a-green)"/>
+                            
+                            <rect x="50" y="40" width="30" height="10" fill="#e67e22" rx="2"/>
+                            <circle cx="55" cy="52" r="3"/><circle cx="75" cy="52" r="3"/>
+                            <path d="M 15 45 L 45 45" fill="none" stroke="#d32f2f" stroke-width="3" marker-end="url(#a-red)"/>
+                            <path d="M 85 45 L 145 45" fill="none" stroke="#2ecc71" stroke-width="3" marker-end="url(#a-green)"/>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> If we push the exact <span class="line answer">Same</span> car with two different forces...</p>
+                    <p><strong>2.</strong> A small push gives a <span class="line answer">Small</span> acceleration.</p>
+                    <p><strong>3.</strong> A massive push gives a ( <span class="mcq">Massive</span> / Tiny ) acceleration.</p>
+                    <p><strong>4.</strong> To make a car go faster quicker, the engine needs more <span class="line answer">Force</span>.</p>
+                    <p><strong>5.</strong> Force is ( Inversely / <span class="mcq">Directly</span> ) proportional to acceleration.</p>
+                    <p><strong>6.</strong> Doubling the pushing force will <span class="line answer">Double</span> the acceleration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="full-header">
+            <div class="h-title">Part 2: Calculations & 3rd Law</div>
+            <div class="h-info">Score: _______ / 48</div>
+        </div>
+
+        <div class="content-grid">
+            <div class="col">
+                <div class="module">
+                    <div class="mod-header numeracy"><span>L9: F=ma Calculations 1</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <rect x="10" y="5" width="180" height="50" fill="#f8f9fa" stroke="#ccc" stroke-dasharray="2 2" rx="4"/>
+                            <text x="100" y="20" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">m = 90kg, a = 3m/s²</text>
+                            <text x="100" y="35" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">F = 90 × 3</text>
+                            <text x="100" y="50" font-family="monospace" font-size="11" font-weight="bold" fill="#2e7d32" text-anchor="middle">F = 270 N</text>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> A 90kg man accelerates at 3 m/s². His force is <span class="line answer">270</span> N.</p>
+                    <p><strong>2.</strong> A 10kg ball is pushed with 50N. Acceleration (a = F÷m) is <span class="line answer">5</span> m/s².</p>
+                    <p><strong>3.</strong> A dog pulls with 100N, causing 2m/s² accel. Mass (m = F÷a) is <span class="line answer">50</span> kg.</p>
+                    <p><strong>4.</strong> A 2000kg car accelerates at 4 m/s². The engine force is <span class="line answer">8000</span> N.</p>
+                    <p><strong>5.</strong> A 500N force pushes a 100kg cart. It accelerates at <span class="line answer">5</span> m/s².</p>
+                    <p><strong>6.</strong> If force is 0N, acceleration must be <span class="line answer">0</span> m/s².</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header numeracy"><span>L10: Mass vs Weight (W=mg)</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <circle cx="60" cy="30" r="15" fill="#3498db"/>
+                            <text x="60" y="33" font-size="8" fill="#fff" font-weight="bold" text-anchor="middle">50kg</text>
+                            <path d="M 60 45 L 60 55" fill="none" stroke="#d32f2f" stroke-width="2" marker-end="url(#a-red)"/>
+                            <text x="120" y="25" font-size="8" font-weight="bold">Earth Gravity = 9.8 m/s²</text>
+                            <text x="120" y="40" font-size="8" font-weight="bold" fill="#d32f2f">Weight = 50 × 9.8</text>
+                            <text x="120" y="55" font-size="8" font-weight="bold" fill="#d32f2f">= 490 Newtons</text>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> Mass is the amount of stuff in you, measured in <span class="line answer">Kilograms</span>.</p>
+                    <p><strong>2.</strong> Weight is a FORCE caused by gravity, measured in <span class="line answer">Newtons</span>.</p>
+                    <p><strong>3.</strong> The formula is Weight = Mass × <span class="line answer">Gravity</span>.</p>
+                    <p><strong>4.</strong> On Earth, gravity accelerates things at roughly <span class="line answer">9.8</span> m/s².</p>
+                    <p><strong>5.</strong> If you go to the Moon, your ( <span class="mcq">Weight</span> / Mass ) changes.</p>
+                    <p><strong>6.</strong> If you go to the Moon, your ( Weight / <span class="mcq">Mass</span> ) stays exactly the same.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L11: Newton's 3rd Law</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <rect x="90" y="5" width="20" height="40" fill="#ecf0f1" stroke="#333"/>
+                            <polygon points="100,-5 90,5 110,5" fill="#e74c3c"/>
+                            <path d="M 100 45 L 100 55" stroke="#f1c40f" stroke-width="4"/>
+                            <path d="M 115 25 L 140 25" fill="none" stroke="#2ecc71" stroke-width="2" marker-end="url(#a-green)"/>
+                            <text x="155" y="28" font-size="6" font-weight="bold" fill="#2ecc71">UP</text>
+                            <path d="M 85 45 L 60 45" fill="none" stroke="#d32f2f" stroke-width="2" marker-end="url(#a-red)"/>
+                            <text x="45" y="48" font-size="6" font-weight="bold" fill="#d32f2f">DOWN</text>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> For every action, there is an <span class="line answer">Equal</span> and opposite reaction.</p>
+                    <p><strong>2.</strong> Forces always come in <span class="line answer">Pairs</span>.</p>
+                    <p><strong>3.</strong> A rocket works by pushing exhaust gas ( Up / <span class="mcq">Down</span> ).</p>
+                    <p><strong>4.</strong> In response, the gas pushes the rocket <span class="line answer">Up</span>.</p>
+                    <p><strong>5.</strong> You ( Can / <span class="mcq">Cannot</span> ) have a single isolated force in the universe.</p>
+                    <p><strong>6.</strong> If you punch a wall with 100N, the wall hits your hand with <span class="line answer">100</span>N.</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L12: 3rd Law Examples</span> <span>/6</span></div>
+                    <div class="diagram-container">
+                        <svg viewBox="0 0 200 60">
+                            <path d="M 80 30 C 80 15, 110 15, 110 30 C 110 45, 80 45, 80 30 Z" fill="#3498db" stroke="#2980b9"/>
+                            <polygon points="80,26 80,34 70,36 70,24" fill="#3498db"/>
+                            <path d="M 65 30 L 40 30" fill="none" stroke="#d32f2f" stroke-width="2" marker-end="url(#a-red)"/>
+                            <text x="50" y="25" font-size="5" font-weight="bold">AIR LEFT</text>
+                            <path d="M 115 30 L 140 30" fill="none" stroke="#0277bd" stroke-width="2" marker-end="url(#a-blue)"/>
+                            <text x="130" y="25" font-size="5" font-weight="bold">BALLOON RIGHT</text>
+                        </svg>
+                    </div>
+                    <p><strong>1.</strong> An untied balloon shoots to the <span class="line answer">Right</span> because air shoots left.</p>
+                    <p><strong>2.</strong> When swimming, you push water backwards to go <span class="line answer">Forward</span>.</p>
+                    <p><strong>3.</strong> A bird pushes air DOWN to fly <span class="line answer">Up</span>.</p>
+                    <p><strong>4.</strong> Stepping off a small boat makes the boat move <span class="line answer">Backwards</span>.</p>
+                    <p><strong>5.</strong> The force on the boat is exactly ( <span class="mcq">Equal</span> / Half ) to the force on you.</p>
+                    <p><strong>6.</strong> A gun recoils backward because the bullet shoots <span class="line answer">Forward</span>.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="module">
+                    <div class="mod-header"><span>L13: True or False?</span> <span>/6</span></div>
+                    <p><em>Read carefully and select the correct option.</em></p>
+                    <p><strong>1.</strong> Inertia is a type of force. ( True / <span class="mcq">False</span> ).</p>
+                    <p><strong>2.</strong> Acceleration happens when forces are unbalanced. ( <span class="mcq">True</span> / False ).</p>
+                    <p><strong>3.</strong> F=ma is Newton's 1st Law. ( True / <span class="mcq">False</span> ).</p>
+                    <p><strong>4.</strong> A heavier object needs more force to accelerate. ( <span class="mcq">True</span> / False ).</p>
+                    <p><strong>5.</strong> Action and reaction forces cancel each other out. ( True / <span class="mcq">False</span> ).</p>
+                    <p><strong>6.</strong> Gravity pulls you down, the floor pushes you up. ( <span class="mcq">True</span> / False ).</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header"><span>L14: Concept Match</span> <span>/6</span></div>
+                    <p><em>Match the Law to the Concept.</em></p>
+                    <p><strong>1.</strong> Objects keep doing what they're doing: ( <span class="mcq">1st Law</span> / 2nd Law ).</p>
+                    <p><strong>2.</strong> Force equals Mass times Acceleration: ( 1st Law / <span class="mcq">2nd Law</span> ).</p>
+                    <p><strong>3.</strong> Every action has an equal/opposite reaction: ( 2nd Law / <span class="mcq">3rd Law</span> ).</p>
+                    <p><strong>4.</strong> A book resting on a table doesn't move: ( <span class="mcq">1st Law</span> / 3rd Law ).</p>
+                    <p><strong>5.</strong> Pushing a heavy car is harder than a light car: ( 1st Law / <span class="mcq">2nd Law</span> ).</p>
+                    <p><strong>6.</strong> A rocket launching into space: ( 1st Law / <span class="mcq">3rd Law</span> ).</p>
+                </div>
+
+                <div class="module">
+                    <div class="mod-header master"><span>L15: Master Challenge</span> <span>/6</span></div>
+                    <p><em>Fill in the blanks to complete the core physics summary.</em></p>
+                    <p><strong>1.</strong> Newton's 1st Law states that objects have <span class="line answer">Inertia</span>.</p>
+                    <p><strong>2.</strong> An <span class="line answer">Unbalanced</span> force is required to change motion.</p>
+                    <p><strong>3.</strong> Newton's 2nd Law equation is <span class="line answer">F = ma</span>.</p>
+                    <p><strong>4.</strong> Increasing mass will <span class="line answer">Decrease</span> acceleration if force is constant.</p>
+                    <p><strong>5.</strong> Newton's 3rd Law states forces act in equal <span class="line answer">Pairs</span>.</p>
+                    <p><strong>6.</strong> These paired forces act on <span class="line answer">Different</span> objects.</p>
+                </div>
+
+                <div class="module" style="background:#fafafa; border-color:#999; flex-grow: 1;">
+                    <div class="mod-header extra"><span>L16: Completion</span></div>
+                    <br>
+                    <div style="border-bottom: 2px solid #ccc; margin: 6px 0;">Student Signature:</div>
+                    <br>
+                    <div style="border-bottom: 2px solid #ccc; margin: 6px 0;">Teacher Sign-off:</div>
+                    <br>
+                    <div style="border-bottom: 2px solid #ccc; margin: 6px 0;">Date:</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script> document.querySelectorAll('.answer, .mcq').forEach(t => t.addEventListener('click', () => t.classList.toggle('revealed'))); </script>
+</body>
+</html>

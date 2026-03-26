@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Year 10 Science: Newton's 3 Laws of Motion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           1. CORE THEME
+           ========================================= */
+        :root {
+            --primary: #0277bd;    
+            --bg-color: #e1f5fe;   
+            --highlight: #ffeb3b;  
+            --correct: #2e7d32;    
+            --wrong: #d32f2f;      
+            --text-dark: #01579b;  
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            padding-bottom: 20px;
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        .container-wrapper { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 10px; box-sizing: border-box; }
+        h1, h2 { font-family: 'Comic Neue'; color: var(--primary); margin: 5px 0; text-align: center; }
+        h1 { font-size: 2.2rem; }
+        h2 { border-bottom: 4px solid var(--highlight); display: inline-block; font-size: 1.8rem; margin-bottom: 15px; }
+        
+        /* =========================================
+           2. NAVIGATION BAR
+           ========================================= */
+        #nav-bar {
+            position: fixed; top: 10px; left: 10px;
+            display: flex; flex-direction: row; align-items: center; gap: 10px; z-index: 10000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px; border-radius: 12px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .nav-btn { 
+            background: var(--primary); color: white; border: none; padding: 8px 12px; 
+            font-size: 1rem; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;
+        }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
+        .nav-btn.secondary { background: #7f8c8d; }
+
+        /* =========================================
+           3. SLIDE LAYOUT (Horizontal/Flex)
+           ========================================= */
+        .slide {
+            min-height: 60vh; width: 100%; padding: 15px; 
+            border-bottom: 10px solid var(--primary); background: white;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px; border-radius: 8px; text-align: center;
+        }
+        .slide-number { position: absolute; bottom: 5px; right: 10px; font-size: 0.9rem; color: #ccc; }
+
+        .flex-row {
+            display: flex; flex-direction: row; justify-content: space-evenly; align-items: center; 
+            width: 100%; gap: 20px; flex-wrap: wrap; margin-top: 10px;
+        }
+        
+        .text-panel { flex: 1; min-width: 350px; display: flex; flex-direction: column; gap: 12px; align-items: center;}
+        .visual-panel { flex: 1.5; min-width: 400px; display: flex; justify-content: center; align-items: center;}
+
+        .note-box { font-size: 1.3rem; line-height: 1.4; color: #2c3e50; font-weight: 600;}
+        .simple-text { font-size: 1.2rem; font-weight: bold; color: #34495e; background: #f8f9fa; padding: 10px 20px; border-radius: 8px; border-left: 5px solid var(--text-dark); width: 100%; text-align: left;}
+        
+        mark {
+            background-color: var(--highlight); color: #000; padding: 10px 15px;
+            border-radius: 8px; font-weight: bold; display: inline-block;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1); border: 2px solid #f39c12; font-size: 1.4rem; text-align: center;
+        }
+
+        /* =========================================
+           4. CLICK-BY-CLICK FRAGMENTS
+           ========================================= */
+        .fragment {
+            opacity: 0; visibility: hidden; max-height: 0;
+            transform: translateY(10px); transition: all 0.4s ease; width: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .fragment.visible {
+            opacity: 1; visibility: visible; max-height: 600px;
+            transform: translateY(0); margin-bottom: 10px;
+        }
+        svg .fragment { opacity: 0; visibility: hidden; transition: opacity 0.4s ease; max-height: none; transform: none; }
+        svg .fragment.visible { opacity: 1; visibility: visible; }
+
+        .tf-btn {
+            width: 100%; max-width: 650px; padding: 15px; margin: 8px 0;
+            font-size: 1.2rem; background: white; border: 2px solid var(--primary);
+            border-radius: 10px; cursor: pointer; text-align: left; transition: 0.2s; box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            color: #000; font-weight: bold;
+        }
+        .tf-btn.correct { background: var(--correct); color: white; border-color: var(--correct); }
+        .tf-btn.wrong { background: var(--wrong); color: white; border-color: var(--wrong); }
+
+        /* =========================================
+           5. VISUALS & FORMULAS
+           ========================================= */
+        .visual-box {
+            width: 100%; max-width: 700px; background: white; border: 3px solid var(--primary);
+            border-radius: 10px; padding: 10px; display: flex; justify-content: center; align-items: center; overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; min-height: 200px;
+        }
+        .visual-box svg { width: 100%; height: auto; max-height: 250px; }
+
+        .calc-row { display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; }
+        .calc-step {
+            background: #f8f9fa; border: 2px dashed #ccc; padding: 10px; border-radius: 8px; 
+            font-family: monospace; font-size: 1.4rem; flex: 1; min-width: 200px; text-align: center; font-weight: bold;
+        }
+        .calc-step.final { background: #e8f5e9; border: 3px solid var(--correct); color: var(--correct); font-weight: bold; }
+
+        /* =========================================
+           6. ACCURATE PHYSICS ANIMATIONS (Keyframes)
+           ========================================= */
+        .draw-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+        .visible .draw-line { animation: draw 1.5s forwards ease-in-out; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        
+        /* Force Push/Pull */
+        .visible .push-anim { animation: pushArrow 2s infinite ease-in-out; }
+        @keyframes pushArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(20px); } }
+        .visible .pull-anim { animation: pullArrow 2s infinite ease-in-out; }
+        @keyframes pullArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-20px); } }
+
+        /* Lazy Block (Inertia) */
+        .visible .lazy-pulse { animation: pulse 3s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+        /* Skateboard Crash (Accurate Parabola & Dead Stop) */
+        .visible .board-roll { animation: rollBoard 3s infinite linear; }
+        @keyframes rollBoard { 
+            0% { transform: translateX(-100px); } 
+            40%, 90% { transform: translateX(100px); } /* Hits rock and stops instantly */
+            100% { opacity: 0; transform: translateX(100px); } 
+        }
+        .visible .rider-fly { animation: flyRider 3s infinite linear; }
+        @keyframes flyRider { 
+            0% { transform: translateX(-100px) translateY(0); } 
+            40% { transform: translateX(100px) translateY(0); animation-timing-function: cubic-bezier(0.2, 0, 0.8, 1); } /* Constant X speed, starts falling Y */
+            60%, 90% { transform: translateX(240px) translateY(40px) rotate(60deg); } /* Projectile arc */
+            100% { opacity: 0; transform: translateX(240px) translateY(40px) rotate(60deg); } 
+        }
+
+        /* Moon Orbit */
+        .visible .moon-orbit { animation: orbit 4s infinite linear; transform-origin: 300px 125px; }
+        @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* F=ma Changing Mass (Attached Force Arrows + Ease-In Acceleration) */
+        .visible .light-box-move { animation: fastPush 3s infinite ease-in; }
+        @keyframes fastPush { 0% { transform: translateX(0); } 60%, 90% { transform: translateX(350px); } 100% { opacity: 0; } }
+        
+        .visible .heavy-box-move { animation: slowPush 3s infinite ease-in; }
+        @keyframes slowPush { 0% { transform: translateX(0); } 60%, 90% { transform: translateX(80px); } 100% { opacity: 0; } }
+
+        /* F=ma Changing Force */
+        .visible .car-slow-push { animation: slowCar 3s infinite ease-in; }
+        @keyframes slowCar { 0% { transform: translateX(0); } 60%, 90% { transform: translateX(100px); } 100% { opacity: 0; } }
+        
+        .visible .car-fast-push { animation: fastCar 3s infinite ease-in; }
+        @keyframes fastCar { 0% { transform: translateX(0); } 60%, 90% { transform: translateX(350px); } 100% { opacity: 0; } }
+
+        /* Action Reaction Rocket */
+        .visible .rocket-launch { animation: launch 3s infinite ease-in; }
+        @keyframes launch { 0%, 20% { transform: translateY(0); } 70%, 90% { transform: translateY(-250px); opacity:1;} 100% { opacity: 0;} }
+        
+        .visible .exhaust-flame { animation: ignite 3s infinite; transform-origin: top center; }
+        @keyframes ignite { 0%, 15% { transform: scaleY(0); opacity: 0; } 20%, 70% { transform: scaleY(1); opacity: 1; } 71%, 100% { opacity: 0; } }
+
+        /* Action Reaction Balloon */
+        .visible .balloon-accel { animation: balloonRight 3s infinite ease-in; }
+        @keyframes balloonRight { 0%, 10% { transform: translateX(0); } 60%, 90% { transform: translateX(350px); opacity:1; } 100% { opacity: 0;} }
+        
+        .visible .air-burst-anim { animation: airLeft 3s infinite ease-out; }
+        @keyframes airLeft { 0%, 10% { transform: translateX(0) scale(0.5); opacity:0; } 20% { transform: translateX(-50px) scale(1.2); opacity:1; } 60%, 90% { transform: translateX(-150px) scale(1.5); opacity:0; } 100% { opacity:0; } }
+
+        svg defs { display: block; }
+    </style>
+</head>
+<body>
+
+    <svg style="width:0; height:0; position:absolute;">
+        <defs>
+            <marker id="arrow-primary" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--primary)" /></marker>
+            <marker id="arrow-correct" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--correct)" /></marker>
+            <marker id="arrow-wrong" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--wrong)" /></marker>
+            <marker id="arrow-grey" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7f8c8d" /></marker>
+        </defs>
+    </svg>
+
+    <div id="nav-bar">
+        <button class="nav-btn secondary" onclick="goBack()">⬅️ Back</button>
+        <button class="nav-btn" onclick="goNext()">Next ➡️</button>
+    </div>
+
+    <div class="container-wrapper">
+
+        <section class="slide">
+            <h2>💡 DO NOW: Unit Match</h2>
+            <div class="default-visual-container">
+                <div class="fragment visible">
+                    <p style="margin: 0 0 10px 0;">Match the word to its unit of measurement. <strong>Tap "Next ➡️" to reveal.</strong></p>
+                </div>
+                <div class="fragment visual-box">
+                    <svg viewBox="0 0 800 280">
+                        <rect x="50" y="20" width="220" height="45" fill="var(--highlight)" rx="8" stroke="#000" stroke-width="2"/><text x="160" y="48" font-weight="bold" font-size="16" text-anchor="middle">1. Mass</text>
+                        <rect x="50" y="85" width="220" height="45" fill="var(--highlight)" rx="8" stroke="#000" stroke-width="2"/><text x="160" y="113" font-weight="bold" font-size="16" text-anchor="middle">2. Velocity</text>
+                        <rect x="50" y="150" width="220" height="45" fill="var(--highlight)" rx="8" stroke="#000" stroke-width="2"/><text x="160" y="178" font-weight="bold" font-size="16" text-anchor="middle">3. Acceleration</text>
+                        <rect x="50" y="215" width="220" height="45" fill="var(--highlight)" rx="8" stroke="#000" stroke-width="2"/><text x="160" y="243" font-weight="bold" font-size="16" text-anchor="middle">4. Force</text>
+                        
+                        <rect x="530" y="20" width="220" height="45" fill="#fff" rx="8" stroke="var(--primary)" stroke-width="3"/><text x="640" y="48" font-weight="bold" font-size="16" fill="var(--primary)" text-anchor="middle">A. m/s²</text>
+                        <rect x="530" y="85" width="220" height="45" fill="#fff" rx="8" stroke="var(--primary)" stroke-width="3"/><text x="640" y="113" font-weight="bold" font-size="16" fill="var(--primary)" text-anchor="middle">B. Newtons (N)</text>
+                        <rect x="530" y="150" width="220" height="45" fill="#fff" rx="8" stroke="var(--primary)" stroke-width="3"/><text x="640" y="178" font-weight="bold" font-size="16" fill="var(--primary)" text-anchor="middle">C. Kilograms (kg)</text>
+                        <rect x="530" y="215" width="220" height="45" fill="#fff" rx="8" stroke="var(--primary)" stroke-width="3"/><text x="640" y="243" font-weight="bold" font-size="16" fill="var(--primary)" text-anchor="middle">D. m/s</text>
+
+                        <g class="fragment"><path class="draw-line" d="M 270 42 Q 400 42, 530 172" fill="none" stroke="var(--correct)" stroke-width="5" stroke-dasharray="10 10"/></g>
+                        <g class="fragment"><path class="draw-line" d="M 270 107 Q 400 107, 530 237" fill="none" stroke="var(--correct)" stroke-width="5" stroke-dasharray="10 10"/></g>
+                        <g class="fragment"><path class="draw-line" d="M 270 172 Q 400 172, 530 42" fill="none" stroke="var(--correct)" stroke-width="5" stroke-dasharray="10 10"/></g>
+                        <g class="fragment"><path class="draw-line" d="M 270 237 Q 400 237, 530 107" fill="none" stroke="var(--correct)" stroke-width="5" stroke-dasharray="10 10"/></g>
+                    </svg>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>What is a Force?</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box"><mark>✏️ A Force is a PUSH, PULL, or TWIST.</mark></div></div>
+                    <div class="fragment"><div class="simple-text">Forces make things move or change shape. We measure Force in <strong>Newtons (N)</strong>.</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 500 200">
+                            <rect x="50" y="80" width="60" height="60" fill="#95a5a6" stroke="#000" stroke-width="2"/>
+                            <g class="pull-anim">
+                                <path d="M 120 110 L 220 110" fill="none" stroke="var(--primary)" stroke-width="6" marker-end="url(#arrow-primary)"/>
+                                <text x="170" y="100" font-weight="bold" fill="var(--primary)">PULL</text>
+                            </g>
+                            
+                            <rect x="380" y="80" width="60" height="60" fill="#95a5a6" stroke="#000" stroke-width="2"/>
+                            <g class="push-anim">
+                                <path d="M 280 110 L 370 110" fill="none" stroke="var(--wrong)" stroke-width="6" marker-end="url(#arrow-wrong)"/>
+                                <text x="305" y="100" font-weight="bold" fill="var(--wrong)">PUSH</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Newton's 1st Law: Inertia</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box"><mark>✏️ Objects keep doing exactly what they are already doing.</mark></div></div>
+                    <div class="fragment"><div class="simple-text">They stay still, or keep moving straight, UNLESS a force pushes or pulls them.</div></div>
+                    <div class="fragment"><div class="note-box" style="color:var(--wrong);">Basically: Objects are LAZY! (Inertia)</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 400 200">
+                            <line x1="50" y1="160" x2="350" y2="160" stroke="#000" stroke-width="4"/>
+                            <g class="lazy-pulse">
+                                <rect x="150" y="60" width="100" height="100" fill="#bdc3c7" stroke="#34495e" stroke-width="4" rx="8"/>
+                                <text x="200" y="110" font-weight="bold" font-size="20" fill="#333" text-anchor="middle">Zzz...</text>
+                                <text x="200" y="135" font-weight="bold" font-size="14" fill="#333" text-anchor="middle">(At Rest)</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Inertia in Real Life: The Skateboard</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box">The skateboard hits a rock and stops instantly.</div></div>
+                    <div class="fragment"><div class="simple-text" style="color: var(--correct); border-color: var(--correct);">Your body's inertia wants to KEEP moving forward at the exact same speed!</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 500 250">
+                            <line x1="20" y1="200" x2="480" y2="200" stroke="#000" stroke-width="4"/>
+                            
+                            <path d="M 285 200 Q 300 170 315 200 Z" fill="#7f8c8d"/>
+                            <text x="300" y="220" font-weight="bold" font-size="12" text-anchor="middle">ROCK</text>
+
+                            <g class="board-roll">
+                                <line x1="100" y1="180" x2="200" y2="180" stroke="#d35400" stroke-width="6"/>
+                                <circle cx="120" cy="190" r="10" fill="#333"/><circle cx="180" cy="190" r="10" fill="#333"/>
+                            </g>
+                            
+                            <g class="rider-fly">
+                                <circle cx="150" cy="80" r="20" fill="#f1c40f" stroke="#000" stroke-width="2"/>
+                                <line x1="150" y1="100" x2="150" y2="150" stroke="#000" stroke-width="4"/>
+                                <line x1="150" y1="110" x2="110" y2="130" stroke="#000" stroke-width="4"/>
+                                <line x1="150" y1="110" x2="190" y2="90" stroke="#000" stroke-width="4"/>
+                                <line x1="150" y1="150" x2="130" y2="175" stroke="#000" stroke-width="4"/>
+                                <line x1="150" y1="150" x2="170" y2="175" stroke="#000" stroke-width="4"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Inertia in Space: The Moon</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box">The Moon wants to fly off in a straight line (Inertia).</div></div>
+                    <div class="fragment"><div class="simple-text" style="color: var(--primary); border-color: var(--primary);">Earth's gravity pulls it back, creating a curved orbit!</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box" style="background: #111;">
+                        <svg viewBox="0 0 600 250">
+                            <circle cx="300" cy="125" r="40" fill="#2ecc71" stroke="#27ae60" stroke-width="4"/>
+                            <text x="300" y="130" font-weight="bold" fill="#fff" font-size="12" text-anchor="middle">EARTH</text>
+                            
+                            <circle cx="300" cy="125" r="100" fill="none" stroke="#555" stroke-width="2" stroke-dasharray="5 5"/>
+
+                            <g class="moon-orbit">
+                                <circle cx="300" cy="25" r="15" fill="#bdc3c7"/>
+                                <path d="M 300 45 L 300 80" fill="none" stroke="var(--primary)" stroke-width="4" marker-end="url(#arrow-primary)"/>
+                                <path d="M 320 25 L 360 25" fill="none" stroke="var(--wrong)" stroke-width="4" marker-end="url(#arrow-wrong)"/>
+                            </g>
+
+                            <rect x="20" y="20" width="100" height="40" fill="#fff" rx="4"/>
+                            <text x="70" y="38" font-size="12" font-weight="bold" fill="var(--wrong)" text-anchor="middle">Red = Inertia</text>
+                            <text x="70" y="52" font-size="12" font-weight="bold" fill="var(--primary)" text-anchor="middle">Blue = Gravity</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>🧠 Formative Quiz 1</h2>
+            <div class="default-visual-container">
+                <div class="fragment"><p>You are standing on a bus. The driver suddenly slams on the brakes. You fall <strong>forward</strong>. Why?</p></div>
+                <div class="fragment" style="width:100%; max-width:800px;">
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">A mysterious forward force pushed you.</button>
+                    <button class="tf-btn" onclick="this.classList.add('correct')">Newton's 1st Law: Your body had inertia and wanted to keep moving forward.</button>
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">Gravity suddenly increased.</button>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Newton's 2nd Law: F = m × a</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box"><mark>✏️ Force = Mass × Acceleration</mark></div></div>
+                    <div class="fragment"><div class="simple-text">To make a heavy object move fast, you need a HUGE push.</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 400 250" style="max-height: 180px;">
+                            <polygon points="200,30 50,230 350,230" fill="var(--highlight)" stroke="#000" stroke-width="4"/>
+                            <line x1="125" y1="130" x2="275" y2="130" stroke="#000" stroke-width="4"/>
+                            <line x1="200" y1="130" x2="200" y2="230" stroke="#000" stroke-width="4"/>
+                            <text x="200" y="110" font-family="Comic Neue" font-weight="bold" font-size="60" text-anchor="middle" fill="#000">F</text>
+                            <text x="145" y="210" font-family="Comic Neue" font-weight="bold" font-size="60" text-anchor="middle" fill="#000">m</text>
+                            <text x="255" y="210" font-family="Comic Neue" font-weight="bold" font-size="60" text-anchor="middle" fill="#000">a</text>
+                            
+                            <text x="200" y="215" font-weight="bold" font-size="30" text-anchor="middle" fill="var(--wrong)">×</text>
+                            <text x="250" y="145" font-weight="bold" font-size="30" text-anchor="middle" fill="var(--primary)">÷</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>F = ma: Changing the Mass</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box">We apply the EXACT same Force (50 N).</div></div>
+                    <div class="fragment"><div class="simple-text">The light box accelerates fast. The heavy box barely moves!</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 500 250">
+                            <line x1="20" y1="110" x2="480" y2="110" stroke="#000" stroke-width="4"/>
+                            <line x1="20" y1="230" x2="480" y2="230" stroke="#000" stroke-width="4"/>
+
+                            <g class="light-box-move">
+                                <rect x="120" y="60" width="50" height="50" fill="#3498db" stroke="#000" stroke-width="2"/>
+                                <text x="145" y="90" font-weight="bold" fill="#fff" font-size="14" text-anchor="middle">10kg</text>
+                                <path d="M 30 85 L 100 85" fill="none" stroke="var(--primary)" stroke-width="5" marker-end="url(#arrow-primary)"/>
+                                <text x="65" y="75" font-weight="bold" fill="var(--primary)" font-size="12" text-anchor="middle">50 N</text>
+                            </g>
+
+                            <g class="heavy-box-move">
+                                <rect x="120" y="140" width="90" height="90" fill="#2c3e50" stroke="#000" stroke-width="2"/>
+                                <text x="165" y="190" font-weight="bold" fill="#fff" font-size="16" text-anchor="middle">1000kg</text>
+                                <path d="M 30 185 L 100 185" fill="none" stroke="var(--primary)" stroke-width="5" marker-end="url(#arrow-primary)"/>
+                                <text x="65" y="175" font-weight="bold" fill="var(--primary)" font-size="12" text-anchor="middle">50 N</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>F = ma: Changing the Force</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box">We push the EXACT same car.</div></div>
+                    <div class="fragment"><div class="simple-text" style="color: var(--correct); border-color: var(--correct);">More force = Faster acceleration!</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 500 250">
+                            <line x1="20" y1="110" x2="480" y2="110" stroke="#000" stroke-width="4"/>
+                            <line x1="20" y1="230" x2="480" y2="230" stroke="#000" stroke-width="4"/>
+
+                            <g class="car-slow-push">
+                                <rect x="120" y="60" width="80" height="40" fill="#e67e22" rx="4"/>
+                                <circle cx="140" cy="100" r="10" fill="#000"/><circle cx="180" cy="100" r="10" fill="#000"/>
+                                <path d="M 30 80 L 100 80" fill="none" stroke="var(--wrong)" stroke-width="2" marker-end="url(#arrow-wrong)"/>
+                                <text x="65" y="70" font-weight="bold" fill="var(--wrong)" font-size="12" text-anchor="middle">Small Push</text>
+                            </g>
+
+                            <g class="car-fast-push">
+                                <rect x="120" y="180" width="80" height="40" fill="#e67e22" rx="4"/>
+                                <circle cx="140" cy="220" r="10" fill="#000"/><circle cx="180" cy="220" r="10" fill="#000"/>
+                                <path d="M 30 200 L 100 200" fill="none" stroke="var(--wrong)" stroke-width="8" marker-end="url(#arrow-wrong)"/>
+                                <text x="65" y="190" font-weight="bold" fill="var(--wrong)" font-size="12" text-anchor="middle">HUGE Push</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Calculation: Finding Force</h2>
+            <div class="default-visual-container">
+                <div class="fragment"><p style="margin: 0 0 15px 0;">"A <strong>5 kg</strong> bowling ball accelerates at <strong>3 m/s²</strong>. Find the Force (F)."</p></div>
+                <div class="calc-row">
+                    <div class="fragment calc-step">1: Formula → F = m × a</div>
+                    <div class="fragment calc-step">2: Numbers → F = 5 × 3</div>
+                    <div class="fragment calc-step final">3: Answer → F = 15 N</div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Calculation: Finding Acceleration</h2>
+            <div class="default-visual-container">
+                <div class="fragment"><p style="margin: 0 0 15px 0;">"You push a <strong>20 kg</strong> cart with a force of <strong>100 N</strong>. Find Acceleration (a)."</p></div>
+                <div class="calc-row">
+                    <div class="fragment calc-step">1: Formula → a = F ÷ m</div>
+                    <div class="fragment calc-step">2: Numbers → a = 100 ÷ 20</div>
+                    <div class="fragment calc-step final">3: Answer → a = 5 m/s²</div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Calculation: Finding Mass</h2>
+            <div class="default-visual-container">
+                <div class="fragment"><p style="margin: 0 0 15px 0;">"A dog pulls a sled with <strong>200 N</strong>. It accelerates at <strong>4 m/s²</strong>. Find Mass (m)."</p></div>
+                <div class="calc-row">
+                    <div class="fragment calc-step">1: Formula → m = F ÷ a</div>
+                    <div class="fragment calc-step">2: Numbers → m = 200 ÷ 4</div>
+                    <div class="fragment calc-step final">3: Answer → m = 50 kg</div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>🧠 Formative Quiz 2</h2>
+            <div class="default-visual-container">
+                <div class="fragment"><p>A car engine creates a force of <strong>4000 N</strong>. The car has a mass of <strong>1000 kg</strong>. What is its acceleration?</p></div>
+                <div class="fragment" style="width:100%; max-width:800px;">
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">5000 m/s²</button>
+                    <button class="tf-btn" onclick="this.classList.add('correct')">4 m/s² (4000 ÷ 1000)</button>
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">0.25 m/s²</button>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>Newton's 3rd Law: Action & Reaction</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box"><mark>✏️ Every Action has an Equal and Opposite Reaction.</mark></div></div>
+                    <div class="fragment"><div class="simple-text">Forces ALWAYS come in pairs. You cannot touch something without it touching you back!</div></div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>3rd Law Example: Rockets!</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box">There is no air in space to push against!</div></div>
+                    <div class="fragment"><div class="simple-text" style="color: var(--primary); border-color: var(--primary);">The rocket pushes fuel DOWN. The fuel pushes the rocket UP!</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box" style="background: #2c3e50;">
+                        <svg viewBox="0 0 400 250">
+                            <g class="rocket-launch" transform="translate(0, 50)">
+                                <rect x="180" y="50" width="40" height="80" fill="#ecf0f1" rx="5"/>
+                                <polygon points="200,10 180,50 220,50" fill="#e74c3c"/>
+                                <polygon points="180,130 160,150 180,100" fill="#e74c3c"/>
+                                <polygon points="220,130 240,150 220,100" fill="#e74c3c"/>
+                                
+                                <path d="M 200 0 L 200 -50" fill="none" stroke="var(--highlight)" stroke-width="6" marker-end="url(#arrow-correct)"/>
+                                <text x="215" y="-20" fill="var(--highlight)" font-weight="bold" font-size="14">REACTION: UP</text>
+
+                                <g class="exhaust-flame">
+                                    <polygon points="190,130 210,130 200,200" fill="#f1c40f"/>
+                                    <polygon points="195,130 205,130 200,180" fill="#e67e22"/>
+                                    <path d="M 200 150 L 200 220" fill="none" stroke="#fff" stroke-width="4" marker-end="url(#arrow-grey)"/>
+                                    <text x="110" y="200" fill="#fff" font-weight="bold" font-size="12">ACTION: DOWN</text>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>3rd Law Example: The Balloon</h2>
+            <div class="flex-row">
+                <div class="text-panel">
+                    <div class="fragment"><div class="note-box">Letting go of an untied balloon makes it zip away!</div></div>
+                    <div class="fragment"><div class="simple-text">The balloon pushes air LEFT. The air pushes the balloon RIGHT.</div></div>
+                </div>
+                <div class="visual-panel">
+                    <div class="fragment visual-box">
+                        <svg viewBox="0 0 500 250">
+                            <g class="balloon-accel" transform="translate(150, 100)">
+                                <path d="M 60 25 C 60 -20, 120 -20, 120 25 C 120 70, 60 70, 60 25 Z" fill="#3498db"/>
+                                <polygon points="60,20 60,30 40,35 40,15" fill="#3498db"/>
+                                
+                                <path d="M 130 25 L 200 25" fill="none" stroke="var(--primary)" stroke-width="5" marker-end="url(#arrow-primary)"/>
+                                <text x="140" y="10" font-weight="bold" fill="var(--primary)" font-size="12">REACTION (Right)</text>
+
+                                <g class="air-burst-anim">
+                                    <path d="M 30 25 L -10 0 M 30 25 L -20 25 M 30 25 L -10 50" stroke="#ccc" stroke-width="4" fill="none"/>
+                                    <text x="-40" y="-10" font-weight="bold" fill="#7f8c8d" font-size="12">ACTION (Left)</text>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+        <section class="slide">
+            <h2>🧠 Formative Quiz 3</h2>
+            <div class="default-visual-container">
+                <div class="fragment"><p>When you jump off a small boat onto the dock, the boat moves backwards into the water. Which law explains this?</p></div>
+                <div class="fragment" style="width:100%; max-width:800px;">
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">Newton's 1st Law (Inertia)</button>
+                    <button class="tf-btn" onclick="this.classList.add('wrong')">Newton's 2nd Law (F = m × a)</button>
+                    <button class="tf-btn" onclick="this.classList.add('correct')">Newton's 3rd Law (Action/Reaction)</button>
+                </div>
+            </div>
+            <div class="slide-number"></div>
+        </section>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        
+        slides.forEach((slide, i) => {
+            const numEl = slide.querySelector('.slide-number');
+            if (numEl) numEl.textContent = `${i + 1} / ${slides.length}`;
+        });
+
+        function getActiveSlideIndex() {
+            let index = 0; let minDistance = Infinity;
+            slides.forEach((slide, i) => {
+                const rect = slide.getBoundingClientRect();
+                const dist = Math.abs(rect.top);
+                if (dist < minDistance && dist < window.innerHeight / 1.5) {
+                    minDistance = dist; index = i;
+                }
+            });
+            return index;
+        }
+
+        function scrollToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function goNext() {
+            const index = getActiveSlideIndex();
+            const currentSlide = slides[index];
+            const hiddenFragments = currentSlide.querySelectorAll('.fragment:not(.visible)');
+            if (hiddenFragments.length > 0) {
+                hiddenFragments[0].classList.add('visible');
+            } else {
+                scrollToSlide(index + 1);
+            }
+        }
+
+        function goBack() {
+            const index = getActiveSlideIndex();
+            const currentSlide = slides[index];
+            const visibleFragments = Array.from(currentSlide.querySelectorAll('.fragment.visible'));
+            
+            const nonStructuralVisible = visibleFragments.filter(f => !f.classList.contains('flex-row'));
+
+            if (nonStructuralVisible.length > 0) {
+                nonStructuralVisible[nonStructuralVisible.length - 1].classList.remove('visible');
+            } else {
+                scrollToSlide(index - 1);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if(e.code === 'ArrowRight' || e.code === 'Space') { e.preventDefault(); goNext(); }
+            if(e.code === 'ArrowLeft') { e.preventDefault(); goBack(); }
+        });
+
+        function saveLesson() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], {type: 'text/html'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Year_10_Newtons_Laws_EALD.html';
+            a.click();
+        }
+    </script>
+</body>
+</html>
