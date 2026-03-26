@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Quiz - Interactive A4</title>
+    <style>
+        /* A4 Page Setup and General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #555;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            padding: 8mm; 
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+        h1, h2 {
+            text-align: center;
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 15pt;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+        }
+
+        /* Page 1: 4-Column Layout for 60 Questions */
+        .mc-container {
+            column-count: 4;
+            column-gap: 5mm; 
+            height: calc(100% - 35px);
+        }
+        .section-header {
+            break-inside: avoid;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
+        .fun-fact {
+            font-size: 7pt;
+            font-weight: bold;
+            color: #0277bd;
+            background: #e1f5fe;
+            padding: 2px 4px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 2px;
+            line-height: 1.1;
+        }
+        .q-block {
+            break-inside: avoid;
+            margin-bottom: 5px;
+            font-size: 7.5pt; 
+            cursor: pointer;
+            user-select: none;
+            padding: 2px;
+            border-radius: 3px;
+            transition: background 0.2s;
+        }
+        .q-block:hover {
+            background-color: #f0f0f0;
+        }
+        .q-text {
+            margin: 0 0 2px 0;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.1;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1px 6px;
+            color: #555;
+        }
+        .opt {
+            transition: color 0.2s, font-weight 0.2s;
+        }
+        
+        /* Interactive Magic: Reveals the correct answer */
+        .q-block.revealed .correct {
+            color: #d32f2f;
+            font-weight: 800;
+        }
+
+        /* Page 2: Short Answer Layout */
+        .sa-container {
+            column-count: 2;
+            column-gap: 8mm;
+            height: calc(100% - 35px);
+        }
+        .sa-block {
+            break-inside: avoid;
+            margin-bottom: 10px;
+            font-size: 8.5pt;
+            cursor: pointer;
+            user-select: none;
+            background: #fdfdfd;
+            border: 1px solid #ccc; /* Slightly darker border for structure */
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            min-height: 130px; /* Forces enough room for writing */
+            box-sizing: border-box;
+            transition: background 0.2s;
+        }
+        .sa-block:hover {
+            background: #f4f4f4;
+        }
+        .sa-q {
+            margin: 0;
+            font-weight: bold;
+            color: #222;
+            line-height: 1.3;
+        }
+        
+        /* Faint lines for student writing space */
+        .writing-lines {
+            flex-grow: 1; /* Pushes the answer to the bottom */
+            background-image: repeating-linear-gradient(transparent, transparent 18px, #e0e0e0 19px);
+            margin-top: 5px;
+            margin-bottom: 5px;
+            min-height: 57px; /* Roughly 3 lines of space */
+        }
+
+        .sa-a {
+            display: none;
+            margin: 0;
+            color: #d32f2f;
+            font-weight: bold;
+            font-style: italic;
+            border-top: 1px dashed #ccc;
+            padding-top: 6px;
+            font-size: 8pt;
+        }
+        .sa-block.revealed .sa-a {
+            display: block;
+        }
+
+        /* Print formatting */
+        @media print {
+            body { background: none; padding: 0; }
+            .a4-page { box-shadow: none; margin: 0; page-break-after: always; }
+        }
+    </style>
+    <script>
+        function toggleReveal(element) {
+            element.classList.toggle('revealed');
+        }
+    </script>
+</head>
+<body>
+
+    <div class="a4-page">
+        <h1>Global Energy: General Knowledge Quiz (Click to Reveal)</h1>
+        <div class="mc-container">
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: The sun emits 380 Yottawatts/sec!</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">1. E=mc² relates energy directly to?</p>
+                <div class="options"><span class="opt correct">A) Mass</span><span class="opt">B) Speed</span><span class="opt">C) Light</span><span class="opt">D) Heat</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">2. Most energy on Earth originates from?</p>
+                <div class="options"><span class="opt">A) The Core</span><span class="opt correct">B) The Sun</span><span class="opt">C) Oceans</span><span class="opt">D) The Moon</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">3. Mass is considered a form of what energy?</p>
+                <div class="options"><span class="opt">A) Kinetic</span><span class="opt">B) Thermal</span><span class="opt correct">C) Potential</span><span class="opt">D) Sound</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">4. "Yotta" is a math prefix meaning?</p>
+                <div class="options"><span class="opt">A) 10^6</span><span class="opt">B) 10^12</span><span class="opt correct">C) 10^24</span><span class="opt">D) 10^100</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">5. Energy of motion is known as?</p>
+                <div class="options"><span class="opt">A) Static</span><span class="opt correct">B) Kinetic</span><span class="opt">C) Potential</span><span class="opt">D) Dark</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Phantom load uses 10% of home power.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">6. Unplugging idle devices saves?</p>
+                <div class="options"><span class="opt correct">A) Vampire power</span><span class="opt">B) Static</span><span class="opt">C) Kinetic</span><span class="opt">D) Watts</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">7. A stretched rubber band holds?</p>
+                <div class="options"><span class="opt">A) Kinetic</span><span class="opt">B) Thermal</span><span class="opt correct">C) Elastic potential</span><span class="opt">D) Radiant</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">8. Programmable thermostats save?</p>
+                <div class="options"><span class="opt">A) Water</span><span class="opt correct">B) Energy</span><span class="opt">C) Friction</span><span class="opt">D) Light</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">9. Gravitational potential depends on?</p>
+                <div class="options"><span class="opt">A) Speed</span><span class="opt correct">B) Height</span><span class="opt">C) Temp</span><span class="opt">D) Color</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">10. Energy waiting to be used is?</p>
+                <div class="options"><span class="opt">A) Kinetic</span><span class="opt correct">B) Potential</span><span class="opt">C) Active</span><span class="opt">D) Nuclear</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Energy is never created or destroyed.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">11. Total energy in a closed system is?</p>
+                <div class="options"><span class="opt">A) Zero</span><span class="opt">B) Growing</span><span class="opt correct">C) Conserved</span><span class="opt">D) Lost</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">12. A pendulum at its highest point has max?</p>
+                <div class="options"><span class="opt">A) Kinetic</span><span class="opt">B) Heat</span><span class="opt correct">C) Potential</span><span class="opt">D) Speed</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">13. The formula is TE = PE + ?</p>
+                <div class="options"><span class="opt correct">A) KE</span><span class="opt">B) GE</span><span class="opt">C) CE</span><span class="opt">D) NE</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">14. Conservation of Energy is which law?</p>
+                <div class="options"><span class="opt correct">A) 1st Thermo</span><span class="opt">B) 2nd Thermo</span><span class="opt">C) Newton's 1st</span><span class="opt">D) Ohm's</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">15. Energy transformation allows us to do?</p>
+                <div class="options"><span class="opt">A) Nothing</span><span class="opt correct">B) Work</span><span class="opt">C) Sleep</span><span class="opt">D) Destroy matter</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Doubling speed quadruples crash energy.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">16. Kinetic energy relies on mass and?</p>
+                <div class="options"><span class="opt">A) Volume</span><span class="opt correct">B) Velocity</span><span class="opt">C) Shape</span><span class="opt">D) Height</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">17. KE formula is 1/2 m * ?</p>
+                <div class="options"><span class="opt">A) v</span><span class="opt correct">B) v²</span><span class="opt">C) h</span><span class="opt">D) c²</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">18. A slow train has high KE because of its?</p>
+                <div class="options"><span class="opt correct">A) Mass</span><span class="opt">B) Heat</span><span class="opt">C) Friction</span><span class="opt">D) Horn</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">19. The Greek word 'kinesis' means?</p>
+                <div class="options"><span class="opt">A) Light</span><span class="opt correct">B) Motion</span><span class="opt">C) Power</span><span class="opt">D) Stop</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">20. Which possesses the most KE?</p>
+                <div class="options"><span class="opt">A) Parked car</span><span class="opt correct">B) Flying jet</span><span class="opt">C) Sitting cat</span><span class="opt">D) Rock</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Air pressure is a great energy battery.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">21. Water towers create pressure using?</p>
+                <div class="options"><span class="opt">A) Elasticity</span><span class="opt correct">B) Gravity</span><span class="opt">C) Magnets</span><span class="opt">D) Heat</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">22. Car suspensions use springs storing?</p>
+                <div class="options"><span class="opt">A) Kinetic</span><span class="opt correct">B) Elastic PE</span><span class="opt">C) Chemical</span><span class="opt">D) Light</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">23. Water towers are built high to increase?</p>
+                <div class="options"><span class="opt">A) Visibility</span><span class="opt correct">B) Potential Energy</span><span class="opt">C) Wind</span><span class="opt">D) Rain</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">24. Compressed air acts mechanically as a?</p>
+                <div class="options"><span class="opt correct">A) Battery</span><span class="opt">B) Wire</span><span class="opt">C) Resistor</span><span class="opt">D) Heater</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">25. A drawn bowstring contains?</p>
+                <div class="options"><span class="opt">A) Kinetic</span><span class="opt correct">B) Potential</span><span class="opt">C) Thermal</span><span class="opt">D) Nuclear</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Pumped hydro acts as a grid battery.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">26. The height of water behind a dam is the?</p>
+                <div class="options"><span class="opt correct">A) Head</span><span class="opt">B) Foot</span><span class="opt">C) Peak</span><span class="opt">D) Crest</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">27. Dams convert Potential Energy into?</p>
+                <div class="options"><span class="opt">A) Thermal</span><span class="opt correct">B) Kinetic</span><span class="opt">C) Solar</span><span class="opt">D) Chemical</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">28. Pumped hydro stores excess?</p>
+                <div class="options"><span class="opt">A) Rain</span><span class="opt correct">B) Electricity</span><span class="opt">C) Heat</span><span class="opt">D) Fish</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">29. Water spinning a turbine creates?</p>
+                <div class="options"><span class="opt">A) Wind</span><span class="opt">B) Gravity</span><span class="opt correct">C) Electricity</span><span class="opt">D) Fire</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">30. This power source is called?</p>
+                <div class="options"><span class="opt">A) Geothermal</span><span class="opt correct">B) Hydroelectric</span><span class="opt">C) Solar</span><span class="opt">D) Biomass</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Old bulbs were actually 90% heaters!</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">31. Incandescent bulbs waste energy as?</p>
+                <div class="options"><span class="opt">A) Light</span><span class="opt correct">B) Heat</span><span class="opt">C) Sound</span><span class="opt">D) Motion</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">32. Efficiency = Useful Output divided by?</p>
+                <div class="options"><span class="opt correct">A) Total Input</span><span class="opt">B) Waste</span><span class="opt">C) Time</span><span class="opt">D) Cost</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">33. Which bulb type is most efficient?</p>
+                <div class="options"><span class="opt">A) Incandescent</span><span class="opt">B) Halogen</span><span class="opt correct">C) LED</span><span class="opt">D) Neon</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">34. Old bulbs are what % efficient for light?</p>
+                <div class="options"><span class="opt correct">A) 10%</span><span class="opt">B) 50%</span><span class="opt">C) 90%</span><span class="opt">D) 100%</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">35. LEDs last approx. how much longer?</p>
+                <div class="options"><span class="opt">A) 2x</span><span class="opt">B) 5x</span><span class="opt correct">C) 25x</span><span class="opt">D) 100x</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Electricity is just moving electrons.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">36. Electricity is the physical flow of?</p>
+                <div class="options"><span class="opt">A) Protons</span><span class="opt">B) Neutrons</span><span class="opt correct">C) Electrons</span><span class="opt">D) Atoms</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">37. Moving charges create an electrical?</p>
+                <div class="options"><span class="opt correct">A) Current</span><span class="opt">B) Static</span><span class="opt">C) Void</span><span class="opt">D) Wall</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">38. Buildup of stationary surface charge is?</p>
+                <div class="options"><span class="opt">A) Current</span><span class="opt correct">B) Static</span><span class="opt">C) Plasma</span><span class="opt">D) Fusion</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">39. Electrons carry what type of charge?</p>
+                <div class="options"><span class="opt">A) Positive</span><span class="opt correct">B) Negative</span><span class="opt">C) Neutral</span><span class="opt">D) Both</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">40. Copper is an excellent?</p>
+                <div class="options"><span class="opt">A) Insulator</span><span class="opt">B) Resistor</span><span class="opt correct">C) Conductor</span><span class="opt">D) Battery</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: One break kills a whole series circuit.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">41. In series, what is identical everywhere?</p>
+                <div class="options"><span class="opt">A) Voltage</span><span class="opt correct">B) Current</span><span class="opt">C) Resistance</span><span class="opt">D) Heat</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">42. In a series circuit, what divides?</p>
+                <div class="options"><span class="opt">A) Current</span><span class="opt correct">B) Voltage</span><span class="opt">C) Protons</span><span class="opt">D) Wires</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">43. If one bulb breaks in a series string?</p>
+                <div class="options"><span class="opt">A) Rest stay on</span><span class="opt">B) Get brighter</span><span class="opt correct">C) All go out</span><span class="opt">D) Melt</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">44. Components in series are wired?</p>
+                <div class="options"><span class="opt correct">A) End-to-end</span><span class="opt">B) Parallel</span><span class="opt">C) Randomly</span><span class="opt">D) Across</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">45. Old Christmas lights were frustratingly?</p>
+                <div class="options"><span class="opt">A) Parallel</span><span class="opt correct">B) Series</span><span class="opt">C) Wireless</span><span class="opt">D) Fiber</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Voltage acts like water pressure.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">46. Ohm's Law relates V, I, and R as?</p>
+                <div class="options"><span class="opt">A) E=mc²</span><span class="opt correct">B) V=I*R</span><span class="opt">C) F=ma</span><span class="opt">D) P=W/t</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">47. In the water analogy, Voltage is?</p>
+                <div class="options"><span class="opt">A) Flow</span><span class="opt correct">B) Pressure</span><span class="opt">C) Pinch</span><span class="opt">D) Pipe</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">48. In the water analogy, Current is?</p>
+                <div class="options"><span class="opt">A) Pressure</span><span class="opt correct">B) Flow volume</span><span class="opt">C) Pinch</span><span class="opt">D) Pump</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">49. Resistance is represented by a?</p>
+                <div class="options"><span class="opt">A) Pump</span><span class="opt">B) Wide pipe</span><span class="opt correct">C) Pinched pipe</span><span class="opt">D) Leak</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">50. If Resistance increases, Current?</p>
+                <div class="options"><span class="opt">A) Increases</span><span class="opt correct">B) Decreases</span><span class="opt">C) Stays same</span><span class="opt">D) Doubles</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Parallel paths get identical voltage.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">51. In parallel, what is the same everywhere?</p>
+                <div class="options"><span class="opt">A) Current</span><span class="opt correct">B) Voltage</span><span class="opt">C) Resistance</span><span class="opt">D) Power</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">52. In parallel, what divides among branches?</p>
+                <div class="options"><span class="opt">A) Voltage</span><span class="opt correct">B) Current</span><span class="opt">C) Electrons</span><span class="opt">D) Charge</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">53. If one bulb breaks in a parallel circuit?</p>
+                <div class="options"><span class="opt">A) All go out</span><span class="opt correct">B) Rest stay on</span><span class="opt">C) Dimming</span><span class="opt">D) Shorting</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">54. Adding branches does what to total resistance?</p>
+                <div class="options"><span class="opt">A) Increases</span><span class="opt correct">B) Decreases</span><span class="opt">C) Keeps same</span><span class="opt">D) Multiplies</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">55. Branch independence is the advantage of?</p>
+                <div class="options"><span class="opt">A) Series</span><span class="opt correct">B) Parallel</span><span class="opt">C) Static</span><span class="opt">D) Inductors</span></div>
+            </div>
+
+            <div class="section-header">
+                <div class="fun-fact">Fact: Your whole house is a parallel circuit.</div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">56. Homes are almost entirely wired in?</p>
+                <div class="options"><span class="opt">A) Series</span><span class="opt correct">B) Parallel</span><span class="opt">C) Alternating</span><span class="opt">D) Neither</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">57. A tripped breaker isolates just one?</p>
+                <div class="options"><span class="opt">A) House</span><span class="opt correct">B) Branch</span><span class="opt">C) Grid</span><span class="opt">D) Transformer</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">58. Wall outlets deliver constant?</p>
+                <div class="options"><span class="opt">A) Current</span><span class="opt">B) Resistance</span><span class="opt correct">C) Voltage</span><span class="opt">D) Wattage</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">59. If homes were in series, turning off TV would?</p>
+                <div class="options"><span class="opt">A) Save nothing</span><span class="opt correct">B) Kill all power</span><span class="opt">C) Start fires</span><span class="opt">D) Be brighter</span></div>
+            </div>
+            <div class="q-block" onclick="toggleReveal(this)">
+                <p class="q-text">60. Breakers protect parallel wires from?</p>
+                <div class="options"><span class="opt">A) Low voltage</span><span class="opt correct">B) Overheating/Overloads</span><span class="opt">C) Static</span><span class="opt">D) Dust</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="a4-page">
+        <h2>Diagram Analysis: Short Answer Review (Click to Reveal)</h2>
+        <div class="sa-container">
+            
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">1. (Pane A1) Why does the diagram connect a telescope looking at the sun, ocean waves, and the equation E=mc²?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">It illustrates that whether it's radiant energy (sun), kinetic energy (waves), or matter itself (E=mc²), energy exists in wildly different, but interconnected, forms across the universe.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">2. (Pane A2) According to the visual, what are two simple physical actions a person can take to conserve energy?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The person in the diagram is shown manually unplugging a cord from the wall to stop "vampire power" and adjusting a programmable wall thermostat.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">3. (Pane A3) Looking at the TE = PE + KE graph alongside the pendulum, what happens to the blue PE line when the red KE line reaches its peak?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The blue Potential Energy line drops to its lowest point (zero) exactly when the Kinetic Energy hits its peak, proving that one converts directly into the other to keep Total Energy (TE) constant.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">4. (Pane B1) Compare the source of kinetic energy shown in the moving train versus the running soccer player.</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The train gets its massive kinetic energy primarily from electrical or chemical (fuel) input driving its heavy mass, whereas the soccer player uses biological chemical energy (from food) to create motion.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">5. (Pane B2) How do the water tower and the compressed spring visually represent the two main types of potential energy?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The water tower represents "Gravitational Potential Energy" (stored via height/position), while the coiled spring represents "Elastic Potential Energy" (stored via physical deformation/stretching).</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">6. (Pane B3) In the hydroelectric dam diagram, at what specific physical point does the stored Potential Energy actively become Kinetic Energy?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The conversion happens the moment the water enters the intake pipe and begins flowing downward through the penstock toward the turbine, changing from stored water to moving water.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">7. (Pane C1) Based on the efficiency diagram, why is the character looking shocked at the old incandescent bulb's statistics?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">Because the diagram shows that 90% of the energy going into the old bulb is entirely wasted as heat, producing only 10% useful light output compared to the LED.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">8. (Pane C2) In the diagram showing the cross-section of a wire, what do the moving blue particles represent compared to the stationary red ones?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The moving blue particles with minus signs represent negatively charged electrons flowing to create a current, while the red particles represent the positively charged protons locked within the atoms of the conductive wire.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">9. (Pane D1) Why is the water pipe shown with a single, continuous flow next to the series circuit of three bulbs?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">It visually reinforces that in a series circuit, the current (water flow) has only one path to take, meaning the exact same flow must pass through every single component sequentially.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">10. (Pane C3) How does the chalkboard equation V = I * R relate to the battery, wire, and resistor drawing next to it?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The battery provides the Voltage (V, the pressure), the wire carries the Current (I, the flow), and the resistor creates the Resistance (R, the pinch), demonstrating how the three variables mathematically interact.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">11. (Pane D2) Visually, what happens to the red arrows (representing current) when they hit the junctions in the parallel circuit diagram?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The arrows split and take multiple different branches simultaneously, visually demonstrating that total current divides among the available paths, unlike in a series circuit.</div>
+            </div>
+
+            <div class="sa-block" onclick="toggleReveal(this)">
+                <p class="sa-q">12. (Pane D3) Looking at the cross-section of the house, why are the different rooms lit independently, and what type of circuit makes this possible?</p>
+                <div class="writing-lines"></div>
+                <div class="sa-a">The house uses parallel wiring. This allows the electricity to flow independently to the upstairs and downstairs rooms, meaning turning off the lights in one room doesn't cut power to the others.</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
