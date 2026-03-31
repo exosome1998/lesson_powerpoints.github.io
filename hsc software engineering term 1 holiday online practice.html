@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Software Engineering: Secure Architecture & PWA</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; }
+        .header { background-color: #002664; color: white; padding: 20px; font-weight: bold; font-size: 1.5em; text-align: center; }
+        .container { max-width: 1100px; margin: 20px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .section-title { color: #002664; border-bottom: 3px solid #002664; padding-bottom: 10px; margin-top: 50px; font-size: 1.5em;}
+        .question-box { margin-bottom: 35px; padding-bottom: 25px; border-bottom: 2px dashed #eee; }
+        .q-title { font-size: 1.15em; font-weight: bold; color: #333; margin-bottom: 10px; display: flex; justify-content: space-between;}
+        .marks { color: #d9534f; font-weight: bold; font-size: 0.9em; }
+        .scenario { background-color: #eef2f5; padding: 12px; border-left: 5px solid #002664; margin-bottom: 15px; font-size: 0.95em; font-style: italic; }
+        select { width: 100%; padding: 10px; font-size: 1em; border-radius: 4px; border: 1px solid #ccc; background-color: #fff;}
+        textarea { width: 100%; box-sizing: border-box; border: 1px solid #002664; padding: 12px; font-family: Arial, sans-serif; font-size: 14px; resize: vertical; border-radius: 4px; background-color: #fafbfc; line-height: 1.5;}
+        .code-input { background-color: #1e1e1e; color: #d4d4d4; font-family: 'Courier New', Courier, monospace; outline: none; border: none; }
+        .split-pane { display: flex; gap: 15px; margin-top: 15px; }
+        .pane { flex: 1; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
+        .pane-header { background: #d0d7de; padding: 8px; font-size: 0.9em; font-family: monospace; font-weight: bold; color: #24292f;}
+        .output { width: 100%; box-sizing: border-box; min-height: 180px; background-color: #0d1117; color: #56d364; padding: 12px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; margin: 0; }
+        button { background-color: #002664; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.2s;}
+        button:hover { background-color: #001a45; }
+        .submit-btn { background-color: #28a745; font-size: 1.3em; padding: 15px 30px; display: block; margin: 50px auto; width: 80%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+        .submit-btn:hover { background-color: #218838; }
+        #status { color: #d9534f; font-weight: bold; margin-bottom: 20px; text-align: center; font-size: 1.2em; padding: 10px; border-radius: 5px; background: #fdf5f5;}
+        .verb-highlight { font-weight: bold; text-transform: uppercase; color: #002664; }
+    </style>
+</head>
+<body>
+
+    <div class="header">HSC Software Engineering: Secure Architecture & PWA Assessment</div>
+
+    <div class="container">
+        <div id="status">⏳ Initializing Enterprise Python Environment... Please wait.</div>
+        
+        <div style="margin-bottom: 30px; background: #eef; padding: 20px; border-radius: 5px; border: 1px solid #ccd;">
+            <label style="font-size: 1.1em; color: #002664;"><strong>Student Details</strong></label><br>
+            <input type="text" id="student_name" placeholder="Enter your full name & NESA Number" style="width: 100%; padding: 12px; margin-top: 10px; box-sizing: border-box; font-size: 1em; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <h2 class="section-title">Part A: Secure Software Architecture (Multiple Choice)</h2>
+
+        <div class="question-box mcq-q" data-q="1">
+            <div class="q-title"><span>1. Continuous Integration Security</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A development team wants to scan their source code for buffer overflow vulnerabilities automatically every time a developer commits code to the repository, before the application is compiled.</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Dynamic Application Security Testing (DAST)</option>
+                <option value="B">Static Application Security Testing (SAST)</option>
+                <option value="C">Penetration Testing</option>
+                <option value="D">Fuzzing</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="2">
+            <div class="q-title"><span>2. Database Defense</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: An attacker attempts to bypass a login screen by entering ' OR 1=1 -- into the username field.</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Cross-Site Scripting (XSS)</option>
+                <option value="B">Cross-Site Request Forgery (CSRF)</option>
+                <option value="C">SQL Injection (SQLi)</option>
+                <option value="D">Man-in-the-Middle (MitM)</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="3">
+            <div class="q-title"><span>3. Cryptographic Storage</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A company is designing a new user database. To protect against rainbow table attacks if the database is breached, the architect mandates that passwords must be processed before storage.</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Encrypted using AES-256</option>
+                <option value="B">Encoded using Base64</option>
+                <option value="C">Hashed and Salted using bcrypt</option>
+                <option value="D">Obfuscated using a proprietary algorithm</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="4">
+            <div class="q-title"><span>4. Principle of Least Privilege</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A junior data analyst needs to generate weekly reports from the financial database. Which architectural approach best aligns with the principle of least privilege?</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Granting the analyst full administrative access so they don't face roadblocks.</option>
+                <option value="B">Providing the analyst a database account with 'Read-Only' access specifically to the reporting tables.</option>
+                <option value="C">Sharing the Database Administrator's password temporarily.</option>
+                <option value="D">Creating a duplicate physical database for the analyst to manage.</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="5">
+            <div class="q-title"><span>5. Session Management</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A banking application requires users to re-authenticate if they have been inactive on the portal for 10 minutes. This architectural decision primarily defends against:</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">SQL Injection</option>
+                <option value="B">Distributed Denial of Service (DDoS)</option>
+                <option value="C">Session Hijacking via physical device access</option>
+                <option value="D">Phishing emails</option>
+            </select>
+        </div>
+
+        <h2 class="section-title">Part B: Progressive Web Apps (Multiple Choice)</h2>
+
+        <div class="question-box mcq-q" data-q="6">
+            <div class="q-title"><span>6. PWA Core Architecture</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A developer is building a PWA and needs a script that runs in the background, independent of the web page, to intercept network requests and manage offline caching.</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Web App Manifest</option>
+                <option value="B">Service Worker</option>
+                <option value="C">IndexedDB</option>
+                <option value="D">Document Object Model (DOM)</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="7">
+            <div class="q-title"><span>7. App Installation</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: To allow users to "Add to Home Screen" (A2HS) and make the PWA look like a native app (defining icons, theme colors, and display mode), the developer must configure the:</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">service-worker.js</option>
+                <option value="B">manifest.json</option>
+                <option value="C">package.json</option>
+                <option value="D">index.html metadata</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="8">
+            <div class="q-title"><span>8. Caching Strategies</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A news PWA wants to ensure users always see the most up-to-date headlines when they have an internet connection, but will fall back to older cached headlines if they are on a train with no signal.</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Cache-First Strategy</option>
+                <option value="B">Network-First Strategy</option>
+                <option value="C">Stale-While-Revalidate Strategy</option>
+                <option value="D">Network-Only Strategy</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="9">
+            <div class="q-title"><span>9. Security Requirements</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: A developer tests their PWA locally and it works, but when deployed to a live server using standard HTTP, the Service Worker fails to register. Why?</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">Service Workers require HTTPS to prevent man-in-the-middle attacks modifying the background script.</option>
+                <option value="B">The manifest file is missing the "secure" flag.</option>
+                <option value="C">PWAs only work on mobile devices, not desktop browsers.</option>
+                <option value="D">The server lacks a dedicated SQL database.</option>
+            </select>
+        </div>
+
+        <div class="question-box mcq-q" data-q="10">
+            <div class="q-title"><span>10. App Shell Model</span> <span class="marks">[1 Mark]</span></div>
+            <div class="scenario">Scenario: When optimizing a PWA's load time, the "App Shell" architecture refers to caching:</div>
+            <select class="student-answer">
+                <option value="">Select an answer...</option>
+                <option value="A">All dynamic user data generated over the last 30 days.</option>
+                <option value="B">The minimal HTML, CSS, and JavaScript required to power the user interface.</option>
+                <option value="C">The backend server's operating system environment.</option>
+                <option value="D">Only the images and video files used on the site.</option>
+            </select>
+        </div>
+
+        <h2 class="section-title">Part C: Secure Architecture (Short Response)</h2>
+
+        <div class="question-box short-q" data-q="11">
+            <div class="q-title"><span>11. <span class="verb-highlight">EVALUATE</span> Role-Based Access Control</span> <span class="marks">[5 Marks]</span></div>
+            <div class="scenario">Scenario: A hospital is upgrading its software architecture. Previously, all staff shared a generic login. They are planning to implement Role-Based Access Control (RBAC) where doctors, nurses, and administrative staff have distinct permission levels.</div>
+            <p>Evaluate the implementation of RBAC in this healthcare scenario in terms of system security and operational efficiency.</p>
+            <textarea class="student-answer" rows="6">The value of implementing Role-Based Access Control (RBAC) in this healthcare scenario is highly significant because...
+
+Furthermore, this improves operational security by...
+
+However, a potential limitation or challenge of this architecture might be...
+
+Ultimately, I judge that...</textarea>
+        </div>
+
+        <div class="question-box short-q" data-q="12">
+            <div class="q-title"><span>12. <span class="verb-highlight">JUSTIFY</span> Parameterized Queries</span> <span class="marks">[4 Marks]</span></div>
+            <div class="scenario">Scenario: An e-commerce backend previously used string concatenation to build database queries (e.g., <code>"SELECT * FROM users WHERE email = '" + input + "'"</code>). The new lead architect demands all developers switch to parameterized queries immediately.</div>
+            <p>Justify the architect's decision to mandate parameterized queries to protect the application's data layer.</p>
+            <textarea class="student-answer" rows="5">The architect's decision to mandate parameterized queries is justified because the original string concatenation approach creates a severe vulnerability to...
+
+By using parameterized queries, the system architecture separates...
+
+Therefore, this prevents an attacker from...</textarea>
+        </div>
+
+        <div class="question-box short-q" data-q="13">
+            <div class="q-title"><span>13. <span class="verb-highlight">DISCUSS</span> Error Handling</span> <span class="marks">[4 Marks]</span></div>
+            <div class="scenario">Scenario: A financial trading API currently crashes and displays the raw Python stack trace, including directory paths and database structure names, when a user inputs an invalid stock ticker symbol.</div>
+            <p>Discuss the security implications of verbose error handling and how defensive error handling should be architected.</p>
+            <textarea class="student-answer" rows="5">One significant security issue with displaying raw stack traces is that it provides attackers with...
+
+Conversely, a secure architectural approach to error handling would involve...
+
+This means that while the developers can still log the detailed error internally, the end-user will only see...</textarea>
+        </div>
+
+        <h2 class="section-title">Part D: Progressive Web Apps (Short Response)</h2>
+
+        <div class="question-box short-q" data-q="14">
+            <div class="q-title"><span>14. <span class="verb-highlight">ASSESS</span> Service Worker Functionality</span> <span class="marks">[5 Marks]</span></div>
+            <div class="scenario">Scenario: A local council has deployed a PWA for citizens to report potholes. A core requirement was that citizens could fill out the reporting form even if they are in a remote area with zero cellular reception.</div>
+            <p>Assess how the integration of a Service Worker and IndexedDB enables this specific offline functionality.</p>
+            <textarea class="student-answer" rows="6">The impact of the Service Worker on this application's offline capability is crucial because it acts as...
+
+When the citizen submits the form without an internet connection, IndexedDB is utilized to...
+
+This is evident when the connection is restored, as the Service Worker can then...
+
+Overall, the effectiveness of this architecture ensures that...</textarea>
+        </div>
+
+        <div class="question-box short-q" data-q="15">
+            <div class="q-title"><span>15. <span class="verb-highlight">EVALUATE</span> Caching Strategies</span> <span class="marks">[6 Marks]</span></div>
+            <div class="scenario">Scenario: A live sports scoring PWA is currently using a "Cache-First" strategy for its API requests. Users are complaining that the scores are consistently 5 to 10 minutes out of date when they open the app.</div>
+            <p>Evaluate the appropriateness of the Cache-First strategy for this app, and justify a better alternative strategy.</p>
+            <textarea class="student-answer" rows="7">The value of a Cache-First strategy is generally good for static assets (like logos), but for a live sports app, it is highly inappropriate because...
+
+A more suitable strategy would be...
+
+This alternative strategy operates by...
+
+Ultimately, I judge that making this architectural shift will improve the user experience by balancing...</textarea>
+        </div>
+
+        <h2 class="section-title">Part E: Secure Architecture (Live Refactoring)</h2>
+        <p><em>Execute and test your secure refactoring using the built-in Pyodide Python engine.</em></p>
+
+        <div class="question-box code-q" data-q="16">
+            <div class="q-title"><span>16. Refactor: Brute Force Protection</span> <span class="marks">[5 Marks]</span></div>
+            <div class="scenario">Scenario: The current login function allows infinite attempts. Refactor `LoginSystem` to lock out an IP address after 3 failed attempts.</div>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># python_editor.py</div>
+                    <textarea class="code-input student-answer" id="q16_code" rows="15">class LoginSystem:
+    def __init__(self):
+        self.failed_attempts = {} # Dictionary to track IP failures
+
+    def attempt_login(self, ip_address, success):
+        # TODO: Refactor this logic
+        # 1. Check if IP has 3 or more failures. If so, return "ACCOUNT LOCKED"
+        # 2. If login is False, increment the IP's failure count. Return "LOGIN FAILED"
+        # 3. If login is True (and not locked), return "ACCESS GRANTED"
+        
+        if success:
+            return "ACCESS GRANTED"
+        else:
+            return "LOGIN FAILED"
+
+# Test cases:
+sys = LoginSystem()
+print(sys.attempt_login("192.168.1.5", False)) # Fail 1
+print(sys.attempt_login("192.168.1.5", False)) # Fail 2
+print(sys.attempt_login("192.168.1.5", False)) # Fail 3
+print(sys.attempt_login("192.168.1.5", True))  # Should print ACCOUNT LOCKED
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># terminal_output</div>
+                    <pre class="output" id="q16_out">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q16_code', 'q16_out')">Run Code</button>
+        </div>
+
+        <div class="question-box code-q" data-q="17">
+            <div class="q-title"><span>17. Refactor: Input Sanitization (XSS Defense)</span> <span class="marks">[5 Marks]</span></div>
+            <div class="scenario">Scenario: A forum allows users to post comments. The current system saves whatever string the user inputs, exposing the site to Cross-Site Scripting (XSS). Refactor the code to sanitize the input by replacing `<` with `&lt;` and `>` with `&gt;`.</div>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># python_editor.py</div>
+                    <textarea class="code-input student-answer" id="q17_code" rows="12">class Forum:
+    def post_comment(self, user_input):
+        # INSECURE: Saving raw input
+        # TODO: Refactor to replace dangerous HTML tags before returning
+        safe_input = user_input 
+        
+        return f"Comment posted: {safe_input}"
+
+# Test cases:
+forum = Forum()
+print(forum.post_comment("Hello world!"))
+# The following should be sanitized so the script doesn't execute in a browser!
+print(forum.post_comment("<script>alert('Hacked!');</script>"))
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># terminal_output</div>
+                    <pre class="output" id="q17_out">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q17_code', 'q17_out')">Run Code</button>
+        </div>
+
+        <h2 class="section-title">Part F: Progressive Web Apps (Logic Refactoring)</h2>
+
+        <div class="question-box code-q" data-q="18">
+            <div class="q-title"><span>18. Build: PWA Service Worker Cache Logic</span> <span class="marks">[5 Marks]</span></div>
+            <div class="scenario">Scenario: You are designing the backend simulation of a Service Worker. Write the logic for a "Network-First" strategy. When `fetch_data(url)` is called, it should try to return `self.network_request(url)`. If the network request fails (raises an Exception), it must catch the exception and return `self.cache.get(url, "Offline: Data not in cache")`.</div>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># python_editor.py</div>
+                    <textarea class="code-input student-answer" id="q18_code" rows="18">class ServiceWorkerMock:
+    def __init__(self):
+        self.cache = {"/api/news": "Cached News Headline"}
+        self.network_status = "offline" # Change to "online" to test the other branch
+
+    def network_request(self, url):
+        if self.network_status == "offline":
+            raise ConnectionError("Network is down")
+        return "Live Network Data"
+
+    def fetch_data(self, url):
+        # TODO: Implement Network-First logic using a try/except block
+        pass
+
+# Test cases:
+sw = ServiceWorkerMock()
+print("Test 1 (Offline):", sw.fetch_data("/api/news"))
+
+sw.network_status = "online"
+print("Test 2 (Online):", sw.fetch_data("/api/news"))
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># terminal_output</div>
+                    <pre class="output" id="q18_out">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q18_code', 'q18_out')">Run Code</button>
+        </div>
+
+        <button class="submit-btn" onclick="saveAsTxt()">💾 Save Full Assessment as .TXT</button>
+
+    </div>
+
+    <script>
+        let pyodide;
+
+        // Initialize the Python WebAssembly Engine
+        async function initPyodide() {
+            try {
+                pyodide = await loadPyodide();
+                let statusEl = document.getElementById("status");
+                statusEl.innerText = "✅ Enterprise Environment Ready. You may begin the simulation.";
+                statusEl.style.color = "#155724";
+                statusEl.style.backgroundColor = "#d4edda";
+                statusEl.style.border = "1px solid #c3e6cb";
+            } catch (error) {
+                document.getElementById("status").innerText = "❌ Error loading Python engine. Check internet connection.";
+            }
+        }
+        initPyodide();
+
+        // Dynamic Code Execution
+        async function runCode(inputId, outputId) {
+            if (!pyodide) {
+                document.getElementById(outputId).innerText = "Engine loading... please wait.";
+                return;
+            }
+            const code = document.getElementById(inputId).value;
+            const outputDiv = document.getElementById(outputId);
+            outputDiv.innerText = "Executing logic...";
+            
+            try {
+                // Redirect Python's stdout to capture print() statements
+                pyodide.runPython(`
+import sys
+import io
+sys.stdout = io.StringIO()
+                `);
+                
+                await pyodide.runPythonAsync(code);
+                
+                let stdout = pyodide.runPython("sys.stdout.getvalue()");
+                outputDiv.innerText = stdout || "Execution complete (No output returned).";
+            } catch (err) {
+                outputDiv.innerText = "ERROR:\n" + err;
+            }
+        }
+
+        // Dynamic Save Function (Automatically grabs all questions, even if you add more HTML boxes)
+        function saveAsTxt() {
+            const studentName = document.getElementById("student_name").value || "Anonymous_Student";
+            let content = `=====================================================\n`;
+            content += `HSC SOFTWARE ENGINEERING: SECURE ARCHITECTURE & PWA\n`;
+            content += `Student: ${studentName}\n`;
+            content += `Date: ${new Date().toLocaleString()}\n`;
+            content += `=====================================================\n\n`;
+            
+            // Grab all question boxes dynamically
+            const questions = document.querySelectorAll('.question-box');
+            
+            questions.forEach(q => {
+                const titleSpan = q.querySelector('.q-title span:first-child');
+                const title = titleSpan ? titleSpan.innerText : "Unknown Question";
+                const qNum = q.getAttribute('data-q');
+                
+                content += `--- Q${qNum}: ${title} ---\n`;
+                
+                // Determine question type and extract answer
+                if (q.classList.contains('mcq-q')) {
+                    const ans = q.querySelector('.student-answer').value || "No answer selected";
+                    content += `Answer: ${ans}\n\n`;
+                } 
+                else if (q.classList.contains('short-q')) {
+                    const ans = q.querySelector('.student-answer').value || "No response provided";
+                    content += `Response:\n${ans}\n\n`;
+                }
+                else if (q.classList.contains('code-q')) {
+                    const code = q.querySelector('.student-answer').value || "No code written";
+                    const output = q.querySelector('.output').innerText || "No output generated";
+                    content += `Source Code:\n${code}\n\n`;
+                    content += `Execution Output:\n${output}\n\n`;
+                }
+            });
+
+            // Create Blob and Download
+            const blob = new Blob([content], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${studentName.replace(/\s+/g, '_')}_HSC_Assessment.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>
