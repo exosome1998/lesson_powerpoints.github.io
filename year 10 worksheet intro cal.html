@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chemistry: Decoding the Periodic Table (Worksheet)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; background: #555; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .page { width: 210mm; height: 297mm; background: white; padding: 8mm; box-sizing: border-box; margin-bottom: 20px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; }
+        .full-header { border-bottom: 4px solid #311b92; margin-bottom: 6px; padding-bottom: 3px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
+        .h-title { font-weight: 900; font-size: 1.25rem; text-transform: uppercase; color: #311b92; letter-spacing: -0.5px; }
+        .h-info { font-size: 0.85rem; font-weight: bold; color: #333; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; height: 100%; align-content: start; }
+        .col { display: flex; flex-direction: column; gap: 6px; }
+        .module { border: 2px solid #333; border-radius: 6px; padding: 5px 8px; background: #fff; display: flex; flex-direction: column; }
+        .mod-header { background: #311b92; color: white; padding: 2px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin: -5px -8px 4px -8px; border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; }
+        .mod-header.numeracy { background: #00838f; }
+        .mod-header.master { background: #fbc02d; color: #000; }
+        .mod-header.extra { background: #555; color: #fff; }
+        p { font-size: 0.78rem; margin: 0 0 2px 0; line-height: 1.25; color: #222; }
+        strong { font-weight: 900; color: #311b92; }
+        .diagram-container { background: #f5f5f5; border: 1px dashed #bbb; border-radius: 4px; margin: 2px 0 4px 0; display: flex; justify-content: center; align-items: center; height: 50px; width: 100%; overflow: hidden; }
+        svg { display: block; max-height: 100%; width: 100%; object-fit: contain; }
+        
+        /* Answer Line Styling */
+        .line { border-bottom: 1.5px solid #000; display: inline-block; min-width: 40px; height: 12px; text-align: center; font-weight: 700; color: transparent; cursor: pointer; transition: color 0.1s; }
+        /* Revealed Answer */
+        .line.revealed { color: #d32f2f; border-bottom-color: #d32f2f; }
+        
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; height: 100vh; } }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Y10 Chemistry — Decoding the Periodic Table</div>
+        <div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+    </div>
+    <div class="content-grid">
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L1 — Anatomy of an Atom</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="25" r="22" fill="none" stroke="#bbdefb" stroke-width="1" stroke-dasharray="2 2"/>
+                        <circle cx="100" cy="25" r="12" fill="none" stroke="#bbdefb" stroke-width="1" stroke-dasharray="2 2"/>
+                        <circle cx="100" cy="25" r="6" fill="#ffcdd2" stroke="#d32f2f" stroke-width="1"/>
+                        <circle cx="100" cy="13" r="2" fill="#1e88e5"/>
+                        <circle cx="100" cy="37" r="2" fill="#1e88e5"/>
+                        <circle cx="78" cy="25" r="2" fill="#1e88e5"/>
+                        <circle cx="122" cy="25" r="2" fill="#1e88e5"/>
+                        <line x1="40" y1="10" x2="94" y2="22" stroke="#333" stroke-width="1"/>
+                        <text x="38" y="10" text-anchor="end" font-size="6" font-weight="bold">Nucleus (p⁺ & n⁰)</text>
+                        <line x1="160" y1="10" x2="124" y2="24" stroke="#333" stroke-width="1"/>
+                        <text x="162" y="10" text-anchor="start" font-size="6" font-weight="bold">Electron shells (e⁻)</text>
+                    </svg>
+                </div>
+                <p>1. The centre of an atom is called the <span class="line answer">nucleus</span>.</p>
+                <p>2. Protons (+) and <span class="line answer">neutrons</span> (0) live inside the nucleus.</p>
+                <p>3. Electrons (-) orbit the outside in <span class="line answer">shells</span>.</p>
+                <p>4. The nucleus is heavy; it holds almost all the atom's <span class="line answer">mass</span>.</p>
+                <p>5. Electrons are so tiny they have almost zero <span class="line answer">mass/weight</span>.</p>
+                <p>6. An atom is mostly made of <span class="line answer">empty space</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L2 — The Periodic Table Square</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">2</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#311b92">He</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Helium</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">4.002</text>
+                        <line x1="45" y1="10" x2="78" y2="10" stroke="#333" stroke-width="1"/>
+                        <text x="43" y="12" text-anchor="end" font-size="6">Atomic Number</text>
+                        <line x1="155" y1="24" x2="122" y2="24" stroke="#333" stroke-width="1"/>
+                        <text x="157" y="26" text-anchor="start" font-size="6">Atomic Symbol</text>
+                        <line x1="45" y1="43" x2="78" y2="43" stroke="#d32f2f" stroke-width="1"/>
+                        <text x="43" y="45" text-anchor="end" font-size="6" fill="#d32f2f">Atomic Mass</text>
+                    </svg>
+                </div>
+                <p>1. The top number is the <span class="line answer">atomic</span> number.</p>
+                <p>2. The 1 or 2 big letters represent the chemical <span class="line answer">symbol</span>.</p>
+                <p>3. The bottom number is the atomic <span class="line answer">mass</span>.</p>
+                <p>4. Atomic mass is usually a decimal but we <span class="line answer">round</span> it to a whole number.</p>
+                <p>5. Helium's rounded atomic mass is <span class="line answer">4</span>.</p>
+                <p>6. The atomic number identifies which <span class="line answer">element</span> it is.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header numeracy"><span>L3 — Numeracy: The APE MAN Rule</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="85" height="30" rx="4" fill="#e8eaf6" stroke="#3f51b5" stroke-width="1.5"/>
+                        <text x="52" y="22" text-anchor="middle" font-size="9" font-weight="bold" fill="#1a237e">A = P = E</text>
+                        <text x="52" y="34" text-anchor="middle" font-size="6" fill="#333">Atomic # = Protons = Electrons</text>
+                        <rect x="105" y="10" width="85" height="30" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="1.5"/>
+                        <text x="147" y="22" text-anchor="middle" font-size="9" font-weight="bold" fill="#b71c1c">M - A = N</text>
+                        <text x="147" y="34" text-anchor="middle" font-size="6" fill="#333">Mass - Atomic # = Neutrons</text>
+                    </svg>
+                </div>
+                <p>1. A neutral atom has the same number of <span class="line answer">protons</span> and electrons.</p>
+                <p>2. The atomic number tells you the number of <span class="line answer">protons</span>.</p>
+                <p>3. To find neutrons, subtract the <span class="line answer">atomic</span> number from the Mass.</p>
+                <p>4. If Mass = 19 and Atomic # = 9. Neutrons = <span class="line answer">10</span>.</p>
+                <p>5. If Mass = 40 and Atomic # = 18. Neutrons = <span class="line answer">22</span>.</p>
+                <p>6. If an atom has 7 protons, it also has <span class="line answer">7</span> electrons.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L4 — Element Profile: Carbon</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">6</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#311b92">C</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Carbon</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">12.011</text>
+                    </svg>
+                </div>
+                <p>1. Carbon's atomic number is <span class="line answer">6</span>.</p>
+                <p>2. Carbon's atomic mass (rounded to whole) is <span class="line answer">12</span>.</p>
+                <p>3. <strong>A=P=E:</strong> Carbon has <span class="line answer">6</span> protons and <span class="line answer">6</span> electrons.</p>
+                <p>4. <strong>M-A=N:</strong> Mass (12) - Atomic (6) = <span class="line answer">6</span> neutrons.</p>
+                <p>5. The symbol for Carbon is <span class="line answer">C</span>.</p>
+                <p>6. Carbon is the essential element for all <span class="line answer">life/living</span> things.</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L5 — Element Profile: Sodium</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">11</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#311b92">Na</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Sodium</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">22.990</text>
+                    </svg>
+                </div>
+                <p>1. Sodium's atomic symbol is <span class="line answer">Na</span>.</p>
+                <p>2. Sodium's atomic number is <span class="line answer">11</span>.</p>
+                <p>3. The mass number rounds to <span class="line answer">23</span>.</p>
+                <p>4. <strong>A=P=E:</strong> Sodium has <span class="line answer">11</span> protons and <span class="line answer">11</span> electrons.</p>
+                <p>5. <strong>M-A=N:</strong> It has <span class="line answer">12</span> neutrons (23 - 11).</p>
+                <p>6. Sodium forms table salt when combined with <span class="line answer">chlorine</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L6 — Metals vs Non-Metals</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="5" width="160" height="40" fill="none" stroke="#ccc" stroke-width="1"/>
+                        <polygon points="20,5 120,5 120,15 130,15 130,25 140,25 140,35 150,35 150,45 20,45" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1"/>
+                        <text x="60" y="28" font-size="8" font-weight="bold" fill="#1b5e20">METALS</text>
+                        <polygon points="120,5 180,5 180,45 150,45 150,35 140,35 140,25 130,25 130,15 120,15" fill="#ffebee" stroke="#c62828" stroke-width="1"/>
+                        <text x="155" y="18" font-size="7" font-weight="bold" fill="#b71c1c">NON-METALS</text>
+                        <rect x="20" y="5" width="15" height="10" fill="#ffebee" stroke="#c62828" stroke-width="1"/>
+                        <text x="27" y="12" font-size="5" fill="#b71c1c">H</text>
+                        <polyline points="120,5 120,15 130,15 130,25 140,25 140,35 150,35 150,45" fill="none" stroke="#000" stroke-width="2"/>
+                    </svg>
+                </div>
+                <p>1. Metals are found on the <span class="line answer">left</span> side of the table.</p>
+                <p>2. Non-metals are mostly on the <span class="line answer">right</span> side.</p>
+                <p>3. They are separated by a zigzag line called the <span class="line answer">staircase</span>.</p>
+                <p>4. Elements touching the line are called <span class="line answer">metalloids</span>.</p>
+                <p>5. Sodium (left side) is a <span class="line answer">metal</span>.</p>
+                <p>6. Exception: Hydrogen (top left) is actually a <span class="line answer">non-metal</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header master"><span>L7 — Master Profile: Oxygen</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">8</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#311b92">O</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Oxygen</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">15.999</text>
+                    </svg>
+                </div>
+                <p>1. Oxygen's rounded mass number is <span class="line answer">16</span>.</p>
+                <p>2. Number of Protons: <span class="line answer">8</span>.</p>
+                <p>3. Number of Electrons: <span class="line answer">8</span>.</p>
+                <p>4. Number of Neutrons: <span class="line answer">8</span>.</p>
+                <p>5. Oxygen is found on the far right, so it is a <span class="line answer">non-metal</span>.</p>
+                <p>6. Is Oxygen's nucleus heavier or lighter than Carbon's? <span class="line answer">Heavier</span></p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L8 — Short Answer: Particles</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="30" y="5" width="140" height="40" rx="3" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+                        <text x="100" y="18" text-anchor="middle" font-size="8" font-weight="bold" fill="#004d40">Explain the math behind an atom.</text>
+                        <text x="100" y="30" text-anchor="middle" font-size="6" fill="#333">Use the words: Mass, Atomic, Neutrons</text>
+                    </svg>
+                </div>
+                <p>Explain how to calculate the number of neutrons in any element:</p>
+                <p>First, take the <span class="line answer" style="min-width:120px;">atomic mass</span></p>
+                <p>and round it to a <span class="line answer" style="min-width:120px;">whole number</span>.</p>
+                <p>Then, subtract the <span class="line answer" style="min-width:120px;">atomic number</span>.</p>
+                <p>The answer gives you the number of <span class="line answer" style="min-width:120px;">neutrons</span>.</p>
+                <p>This works because the mass = protons + <span class="line answer" style="min-width:120px;">neutrons</span>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Y10 Chemistry — Complex Elements</div>
+        <div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+    </div>
+    <div class="content-grid">
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L9 — Element Profile: Iron</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">26</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#311b92">Fe</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Iron</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">55.845</text>
+                    </svg>
+                </div>
+                <p>1. The atomic symbol for Iron is <span class="line answer">Fe</span>.</p>
+                <p>2. Iron's atomic mass rounds up to <span class="line answer">56</span>.</p>
+                <p>3. Number of Protons: <span class="line answer">26</span>.</p>
+                <p>4. Number of Electrons: <span class="line answer">26</span>.</p>
+                <p>5. Number of Neutrons (56 - 26): <span class="line answer">30</span>.</p>
+                <p>6. Iron is in the middle of the table, so it is a transition <span class="line answer">metal</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L10 — Element Profile: Chlorine</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">17</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#311b92">Cl</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Chlorine</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">35.45</text>
+                    </svg>
+                </div>
+                <p>1. Chlorine's atomic number is <span class="line answer">17</span>.</p>
+                <p>2. Chlorine's mass number rounds to <span class="line answer">35</span>.</p>
+                <p>3. Number of Protons: <span class="line answer">17</span>.</p>
+                <p>4. Number of Electrons: <span class="line answer">17</span>.</p>
+                <p>5. Number of Neutrons: <span class="line answer">18</span>.</p>
+                <p>6. Chlorine is on the far right, so it is a <span class="line answer">non-metal</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header numeracy"><span>L11 — Numeracy: Missing Info</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="5" width="180" height="40" rx="4" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+                        <text x="100" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="#004d40">Mystery Element X</text>
+                        <text x="100" y="28" text-anchor="middle" font-size="8" fill="#333">Protons = 9</text>
+                        <text x="100" y="38" text-anchor="middle" font-size="8" fill="#333">Neutrons = 10</text>
+                    </svg>
+                </div>
+                <p>1. Since Protons = 9, the atomic number is <span class="line answer">9</span>.</p>
+                <p>2. Since A=P=E, the number of Electrons is <span class="line answer">9</span>.</p>
+                <p>3. To find the mass, we add Protons + <span class="line answer">Neutrons</span>.</p>
+                <p>4. The Atomic Mass of Element X is <span class="line answer">19</span>.</p>
+                <p>5. Look at a periodic table. Element #9 is <span class="line answer">Fluorine</span>.</p>
+                <p>6. The symbol for this element is <span class="line answer">F</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header numeracy"><span>L12 — Numeracy: Heavy Elements</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#fff" stroke="#311b92" stroke-width="2"/>
+                        <text x="83" y="12" font-size="6" fill="#333" font-weight="bold">79</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#fbc02d">Au</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#555">Gold</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">196.97</text>
+                    </svg>
+                </div>
+                <p>1. Gold's atomic number is <span class="line answer">79</span>.</p>
+                <p>2. Gold's atomic mass rounds to <span class="line answer">197</span>.</p>
+                <p>3. Number of Protons: <span class="line answer">79</span>.</p>
+                <p>4. Number of Electrons: <span class="line answer">79</span>.</p>
+                <p>5. Subtraction: 197 - 79 = <span class="line answer">118</span>.</p>
+                <p>6. Gold has <span class="line answer">118</span> neutrons in its nucleus.</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L13 — Key Vocabulary</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="40" rx="5" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+                        <text x="100" y="20" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Chemistry Terms</text>
+                        <text x="40" y="38" text-anchor="middle" font-size="8" fill="#333">Nucleus</text>
+                        <text x="100" y="38" text-anchor="middle" font-size="8" fill="#333">Mass</text>
+                        <text x="160" y="38" text-anchor="middle" font-size="8" fill="#333">Symbol</text>
+                    </svg>
+                </div>
+                <p>1. <strong>Atomic Number:</strong> Tells you the number of <span class="line answer">protons</span>.</p>
+                <p>2. <strong>Atomic Mass:</strong> The combined weight of protons and <span class="line answer">neutrons</span>.</p>
+                <p>3. <strong>Symbol:</strong> The 1 or 2 letter abbreviation for an <span class="line answer">element</span>.</p>
+                <p>4. <strong>Nucleus:</strong> The heavy center of the atom where <span class="line answer">protons</span> live.</p>
+                <p>5. <strong>Shells:</strong> The outer rings where <span class="line answer">electrons</span> orbit.</p>
+                <p>6. <strong>Metalloids:</strong> Elements touching the zigzag <span class="line answer">staircase</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header master"><span>L14 — Master: The Mystery Element</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="2" width="40" height="46" fill="#f5f5f5" stroke="#333" stroke-width="2" stroke-dasharray="2 2"/>
+                        <text x="83" y="12" font-size="6" fill="#777" font-weight="bold">?</text>
+                        <text x="100" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#777">?</text>
+                        <text x="100" y="37" font-size="5" text-anchor="middle" fill="#777">Unknown</text>
+                        <text x="100" y="45" font-size="6" text-anchor="middle" fill="#d32f2f" font-weight="bold">?</text>
+                        <text x="40" y="25" font-size="7" font-weight="bold" fill="#311b92">p⁺ = 20</text>
+                        <text x="160" y="25" font-size="7" font-weight="bold" fill="#311b92">n⁰ = 20</text>
+                    </svg>
+                </div>
+                <p>1. The element has 20 protons. Its atomic number is <span class="line answer">20</span>.</p>
+                <p>2. The element has 20 neutrons. Its mass number is <span class="line answer">40</span>.</p>
+                <p>3. A neutral atom of this element has <span class="line answer">20</span> electrons.</p>
+                <p>4. Look at a periodic table. Element 20 is <span class="line answer">Calcium</span>.</p>
+                <p>5. The chemical symbol is <span class="line answer">Ca</span>.</p>
+                <p>6. It is found on the far left side, so it is a <span class="line answer">metal</span>.</p>
+            </div>
+            <div class="module" style="flex-grow:1; justify-content:space-between;">
+                <div class="mod-header extra"><span>L15 — Chemistry Reflection</span><span>✅</span></div>
+                <p style="font-size:0.82rem; margin-top:4px;"><strong>Write out the APE MAN rule:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>Where is most of the mass in an atom located?</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>One element I found interesting today:</strong></p>
+                <p>____________________________________________________</p>
+                <div style="display:flex; justify-content:space-between; margin-top:10px; border-top:1px solid #ccc; padding-top:6px;">
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Student Signature:</p>
+                        <div style="border-bottom:1.5px solid #333; width:120px; margin-top:14px;"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Teacher Signature:</p>
+                        <div style="border-bottom:1.5px solid #333; width:120px; margin-top:14px;"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Date:</p>
+                        <div style="border-bottom:1.5px solid #333; width:80px; margin-top:14px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.answer').forEach(t => t.addEventListener('click', () => t.classList.toggle('revealed')));
+</script>
+</body>
+</html>

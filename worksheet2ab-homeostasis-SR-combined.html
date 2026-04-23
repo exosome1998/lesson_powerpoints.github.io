@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinical Science & Graph Analysis (Worksheet)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; background: #555; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .page { width: 210mm; height: 297mm; background: white; padding: 8mm; box-sizing: border-box; margin-bottom: 20px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; }
+        .full-header { border-bottom: 4px solid #b71c1c; margin-bottom: 6px; padding-bottom: 3px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
+        .h-title { font-weight: 900; font-size: 1.2rem; text-transform: uppercase; color: #b71c1c; letter-spacing: -0.5px; }
+        .h-info { font-size: 0.85rem; font-weight: bold; color: #333; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; height: 100%; align-content: start; }
+        .col { display: flex; flex-direction: column; gap: 5px; }
+        .module { border: 2px solid #333; border-radius: 6px; padding: 4px 8px; background: #fff; display: flex; flex-direction: column; }
+        .mod-header { background: #b71c1c; color: white; padding: 2px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin: -4px -8px 4px -8px; border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; }
+        .mod-header.numeracy { background: #00838f; }
+        .mod-header.graph { background: #6a1b9a; }
+        .mod-header.master { background: #fbc02d; color: #000; }
+        .mod-header.extra { background: #555; color: #fff; }
+        p { font-size: 0.78rem; margin: 0 0 2px 0; line-height: 1.25; color: #222; }
+        strong { font-weight: 900; color: #b71c1c; }
+        .diagram-container { background: #f8f9fa; border: 1px dashed #bbb; border-radius: 4px; margin: 2px 0 4px 0; display: flex; justify-content: center; align-items: center; height: 50px; width: 100%; overflow: hidden; }
+        svg { display: block; max-height: 100%; width: 100%; object-fit: contain; }
+        
+        /* Answer Line Styling */
+        .line { border-bottom: 1.5px solid #000; display: inline-block; min-width: 40px; height: 12px; text-align: center; font-weight: 700; color: transparent; cursor: pointer; transition: color 0.1s; }
+        /* Revealed Answer */
+        .line.revealed { color: #d32f2f; border-bottom-color: #d32f2f; }
+        
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; height: 100vh; } }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Clinical Science — Negative Feedback & Graph Analysis</div>
+        <div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+    </div>
+    <div class="content-grid">
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L1 — Negative Feedback Loops</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 40,25 Q 100,-10 160,25 Q 100,60 40,25" fill="none" stroke="#b71c1c" stroke-width="2" stroke-dasharray="4 2"/>
+                        <circle cx="100" cy="25" r="12" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+                        <text x="100" y="28" text-anchor="middle" font-size="8" font-weight="bold" fill="#2e7d32">Set Point</text>
+                        <text x="50" y="15" font-size="7" fill="#333">Change detected 📈</text>
+                        <text x="150" y="42" font-size="7" text-anchor="end" fill="#333">📉 Reversed back to normal</text>
+                    </svg>
+                </div>
+                <p>1. <strong>Negative feedback</strong> is when the body detects a change and <span class="line answer">reverses</span> it.</p>
+                <p>2. This loop is how the body maintains <span class="line answer">homeostasis</span>.</p>
+                <p>3. If you get too hot, negative feedback makes you <span class="line answer">cool down</span>.</p>
+                <p>4. The ideal, normal level the body wants to stay at is called the <span class="line answer">set point</span>.</p>
+                <p>5. If blood pressure drops, the response will make it go <span class="line answer">up</span>.</p>
+                <p>6. Without negative feedback, we would quickly become <span class="line answer">sick/dead</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L2 — Blood Sugar Feedback Loop</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="5" width="80" height="15" rx="3" fill="#ffebee" stroke="#d32f2f" stroke-width="1.5"/>
+                        <text x="50" y="15" text-anchor="middle" font-size="7" font-weight="bold" fill="#b71c1c">High Sugar → INSULIN</text>
+                        <rect x="110" y="30" width="80" height="15" rx="3" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+                        <text x="150" y="40" text-anchor="middle" font-size="7" font-weight="bold" fill="#0d47a1">Low Sugar → GLUCAGON</text>
+                        <line x1="95" y1="12" x2="190" y2="12" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="2 2" marker-end="url(#arr)"/>
+                        <line x1="105" y1="37" x2="10" y2="37" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="2 2" marker-end="url(#arr)"/>
+                        <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32"/></marker></defs>
+                    </svg>
+                </div>
+                <p>1. High blood sugar is the <span class="line answer">stimulus</span> for the pancreas.</p>
+                <p>2. The pancreas responds by releasing <span class="line answer">insulin</span>.</p>
+                <p>3. Insulin forces cells to absorb sugar, which <span class="line answer">lowers</span> the blood sugar level.</p>
+                <p>4. This creates a perfect <span class="line answer">negative</span> feedback loop.</p>
+                <p>5. If sugar gets too low, the pancreas releases <span class="line answer">glucagon</span> instead.</p>
+                <p>6. Glucagon acts to bring blood sugar back <span class="line answer">up</span> to the set point.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header graph"><span>L3 — Graph Analysis: Glucose Spike</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="25" y1="40" x2="180" y2="40" stroke="#000" stroke-width="1"/>
+                        <line x1="25" y1="40" x2="25" y2="5" stroke="#000" stroke-width="1"/>
+                        <text x="15" y="10" font-size="6" fill="#333">150</text>
+                        <text x="15" y="25" font-size="6" fill="#333">100</text>
+                        <text x="15" y="40" font-size="6" fill="#333">50</text>
+                        <text x="25" y="48" font-size="6" fill="#333">0m</text>
+                        <text x="60" y="48" font-size="6" fill="#333">30m</text>
+                        <text x="100" y="48" font-size="6" fill="#333">60m</text>
+                        <text x="140" y="48" font-size="6" fill="#333">90m</text>
+                        <polyline points="25,25 60,10 100,20 140,25 180,25" fill="none" stroke="#d32f2f" stroke-width="2"/>
+                        <line x1="25" y1="25" x2="180" y2="25" stroke="#2e7d32" stroke-width="1" stroke-dasharray="3 3"/>
+                        <text x="182" y="27" font-size="5" fill="#2e7d32">Set Point</text>
+                    </svg>
+                </div>
+                <p>1. At 0 minutes, the patient's blood glucose is <span class="line answer">100</span> mg/dL.</p>
+                <p>2. The glucose peaks to 150 mg/dL at <span class="line answer">30</span> minutes.</p>
+                <p>3. Calculate the total drop between 30 and 90 minutes: <span class="line answer">50</span> mg/dL.</p>
+                <p>4. Which hormone caused the graph to go down after 30 mins? <span class="line answer">Insulin</span></p>
+                <p>5. By 90 minutes, the body successfully restored <span class="line answer">homeostasis</span>.</p>
+                <p>6. The green dashed line represents the healthy <span class="line answer">set point</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header numeracy"><span>L4 — Numeracy: Urine Output</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="40" rx="4" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+                        <text x="100" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="#004d40">Kidney Fluid Processing (Per Hour)</text>
+                        <text x="100" y="28" text-anchor="middle" font-size="8" fill="#333">Fluid filtered by kidneys: 7.5 Liters</text>
+                        <text x="100" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#d32f2f">Fluid reabsorbed into blood: 7.4 Liters</text>
+                    </svg>
+                </div>
+                <p>1. Fluid filtered minus fluid reabsorbed equals urine made. Urine = <span class="line answer">0.1</span> L.</p>
+                <p>2. Convert the urine output into millilitres (1 L = 1000 mL): <span class="line answer">100</span> mL.</p>
+                <p>3. If the patient runs a marathon and sweats heavily, ADH hormone will <span class="line answer">increase</span>.</p>
+                <p>4. Higher ADH means the kidneys will reabsorb <span class="line answer">more</span> water.</p>
+                <p>5. If reabsorption rises to 7.45 L, the new urine output is <span class="line answer">0.05</span> L.</p>
+                <p>6. This negative feedback loop protects against <span class="line answer">dehydration</span>.</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L5 — Fever: Moving the Set Point</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="120" height="10" rx="5" fill="#fff" stroke="#333" stroke-width="1.5"/>
+                        <circle cx="20" cy="25" r="9" fill="#d32f2f"/>
+                        <rect x="20" y="22" width="100" height="6" fill="#d32f2f"/>
+                        <text x="160" y="28" text-anchor="start" font-size="10" font-weight="bold" fill="#d32f2f">39.5°C</text>
+                        <text x="80" y="14" text-anchor="middle" font-size="7" font-weight="bold" fill="#333">Hypothalamus (Brain)</text>
+                    </svg>
+                </div>
+                <p>1. Normally, human core temperature has a set point of <span class="line answer">37</span> °C.</p>
+                <p>2. During an infection, the brain <span class="line answer">increases</span> this set point.</p>
+                <p>3. Because the new target is higher, you feel <span class="line answer">cold</span> and start shivering.</p>
+                <p>4. Shivering (the effector) generates <span class="line answer">heat</span> to reach the new set point.</p>
+                <p>5. A fever is a protective response designed to <span class="line answer">kill</span> bacteria/viruses.</p>
+                <p>6. When the fever breaks, negative feedback forces you to <span class="line answer">sweat</span> to cool down.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L6 — Blood Pressure & Shock</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="15" width="40" height="20" fill="#ffcdd2" stroke="#b71c1c" stroke-width="2"/>
+                        <rect x="20" y="18" width="40" height="14" fill="#fff"/>
+                        <text x="40" y="45" text-anchor="middle" font-size="6" fill="#333">Wide (Low BP)</text>
+                        <line x1="70" y1="25" x2="110" y2="25" stroke="#d32f2f" stroke-width="2" marker-end="url(#arr)"/>
+                        <rect x="120" y="20" width="40" height="10" fill="#ffcdd2" stroke="#b71c1c" stroke-width="3"/>
+                        <text x="140" y="45" text-anchor="middle" font-size="6" fill="#333">Narrow (High BP)</text>
+                    </svg>
+                </div>
+                <p>1. Sudden blood loss causes blood pressure to drop (the <span class="line answer">stimulus</span>).</p>
+                <p>2. Pressure receptors detect this and alert the <span class="line answer">brain</span>.</p>
+                <p>3. The brain responds by making blood vessels <span class="line answer">constrict/narrow</span>.</p>
+                <p>4. This negative feedback loop makes the pressure go back <span class="line answer">up</span>.</p>
+                <p>5. The brain also tells the heart to beat <span class="line answer">faster</span>.</p>
+                <p>6. Failure of this negative feedback loop results in clinical <span class="line answer">shock</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header graph"><span>L7 — Graph Analysis: Temperature</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="25" y1="40" x2="180" y2="40" stroke="#000" stroke-width="1"/>
+                        <line x1="25" y1="40" x2="25" y2="5" stroke="#000" stroke-width="1"/>
+                        <text x="15" y="10" font-size="5" fill="#333">37°C</text>
+                        <text x="15" y="40" font-size="5" fill="#333">35°C</text>
+                        <text x="25" y="48" font-size="6" fill="#333">0m</text>
+                        <text x="75" y="48" font-size="6" fill="#333">10m</text>
+                        <text x="125" y="48" font-size="6" fill="#333">20m</text>
+                        <text x="175" y="48" font-size="6" fill="#333">30m</text>
+                        <polyline points="25,10 75,35 125,18 175,10" fill="none" stroke="#1565c0" stroke-width="2"/>
+                        <rect x="25" y="5" width="50" height="35" fill="#bbdefb" opacity="0.3"/>
+                        <text x="50" y="40" text-anchor="middle" font-size="5" fill="#0d47a1">Ice Bath</text>
+                    </svg>
+                </div>
+                <p>1. The patient's normal set point is <span class="line answer">37</span> °C.</p>
+                <p>2. What is the lowest temperature reached? <span class="line answer">35</span> °C.</p>
+                <p>3. Calculate the temp drop between 0 and 10 minutes: <span class="line answer">2</span> °C.</p>
+                <p>4. Calculate the rate of warming from 10m to 30m: <span class="line answer">0.1</span> °C per minute.</p>
+                <p>5. What bodily response (effector) caused the line to rise? <span class="line answer">Shivering</span></p>
+                <p>6. The recovery from 35°C to 37°C is proof of <span class="line answer">negative</span> feedback.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L8 — Concussion Testing</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="25" r="16" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+                        <circle cx="50" cy="25" r="10" fill="#006064"/>
+                        <circle cx="50" cy="25" r="3" fill="#000"/>
+                        <polygon points="90,18 90,32 70,25" fill="#fff9c4" stroke="#f57f17"/>
+                        <text x="140" y="20" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">Medical Penlight</text>
+                        <text x="140" y="32" text-anchor="middle" font-size="7" fill="#555">Checking pupillary reflex</text>
+                    </svg>
+                </div>
+                <p>1. Shining a light in the eye provides a <span class="line answer">stimulus</span>.</p>
+                <p>2. The retina acts as the <span class="line answer">receptor</span>.</p>
+                <p>3. The negative feedback response protects the eye by making the pupil <span class="line answer">smaller</span>.</p>
+                <p>4. The effector performing this action is the iris <span class="line answer">muscle</span>.</p>
+                <p>5. If the pupil doesn't react, it implies the <span class="line answer">brain</span> is damaged.</p>
+                <p>6. This reflex proves the sensory and motor <span class="line answer">nerves</span> are still working.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Clinical Science — Medical Scenarios (continued)</div>
+        <div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+    </div>
+    <div class="content-grid">
+        <div class="col">
+            <div class="module">
+                <div class="mod-header numeracy"><span>L9 — Numeracy: Heart Rate (ECG)</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="40" rx="4" fill="#000" stroke="#333" stroke-width="2"/>
+                        <polyline points="10,25 30,25 35,10 40,40 45,25 80,25 85,10 90,40 95,25 130,25 135,10 140,40 145,25 180,25" fill="none" stroke="#00e676" stroke-width="1.5"/>
+                        <text x="100" y="45" text-anchor="middle" font-size="6" fill="#fff">1 Second Timeframe (3 Beats shown)</text>
+                    </svg>
+                </div>
+                <p>1. The graph shows 3 beats in 1 second. How many in 60 secs? <span class="line answer">180</span></p>
+                <p>2. Normal resting heart rate is between 60 and <span class="line answer">100</span> BPM.</p>
+                <p>3. This patient has a dangerously <span class="line answer">high</span> heart rate (tachycardia).</p>
+                <p>4. Tachycardia could be a response to the stimulus of extreme <span class="line answer">fear/exercise</span>.</p>
+                <p>5. The effector creating these beats is the heart <span class="line answer">muscle</span>.</p>
+                <p>6. A high heart rate is driven by the hormone <span class="line answer">adrenaline</span>.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L10 — Anesthesia & Nerve Blocks</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="20" y1="25" x2="180" y2="25" stroke="#333" stroke-width="3"/>
+                        <rect x="80" y="10" width="40" height="30" rx="3" fill="#ffcdd2" stroke="#d32f2f" stroke-width="1.5"/>
+                        <text x="100" y="28" text-anchor="middle" font-size="8" font-weight="bold" fill="#b71c1c">BLOCKED</text>
+                        <polygon points="100,10 95,5 105,5" fill="#00838f"/>
+                        <text x="40" y="18" text-anchor="middle" font-size="7" fill="#333">Receptor</text>
+                        <text x="160" y="18" text-anchor="middle" font-size="7" fill="#333">To Brain</text>
+                    </svg>
+                </div>
+                <p>1. A scalpel cutting skin acts as an extreme <span class="line answer">stimulus</span>.</p>
+                <p>2. Pain receptors physically <span class="line answer">detect</span> this cut.</p>
+                <p>3. However, anesthesia chemically blocks the sensory <span class="line answer">nerves</span>.</p>
+                <p>4. Because the signal is blocked, it never reaches the <span class="line answer">coordinator/brain</span>.</p>
+                <p>5. If the brain receives no alert, there is no pain <span class="line answer">response</span>.</p>
+                <p>6. Paralytics work similarly but block <span class="line answer">motor</span> nerves to muscles.</p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L11 — Short Answer: Medical Case</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="80" y="5" width="40" height="40" rx="2" fill="#fff" stroke="#555" stroke-width="1.5"/>
+                        <line x1="85" y1="15" x2="115" y2="15" stroke="#ccc" stroke-width="1"/>
+                        <line x1="85" y1="22" x2="115" y2="22" stroke="#ccc" stroke-width="1"/>
+                        <line x1="85" y1="29" x2="115" y2="29" stroke="#ccc" stroke-width="1"/>
+                        <text x="65" y="30" text-anchor="middle" font-size="16">⚕️</text>
+                        <text x="145" y="28" text-anchor="middle" font-size="8" font-weight="bold" fill="#b71c1c">Patient Chart</text>
+                    </svg>
+                </div>
+                <p>Choose a disease/medical scenario. Map the S-R pathway:</p>
+                <p>Scenario: <span class="line answer" style="min-width:120px;">e.g. Asthma attack</span></p>
+                <p>What is the internal stimulus? <span class="line answer" style="min-width:120px;">High blood CO2</span></p>
+                <p>What is the effector? <span class="line answer" style="min-width:120px;">Diaphragm / lung muscles</span></p>
+                <p>What is the response? <span class="line answer" style="min-width:120px;">Breathe faster / hyperventilate</span></p>
+                <p>How does this act as Negative Feedback? <span class="line answer" style="min-width:120px;">Removes the excess CO2</span></p>
+            </div>
+            <div class="module">
+                <div class="mod-header"><span>L12 — Medical Vocabulary</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="40" rx="5" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+                        <text x="100" y="20" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Clinical Terms</text>
+                        <text x="40" y="38" text-anchor="middle" font-size="8" fill="#333">Hyper = High</text>
+                        <text x="100" y="38" text-anchor="middle" font-size="8" fill="#333">Hypo = Low</text>
+                        <text x="160" y="38" text-anchor="middle" font-size="8" fill="#333">Vaso = Vessel</text>
+                    </svg>
+                </div>
+                <p>1. <strong>Homeostasis:</strong> maintaining a stable <span class="line answer">internal</span> environment.</p>
+                <p>2. <strong>Hypoglycemia:</strong> dangerously <span class="line answer">low</span> blood sugar.</p>
+                <p>3. <strong>Hyperthermia:</strong> dangerously <span class="line answer">high</span> body temperature.</p>
+                <p>4. <strong>Vasodilation:</strong> blood vessels get <span class="line answer">wider</span> to lose heat.</p>
+                <p>5. <strong>Vasoconstriction:</strong> blood vessels get <span class="line answer">narrow</span> to save heat.</p>
+                <p>6. <strong>Pathogen:</strong> a bacteria/virus that acts as a <span class="line answer">stimulus</span> for fever.</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="module">
+                <div class="mod-header graph"><span>L13 — Master Graph Analysis: Type 1 Diabetes</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 55" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="20" y1="45" x2="180" y2="45" stroke="#000" stroke-width="1"/>
+                        <line x1="20" y1="45" x2="20" y2="5" stroke="#000" stroke-width="1"/>
+                        <text x="18" y="10" font-size="5" text-anchor="end" fill="#333">250</text>
+                        <text x="18" y="27" font-size="5" text-anchor="end" fill="#333">150</text>
+                        <text x="18" y="45" font-size="5" text-anchor="end" fill="#333">90</text>
+                        <text x="20" y="53" font-size="6" fill="#333">0hr</text>
+                        <text x="100" y="53" font-size="6" fill="#333">1hr</text>
+                        <text x="180" y="53" font-size="6" fill="#333">2hr</text>
+                        <polyline points="20,45 60,27 100,35 140,43 180,45" fill="none" stroke="#2e7d32" stroke-width="2"/>
+                        <text x="150" y="42" font-size="6" font-weight="bold" fill="#2e7d32">Patient A</text>
+                        <polyline points="20,45 60,18 100,10 140,8 180,8" fill="none" stroke="#d32f2f" stroke-width="2"/>
+                        <text x="150" y="15" font-size="6" font-weight="bold" fill="#d32f2f">Patient B</text>
+                        <text x="40" y="53" font-size="5" font-style="italic" fill="#555">Meal</text>
+                    </svg>
+                </div>
+                <p>1. Both patients eat a meal at 0 hr. Blood glucose initially goes <span class="line answer">up</span> for both.</p>
+                <p>2. Patient A's glucose peaks at 1 hour and returns to 90 mg/dL by <span class="line answer">2</span> hours.</p>
+                <p>3. Patient A has a functioning <span class="line answer">negative</span> feedback loop.</p>
+                <p>4. Which patient is suffering from Type 1 Diabetes? <span class="line answer">Patient B</span>.</p>
+                <p>5. Calculate the difference in blood sugar between Patient A and B at 2 hours: <span class="line answer">160</span> mg/dL.</p>
+                <p>6. Patient B's graph stays high because their body cannot produce <span class="line answer">insulin</span>.</p>
+            </div>
+            
+            <div class="module">
+                <div class="mod-header master"><span>L14 — Master: Broken Loops</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="30" rx="4" fill="#fce4ec" stroke="#e91e63" stroke-width="1.5"/>
+                        <text x="100" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="#880e4f">Anaphylaxis (Severe Allergy)</text>
+                        <text x="100" y="28" text-anchor="middle" font-size="6" fill="#333">Peanut = Airways swell shut.</text>
+                    </svg>
+                </div>
+                <p>1. In allergies, a harmless food acts as an extreme <span class="line answer">stimulus</span>.</p>
+                <p>2. The body's natural response is dangerous; airways <span class="line answer">swell/close</span>.</p>
+                <p>3. An EpiPen injects artificial adrenaline (<span class="line answer">hormone</span>) to fix this.</p>
+                <p>4. The medicine forces airway muscles to <span class="line answer">relax/open</span>.</p>
+                <p>5. Medicine is used to manually restore <span class="line answer">homeostasis</span> when a loop breaks.</p>
+            </div>
+
+            <div class="module" style="flex-grow:1; justify-content:space-between;">
+                <div class="mod-header extra"><span>L15 — Clinical Reflection</span><span>✅</span></div>
+                <p style="font-size:0.82rem; margin-top:4px;"><strong>Explain Negative Feedback in your own words:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>Name a disease caused by a broken feedback loop:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>One thing I found interesting today:</strong></p>
+                <p>____________________________________________________</p>
+                <div style="display:flex; justify-content:space-between; margin-top:10px; border-top:1px solid #ccc; padding-top:6px;">
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Student Signature:</p>
+                        <div style="border-bottom:1.5px solid #333; width:120px; margin-top:14px;"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Teacher Signature:</p>
+                        <div style="border-bottom:1.5px solid #333; width:120px; margin-top:14px;"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Date:</p>
+                        <div style="border-bottom:1.5px solid #333; width:80px; margin-top:14px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.answer').forEach(t => t.addEventListener('click', () => t.classList.toggle('revealed')));
+</script>
+</body>
+</html>
