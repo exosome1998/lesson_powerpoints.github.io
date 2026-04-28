@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Depth Study Workbook – Simple Machines</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ef;
+    --paper: #f5efe3;
+    --navy: #1a2744;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --rust: #b5451b;
+    --sage: #4a6741;
+    --mid: #6b7280;
+    --border: #d6c9b0;
+    --highlight: #fff8e7;
+    --red: #c0392b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ===== COVER PAGE ===== */
+  #cover {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(200,146,42,0.04) 60px, rgba(200,146,42,0.04) 61px),
+      repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(200,146,42,0.04) 60px, rgba(200,146,42,0.04) 61px);
+  }
+
+  .cover-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+    line-height: 1.05;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .cover-title span {
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .cover-subtitle {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-top: 16px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 32px auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-field {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,146,42,0.3);
+    padding: 14px 18px;
+  }
+
+  .cover-field label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .cover-field input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    width: 100%;
+    padding: 4px 0;
+    outline: none;
+  }
+
+  .cover-field input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .start-btn {
+    margin-top: 44px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 44px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .start-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .cover-lessons {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cover-lesson-pill {
+    border: 1px solid rgba(200,146,42,0.4);
+    color: rgba(255,255,255,0.55);
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+  }
+
+  /* ===== MAIN WORKBOOK ===== */
+  #workbook { display: none; }
+
+  /* NAV */
+  .nav-bar {
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 4px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(26,39,68,0.25);
+    overflow-x: auto;
+  }
+
+  .nav-logo {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-right: 16px;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+
+  .nav-tab {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 16px 14px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-tab:hover { color: rgba(255,255,255,0.8); }
+  .nav-tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+  /* LESSON PAGES */
+  .lesson-page { display: none; max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  .lesson-page.active { display: block; }
+
+  /* Lesson header */
+  .lesson-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .lesson-number-block {
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    min-width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .lesson-header-text {}
+
+  .lesson-tag {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .lesson-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-top: 4px;
+    line-height: 1.2;
+  }
+
+  .lesson-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-meta-item {
+    font-size: 13px;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .lesson-meta-item strong { color: var(--navy); }
+
+  /* SECTION HEADERS */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 16px;
+  }
+
+  .section-label-bar {
+    width: 4px;
+    height: 22px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .section-label h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* BOXES */
+  .info-box {
+    background: var(--highlight);
+    border-left: 4px solid var(--gold);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .info-box strong { color: var(--navy); }
+
+  .tip-box {
+    background: #eef6ee;
+    border-left: 4px solid var(--sage);
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .tip-box .tip-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .warning-box {
+    background: #fdf0ee;
+    border-left: 4px solid var(--rust);
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* WRITE-IN AREAS */
+  .write-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .write-field {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: #fffdf8;
+    padding: 10px 14px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14.5px;
+    color: var(--navy);
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+
+  .write-field:focus { border-color: var(--gold); }
+
+  .write-block {
+    margin: 14px 0;
+  }
+
+  .inline-field {
+    display: inline-block;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14.5px;
+    color: var(--navy);
+    outline: none;
+    padding: 2px 4px;
+    min-width: 120px;
+    transition: border-color 0.2s;
+  }
+
+  .inline-field:focus { border-bottom-color: var(--gold); }
+
+  /* TABLES */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    padding: 10px 12px;
+    text-align: center;
+    border: 1px solid var(--navy);
+    font-size: 13px;
+  }
+
+  .data-table td {
+    border: 1px solid var(--border);
+    padding: 0;
+    text-align: center;
+    background: #fffdf8;
+  }
+
+  .data-table tr:nth-child(even) td { background: #faf6ef; }
+
+  .data-table td input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'Courier Prime', monospace;
+    font-size: 14px;
+    padding: 9px 6px;
+    outline: none;
+    color: var(--navy);
+  }
+
+  .data-table .row-label {
+    background: #f0ece3;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 9px 12px;
+    text-align: left;
+    color: var(--navy);
+  }
+
+  .data-table .mean-row td { background: #fff8e7 !important; font-weight: 700; }
+  .data-table .mean-row td input { font-weight: 700; }
+
+  /* KEY TERMS */
+  .key-term-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  @media (max-width: 560px) { .key-term-grid { grid-template-columns: 1fr; } }
+
+  .key-term-card {
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    background: #fffdf8;
+  }
+
+  .key-term-card .term {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .key-term-card .definition {
+    font-size: 13.5px;
+    color: var(--navy);
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  .key-term-card .my-def-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--mid);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  /* STEP FLOW */
+  .step-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 36px;
+    width: 2px;
+    bottom: 0;
+    background: var(--border);
+  }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Courier Prime', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content {
+    padding-bottom: 24px;
+    flex: 1;
+  }
+
+  .step-content strong {
+    display: block;
+    font-size: 14.5px;
+    color: var(--navy);
+    margin-bottom: 4px;
+    margin-top: 6px;
+  }
+
+  .step-content p {
+    font-size: 13.5px;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* HYPOTHESIS BUILDER */
+  .hypothesis-builder {
+    background: var(--paper);
+    border: 2px dashed var(--gold);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .hypothesis-builder .hb-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .hypothesis-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .hypothesis-row .keyword {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .hypothesis-row input {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14.5px;
+    color: var(--navy);
+    outline: none;
+    padding: 2px 4px;
+  }
+
+  .hypothesis-row input:focus { border-bottom-color: var(--gold); }
+
+  /* GRAPH AREA */
+  .graph-area {
+    border: 1px solid var(--border);
+    background: #fffdf8;
+    padding: 16px;
+    margin: 16px 0;
+    min-height: 280px;
+    position: relative;
+  }
+
+  .graph-grid {
+    width: 100%;
+    height: 240px;
+    background-image:
+      linear-gradient(to right, #e8e0d0 1px, transparent 1px),
+      linear-gradient(to bottom, #e8e0d0 1px, transparent 1px);
+    background-size: 40px 30px;
+    border-left: 2px solid var(--navy);
+    border-bottom: 2px solid var(--navy);
+    position: relative;
+  }
+
+  .graph-axis-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    letter-spacing: 1px;
+  }
+
+  .graph-x-label {
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .graph-y-label {
+    position: absolute;
+    left: -48px;
+    top: 50%;
+    transform: rotate(-90deg) translateX(50%);
+    white-space: nowrap;
+  }
+
+  .graph-title-field {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    outline: none;
+    padding: 4px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .graph-title-field:focus { border-bottom-color: var(--gold); }
+
+  /* VARIABLE IDENTIFIER */
+  .variable-box {
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    background: #fffdf8;
+    margin: 10px 0;
+  }
+
+  .variable-box .var-type {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .var-independent .var-type { color: var(--rust); }
+  .var-dependent .var-type { color: var(--sage); }
+  .var-controlled .var-type { color: #5b6abf; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin: 12px 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--gold);
+  }
+
+  /* RELIABILITY/VALIDITY TABLE */
+  .rvt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .rvt-table th {
+    background: var(--navy);
+    color: var(--gold-light);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .rvt-table td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    background: #fffdf8;
+    vertical-align: top;
+  }
+
+  .rvt-table td:first-child {
+    background: #f0ece3;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.08);
+    height: 4px;
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.4s;
+  }
+
+  /* CONCLUSION SCAFFOLD */
+  .conclusion-scaffold {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .cs-row {
+    margin-bottom: 16px;
+  }
+
+  .cs-row .cs-prompt {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .cs-row .cs-hint {
+    font-size: 12.5px;
+    color: var(--mid);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  /* PRINT */
+  @media print {
+    .nav-bar, .start-btn, #cover { display: none !important; }
+    #workbook { display: block !important; }
+    .lesson-page { display: block !important; page-break-after: always; }
+    .write-field, .inline-field, input { border: 1px solid #aaa !important; }
+  }
+
+  /* UTILITY */
+  .text-sm { font-size: 13px; }
+  .text-mid { color: var(--mid); }
+  p { line-height: 1.7; font-size: 14.5px; margin-bottom: 10px; }
+  .mb-0 { margin-bottom: 0 !important; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .gap-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .flex-1 { flex: 1; min-width: 160px; }
+
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 30px 0;
+  }
+
+  .experiment-tag {
+    display: inline-block;
+    background: var(--rust);
+    color: #fff;
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .cols-2 { grid-template-columns: 1fr; } }
+
+  .page-title-strip {
+    background: var(--gold);
+    padding: 6px 0;
+    text-align: center;
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER PAGE ===== -->
+<div id="cover">
+  <div class="cover-badge">NSW Science · Year 8 · Depth Study</div>
+  <h1 class="cover-title">
+    Ancient Machines,
+    <span>Modern Science</span>
+  </h1>
+  <p class="cover-subtitle">Simple Machines &amp; Scientific Method — Student Workbook</p>
+  <div class="cover-divider"></div>
+
+  <div class="cover-info">
+    <div class="cover-field">
+      <label>Student Name</label>
+      <input type="text" placeholder="Your full name">
+    </div>
+    <div class="cover-field">
+      <label>Class</label>
+      <input type="text" placeholder="e.g. 8SC1">
+    </div>
+    <div class="cover-field">
+      <label>Teacher</label>
+      <input type="text" placeholder="Teacher's name">
+    </div>
+    <div class="cover-field">
+      <label>Term / Year</label>
+      <input type="text" placeholder="e.g. Term 2, 2026">
+    </div>
+  </div>
+
+  <div class="cover-lessons">
+    <div class="cover-lesson-pill">L1 · Scientific Method</div>
+    <div class="cover-lesson-pill">L2 · Experiment 1: Ramp</div>
+    <div class="cover-lesson-pill">L3 · Experiment 2: Friction</div>
+    <div class="cover-lesson-pill">L4 · Data &amp; Analysis</div>
+    <div class="cover-lesson-pill">L5 · Assessment ✦</div>
+  </div>
+
+  <button class="start-btn" onclick="openWorkbook()">Open Workbook →</button>
+</div>
+
+<!-- ===== WORKBOOK ===== -->
+<div id="workbook">
+
+  <nav class="nav-bar">
+    <div class="nav-logo">Sci Workbook</div>
+    <button class="nav-tab active" onclick="showLesson(1, this)">Lesson 1</button>
+    <button class="nav-tab" onclick="showLesson(2, this)">Lesson 2</button>
+    <button class="nav-tab" onclick="showLesson(3, this)">Lesson 3</button>
+    <button class="nav-tab" onclick="showLesson(4, this)">Lesson 4</button>
+  </nav>
+
+  <!-- ============================================================
+       LESSON 1: SCIENTIFIC METHOD & VARIABLES
+       ============================================================ -->
+  <div class="lesson-page active" id="lesson-1">
+    <div class="page-title-strip">Lesson 1 of 4 · 50 Minutes</div>
+
+    <div class="lesson-header">
+      <div class="lesson-number-block">1</div>
+      <div class="lesson-header-text">
+        <div class="lesson-tag">Scientific Method · Variables · Hypothesis</div>
+        <div class="lesson-title">Thinking Like a Scientist</div>
+        <div class="lesson-meta">
+          <div class="lesson-meta-item">⏱ <strong>50 min</strong></div>
+          <div class="lesson-meta-item">📋 <strong>SC4-WS-01 · SC4-WS-02</strong></div>
+          <div class="lesson-meta-item">✏️ <strong>No experiment today — building skills</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTEXT -->
+    <div class="info-box">
+      <strong>🏛 The Big Question:</strong> How did the ancient Egyptians move 80,000 kg stone blocks to build the Great Pyramid? Over the next four lessons, you will investigate simple machines — the same technology used 4,500 years ago — using the tools of modern science.
+    </div>
+
+    <!-- SCIENTIFIC METHOD -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part A — The Scientific Method</h3></div>
+
+    <p>Scientists follow a structured process to answer questions. Below are the key steps. Read each one, then add a brief note in your own words.</p>
+
+    <div class="step-flow">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Aim</strong>
+          <p>A clear statement of <em>what</em> you are trying to find out. It usually begins with <em>"To investigate…"</em> or <em>"To determine…"</em></p>
+          <div class="write-block mt-8">
+            <span class="write-label">Example aim in your own words:</span>
+            <textarea class="write-field" rows="2" placeholder="Write an example of an aim here..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Hypothesis</strong>
+          <p>A testable prediction. Must use the format: <em>"If [change], then [result], because [reason]."</em></p>
+          <div class="write-block mt-8">
+            <span class="write-label">My notes on what makes a good hypothesis:</span>
+            <textarea class="write-field" rows="2" placeholder="e.g. It must be testable, it predicts an outcome..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Method</strong>
+          <p>A step-by-step procedure that anyone could follow to repeat the experiment exactly. Lists materials and describes each step.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Results</strong>
+          <p>The data collected, shown in a table and/or graph. Raw numbers — no interpretation yet.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Discussion</strong>
+          <p>Explain your results. Look for patterns, explain why they occurred, and discuss limitations.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <strong>Conclusion</strong>
+          <p>A short summary that directly answers the aim, referencing your evidence. Start with <em>"In conclusion…"</em></p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- VARIABLES -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part B — Understanding Variables</h3></div>
+
+    <div class="key-term-grid">
+      <div class="key-term-card">
+        <div class="term">Independent Variable</div>
+        <div class="definition">The one thing you deliberately <strong>change</strong> in the experiment. Only change ONE at a time.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+      <div class="key-term-card">
+        <div class="term">Dependent Variable</div>
+        <div class="definition">What you <strong>measure</strong> — the thing that changes in response to the independent variable.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+      <div class="key-term-card">
+        <div class="term">Controlled Variables</div>
+        <div class="definition">Everything else that is kept the <strong>same</strong> so results are fair and valid.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+      <div class="key-term-card">
+        <div class="term">Control Experiment</div>
+        <div class="definition">The "normal" condition with no change applied — gives you a baseline to compare against.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+    </div>
+
+    <!-- VARIABLE PRACTICE -->
+    <div class="tip-box">
+      <div class="tip-label">📝 Practice Activity</div>
+      <strong>Scenario:</strong> A student wants to find out if the angle of a ramp affects how much force is needed to pull a 1 kg block up it. They test angles of 15°, 30°, and 45°, keeping the block and spring balance the same each time.
+    </div>
+
+    <div class="variable-box var-independent">
+      <span class="var-type">→ Independent Variable (what is being changed)</span>
+      <textarea class="write-field" rows="2" placeholder="Identify the independent variable from the scenario above..."></textarea>
+    </div>
+    <div class="variable-box var-dependent">
+      <span class="var-type">→ Dependent Variable (what is being measured)</span>
+      <textarea class="write-field" rows="2" placeholder="Identify the dependent variable from the scenario above..."></textarea>
+    </div>
+    <div class="variable-box var-controlled">
+      <span class="var-type">→ Controlled Variables (name at least 3 things kept the same)</span>
+      <textarea class="write-field" rows="3" placeholder="1. \n2. \n3. "></textarea>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- HYPOTHESIS BUILDER -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part C — Writing a Hypothesis</h3></div>
+
+    <p>A strong hypothesis is a <strong>specific, testable prediction</strong> that explains the expected outcome with a reason. Always use the <em>If… then… because…</em> structure.</p>
+
+    <div class="hypothesis-builder">
+      <span class="hb-label">✦ Hypothesis Builder — Experiment 1 (Ramp Angle)</span>
+      <div class="hypothesis-row">
+        <span class="keyword">If</span>
+        <input type="text" placeholder="the ramp angle is increased...">
+      </div>
+      <div class="hypothesis-row">
+        <span class="keyword">then</span>
+        <input type="text" placeholder="the force needed to pull the block will...">
+      </div>
+      <div class="hypothesis-row">
+        <span class="keyword">because</span>
+        <input type="text" placeholder="give a scientific reason using words like gravity, friction, inclined plane...">
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- DATA QUALITY -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part D — Data Quality: Accuracy, Reliability &amp; Validity</h3></div>
+
+    <div class="key-term-grid">
+      <div class="key-term-card">
+        <div class="term">Accuracy</div>
+        <div class="definition">How close your results are to the <strong>true value</strong>. Better equipment and careful technique improve accuracy.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+      <div class="key-term-card">
+        <div class="term">Reliability</div>
+        <div class="definition">How <strong>consistent</strong> your results are. If you repeat the same test and get similar results each time, the data is reliable.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+      <div class="key-term-card">
+        <div class="term">Validity</div>
+        <div class="definition">Whether the experiment actually <strong>tests what it claims</strong> to test. Controlled variables ensure validity.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+      <div class="key-term-card">
+        <div class="term">Outlier</div>
+        <div class="definition">A data point that is <strong>significantly different</strong> from the rest — may indicate an error. Must be identified and noted.</div>
+        <span class="my-def-label">My definition:</span>
+        <textarea class="write-field" rows="2" placeholder="Write it in your own words..."></textarea>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <strong>⚠️ Think About It:</strong> A group records these forces when pulling a block: 4.2 N, 4.3 N, 4.1 N, 9.8 N, 4.2 N.<br><br>
+      Which value is the outlier? <input class="inline-field" type="text" placeholder="________"> N<br><br>
+      Should it be included in the mean? <input class="inline-field" type="text" placeholder="Yes / No"> — Why?
+      <textarea class="write-field mt-8" rows="2" placeholder="Explain your reasoning..."></textarea>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- LESSON REFLECTION -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Lesson Reflection</h3></div>
+
+    <div class="write-block">
+      <span class="write-label">What is the most important thing you learned today?</span>
+      <textarea class="write-field" rows="3" placeholder="Write 2–3 sentences..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">Write one question you still have:</span>
+      <textarea class="write-field" rows="2" placeholder="e.g. I'm not sure how to..."></textarea>
+    </div>
+
+    <div style="text-align:right; margin-top:28px;">
+      <button class="start-btn" onclick="showLesson(2, document.querySelectorAll('.nav-tab')[1])" style="font-size:12px; padding:12px 28px;">Next: Lesson 2 →</button>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       LESSON 2: EXPERIMENT 1 — RAMP ANGLE
+       ============================================================ -->
+  <div class="lesson-page" id="lesson-2">
+    <div class="page-title-strip">Lesson 2 of 4 · 50 Minutes</div>
+
+    <div class="lesson-header">
+      <div class="lesson-number-block">2</div>
+      <div class="lesson-header-text">
+        <div class="lesson-tag">Experiment 1 · Inclined Plane · Force</div>
+        <div class="lesson-title">The Ramp: Does Angle Matter?</div>
+        <div class="lesson-meta">
+          <div class="lesson-meta-item">⏱ <strong>50 min</strong></div>
+          <div class="lesson-meta-item">🧪 <strong>Practical Investigation</strong></div>
+          <div class="lesson-meta-item">📋 <strong>SC4-FOR-01 · SC4-WS-03 · SC4-WS-04</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>🏛 Context:</strong> Historians believe the Egyptians used ramps to drag stone blocks into place. But what angle was most efficient? A steep ramp requires more force — but a very shallow ramp requires far more distance. Today you will investigate how ramp angle affects the effort (force) needed to move a load.
+    </div>
+
+    <!-- AIM -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part A — Scientific Setup</h3></div>
+
+    <div class="write-block">
+      <span class="write-label">Aim — To investigate…</span>
+      <textarea class="write-field" rows="2" placeholder="To investigate the effect of ramp angle on the force (N) required to pull a block up an inclined plane."></textarea>
+    </div>
+
+    <!-- HYPOTHESIS -->
+    <div class="hypothesis-builder">
+      <span class="hb-label">✦ My Hypothesis</span>
+      <div class="hypothesis-row">
+        <span class="keyword">If</span>
+        <input type="text" placeholder="the angle of the ramp increases...">
+      </div>
+      <div class="hypothesis-row">
+        <span class="keyword">then</span>
+        <input type="text" placeholder="the force needed to pull the block will...">
+      </div>
+      <div class="hypothesis-row">
+        <span class="keyword">because</span>
+        <input type="text" placeholder="a steeper ramp means more of the force of gravity is...">
+      </div>
+    </div>
+
+    <!-- VARIABLES -->
+    <div class="variable-box var-independent">
+      <span class="var-type">→ Independent Variable</span>
+      <input class="inline-field" type="text" placeholder="The angle of the ramp: ___°, ___°, ___°" style="min-width:300px">
+    </div>
+    <div class="variable-box var-dependent">
+      <span class="var-type">→ Dependent Variable</span>
+      <input class="inline-field" type="text" placeholder="The force (N) required to pull the block up the ramp" style="min-width:300px">
+    </div>
+    <div class="variable-box var-controlled">
+      <span class="var-type">→ Controlled Variables (list at least 4)</span>
+      <div class="cols-2 mt-8">
+        <input class="write-field" type="text" placeholder="1. Mass of the block" style="padding:8px">
+        <input class="write-field" type="text" placeholder="2. " style="padding:8px">
+        <input class="write-field" type="text" placeholder="3. " style="padding:8px">
+        <input class="write-field" type="text" placeholder="4. " style="padding:8px">
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- MATERIALS & METHOD -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part B — Materials &amp; Method</h3></div>
+
+    <div class="tip-box">
+      <div class="tip-label">Equipment Provided</div>
+      Wooden ramp board · Wooden block with hook · Spring balance (0–10 N) · Ruler or protractor · Books/blocks to adjust ramp angle · String
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">Write the Method — numbered steps (aim for 6–8 steps)</span>
+      <textarea class="write-field" rows="12" placeholder="1. Set up the ramp by placing the board on the desk and supporting one end with books.&#10;2. Measure and record the angle of the ramp using a protractor. Start at ___°.&#10;3. Attach the spring balance to the wooden block using string.&#10;4. Pull the block steadily up the ramp and record the force shown on the spring balance (N).&#10;5. Repeat this measurement 5 times at the same angle to ensure reliability.&#10;6. &#10;7. &#10;8. "></textarea>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">💡 Method Writing Tips</div>
+      Use past tense · Be specific with measurements · Number every step · Include how many trials you do and why
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- RESULTS -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part C — Results</h3></div>
+
+    <p>Record the force (in Newtons) required to pull the block up the ramp at each angle. Complete <strong>5 trials</strong> per angle to improve reliability.</p>
+
+    <span class="experiment-tag">Experiment 1 Data Table</span>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Ramp Angle</th>
+          <th>Trial 1 (N)</th>
+          <th>Trial 2 (N)</th>
+          <th>Trial 3 (N)</th>
+          <th>Trial 4 (N)</th>
+          <th>Trial 5 (N)</th>
+          <th>Mean (N)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Low angle (<input type="text" style="width:36px;border:none;background:transparent;text-align:center;font-size:13px;" placeholder="__">°)</td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+        </tr>
+        <tr>
+          <td class="row-label">Mid angle (<input type="text" style="width:36px;border:none;background:transparent;text-align:center;font-size:13px;" placeholder="__">°)</td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+        </tr>
+        <tr>
+          <td class="row-label">High angle (<input type="text" style="width:36px;border:none;background:transparent;text-align:center;font-size:13px;" placeholder="__">°)</td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+        </tr>
+        <tr class="mean-row">
+          <td class="row-label">Outliers noted?</td>
+          <td colspan="6"><input type="text" style="width:100%;border:none;background:transparent;font-size:13px;padding:9px 8px;" placeholder="Record any outliers and the trial number here, e.g. Trial 4 at 30° = 9.8N (outlier — excluded from mean)"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <div class="tip-label">How to Calculate the Mean</div>
+      Add all valid trial values together, then divide by the number of trials. If you identified an outlier, <strong>do not include it</strong> in the calculation — but make a note that you excluded it and why.
+    </div>
+
+    <!-- GRAPH -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part D — Graph</h3></div>
+
+    <p>Construct a <strong>column (bar) graph</strong> of your mean results in the grid below. Remember: titles, axis labels with units, and a consistent scale.</p>
+
+    <div class="graph-area">
+      <input class="graph-title-field" type="text" placeholder="Graph Title: e.g. The Effect of Ramp Angle on the Mean Force Required to Pull a Block (N)">
+      <div style="position:relative; padding-left:60px;">
+        <div class="graph-axis-label graph-y-label">Force (N) ↑</div>
+        <div class="graph-grid"></div>
+      </div>
+      <div class="graph-axis-label graph-x-label">Ramp Angle (°) →</div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">💡 Graph Checklist</div>
+      <ul class="checklist">
+        <li><input type="checkbox"> Graph has a descriptive title</li>
+        <li><input type="checkbox"> Both axes are labelled with units (N, °)</li>
+        <li><input type="checkbox"> Scale is even and starts at zero</li>
+        <li><input type="checkbox"> Bars are drawn accurately using mean values</li>
+        <li><input type="checkbox"> Bars are evenly spaced and the same width</li>
+      </ul>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- DISCUSSION -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part E — Discussion Questions</h3></div>
+
+    <div class="write-block">
+      <span class="write-label">1. Describe the trend in your results. What happened to the force as the angle increased?</span>
+      <textarea class="write-field" rows="3" placeholder="As the ramp angle increased from _° to _°, the force required to pull the block..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">2. Were your results reliable? How do you know? (Hint: look at how close your 5 trials are to each other)</span>
+      <textarea class="write-field" rows="3" placeholder="My results were / were not reliable because..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">3. Was your experiment valid? Identify one controlled variable that was especially important to keep the same.</span>
+      <textarea class="write-field" rows="3" placeholder="The experiment was valid because... The most important controlled variable was..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">4. Was your hypothesis supported? Use evidence from your data.</span>
+      <textarea class="write-field" rows="3" placeholder="My hypothesis was supported / not supported. I predicted that... My data showed that..."></textarea>
+    </div>
+
+    <div style="text-align:right; margin-top:28px;">
+      <button class="start-btn" onclick="showLesson(3, document.querySelectorAll('.nav-tab')[2])" style="font-size:12px; padding:12px 28px;">Next: Lesson 3 →</button>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       LESSON 3: EXPERIMENT 2 — FRICTION / SURFACE
+       ============================================================ -->
+  <div class="lesson-page" id="lesson-3">
+    <div class="page-title-strip">Lesson 3 of 4 · 50 Minutes</div>
+
+    <div class="lesson-header">
+      <div class="lesson-number-block">3</div>
+      <div class="lesson-header-text">
+        <div class="lesson-tag">Experiment 2 · Friction · Surface Conditions</div>
+        <div class="lesson-title">Reducing Friction: Does Surface Matter?</div>
+        <div class="lesson-meta">
+          <div class="lesson-meta-item">⏱ <strong>50 min</strong></div>
+          <div class="lesson-meta-item">🧪 <strong>Practical Investigation</strong></div>
+          <div class="lesson-meta-item">📋 <strong>SC4-FOR-01 · SC4-WS-03 · SC4-WS-04</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>🏛 Context:</strong> Archaeologists discovered ancient Egyptian wall paintings showing workers pouring liquid in front of sledges carrying stone blocks. They believe this was water or oil — used to reduce friction and make dragging easier. Today you will test how different surface conditions affect the force needed to pull a block along a flat surface.
+    </div>
+
+    <!-- AIM -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part A — Scientific Setup</h3></div>
+
+    <div class="write-block">
+      <span class="write-label">Aim — To investigate…</span>
+      <textarea class="write-field" rows="2" placeholder="To investigate the effect of surface condition (dry, damp, soapy) on the force (N) required to pull a block across a flat surface."></textarea>
+    </div>
+
+    <div class="hypothesis-builder">
+      <span class="hb-label">✦ My Hypothesis</span>
+      <div class="hypothesis-row">
+        <span class="keyword">If</span>
+        <input type="text" placeholder="the surface under the block changes from dry to wet/soapy...">
+      </div>
+      <div class="hypothesis-row">
+        <span class="keyword">then</span>
+        <input type="text" placeholder="the force required to pull the block will...">
+      </div>
+      <div class="hypothesis-row">
+        <span class="keyword">because</span>
+        <input type="text" placeholder="liquids act as lubricants, reducing the friction between...">
+      </div>
+    </div>
+
+    <div class="variable-box var-independent">
+      <span class="var-type">→ Independent Variable</span>
+      <input class="inline-field" type="text" placeholder="Surface condition: dry / damp water / soapy water" style="min-width:300px">
+    </div>
+    <div class="variable-box var-dependent">
+      <span class="var-type">→ Dependent Variable</span>
+      <input class="inline-field" type="text" placeholder="The force (N) required to pull the block" style="min-width:300px">
+    </div>
+    <div class="variable-box var-controlled">
+      <span class="var-type">→ Controlled Variables (list at least 4)</span>
+      <div class="cols-2 mt-8">
+        <input class="write-field" type="text" placeholder="1. Mass of the block" style="padding:8px">
+        <input class="write-field" type="text" placeholder="2. Length of surface pulled across" style="padding:8px">
+        <input class="write-field" type="text" placeholder="3. " style="padding:8px">
+        <input class="write-field" type="text" placeholder="4. " style="padding:8px">
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- MATERIALS & METHOD -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part B — Materials &amp; Method</h3></div>
+
+    <div class="tip-box">
+      <div class="tip-label">Equipment Provided</div>
+      Wooden block with hook · Spring balance (0–10 N) · Plastic tray or bench surface · Water · Dish soap · Paper towel · String · Ruler
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">Write the Method — numbered steps (aim for 6–8 steps)</span>
+      <textarea class="write-field" rows="12" placeholder="1. Set up the block on a flat surface (plastic tray or bench).&#10;2. Attach the spring balance to the block using string.&#10;3. Pull the block steadily across the dry surface and read the force from the spring balance (N).&#10;4. Record the force in the results table. Repeat 5 times for the dry condition.&#10;5. Wipe the surface clean. Apply a small amount of water to the surface.&#10;6. &#10;7. &#10;8. "></textarea>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- RESULTS -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part C — Results</h3></div>
+
+    <p>Record your force measurements (Newtons) for each surface condition. Complete <strong>5 trials</strong> per condition.</p>
+
+    <span class="experiment-tag">Experiment 2 Data Table</span>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Surface Condition</th>
+          <th>Trial 1 (N)</th>
+          <th>Trial 2 (N)</th>
+          <th>Trial 3 (N)</th>
+          <th>Trial 4 (N)</th>
+          <th>Trial 5 (N)</th>
+          <th>Mean (N)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Dry surface</td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+        </tr>
+        <tr>
+          <td class="row-label">Damp (water only)</td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+        </tr>
+        <tr>
+          <td class="row-label">Soapy water</td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="–"></td>
+        </tr>
+        <tr class="mean-row">
+          <td class="row-label">Outliers noted?</td>
+          <td colspan="6"><input type="text" style="width:100%;border:none;background:transparent;font-size:13px;padding:9px 8px;" placeholder="Record any outliers and the trial number here..."></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- GRAPH -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part D — Graph</h3></div>
+
+    <p>Construct a <strong>column graph</strong> of your mean results. Ensure all graph conventions are followed.</p>
+
+    <div class="graph-area">
+      <input class="graph-title-field" type="text" placeholder="Graph Title: e.g. The Effect of Surface Condition on the Mean Force Required to Pull a Block (N)">
+      <div style="position:relative; padding-left:60px;">
+        <div class="graph-axis-label graph-y-label">Force (N) ↑</div>
+        <div class="graph-grid"></div>
+      </div>
+      <div class="graph-axis-label graph-x-label">Surface Condition →</div>
+    </div>
+
+    <ul class="checklist">
+      <li><input type="checkbox"> Graph has a descriptive title</li>
+      <li><input type="checkbox"> Both axes are labelled with units</li>
+      <li><input type="checkbox"> Scale is even and starts at zero</li>
+      <li><input type="checkbox"> Bars drawn accurately from mean values</li>
+      <li><input type="checkbox"> Three bars clearly labelled (Dry / Damp / Soapy)</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <!-- DISCUSSION -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part E — Discussion Questions</h3></div>
+
+    <div class="write-block">
+      <span class="write-label">1. Describe the trend. How did force change as the surface went from dry → damp → soapy?</span>
+      <textarea class="write-field" rows="3" placeholder="When the surface changed from dry to damp, the force required... When it changed to soapy..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">2. Explain why a soapy surface reduces friction. Use the words: <em>lubricant, molecules, friction, surfaces</em>.</span>
+      <textarea class="write-field" rows="3" placeholder="Soap acts as a lubricant because..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">3. Compare the two experiments (Lesson 2 and Lesson 3). Which experiment produced more reliable results, and why?</span>
+      <textarea class="write-field" rows="4" placeholder="Experiment ___ produced more reliable results because... I can tell this by comparing..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">4. Was your hypothesis supported? Use specific data values as evidence.</span>
+      <textarea class="write-field" rows="3" placeholder="My hypothesis was supported / not supported. My data showed that dry surface required ___ N and soapy required ___ N, which means..."></textarea>
+    </div>
+
+    <div style="text-align:right; margin-top:28px;">
+      <button class="start-btn" onclick="showLesson(4, document.querySelectorAll('.nav-tab')[3])" style="font-size:12px; padding:12px 28px;">Next: Lesson 4 →</button>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       LESSON 4: DATA PROCESSING & ANALYSIS SKILLS
+       ============================================================ -->
+  <div class="lesson-page" id="lesson-4">
+    <div class="page-title-strip">Lesson 4 of 4 · 50 Minutes</div>
+
+    <div class="lesson-header">
+      <div class="lesson-number-block">4</div>
+      <div class="lesson-header-text">
+        <div class="lesson-tag">Data Processing · Analysis · Assessment Prep</div>
+        <div class="lesson-title">From Numbers to Knowledge</div>
+        <div class="lesson-meta">
+          <div class="lesson-meta-item">⏱ <strong>50 min</strong></div>
+          <div class="lesson-meta-item">📊 <strong>No new experiment — processing &amp; writing skills</strong></div>
+          <div class="lesson-meta-item">📋 <strong>SC4-WS-05 · SC4-WS-06</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Today's Focus:</strong> Now that you have conducted both experiments, Lesson 4 builds the skills you need to succeed in the Lesson 5 assessment. You will practise calculating means, identifying outliers, writing conclusions, and evaluating your experiments.
+    </div>
+
+    <!-- PART A: MEANS AND OUTLIERS -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part A — Calculating Means &amp; Spotting Outliers</h3></div>
+
+    <p>The <strong>mean</strong> (average) smooths out small variations between trials. It is the most useful single number to represent your results.</p>
+
+    <div class="info-box">
+      <strong>Formula:</strong> Mean = (Sum of all valid values) ÷ (Number of trials used)<br>
+      <em>⚠️ Always check for outliers BEFORE calculating the mean. Exclude them and record why.</em>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">📝 Worked Example</div>
+      A student records these force values at 30°: <strong>3.8 N, 4.0 N, 3.9 N, 8.5 N, 3.7 N</strong><br><br>
+      <strong>Step 1 — Spot the outlier:</strong> 8.5 N is much higher than the rest → likely a measurement error → excluded.<br>
+      <strong>Step 2 — Calculate the mean:</strong> (3.8 + 4.0 + 3.9 + 3.7) ÷ 4 = 15.4 ÷ 4 = <strong>3.85 N</strong>
+    </div>
+
+    <!-- PRACTICE CALCULATION -->
+    <p class="mt-16"><strong>Practice:</strong> Calculate the mean for the data sets below. First circle any outliers, then show your working.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Condition</th>
+          <th>Trial 1</th>
+          <th>Trial 2</th>
+          <th>Trial 3</th>
+          <th>Trial 4</th>
+          <th>Trial 5</th>
+          <th>Outlier?</th>
+          <th>Mean (N)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Dry surface</td>
+          <td><input type="text" value="5.2"></td>
+          <td><input type="text" value="5.0"></td>
+          <td><input type="text" value="5.3"></td>
+          <td><input type="text" value="9.8"></td>
+          <td><input type="text" value="5.1"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="calculate"></td>
+        </tr>
+        <tr>
+          <td class="row-label">Damp surface</td>
+          <td><input type="text" value="3.6"></td>
+          <td><input type="text" value="3.8"></td>
+          <td><input type="text" value="3.5"></td>
+          <td><input type="text" value="3.7"></td>
+          <td><input type="text" value="3.6"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="calculate"></td>
+        </tr>
+        <tr>
+          <td class="row-label">Soapy surface</td>
+          <td><input type="text" value="2.1"></td>
+          <td><input type="text" value="2.3"></td>
+          <td><input type="text" value="2.0"></td>
+          <td><input type="text" value="2.2"></td>
+          <td><input type="text" value="0.1"></td>
+          <td><input type="text" placeholder="–"></td>
+          <td><input type="text" placeholder="calculate"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="write-block">
+      <span class="write-label">Show your working for the Dry surface mean:</span>
+      <textarea class="write-field" rows="2" placeholder="( ___ + ___ + ___ + ___ ) ÷ ___ = ___"></textarea>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- PART B: RELIABILITY AND VALIDITY -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part B — Evaluating Reliability &amp; Validity</h3></div>
+
+    <table class="rvt-table">
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>What it means</th>
+          <th>How to improve it</th>
+          <th>Evidence from YOUR experiments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reliability</td>
+          <td>Results are consistent across repeated trials — similar values each time</td>
+          <td>Increase number of trials; use same person to do each measurement; use precise equipment</td>
+          <td><textarea class="write-field" rows="3" placeholder="My experiment was reliable / unreliable because... My trial values were..."></textarea></td>
+        </tr>
+        <tr>
+          <td>Validity</td>
+          <td>The experiment actually tests what it claims — only one variable changed at a time</td>
+          <td>Control all variables except the independent variable; use a control experiment</td>
+          <td><textarea class="write-field" rows="3" placeholder="My experiment was valid / invalid because... One variable I may not have controlled well was..."></textarea></td>
+        </tr>
+        <tr>
+          <td>Accuracy</td>
+          <td>Results are close to the true value — equipment is calibrated and used correctly</td>
+          <td>Zero the spring balance before each use; read scale at eye level; take measurements carefully</td>
+          <td><textarea class="write-field" rows="3" placeholder="I improved accuracy by... One source of error that could have affected my accuracy was..."></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="section-divider">
+
+    <!-- PART C: WRITING A CONCLUSION -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part C — Writing a Strong Conclusion</h3></div>
+
+    <p>A conclusion must directly answer the aim, reference data, and state whether the hypothesis was supported. Use this scaffold for practice.</p>
+
+    <div class="conclusion-scaffold">
+      <div class="cs-row">
+        <div class="cs-prompt">1. Restate what you investigated:</div>
+        <div class="cs-hint">Begin with "In this experiment, I investigated..."</div>
+        <textarea class="write-field" rows="2" placeholder="In this experiment, I investigated the effect of..."></textarea>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-prompt">2. State the main finding (with data):</div>
+        <div class="cs-hint">Use actual numbers from your results table. "The results showed that..."</div>
+        <textarea class="write-field" rows="3" placeholder="The results showed that when the surface changed from dry to soapy, the mean force decreased from ___ N to ___ N, indicating that..."></textarea>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-prompt">3. State whether your hypothesis was supported:</div>
+        <div class="cs-hint">"My hypothesis was supported / not supported because..."</div>
+        <textarea class="write-field" rows="2" placeholder="My hypothesis was supported because I predicted... and the data showed..."></textarea>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-prompt">4. Link back to the real world or scientific concept:</div>
+        <div class="cs-hint">Mention friction, simple machines, or the Egyptian context</div>
+        <textarea class="write-field" rows="2" placeholder="This explains why the ancient Egyptians may have used wet sand/water to reduce friction when moving..."></textarea>
+      </div>
+
+      <div class="cs-row mb-0">
+        <div class="cs-prompt">5. Suggest one improvement for future experiments:</div>
+        <div class="cs-hint">"To improve this experiment in the future, I would..."</div>
+        <textarea class="write-field" rows="2" placeholder="To improve this experiment, I would test more surface types / use a digital force meter to improve accuracy..."></textarea>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- PART D: ASSESSMENT PREP -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Part D — Choosing Your Experiment for the Assessment</h3></div>
+
+    <div class="info-box">
+      <strong>For the Lesson 5 in-class assessment</strong>, you will be given a new data set and asked to process, graph, and analyse it independently. You may use the scientific writing skills you have practised in this workbook.
+      <br><br>
+      Review your data from both experiments and decide which one produced cleaner, more reliable results. The skills you practised — calculating means, writing conclusions, and evaluating — are exactly what the assessment will test.
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">Which experiment do you think gave better data quality and why?</span>
+      <textarea class="write-field" rows="3" placeholder="I think Experiment ___ (ramp angle / surface friction) gave better data because..."></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">List 3 things you feel confident about for the assessment:</span>
+      <textarea class="write-field" rows="4" placeholder="1. I feel confident calculating means and identifying outliers&#10;2. &#10;3. "></textarea>
+    </div>
+
+    <div class="write-block">
+      <span class="write-label">List 1–2 things you want to practise or clarify before Lesson 5:</span>
+      <textarea class="write-field" rows="3" placeholder="I still need to practise... / I am unsure about..."></textarea>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- FINAL GLOSSARY REVIEW -->
+    <div class="section-label"><div class="section-label-bar"></div><h3>Glossary Review — Fill in the Blanks</h3></div>
+
+    <p class="text-sm text-mid">Complete these without looking at your notes if you can — it's a great self-test before the assessment!</p>
+
+    <table class="data-table" style="margin-top:12px">
+      <thead>
+        <tr><th style="width:30%">Term</th><th>My definition (in my own words)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">Aim</td><td><input type="text" placeholder="A statement of what the experiment is trying to find out..." style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Hypothesis</td><td><input type="text" placeholder="A testable prediction in If...then...because format..." style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Independent variable</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Dependent variable</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Controlled variable</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Mean</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Outlier</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Reliability</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Validity</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Accuracy</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Friction</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+        <tr><td class="row-label">Inclined plane</td><td><input type="text" placeholder="" style="width:100%;border:none;padding:9px 10px;background:transparent;font-size:14px;color:#1a2744"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box" style="margin-top:32px; border-left-color: var(--navy); background: #eef0f8;">
+      <strong>✦ Good luck in Lesson 5!</strong><br>
+      Remember: the assessment will give you a data set to process. You will not need to conduct an experiment — just use the skills from this workbook. Review your data tables, your conclusions from Lessons 2 and 3, and the scaffolded conclusion in Part C of this lesson.
+    </div>
+
+  </div>
+
+</div><!-- end workbook -->
+
+<script>
+  function openWorkbook() {
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('workbook').style.display = 'block';
+  }
+
+  function showLesson(num, tabEl) {
+    // Hide all lessons
+    document.querySelectorAll('.lesson-page').forEach(p => p.classList.remove('active'));
+    // Deactivate all tabs
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    // Show target
+    document.getElementById('lesson-' + num).classList.add('active');
+    tabEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
