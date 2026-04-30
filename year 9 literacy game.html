@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Science Literacy Sandbox - Master Widescreen Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================================
+           CORE VARIABLES & THEME
+           ========================================================= */
+        :root {
+            --bg: #f8fafc; --panel: #ffffff; --card: #ffffff;
+            --text: #0f172a; --text-muted: #475569;
+            --primary: #00695c; --primary-light: #4db6ac; --primary-dark: #004d40;
+            --success: #1b5e20; --success-light: #e8f5e9; --success-border: #4caf50;
+            --danger: #b71c1c; --danger-light: #ffebee; --danger-border: #ef5350;
+            --warn: #f57f17;
+            --border: #cbd5e1;
+            
+            /* Stimulus Colors for Visual Consistency */
+            --heat: #c62828; --light: #f57f17; --chem: #1565c0; 
+            --mech: #6a1b9a; --pain: #d84315; --sound: #0277bd;
+            --water: #00838f; --pressure: #4527a0;
+        }
+        * { box-sizing: border-box; }
+        
+        /* INCREASED BASE FONT SIZE FOR TV VIEWING */
+        html { font-size: 18px; } 
+        
+        body { margin: 0; padding: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        
+        /* =========================================================
+           NAVIGATION & HEADER
+           ========================================================= */
+        header { background: #ffffff; padding: 20px 30px; display: flex; align-items: center; border-bottom: 4px solid var(--primary); position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        header h1 { margin: 0; font-size: 1.8rem; color: var(--primary); margin-right: 20px; font-weight: 800; letter-spacing: -0.5px; }
+        .nav-tabs { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; justify-content: flex-start; }
+        .tab-btn { background: #f1f5f9; color: var(--text-muted); border: 2px solid var(--border); padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-size: 1.1rem; box-shadow: 0 2px 0 var(--border); }
+        .tab-btn:hover { background: #e2e8f0; transform: translateY(-2px); box-shadow: 0 4px 0 var(--border); color: var(--text); }
+        .tab-btn:active { transform: translateY(2px); box-shadow: 0 0 0 var(--border); }
+        .tab-btn.theory-tab { border-left: 6px solid var(--warn); }
+        .tab-btn.quiz-tab { border-left: 6px solid var(--success); }
+        .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,105,92,0.4); border-left-color: var(--primary-dark); transform: translateY(-2px); }
+
+        /* =========================================================
+           MAIN LAYOUT & CONTAINERS (WIDESCREEN OPTIMIZED)
+           ========================================================= */
+        main { display: flex; flex: 1; flex-direction: column; padding: 30px; max-width: 1600px; margin: 0 auto; width: 100%; }
+        .phase-section { display: none; flex-direction: column; gap: 30px; width: 100%; animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
+        .phase-section.active { display: flex; }
+        
+        .split-layout { display: flex; flex-wrap: wrap; gap: 40px; width: 100%; align-items: stretch; }
+        /* Left column slightly smaller, right column (interactive) much larger */
+        .left-col { flex: 1; min-width: 400px; display: flex; flex-direction: column; gap: 25px; }
+        .right-col { flex: 2.2; min-width: 600px; background: var(--panel); border-radius: 16px; border: 3px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; min-height: 600px; padding: 40px; box-shadow: inset 0 2px 15px rgba(0,0,0,0.03), 0 10px 25px rgba(0,0,0,0.05); }
+
+        h2 { font-size: 2.8rem; margin: 0 0 20px 0; color: var(--primary-dark); text-align: center; border-bottom: 5px solid var(--primary); padding-bottom: 15px; display: inline-block; letter-spacing: -1px; }
+        h3 { color: var(--text); margin-bottom: 15px; font-size: 1.8rem; border-left: 5px solid var(--primary); padding-left: 15px; }
+        
+        /* HIGHLIGHTS & TEXT STYLES */
+        mark { background-color: #fef08a; color: #000; font-weight: 800; padding: 8px 16px; border-radius: 8px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); display: inline-block; margin-bottom: 10px; line-height: 1.6; font-size: 1.3rem; border: 3px solid #ca8a04; transition: 0.2s; }
+        mark:hover { transform: scale(1.02); }
+        .instruction-text { margin: 0 0 30px 0; font-size: 1.5rem; line-height: 1.8; text-align: center; color: var(--text-muted); max-width: 1000px; align-self: center; background: white; padding: 20px; border-radius: 12px; border: 3px dashed var(--border); }
+
+        /* =========================================================
+           THEORY CARDS & VISUALS
+           ========================================================= */
+        .theory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px; width: 100%; }
+        .v-card { background: var(--card); border: 3px solid var(--border); border-radius: 16px; padding: 35px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease; position: relative; overflow: hidden; }
+        .v-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: var(--primary-light); }
+        .v-card h3 { color: var(--primary); margin-top: 0; margin-bottom: 25px; width: 100%; border-bottom: 3px solid var(--border); padding-bottom: 15px; font-size: 2rem; border-left: none; }
+        .svg-diagram { width: 100%; max-width: 320px; height: 200px; background: #f8fafc; border: 3px dashed #cbd5e1; border-radius: 12px; margin-bottom: 25px; display: flex; justify-content: center; align-items: center; padding: 20px; transition: 0.3s; }
+        .v-card:hover .svg-diagram { border-color: var(--primary-light); background: #f0fdfa; }
+
+        /* TABLES */
+        table { border-collapse: collapse; width: 100%; font-size: 1.3rem; background: white; border-radius: 12px; overflow: hidden; border: 4px solid var(--primary); margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        th { background: var(--primary); color: white; padding: 18px; text-align: left; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
+        td { border-bottom: 2px solid var(--border); padding: 18px; color: var(--text); line-height: 1.6; }
+        tr:nth-child(even) td { background: #f8fafc; }
+        tr:hover td { background: #f0fdfa; }
+
+        /* =========================================================
+           BUTTONS & CONTROLS
+           ========================================================= */
+        .btn { width: 100%; background: #e2e8f0; color: var(--text); border: 3px solid #94a3b8; padding: 18px; font-size: 1.4rem; font-weight: bold; border-radius: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 6px 0 #cbd5e1; text-align: center; margin-bottom: 12px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn:hover { background: #cbd5e1; transform: translateY(-2px); box-shadow: 0 8px 0 #94a3b8; filter: brightness(1.05); }
+        .btn:active { transform: translateY(6px); box-shadow: 0 0 0 #cbd5e1; filter: brightness(0.95); }
+        .btn-action { background: var(--primary); color: white; border-color: var(--primary-dark); box-shadow: 0 6px 0 var(--primary-dark); }
+        .btn-action:hover { background: var(--primary-light); border-color: var(--primary); box-shadow: 0 8px 0 var(--primary-dark); }
+
+        .control-group { background: white; border: 3px solid var(--border); padding: 30px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative; }
+        select.inline-select { padding: 10px 15px; font-size: 1.3rem; border: 3px solid var(--primary); border-radius: 8px; font-family: 'Space Mono', monospace; font-weight: bold; background: white; cursor: pointer; margin: 0 5px; color: var(--primary-dark); transition: 0.3s; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+        select.inline-select:focus { outline: none; border-color: var(--warn); box-shadow: 0 0 10px rgba(245, 127, 23, 0.5); }
+        select.inline-select.correct { border-color: var(--success); background: #dcfce7; color: var(--success); box-shadow: 0 4px 0 #166534; }
+        select.inline-select.wrong { border-color: var(--danger); background: #fee2e2; color: var(--danger); box-shadow: 0 4px 0 #991b1b; }
+
+        /* =========================================================
+           TAB 1: WORD LAB STYLES
+           ========================================================= */
+        .prefix-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .word-equation { display: flex; align-items: center; justify-content: center; gap: 20px; font-family: 'Space Mono', monospace; font-size: 2.8rem; font-weight: bold; margin: 30px 0; flex-wrap: wrap; background: white; padding: 40px; border-radius: 16px; border: 4px dashed var(--border); width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .word-part { padding: 18px 30px; border-radius: 12px; border: 5px solid #cbd5e1; background: white; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-transform: uppercase; }
+        .word-meaning { font-family: 'Lexend', sans-serif; font-size: 1.5rem; color: var(--text-muted); text-align: center; margin-top: 12px; font-weight: 600; }
+        .translation-box { background: #f0fdfa; border: 4px solid var(--primary-light); padding: 25px; border-radius: 12px; width: 100%; text-align: center; margin-top: 25px; }
+
+        /* =========================================================
+           TAB 3: MAD LIBS PARAGRAPH STYLES
+           ========================================================= */
+        .mad-libs { font-size: 1.7rem; line-height: 2.5; background: white; padding: 40px; border-radius: 16px; border: 4px solid var(--border); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+        .connective { color: var(--primary); font-weight: 800; text-decoration: underline; text-decoration-color: var(--warn); text-decoration-thickness: 5px; text-underline-offset: 5px; padding: 0 6px; background: rgba(245, 127, 23, 0.1); border-radius: 6px; }
+        
+        .path-node { transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: center; }
+        .path-node.active rect { stroke-width: 6; filter: drop-shadow(0 0 15px rgba(0, 105, 92, 0.8)); }
+        .path-node.active text { font-weight: 800; font-size: 18px; }
+        .path-node.active { transform: scale(1.05); }
+        .path-line { stroke: var(--border); stroke-width: 6; stroke-dasharray: 12 10; transition: all 0.5s ease; }
+        .path-line.active { stroke: var(--primary); stroke-dasharray: none; stroke-width: 10; }
+
+        /* =========================================================
+           TAB 5: NEW DIAGRAM LABELER STYLES (MATCHING IMAGE)
+           ========================================================= */
+        /* Left Column Specifics */
+        .wb-header { font-size: 2rem; font-weight: 800; color: var(--text); border-left: 6px solid var(--primary); padding-left: 15px; margin-bottom: 20px; }
+        .wb-container { background: #f8fafc; border: 2px solid var(--border); border-radius: 12px; padding: 25px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; }
+        .wb-btn { background: white; border: 3px solid var(--primary); border-radius: 8px; padding: 12px 20px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 0 var(--primary-dark); display: flex; align-items: center; gap: 8px; color: var(--text); font-family: 'Lexend', sans-serif; }
+        .wb-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--primary-dark); }
+        .wb-btn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-dark); }
+        .wb-btn.used { background: #f1f5f9; border-color: #cbd5e1; color: #94a3b8; box-shadow: 0 2px 0 #cbd5e1; transform: translateY(2px); pointer-events: none; filter: grayscale(1); }
+        .wb-btn.selected { border-color: var(--warn); box-shadow: 0 4px 0 #b45309; background: #fffbeb; }
+
+        .diag-feedback-box { background: white; border: 3px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; font-size: 1.4rem; font-weight: bold; color: var(--text-muted); min-height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: 0.3s; }
+        .diag-feedback-box.correct { border-color: var(--success); color: var(--success); background: var(--success-light); }
+        .diag-feedback-box.wrong { border-color: var(--danger); color: var(--danger); background: var(--danger-light); animation: shakeWrong 0.4s ease; }
+
+        .diag-reset-btn { width: 100%; background: #e2e8f0; border: 3px solid #cbd5e1; padding: 15px; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; color: var(--text-muted); transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .diag-reset-btn:hover { background: #cbd5e1; color: var(--text); }
+
+        /* Right Column Specifics */
+        .label-arena { width: 100%; height: 600px; background: white; border: 4px dashed var(--border); border-radius: 16px; position: relative; display: flex; justify-content: center; align-items: center; }
+        .label-svg-container { width: 90%; height: 90%; position: relative; }
+        
+        .drop-target { position: absolute; width: 60px; height: 60px; border: 4px dashed #f59e0b; border-radius: 50%; background: rgba(245, 158, 11, 0.1); transform: translate(-50%, -50%); cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 10; display: flex; justify-content: center; align-items: center; }
+        .drop-target:hover { transform: translate(-50%, -50%) scale(1.2); background: rgba(245, 158, 11, 0.3); }
+        .drop-target.active { border-color: var(--primary); background: rgba(0, 105, 92, 0.3); box-shadow: 0 0 15px rgba(0, 105, 92, 0.5); transform: translate(-50%, -50%) scale(1.1); }
+        .drop-target.filled { width: auto; height: auto; border-radius: 12px; border: 3px solid var(--success-border); background: var(--success); color: white; padding: 10px 20px; font-weight: 800; font-size: 1.2rem; transform: translate(-50%, -50%) scale(1); white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.15); pointer-events: none; }
+
+        /* =========================================================
+           QUIZ STYLES
+           ========================================================= */
+        .quiz-card { background: var(--card); border: 4px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 35px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); display: flex; gap: 30px; align-items: center; flex-wrap: wrap; transition: 0.3s; }
+        .quiz-card:hover { border-color: var(--primary-light); }
+        .quiz-content { flex: 2; min-width: 350px; }
+        .quiz-visual { flex: 1; min-width: 250px; display: flex; justify-content: center; background: #f8fafc; padding: 20px; border-radius: 12px; border: 3px dashed var(--border); }
+        .quiz-q { font-size: 1.5rem; font-weight: 800; margin-bottom: 25px; color: var(--text); line-height: 1.6; border-left: 5px solid var(--warn); padding-left: 20px; }
+        .tf-btn { width: 100%; padding: 18px 25px; margin: 10px 0; font-size: 1.3rem; background: white; color: var(--text); border: 3px solid var(--border); border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-weight: bold; box-shadow: 0 4px 0 var(--border); }
+        .tf-btn:hover { background: #f1f5f9; border-color: var(--primary-light); box-shadow: 0 6px 0 var(--primary-light); transform: translateY(-2px); }
+        .tf-btn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-light); }
+        .tf-btn.correct { background: #dcfce7; border-color: var(--success); color: #166534; box-shadow: 0 4px 0 var(--success); }
+        .tf-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; box-shadow: 0 4px 0 var(--danger); }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseSuccess { 0% { transform: scale(1); } 50% { transform: scale(1.05); border-color: var(--success); box-shadow: 0 0 30px rgba(46,125,50,0.6); } 100% { transform: scale(1); } }
+        @keyframes shakeWrong { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🧬 Literacy Sandbox</h1>
+    <div class="nav-tabs">
+        <button class="tab-btn theory-tab active" onclick="switchPhase(0)">1a. Vocab Theory</button>
+        <button class="tab-btn" onclick="switchPhase(1)">1b. Word Decoder</button>
+        <button class="tab-btn theory-tab" onclick="switchPhase(2)">2a. Sequence Theory</button>
+        <button class="tab-btn" onclick="switchPhase(3)">2b. Paragraph Builder</button>
+        <button class="tab-btn theory-tab" onclick="switchPhase(4)">3a. Diagram Theory</button>
+        <button class="tab-btn" onclick="switchPhase(5)">3b. Diagram Labeler</button>
+        <button class="tab-btn quiz-tab" onclick="switchPhase(6)">🏆 Master Quiz</button>
+    </div>
+</header>
+
+<main>
+    <section id="phase0" class="phase-section active">
+        <div style="text-align: center;">
+            <h2>1a. Decoding Scientific Words</h2>
+            <div class="instruction-text">Complex biology words are just small puzzle pieces glued together. If you know the code, you can read anything!</div>
+        </div>
+        <div class="theory-grid">
+            <div class="v-card" style="grid-column: span 2;">
+                <h3>🔍 The Prefixes (The Start of the Word)</h3>
+                <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; width:100%; margin-bottom: 15px; font-size: 1.3rem;">
+                    <div style="background:#fee2e2; border:3px solid var(--heat); padding:15px; border-radius:12px; font-weight:bold;">♨️ THERMO = Heat</div>
+                    <div style="background:#fef3c7; border:3px solid var(--light); padding:15px; border-radius:12px; font-weight:bold;">☀️ PHOTO = Light</div>
+                    <div style="background:#e0f2fe; border:3px solid var(--chem); padding:15px; border-radius:12px; font-weight:bold;">🧪 CHEMO = Chemical</div>
+                    <div style="background:#f3e8ff; border:3px solid var(--mech); padding:15px; border-radius:12px; font-weight:bold;">🤏 MECHANO = Touch / Physical</div>
+                    <div style="background:#ffccbc; border:3px solid var(--pain); padding:15px; border-radius:12px; font-weight:bold;">⚡ NOCI = Pain / Damage</div>
+                    <div style="background:#e1f5fe; border:3px solid var(--sound); padding:15px; border-radius:12px; font-weight:bold;">🔊 AUDIO = Sound</div>
+                    <div style="background:#e0f7fa; border:3px solid var(--water); padding:15px; border-radius:12px; font-weight:bold;">💧 OSMO = Water / Solutes</div>
+                    <div style="background:#ede7f6; border:3px solid var(--pressure); padding:15px; border-radius:12px; font-weight:bold;">🎈 BARO = Air/Blood Pressure</div>
+                </div>
+            </div>
+
+            <div class="v-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <h3>🧩 The Suffix (The Ending)</h3>
+                <div class="svg-diagram" style="height: 140px;">
+                    <svg viewBox="0 0 150 80" width="100%" height="100%">
+                        <rect x="10" y="20" width="130" height="40" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+                        <text x="75" y="45" text-anchor="middle" font-size="16" font-weight="bold">-RECEPTOR</text>
+                    </svg>
+                </div>
+                <div style="flex:1;">
+                    <mark style="display:block; margin-bottom: 20px;">Receptor = A Receiver / Detector.</mark>
+                    <p style="font-size:1.3rem; line-height: 1.6; margin:0;">It is the specialized cell or organ in the body that "receives" or detects a specific change in the environment.</p>
+                </div>
+                <div style="background: #f0fdfa; border: 3px dashed var(--primary); padding: 20px; border-radius: 12px; margin-top: 20px; width: 100%; font-size: 1.3rem;">
+                    <strong>Example:</strong><br><br>
+                    <span style="color:var(--danger); font-weight:bold;">Noci</span> + <span style="color:#64748b; font-weight:bold;">receptor</span> = A Pain Detector!
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-action" style="max-width: 500px; margin: 30px auto;" onclick="switchPhase(1)">Go to Word Decoder Lab ➡</button>
+    </section>
+
+    <section id="phase1" class="phase-section">
+        <div style="text-align: center;">
+            <h2>1b. The Word Decoder Lab</h2>
+            <div class="instruction-text">Select an environmental stimulus below. Watch how the scientific vocabulary is constructed and translated.</div>
+        </div>
+        <div class="split-layout">
+            <div class="left-col" style="flex: 1.2;">
+                <div class="control-group">
+                    <h3 style="color:var(--warn); margin-top:0;">1. Select an Environmental Stimulus</h3>
+                    <div class="prefix-grid">
+                        <button class="btn" style="border-color:var(--heat); color:var(--heat);" onclick="wordLab.decode('heat')">♨️ Touch Hot Stove</button>
+                        <button class="btn" style="border-color:var(--light); color:var(--light);" onclick="wordLab.decode('light')">☀️ Bright Sun Glare</button>
+                        <button class="btn" style="border-color:var(--chem); color:var(--chem);" onclick="wordLab.decode('chem')">🍕 Smell Baking Pizza</button>
+                        <button class="btn" style="border-color:var(--mech); color:var(--mech);" onclick="wordLab.decode('mech')">🌬️ Wind on your skin</button>
+                        <button class="btn" style="border-color:var(--pain); color:var(--pain);" onclick="wordLab.decode('pain')">📌 Step on Sharp Pin</button>
+                        <button class="btn" style="border-color:var(--sound); color:var(--sound);" onclick="wordLab.decode('sound')">🔊 Hear Loud Alarm</button>
+                        <button class="btn" style="border-color:var(--water); color:var(--water);" onclick="wordLab.decode('water')">💧 Dehydration</button>
+                        <button class="btn" style="border-color:var(--pressure); color:var(--pressure);" onclick="wordLab.decode('pressure')">🩸 High Blood Pressure</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right-col" style="flex: 1.8;">
+                <h3 style="margin-top:0; color:var(--text-muted); font-size:2rem; border:none;">Scientific Word Builder</h3>
+                
+                <div class="word-equation">
+                    <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+                        <div class="word-part" id="wl-prefix" style="color: var(--text-muted); font-size: 2.2rem;">Select</div>
+                        <div class="word-meaning" id="wl-prefix-mean">...</div>
+                    </div>
+                    <div style="color:var(--border); font-size:4rem;">+</div>
+                    <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+                        <div class="word-part" style="border-color:#64748b; color:#64748b; font-size: 2.2rem;">RECEPTOR</div>
+                        <div class="word-meaning">Detector</div>
+                    </div>
+                </div>
+
+                <div class="translation-box">
+                    <h3 style="margin:0 0 10px 0; border:none; padding:0; color:var(--primary-dark);">Literal English Translation:</h3>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary);" id="wl-translation">A ___ Detector</div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 30px; margin-top: 40px; background: white; padding: 30px; border-radius: 16px; border: 4px solid var(--border); width: 100%;">
+                    <div style="font-size: 6rem; background:#f1f5f9; padding: 15px; border-radius: 16px; border: 3px solid #cbd5e1;" id="wl-organ">❓</div>
+                    <div>
+                        <div style="font-size: 1.4rem; color: var(--text-muted); text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Sense Organ Deployed</div>
+                        <div style="font-weight: 800; color: var(--text); font-size: 2rem;" id="wl-organ-text">Awaiting Input...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="phase2" class="phase-section">
+        <div style="text-align: center;">
+            <h2>2a. Writing Scientific Sequences</h2>
+            <div class="instruction-text">Scientists use precise "connective transition words" to explain cause and effect, turning a visual flowchart into a professional paragraph.</div>
+        </div>
+        <div class="theory-grid">
+            <div class="v-card" style="grid-column: 1 / -1; padding: 30px;">
+                <h3 style="margin-bottom: 20px;">🗺️ Reading the Stimulus-Response Pathway</h3>
+                <div class="svg-diagram" style="max-width: 100%; height: 120px; border:none; background:transparent;">
+                    <svg viewBox="0 0 900 120" width="100%" height="100%">
+                        <rect x="10" y="35" width="140" height="50" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="4"/>
+                        <text x="80" y="65" font-size="16" font-weight="bold" text-anchor="middle">STIMULUS</text>
+                        <line x1="160" y1="60" x2="200" y2="60" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+                        
+                        <rect x="210" y="35" width="140" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+                        <text x="280" y="65" font-size="16" font-weight="bold" text-anchor="middle">RECEPTOR</text>
+                        <line x1="360" y1="60" x2="400" y2="60" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+
+                        <rect x="410" y="35" width="140" height="50" rx="8" fill="#f3e8ff" stroke="#7e22ce" stroke-width="4"/>
+                        <text x="480" y="65" font-size="16" font-weight="bold" text-anchor="middle">CONTROL</text>
+                        <line x1="560" y1="60" x2="600" y2="60" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+
+                        <rect x="610" y="35" width="140" height="50" rx="8" fill="#e0f2fe" stroke="#0369a1" stroke-width="4"/>
+                        <text x="680" y="65" font-size="16" font-weight="bold" text-anchor="middle">EFFECTOR</text>
+                        <line x1="760" y1="60" x2="800" y2="60" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+
+                        <rect x="810" y="35" width="140" height="50" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="4"/>
+                        <text x="880" y="65" font-size="16" font-weight="bold" text-anchor="middle">RESPONSE</text>
+
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="v-card" style="align-items: flex-start; text-align: left;">
+                <h3 style="width:100%;">🔗 The "Connective" Words</h3>
+                <p style="font-size: 1.4rem; color: var(--text-muted); margin-top:0;">Instead of drawing arrows, we use these phrases to link the steps:</p>
+                <ul style="font-size: 1.5rem; line-height: 2.2; margin-top: 0; padding-left: 20px;">
+                    <li><span class="connective">First,</span> the stimulus happens...</li>
+                    <li><span class="connective">which is detected by</span> the receptor...</li>
+                    <li><span class="connective">sending a signal to</span> the control centre...</li>
+                    <li><span class="connective">which then triggers</span> the effector...</li>
+                    <li><span class="connective">resulting in</span> a response.</li>
+                </ul>
+            </div>
+
+            <div class="v-card" style="align-items: flex-start; text-align: left; background:#f8fafc;">
+                <h3 style="width:100%; border-color:var(--danger); color:var(--danger);">❌ Bad Example</h3>
+                <div style="font-size: 1.3rem; line-height: 1.8; color: var(--text); padding: 20px; background: white; border: 3px solid #fca5a5; border-radius: 8px; margin-bottom: 25px; font-style: italic;">
+                    "The fire was hot so I moved my hand. My brain told my muscles to do it because it hurt."
+                </div>
+                <h3 style="width:100%; border-color:var(--success); color:var(--success); margin-top:0;">✅ Good Scientific Example</h3>
+                <div style="font-size: 1.3rem; line-height: 1.8; color: var(--text); padding: 20px; background: white; border: 3px solid #86efac; border-radius: 8px;">
+                    <span class="connective" style="background:rgba(46,125,50,0.1); text-decoration-color:var(--success);">First,</span> the hot fire (stimulus) occurs, <span class="connective" style="background:rgba(46,125,50,0.1); text-decoration-color:var(--success);">which is detected by</span> thermoreceptors in the skin. This <span class="connective" style="background:rgba(46,125,50,0.1); text-decoration-color:var(--success);">sends a signal to</span> the spinal cord, <span class="connective" style="background:rgba(46,125,50,0.1); text-decoration-color:var(--success);">which then triggers</span> the arm muscle (effector), <span class="connective" style="background:rgba(46,125,50,0.1); text-decoration-color:var(--success);">resulting in</span> pulling your hand away.
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-action" style="max-width: 500px; margin: 30px auto;" onclick="switchPhase(3)">Go to Paragraph Builder ➡</button>
+    </section>
+
+    <section id="phase3" class="phase-section">
+        <div style="text-align: center;">
+            <h2>2b. Scientific Paragraph Builder</h2>
+            <div class="instruction-text">Select a scenario. Choose the correct scientific vocabulary from the dropdowns to build a perfect sequence. Watch the pathway light up!</div>
+        </div>
+        <div class="split-layout">
+            <div class="left-col" style="flex: 1.8;">
+                
+                <div class="control-group" style="display:flex; align-items:center; gap:20px; background:var(--primary-dark); color:white; border-color:var(--primary-dark);">
+                    <h3 style="margin:0; color:white; border:none; padding:0;">Scenario:</h3>
+                    <select id="seq-scenario" class="inline-select" style="flex:1; border-color:white;" onchange="seqApp.loadScenario(this.value)">
+                        <option value="light">☀️ Flashlight shone in the eyes</option>
+                        <option value="heat">🔥 Accidentally touching a hot stove</option>
+                        <option value="food">🍕 Smelling delicious pizza baking</option>
+                        <option value="pin">📌 Stepping barefoot on a sharp pin</option>
+                        <option value="cold">❄️ Walking outside in a freezing wind</option>
+                        <option value="noise">🔊 Hearing a sudden, loud explosion</option>
+                    </select>
+                </div>
+
+                <div class="mad-libs" id="mad-libs-container">
+                    <span class="connective">First,</span> the <span id="text-stim" style="font-weight:900; color:var(--danger); font-size:2rem; text-transform:uppercase;">bright light</span> (stimulus) occurs, <span class="connective">which is detected by</span> 
+                    
+                    <select id="sel-receptor" class="inline-select" onchange="seqApp.checkAnswers()">
+                        <option value="">--Choose Receptor--</option>
+                        <option value="thermo">Thermoreceptors (Skin)</option>
+                        <option value="photo">Photoreceptors (Eyes)</option>
+                        <option value="chemo">Chemoreceptors (Nose/Tongue)</option>
+                        <option value="noci">Nociceptors (Skin Pain)</option>
+                        <option value="audio">Audio Mechanoreceptors (Ears)</option>
+                    </select>
+                    
+                    . This <span class="connective">sends an electrical signal to</span> the 
+                    
+                    <select id="sel-control" class="inline-select" onchange="seqApp.checkAnswers()">
+                        <option value="">--Choose Control Centre--</option>
+                        <option value="brain">Brain / Spinal Cord</option>
+                        <option value="heart">Heart</option>
+                        <option value="stomach">Stomach</option>
+                        <option value="lungs">Lungs</option>
+                    </select>
+                    
+                    , <span class="connective">which then triggers</span> the 
+                    
+                    <select id="sel-effector" class="inline-select" onchange="seqApp.checkAnswers()">
+                        <option value="">--Choose Effector--</option>
+                        <option value="arm">Arm Muscle</option>
+                        <option value="leg">Leg Muscle</option>
+                        <option value="eyelid">Eyelid Muscle</option>
+                        <option value="saliva">Salivary Gland</option>
+                        <option value="adrenal">Adrenal Gland & Muscles</option>
+                        <option value="body_muscles">Skeletal Body Muscles</option>
+                    </select>
+                    
+                    (effector), <span class="connective">resulting in</span> a response where you 
+                    
+                    <select id="sel-response" class="inline-select" onchange="seqApp.checkAnswers()">
+                        <option value="">--Choose Response--</option>
+                        <option value="blink">blink to protect your eye.</option>
+                        <option value="pull">pull your hand away quickly.</option>
+                        <option value="drool">produce saliva to eat.</option>
+                        <option value="lift">lift your foot up rapidly.</option>
+                        <option value="shiver">shiver to generate heat.</option>
+                        <option value="flinch">flinch and jump back.</option>
+                    </select>
+                    .
+                </div>
+                
+                <div id="seq-feedback" style="margin-top: 25px; font-weight: 800; text-align: center; font-size: 1.6rem; color: var(--warn); background: white; padding: 20px; border-radius: 12px; border: 3px dashed var(--warn);">Complete the paragraph to trace the pathway!</div>
+
+            </div>
+            <div class="right-col" style="flex: 1; min-height: 550px; justify-content: flex-start;">
+                <h3 style="margin-top:0; color:var(--text-muted); width: 100%; text-align: center; border: none; padding: 0;">Pathway Tracker</h3>
+                
+                <svg viewBox="0 0 200 450" width="100%" height="100%" style="max-height: 500px; margin-top: 20px;">
+                    <g class="path-node" id="svg-stim">
+                        <rect x="10" y="10" width="180" height="50" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="4"/>
+                        <text x="100" y="42" font-size="18" font-family="'Lexend'" text-anchor="middle" fill="#991b1b">STIMULUS</text>
+                    </g>
+                    <line x1="100" y1="60" x2="100" y2="95" class="path-line" id="line-1" />
+
+                    <g class="path-node" id="svg-rec">
+                        <rect x="10" y="95" width="180" height="50" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+                        <text x="100" y="127" font-size="18" font-family="'Lexend'" text-anchor="middle" fill="#b45309">RECEPTOR</text>
+                    </g>
+                    <line x1="100" y1="145" x2="100" y2="180" class="path-line" id="line-2" />
+
+                    <g class="path-node" id="svg-con">
+                        <rect x="10" y="180" width="180" height="50" rx="10" fill="#f3e8ff" stroke="#7e22ce" stroke-width="4"/>
+                        <text x="100" y="212" font-size="18" font-family="'Lexend'" text-anchor="middle" fill="#6b21a8">CONTROL</text>
+                    </g>
+                    <line x1="100" y1="230" x2="100" y2="265" class="path-line" id="line-3" />
+
+                    <g class="path-node" id="svg-eff">
+                        <rect x="10" y="265" width="180" height="50" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="4"/>
+                        <text x="100" y="297" font-size="18" font-family="'Lexend'" text-anchor="middle" fill="#075985">EFFECTOR</text>
+                    </g>
+                    <line x1="100" y1="315" x2="100" y2="350" class="path-line" id="line-4" />
+
+                    <g class="path-node" id="svg-res">
+                        <rect x="10" y="350" width="180" height="50" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="4"/>
+                        <text x="100" y="382" font-size="18" font-family="'Lexend'" text-anchor="middle" fill="#166534">RESPONSE</text>
+                    </g>
+                </svg>
+                
+                <div id="svg-emoji" style="font-size: 6rem; position: absolute; bottom: 40px; right: 40px; opacity: 0; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: scale(0.1) rotate(-45deg);">😎</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="phase4" class="phase-section">
+        <div style="text-align: center;">
+            <h2>3a. Diagram Literacy: Reading the Reflex Arc</h2>
+            <div class="instruction-text">Science isn't just text. You must know how to translate an anatomical diagram into a sequence.</div>
+        </div>
+        <div class="theory-grid" style="grid-template-columns: 1fr;">
+            <div class="v-card" style="padding: 40px; background: #f8fafc;">
+                <h3>Tracing the Pathway</h3>
+                <p style="font-size: 1.5rem; color: var(--text-muted); max-width: 900px; margin-bottom: 30px;">In a reflex diagram, follow the <strong>arrows</strong>. They represent the electrical signal traveling through the nerves. A reflex is special because it skips the brain and loops through the spinal cord for maximum speed!</p>
+                
+                <div style="width: 100%; max-width: 1000px; background: white; border: 4px solid var(--primary); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <svg viewBox="0 0 800 300" width="100%" height="100%">
+                        <path d="M 100,200 Q 120,150 100,100 Q 130,160 140,200 Z" fill="#ef4444"/>
+                        <text x="110" y="235" font-weight="bold" font-size="18" fill="#dc2626">1. Stimulus</text>
+                        
+                        <rect x="150" y="150" width="70" height="35" rx="15" fill="#fcd34d" stroke="#d97706" stroke-width="4"/>
+                        <text x="185" y="210" font-weight="bold" font-size="18" fill="#d97706" text-anchor="middle">2. Receptor</text>
+
+                        <path d="M 220,165 Q 400,30 600,140" fill="none" stroke="#3b82f6" stroke-width="8" stroke-dasharray="12 8" marker-end="url(#arrow-blue)"/>
+                        <text x="400" y="60" font-weight="bold" font-size="18" fill="#2563eb" text-anchor="middle">3. Sensory Nerve (IN)</text>
+
+                        <ellipse cx="650" cy="150" rx="55" ry="90" fill="#f3e8ff" stroke="#7e22ce" stroke-width="5"/>
+                        <text x="650" y="270" font-weight="bold" font-size="18" fill="#7e22ce" text-anchor="middle">4. Spinal Cord (Control)</text>
+
+                        <path d="M 600,160 Q 400,270 260,185" fill="none" stroke="#22c55e" stroke-width="8" stroke-dasharray="12 8" marker-end="url(#arrow-green)"/>
+                        <text x="400" y="260" font-weight="bold" font-size="18" fill="#16a34a" text-anchor="middle">5. Motor Nerve (OUT)</text>
+
+                        <ellipse cx="230" cy="175" rx="35" ry="22" fill="#fca5a5" stroke="#b91c1c" stroke-width="4" transform="rotate(-30 230 175)"/>
+                        <text x="230" y="125" font-weight="bold" font-size="18" fill="#b91c1c" text-anchor="middle">6. Effector</text>
+
+                        <defs>
+                            <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+                            <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/></marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-action" style="max-width: 500px; margin: 30px auto;" onclick="switchPhase(5)">Go to Diagram Labeler ➡</button>
+    </section>
+
+    <section id="phase5" class="phase-section">
+        <div style="text-align: center;">
+            <h2>3b. Interactive Diagram Labeler</h2>
+            <div class="instruction-text">1. Click a word from the Word Bank. 2. Click the matching empty dashed circle on the diagram to label it!</div>
+        </div>
+        <div class="split-layout">
+            
+            <div class="left-col" style="flex: 1; max-width: 450px;">
+                <div class="wb-header">Word Bank</div>
+                
+                <div class="wb-container" id="word-bank">
+                    <button class="wb-btn" data-term="stimulus" onclick="diagramApp.selectWord(this)">🔥 Stimulus</button>
+                    <button class="wb-btn" data-term="receptor" onclick="diagramApp.selectWord(this)">🖐️ Receptor</button>
+                    <button class="wb-btn" style="border-color: #0369a1;" data-term="sensory" onclick="diagramApp.selectWord(this)">🔵 Sensory Nerve</button>
+                    <button class="wb-btn" style="border-color: #7e22ce;" data-term="control" onclick="diagramApp.selectWord(this)">🧠 Spinal Cord</button>
+                    <button class="wb-btn" style="border-color: #15803d;" data-term="motor" onclick="diagramApp.selectWord(this)">🟢 Motor Nerve</button>
+                    <button class="wb-btn" style="border-color: #b91c1c;" data-term="effector" onclick="diagramApp.selectWord(this)">💪 Effector</button>
+                </div>
+                
+                <div id="diag-feedback" class="diag-feedback-box">
+                    Select a word to begin...
+                </div>
+                
+                <button class="diag-reset-btn" onclick="diagramApp.reset()">🔄 Reset Diagram</button>
+            </div>
+            
+            <div class="right-col" style="flex: 2.5; padding: 20px;">
+                <div class="label-arena">
+                    <div class="label-svg-container">
+                        <svg viewBox="0 0 1000 600" width="100%" height="100%">
+                            
+                            <path d="M 260,250 Q 550,50 820,250" fill="none" stroke="#94a3b8" stroke-width="10" stroke-dasharray="20 15" id="svg-n-sensory" />
+                            
+                            <path d="M 820,350 Q 550,550 340,360" fill="none" stroke="#94a3b8" stroke-width="10" stroke-dasharray="20 15" id="svg-n-motor" />
+
+                            <path d="M 120,480 Q 150,350 120,250 Q 180,380 200,480 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="4"/>
+                            
+                            <rect x="200" y="230" width="90" height="40" rx="20" fill="#fcd34d" stroke="#d97706" stroke-width="5"/>
+                            
+                            <ellipse cx="300" cy="350" rx="50" ry="30" fill="#fca5a5" stroke="#b91c1c" stroke-width="5" transform="rotate(-30 300 350)"/>
+                            
+                            <ellipse cx="850" cy="300" rx="70" ry="160" fill="transparent" stroke="#a855f7" stroke-width="10" id="svg-n-control"/>
+
+                        </svg>
+
+                        <div class="drop-target" data-target="stimulus" style="top: 85%; left: 15%;" onclick="diagramApp.placeWord(this)"></div>
+                        
+                        <div class="drop-target" data-target="receptor" style="top: 35%; left: 10%;" onclick="diagramApp.placeWord(this)"></div>
+                        
+                        <div class="drop-target" data-target="sensory" style="top: 15%; left: 55%;" onclick="diagramApp.placeWord(this)"></div>
+                        
+                        <div class="drop-target" data-target="control" style="top: 15%; left: 85%;" onclick="diagramApp.placeWord(this)"></div>
+                        
+                        <div class="drop-target" data-target="motor" style="top: 85%; left: 55%;" onclick="diagramApp.placeWord(this)"></div>
+                        
+                        <div class="drop-target" data-target="effector" style="top: 45%; left: 35%;" onclick="diagramApp.placeWord(this)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="phase6" class="phase-section">
+        <div style="text-align: center;">
+            <h2>🏆 Master Quiz & Glossary</h2>
+            <div class="instruction-text">Review the master glossary, then test your science literacy with 10 rigorous questions!</div>
+        </div>
+        
+        <div style="max-width: 1100px; margin: 0 auto; width: 100%;">
+            
+            <table>
+                <tr style="background:var(--primary-dark);"><th colspan="3" style="text-align:center; font-size: 1.6rem;">Scientific Prefixes</th></tr>
+                <tr><th>Prefix</th><th>Literal Meaning</th><th>Example (What it detects)</th></tr>
+                <tr><td><strong>Thermo-</strong></td><td>Heat</td><td>Thermoreceptor (Detects changes in temperature)</td></tr>
+                <tr><td><strong>Photo-</strong></td><td>Light</td><td>Photoreceptor (Detects light in the retina)</td></tr>
+                <tr><td><strong>Chemo-</strong></td><td>Chemical</td><td>Chemoreceptor (Detects taste or smell particles)</td></tr>
+                <tr><td><strong>Mechano-</strong></td><td>Physical / Touch</td><td>Mechanoreceptor (Detects pressure/sound waves)</td></tr>
+                <tr><td><strong>Noci-</strong></td><td>Pain / Damage</td><td>Nociceptor (Detects tissue damage)</td></tr>
+                <tr><td><strong>Osmo-</strong></td><td>Water / Solutes</td><td>Osmoreceptor (Detects blood hydration levels)</td></tr>
+                <tr><td><strong>Baro-</strong></td><td>Pressure</td><td>Baroreceptor (Detects blood pressure)</td></tr>
+                
+                <tr style="background:var(--primary-dark);"><th colspan="3" style="text-align:center; font-size: 1.6rem;">Sequence Vocabulary</th></tr>
+                <tr><td><strong>Stimulus</strong></td><td colspan="2">The change in the environment (The cause or trigger).</td></tr>
+                <tr><td><strong>Receptor</strong></td><td colspan="2">The specific cell or organ that <em>detects</em> the stimulus.</td></tr>
+                <tr><td><strong>Control Centre</strong></td><td colspan="2">The Brain or Spinal Cord. Receives signal and decides response.</td></tr>
+                <tr><td><strong>Effector</strong></td><td colspan="2">A muscle or gland that <em>carries out</em> the action.</td></tr>
+                <tr><td><strong>Response</strong></td><td colspan="2">The physical action or effect (The result).</td></tr>
+            </table>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">1. "A snake flicks its tongue to catch scent particles in the air to find a mouse." Which receptor is the snake using?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) Photoreceptors</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) Chemoreceptors</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) Thermoreceptors</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">2. Which sequence uses the correct connective words to explain a scientific reflex?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) The stimulus happens, and then the response happens because the brain said so.</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) The stimulus is detected by a receptor, sending a signal to the spinal cord, which triggers an effector.</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) The effector triggers the stimulus, which sends a signal to the response.</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">3. If you read the word "Mechanoreceptor" in a biology textbook, what can you decode it to mean?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) A machine that detects light.</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) A cell that detects physical pressure, touch, or sound waves.</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) A chemical that stops reactions.</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">4. When looking at a Reflex Arc diagram, what does the arrow pointing AWAY from the Spinal Cord towards the Muscle represent?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) The Sensory Nerve</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">B) The Stimulus</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">C) The Motor Nerve</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">5. A dog hears a loud whistle and immediately turns its head. What was the <b>stimulus</b>?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) The dog's ear</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) The sound waves of the whistle</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) The action of turning the head</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">6. Which prefix would be used for a receptor that detects tissue damage or extreme pain?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">A) Noci-</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">B) Baro-</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) Osmo-</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">7. In a flowchart, what always directly follows the Control Centre?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) The Receptor</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) The Motor Nerve / Effector</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) The Stimulus</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">8. What is the literal translation of the word "Osmoreceptor"?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) Bone detector</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">B) Smell detector</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">C) Water / Concentration detector</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">9. You step on a sharp pin. Your leg muscles contract to lift your foot up. What is the <b>effector</b>?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) The sharp pin</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) The leg muscle</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) The skin on your foot</button>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-content">
+                    <div class="quiz-q">10. Why is reading diagrams an important science literacy skill?</div>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">A) Because scientists do not use words.</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, true)">B) Because diagrams show flow, sequence, and relationships that translate directly into scientific explanations.</button>
+                    <button class="tf-btn" onclick="checkQuiz(this, false)">C) Because diagrams are just for decoration to make the page look nice.</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script>
+    // =====================================================================
+    // NAVIGATION LOGIC
+    // =====================================================================
+    function switchPhase(num) {
+        document.querySelectorAll('.phase-section').forEach(el => {
+            el.classList.remove('active');
+            el.style.opacity = "0";
+        });
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        let target = document.getElementById(`phase${num}`);
+        target.classList.add('active');
+        // Reset animation trigger
+        target.style.animation = 'none';
+        target.offsetHeight; /* trigger reflow */
+        target.style.animation = null; 
+        
+        document.querySelector(`.tab-btn:nth-child(${num+1})`).classList.add('active');
+        
+        // Auto-load default scenario if opening Paragraph Builder
+        if(num === 3) seqApp.loadScenario(document.getElementById('seq-scenario').value);
+    }
+
+    // =====================================================================
+    // QUIZ LOGIC
+    // =====================================================================
+    function checkQuiz(btn, isCorrect) {
+        const parent = btn.closest('.quiz-content');
+        parent.querySelectorAll('.tf-btn').forEach(b => {
+            b.classList.remove('correct', 'wrong');
+            b.innerHTML = b.innerHTML.replace('✅ ', '').replace('❌ ', '');
+        });
+        
+        if (isCorrect) {
+            btn.classList.add('correct');
+            btn.innerHTML = '✅ ' + btn.innerHTML;
+        } else {
+            btn.classList.add('wrong');
+            btn.innerHTML = '❌ ' + btn.innerHTML;
+            btn.style.animation = "shakeWrong 0.4s ease";
+            setTimeout(() => btn.style.animation = "", 400);
+        }
+    }
+
+    // =====================================================================
+    // SIM 1: WORD DECODER LAB LOGIC
+    // =====================================================================
+    const wordLab = {
+        decode: function(type) {
+            const preBox = document.getElementById('wl-prefix');
+            const preMean = document.getElementById('wl-prefix-mean');
+            const trans = document.getElementById('wl-translation');
+            const organ = document.getElementById('wl-organ');
+            const organText = document.getElementById('wl-organ-text');
+
+            preBox.style.color = "white";
+            
+            const data = {
+                'heat':     { p: "Thermo", c: "var(--heat)", m: "(Heat)", t: "A Heat Detector", o: "🖐️", ot: "Skin (Detects temperature changes)" },
+                'light':    { p: "Photo", c: "var(--light)", m: "(Light)", t: "A Light Detector", o: "👁️", ot: "Eyes (Detects light in the retina)" },
+                'chem':     { p: "Chemo", c: "var(--chem)", m: "(Chemical)", t: "A Chemical Detector", o: "👃", ot: "Nose / Tongue (Detects scent/taste particles)" },
+                'mech':     { p: "Mechano", c: "var(--mech)", m: "(Physical / Touch)", t: "A Physical Pressure Detector", o: "🌬️", ot: "Skin (Detects physical movement/wind)" },
+                'pain':     { p: "Noci", c: "var(--pain)", m: "(Pain / Damage)", t: "A Pain / Damage Detector", o: "🩸", ot: "Skin / Organs (Detects tissue damage)" },
+                'sound':    { p: "Audio / Mechano", c: "var(--sound)", m: "(Sound / Waves)", t: "A Sound Wave Detector", o: "👂", ot: "Ears (Detects vibrations in the air)" },
+                'water':    { p: "Osmo", c: "var(--water)", m: "(Water / Solute)", t: "A Hydration Detector", o: "🧠", ot: "Brain (Hypothalamus detects blood thickness)" },
+                'pressure': { p: "Baro", c: "var(--pressure)", m: "(Pressure)", t: "A Blood Pressure Detector", o: "❤️", ot: "Blood Vessels (Detects stretch in arteries)" }
+            };
+
+            let d = data[type];
+            preBox.textContent = d.p;
+            preBox.style.borderColor = d.c;
+            preBox.style.backgroundColor = d.c;
+            preMean.textContent = d.m;
+            trans.textContent = d.t;
+            trans.style.color = d.c;
+            organ.textContent = d.o;
+            organText.textContent = d.ot;
+            
+            // Animation pop
+            trans.parentElement.style.animation = "none";
+            void trans.parentElement.offsetWidth; // trigger reflow
+            trans.parentElement.style.animation = "pulseSuccess 0.5s ease";
+        }
+    };
+
+    // =====================================================================
+    // SIM 2: SEQUENCE BUILDER LOGIC
+    // =====================================================================
+    const seqApp = {
+        scenarios: {
+            light: { stimText: "bright flash of light", rec: "photo", con: "brain", eff: "eyelid", res: "blink", emoji: "😖" },
+            heat: { stimText: "hot stove touch", rec: "thermo", con: "brain", eff: "arm", res: "pull", emoji: "🔥" },
+            food: { stimText: "smell of baking pizza", rec: "chemo", con: "brain", eff: "saliva", res: "drool", emoji: "🤤" },
+            pin: { stimText: "stepping on a sharp pin", rec: "noci", con: "brain", eff: "leg", res: "lift", emoji: "💥" },
+            cold: { stimText: "freezing cold wind", rec: "thermo", con: "brain", eff: "body_muscles", res: "shiver", emoji: "🥶" },
+            noise: { stimText: "sudden loud explosion", rec: "audio", con: "brain", eff: "adrenal", res: "flinch", emoji: "😱" }
+        },
+        current: 'light',
+
+        loadScenario: function(val) {
+            this.current = val;
+            const data = this.scenarios[val];
+            document.getElementById('text-stim').textContent = data.stimText;
+            
+            // Reset dropdowns
+            const selects = ['sel-receptor', 'sel-control', 'sel-effector', 'sel-response'];
+            selects.forEach(id => {
+                let el = document.getElementById(id);
+                el.value = "";
+                el.className = "inline-select";
+            });
+
+            // Reset SVG
+            document.querySelectorAll('.path-node').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.path-line').forEach(el => el.classList.remove('active'));
+            document.getElementById('svg-stim').classList.add('active'); // Stim always active at start
+            
+            let emj = document.getElementById('svg-emoji');
+            emj.style.opacity = '0';
+            emj.style.transform = 'scale(0.1) rotate(-45deg)';
+            
+            let fb = document.getElementById('seq-feedback');
+            fb.textContent = "Complete the paragraph to trace the pathway!";
+            fb.style.color = "var(--warn)";
+            fb.style.borderColor = "var(--warn)";
+            fb.style.background = "white";
+            
+            // Remove animation class from container
+            document.getElementById('mad-libs-container').style.animation = "none";
+        },
+
+        checkAnswers: function() {
+            const data = this.scenarios[this.current];
+            let score = 0;
+
+            // Check Receptor
+            let rec = document.getElementById('sel-receptor');
+            if(rec.value === data.rec) { rec.className = "inline-select correct"; document.getElementById('line-1').classList.add('active'); document.getElementById('svg-rec').classList.add('active'); score++; }
+            else if(rec.value !== "") { rec.className = "inline-select wrong"; document.getElementById('line-1').classList.remove('active'); document.getElementById('svg-rec').classList.remove('active'); }
+            else { rec.className = "inline-select"; document.getElementById('line-1').classList.remove('active'); document.getElementById('svg-rec').classList.remove('active'); }
+
+            // Check Control (Brain/Spinal Cord is always correct for these reflex/SR examples)
+            let con = document.getElementById('sel-control');
+            if(con.value === data.con && score >= 1) { con.className = "inline-select correct"; document.getElementById('line-2').classList.add('active'); document.getElementById('svg-con').classList.add('active'); score++; }
+            else if(con.value !== "") { con.className = "inline-select wrong"; document.getElementById('line-2').classList.remove('active'); document.getElementById('svg-con').classList.remove('active'); }
+            else { con.className = "inline-select"; document.getElementById('line-2').classList.remove('active'); document.getElementById('svg-con').classList.remove('active'); }
+
+            // Check Effector
+            let eff = document.getElementById('sel-effector');
+            if(eff.value === data.eff && score >= 2) { eff.className = "inline-select correct"; document.getElementById('line-3').classList.add('active'); document.getElementById('svg-eff').classList.add('active'); score++; }
+            else if(eff.value !== "") { eff.className = "inline-select wrong"; document.getElementById('line-3').classList.remove('active'); document.getElementById('svg-eff').classList.remove('active'); }
+            else { eff.className = "inline-select"; document.getElementById('line-3').classList.remove('active'); document.getElementById('svg-eff').classList.remove('active'); }
+
+            // Check Response
+            let res = document.getElementById('sel-response');
+            if(res.value === data.res && score >= 3) { res.className = "inline-select correct"; document.getElementById('line-4').classList.add('active'); document.getElementById('svg-res').classList.add('active'); score++; }
+            else if(res.value !== "") { res.className = "inline-select wrong"; document.getElementById('line-4').classList.remove('active'); document.getElementById('svg-res').classList.remove('active'); }
+            else { res.className = "inline-select"; document.getElementById('line-4').classList.remove('active'); document.getElementById('svg-res').classList.remove('active'); }
+
+            // Win State Check
+            let fb = document.getElementById('seq-feedback');
+            if(score === 4) {
+                fb.textContent = "Excellent Scientific Explanation! ✅ Sequence Complete.";
+                fb.style.color = "var(--success)";
+                fb.style.borderColor = "var(--success)";
+                fb.style.background = "#dcfce7";
+                
+                document.getElementById('mad-libs-container').style.animation = "pulseSuccess 0.6s ease";
+                
+                let emj = document.getElementById('svg-emoji');
+                emj.textContent = data.emoji;
+                emj.style.opacity = '1';
+                emj.style.transform = 'scale(1) rotate(0deg)';
+            } else {
+                fb.textContent = "Keep building... Ensure your vocabulary matches the specific scenario.";
+                fb.style.color = "var(--warn)";
+                fb.style.borderColor = "var(--warn)";
+                fb.style.background = "white";
+                let emj = document.getElementById('svg-emoji');
+                emj.style.opacity = '0';
+                emj.style.transform = 'scale(0.1) rotate(-45deg)';
+            }
+        }
+    };
+
+    // =====================================================================
+    // SIM 3: NEW DIAGRAM LABELER LOGIC
+    // =====================================================================
+    const diagramApp = {
+        selectedWord: null,
+        selectedTerm: null,
+        placedCount: 0,
+
+        selectWord: function(element) {
+            if(element.classList.contains('used')) return;
+            
+            // Clear previous selections
+            document.querySelectorAll('.wb-btn').forEach(el => {
+                if(!el.classList.contains('used')) el.classList.remove('selected');
+            });
+            
+            this.selectedWord = element;
+            this.selectedTerm = element.dataset.term;
+            
+            element.classList.add('selected');
+            
+            let fb = document.getElementById('diag-feedback');
+            fb.textContent = `Selected: "${element.textContent}". Now click the correct dashed circle!`;
+            fb.className = "diag-feedback-box"; // reset classes
+            fb.style.borderColor = "var(--warn)";
+            fb.style.color = "var(--warn)";
+        },
+
+        placeWord: function(targetElement) {
+            if(!this.selectedWord) {
+                let fb = document.getElementById('diag-feedback');
+                fb.textContent = "⚠️ Please select a word from the Word Bank first!";
+                fb.className = "diag-feedback-box wrong";
+                return;
+            }
+
+            if(targetElement.classList.contains('filled')) return; // already done
+
+            const targetTerm = targetElement.dataset.target;
+
+            if(this.selectedTerm === targetTerm) {
+                // Correct!
+                targetElement.classList.add('filled');
+                targetElement.textContent = this.selectedWord.textContent;
+                
+                this.selectedWord.classList.remove('selected');
+                this.selectedWord.classList.add('used');
+                
+                // Highlight the SVG path if applicable
+                let svgPart = document.getElementById(`svg-n-${targetTerm}`);
+                if(svgPart) {
+                    if(targetTerm === 'sensory') { svgPart.style.stroke = "#0369a1"; svgPart.style.strokeDasharray = "none"; }
+                    if(targetTerm === 'motor') { svgPart.style.stroke = "#15803d"; svgPart.style.strokeDasharray = "none"; }
+                    if(targetTerm === 'control') svgPart.style.stroke = "#7e22ce"; 
+                }
+
+                let fb = document.getElementById('diag-feedback');
+                fb.textContent = "✅ Correct! Great diagram reading.";
+                fb.className = "diag-feedback-box correct";
+                
+                this.placedCount++;
+                this.selectedWord = null;
+                this.selectedTerm = null;
+
+                if(this.placedCount === 6) {
+                    fb.innerHTML = "🎉 <b>DIAGRAM COMPLETE!</b> You are a master at reading anatomical models.";
+                }
+
+            } else {
+                // Wrong!
+                let fb = document.getElementById('diag-feedback');
+                fb.textContent = "❌ Incorrect placement. Trace the pathway arrows carefully!";
+                fb.className = "diag-feedback-box wrong";
+            }
+        },
+
+        reset: function() {
+            this.selectedWord = null;
+            this.selectedTerm = null;
+            this.placedCount = 0;
+
+            // Reset Bank
+            document.querySelectorAll('.wb-btn').forEach(el => {
+                el.classList.remove('used');
+                el.classList.remove('selected');
+            });
+
+            // Reset Targets
+            document.querySelectorAll('.drop-target').forEach(el => {
+                el.classList.remove('filled');
+                el.textContent = "";
+            });
+
+            // Reset SVG Colors
+            document.getElementById('svg-n-sensory').style.stroke = "#94a3b8";
+            document.getElementById('svg-n-sensory').style.strokeDasharray = "20 15";
+            document.getElementById('svg-n-motor').style.stroke = "#94a3b8";
+            document.getElementById('svg-n-motor').style.strokeDasharray = "20 15";
+            document.getElementById('svg-n-control').style.stroke = "#a855f7";
+
+            let fb = document.getElementById('diag-feedback');
+            fb.textContent = "Select a word to begin...";
+            fb.className = "diag-feedback-box";
+            fb.style.borderColor = "var(--border)";
+            fb.style.color = "var(--text-muted)";
+        }
+    };
+
+</script>
+</body>
+</html>
