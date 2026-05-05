@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Automation & Machine Learning - Practice Exam</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; }
+        .header { background-color: #4b0082; color: white; padding: 15px 20px; font-weight: bold; font-size: 1.2em; text-align: center; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .section-title { color: #4b0082; border-bottom: 2px solid #4b0082; padding-bottom: 5px; margin-top: 40px; }
+        .question-box { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .q-title { font-size: 1.1em; font-weight: bold; color: #333; margin-bottom: 10px; }
+        .scenario { background-color: #f3e5f5; padding: 10px; border-left: 4px solid #4b0082; margin-bottom: 15px; font-size: 0.95em; font-style: italic; }
+        select { width: 100%; padding: 10px; font-size: 1em; border-radius: 4px; border: 1px solid #ccc; }
+        textarea { width: 100%; box-sizing: border-box; border: 1px solid #ccc; padding: 10px; font-family: monospace; font-size: 14px; resize: vertical; border-radius: 4px; }
+        .text-answer { background-color: #fff; color: #000; font-family: Arial, sans-serif; }
+        .code-input { background-color: #2d2d2d; color: #f8f8f2; outline: none; border: none; }
+        .split-pane { display: flex; gap: 10px; margin-top: 15px; }
+        .pane { flex: 1; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
+        .pane-header { background: #e0e0e0; padding: 8px; font-size: 0.9em; font-family: monospace; font-weight: bold; }
+        .output { width: 100%; box-sizing: border-box; min-height: 150px; background-color: #000; color: #0f0; padding: 10px; font-family: monospace; white-space: pre-wrap; margin: 0; }
+        button { background-color: #4b0082; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background-color: #38006b; }
+        .submit-btn { background-color: #28a745; font-size: 1.2em; padding: 15px 30px; display: block; margin: 40px auto; width: 80%; }
+        .submit-btn:hover { background-color: #218838; }
+        #status { color: #d9534f; font-weight: bold; margin-bottom: 20px; text-align: center; font-size: 1.1em;}
+    </style>
+</head>
+<body>
+
+    <div class="header">Industry Simulation: Software Automation & Machine Learning (Year 12)</div>
+
+    <div class="container">
+        <div id="status">⏳ Booting Enterprise Python Environment... Please wait.</div>
+        
+        <div style="margin-bottom: 30px; background: #eef; padding: 15px; border-radius: 5px;">
+            <label><strong>Your FULL Name:</strong></label><br>
+            <input type="text" id="student_name" placeholder="Enter your full name" style="width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; font-size: 1em;">
+        </div>
+
+        <h2 class="section-title">Part A: ML & Automation Concepts (Multiple Choice)</h2>
+
+        <div class="question-box">
+            <div class="q-title">1. Business Process Automation vs ML</div>
+            <div class="scenario">Scenario: A school library wants to upgrade its systems. They write a script that automatically emails students when a book is 3 days overdue. This script follows a strict, pre-programmed set of rules without learning from historical data.</div>
+            <select id="q1_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Machine Learning (ML)</option>
+                <option value="B">Robotic Process Automation (RPA)</option>
+                <option value="C">Business Process Automation (BPA)</option>
+                <option value="D">Artificial Intelligence (AI)</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">2. Machine Learning Training Models</div>
+            <div class="scenario">Scenario: You are building a mark estimation program. You feed the algorithm a dataset containing past students' "hours studied" alongside their "final exam marks" (labelled data) so the algorithm can learn the relationship between the two.</div>
+            <select id="q2_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Unsupervised Learning</option>
+                <option value="B">Supervised Learning</option>
+                <option value="C">Reinforcement Learning</option>
+                <option value="D">Semi-supervised Learning</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">3. Choosing the Right Algorithm</div>
+            <div class="scenario">Scenario: A student named Alex missed an exam. The teacher needs to predict a continuous, numeric value (Alex's estimated score out of 100) based on her previous assessment marks.</div>
+            <select id="q3_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Linear Regression</option>
+                <option value="B">Logistic Regression</option>
+                <option value="C">K-nearest Neighbour</option>
+                <option value="D">Decision Tree Classification</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">4. Neural Networks</div>
+            <div class="scenario">Scenario: During the training cycle of a neural network, the model makes a prediction, compares it to the actual target value to calculate the error, and then adjusts its internal connections. What are these adjustable connections called?</div>
+            <select id="q4_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Nodes and Layers</option>
+                <option value="B">Weights and Biases</option>
+                <option value="C">Trees and Branches</option>
+                <option value="D">Inputs and Outputs</option>
+            </select>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">5. Social & Ethical Implications</div>
+            <div class="scenario">Scenario: An automated recruitment AI is trained using 10 years of historical hiring data from a tech company. The resulting ML model begins automatically rejecting resumes from female applicants because the historical data predominantly featured successful male hires.</div>
+            <select id="q5_ans">
+                <option value="">Select an answer...</option>
+                <option value="A">Dataset Source Bias</option>
+                <option value="B">Hardware Failure</option>
+                <option value="C">Overfitting</option>
+                <option value="D">K-Nearest Neighbour Error</option>
+            </select>
+        </div>
+
+        <h2 class="section-title">Part B: AI & Automation Architecture (Short Response)</h2>
+
+        <div class="question-box">
+            <div class="q-title">6. Distinguishing AI and ML</div>
+            <div class="scenario">Scenario: The school principal asks you to explain the difference between Artificial Intelligence (AI) and Machine Learning (ML) for a presentation about the new IT curriculum.</div>
+            <p>Briefly distinguish between AI and ML. How does ML act as a subset of AI?</p>
+            <textarea id="q6_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">7. Neural Network Execution Cycle</div>
+            <div class="scenario">Scenario: You are designing a deep learning model for image recognition.</div>
+            <p>Explain the basic process of how data moves through a Neural Network (from the input layer, through hidden layers, to the output layer) during the execution cycle.</p>
+            <textarea id="q7_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">8. Dataset Bias and Social Impact</div>
+            <div class="scenario">Scenario: The Australian "Robodebt" scheme used an automated algorithm to calculate welfare overpayments, resulting in severe psychological distress for many citizens due to flawed logic and assumptions.</div>
+            <p>Discuss the ethical implications of human and dataset source bias in software automation, referencing how it impacts individuals in society.</p>
+            <textarea id="q8_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">9. ML Supporting Automation</div>
+            <div class="scenario">Scenario: An enterprise uses DevOps to continuously update their software. They want to integrate Machine Learning (MLOps) into their pipeline.</div>
+            <p>Describe how Machine Learning can support and enhance standard software automation processes like DevOps or Business Process Automation (BPA).</p>
+            <textarea id="q9_ans" class="text-answer" rows="4" placeholder="Type your response here..."></textarea>
+        </div>
+
+        <h2 class="section-title">Part C: Live Automation & ML Scripting (Coding)</h2>
+        <p><em>Questions 10-13 contain faulty OOP implementations of ML concepts. You must refactor the code to make it function correctly. Questions 14-15 require you to build architectures from scratch. Click "Run Code" to test.</em></p>
+
+        <div class="question-box">
+            <div class="q-title">10. Refactor: Linear Regression OOP Model</div>
+            <div class="scenario">Scenario: You are building a mark estimation program using a Linear Regression equation (y = mx + c). The current class doesn't calculate the prediction correctly.</div>
+            <p><strong>Task:</strong> Refactor `predict_mark`. It should return the slope (`m`) multiplied by `hours_studied` (`x`), plus the intercept (`c`).</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q10_code" class="code-input" rows="14">
+class LinearEstimator:
+    def __init__(self, slope, intercept):
+        self.m = slope
+        self.c = intercept
+
+    def predict_mark(self, hours_studied):
+        # INSECURE/FAULTY LOGIC: Currently just adding them together
+        estimated_mark = self.m + hours_studied + self.c
+        return estimated_mark
+
+# Test code:
+# If slope is 5 (marks per hour) and intercept is 20 (base mark)
+model = LinearEstimator(5, 20)
+print("Estimated Mark for 10 hours:", model.predict_mark(10)) # Should be 70
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q10_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q10_code', 'q10_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">11. Refactor: Decision Tree Logic</div>
+            <div class="scenario">Scenario: A basic decision tree is used to automate student support categorization. The tree logic is broken and returning incorrect categories.</div>
+            <p><strong>Task:</strong> Refactor `classify`. 
+            1. If `attendance > 80` AND `grades > 50`, return "On Track". 
+            2. If `attendance > 80` BUT `grades <= 50`, return "Academic Support". 
+            3. If `attendance <= 80`, return "Attendance Intervention" (regardless of grades).</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q11_code" class="code-input" rows="15">
+class DecisionTree:
+    def classify(self, attendance, grades):
+        # FAULTY LOGIC: This tree is broken!
+        if attendance > 80:
+            return "On Track"
+        elif grades > 50:
+            return "Academic Support"
+        else:
+            return "Attendance Intervention"
+
+# Test code:
+tree = DecisionTree()
+print("Student 1 (90%, 40):", tree.classify(90, 40)) # Should be Academic Support
+print("Student 2 (70%, 80):", tree.classify(70, 80)) # Should be Attendance Intervention
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q11_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q11_code', 'q11_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">12. Refactor: Data Sanitization (Removing Bias)</div>
+            <div class="scenario">Scenario: Before feeding a dataset into an ML algorithm, you must strip out sensitive identifiers to prevent human bias.</div>
+            <p><strong>Task:</strong> Refactor `sanitize_data`. Iterate through the list of dictionaries. Create and return a new list of dictionaries that ONLY includes "hours" and "score". Remove "name" and "gender" to anonymize the training data.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q12_code" class="code-input" rows="13">
+class DataPipeline:
+    def sanitize_data(self, dataset):
+        # FAULTY: Returning the raw biased dataset!
+        return dataset
+
+# Test code:
+raw_data = [
+    {"name": "Alice", "gender": "F", "hours": 5, "score": 60},
+    {"name": "Bob", "gender": "M", "hours": 8, "score": 85}
+]
+pipeline = DataPipeline()
+print(pipeline.sanitize_data(raw_data))
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q12_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q12_code', 'q12_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">13. Refactor: Logistic Regression Probability</div>
+            <div class="scenario">Scenario: Logistic Regression outputs a probability between 0 and 1 using a Sigmoid-like function. A junior dev tried to simulate this but it crashes on negative numbers.</div>
+            <p><strong>Task:</strong> Refactor `calculate_probability`. Without importing math libraries, write logic so that if the `score` is less than 0, return `0.0`. If the `score` is greater than 10, return `1.0`. Otherwise, return `score / 10.0`.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Refactor this)</div>
+                    <textarea id="q13_code" class="code-input" rows="13">
+class LogisticModel:
+    def calculate_probability(self, score):
+        # FAULTY: Does not bound the probability between 0 and 1
+        return score / 10.0
+
+# Test code:
+model = LogisticModel()
+print("Score 5:", model.calculate_probability(5))   # Should be 0.5
+print("Score -2:", model.calculate_probability(-2)) # Should be 0.0
+print("Score 15:", model.calculate_probability(15)) # Should be 1.0
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q13_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q13_code', 'q13_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">14. Build: Neural Network Perceptron</div>
+            <div class="scenario">Scenario: You need to build a single artificial neuron (Perceptron) using OOP to understand neural network foundations.</div>
+            <p><strong>Task:</strong> Create an OOP class `Perceptron` from scratch. 
+            <br>1. In `__init__`, accept `weight` and `bias`. 
+            <br>2. Create a method `feed_forward(self, input_value)`. 
+            <br>3. Calculate the weighted sum: `(input_value * self.weight) + self.bias`.
+            <br>4. Apply an activation function: If the weighted sum is `> 0`, return `1`. Otherwise, return `0`.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Build from scratch)</div>
+                    <textarea id="q14_code" class="code-input" rows="14">
+# Write your Perceptron class here:
+
+
+
+# Use this to test:
+# neuron = Perceptron(weight=0.5, bias=-2)
+# print("Input 3:", neuron.feed_forward(3)) # (3*0.5)-2 = -0.5 -> Returns 0
+# print("Input 5:", neuron.feed_forward(5)) # (5*0.5)-2 =  0.5 -> Returns 1
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q14_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q14_code', 'q14_output')">Run Code</button>
+        </div>
+
+        <div class="question-box">
+            <div class="q-title">15. Build: ML Automation Ops (MLOps)</div>
+            <div class="scenario">Scenario: As part of automated training, you need an MLOps script that stops training if the algorithm's accuracy drops below an acceptable threshold.</div>
+            <p><strong>Task:</strong> Create a class `ModelTrainer` from scratch.
+            <br>1. Constructor initializes `self.epoch = 0`.
+            <br>2. Create `log_accuracy(self, accuracy)`. Increment `self.epoch` by 1.
+            <br>3. If `accuracy` is less than `0.75`, print `"Alert: Accuracy degraded at epoch {epoch}. Stopping."` and return `False`.
+            <br>4. Otherwise, print `"Epoch {epoch}: Accuracy {accuracy}. Continuing."` and return `True`.</p>
+            <div class="split-pane">
+                <div class="pane">
+                    <div class="pane-header"># Input code (Build from scratch)</div>
+                    <textarea id="q15_code" class="code-input" rows="16">
+# Write your ModelTrainer class here:
+
+
+
+# Use this to test:
+# trainer = ModelTrainer()
+# trainer.log_accuracy(0.85)
+# trainer.log_accuracy(0.80)
+# trainer.log_accuracy(0.70) # Should trigger alert and return False
+</textarea>
+                </div>
+                <div class="pane">
+                    <div class="pane-header"># Output</div>
+                    <pre id="q15_output" class="output">Awaiting execution...</pre>
+                </div>
+            </div>
+            <button onclick="runCode('q15_code', 'q15_output')">Run Code</button>
+        </div>
+
+        <button class="submit-btn" onclick="saveAsTxt()">💾 Save ML Automation Assessment as .TXT</button>
+
+    </div>
+
+    <script>
+        let pyodide;
+
+        async function initPyodide() {
+            pyodide = await loadPyodide();
+            document.getElementById("status").innerText = "✅ Machine Learning Environment Ready. You may begin the simulation.";
+            document.getElementById("status").style.color = "green";
+        }
+        initPyodide();
+
+        async function runCode(inputId, outputId) {
+            if (!pyodide) {
+                document.getElementById(outputId).innerText = "Engine loading... please wait.";
+                return;
+            }
+            const code = document.getElementById(inputId).value;
+            const outputDiv = document.getElementById(outputId);
+            outputDiv.innerText = "Executing logic...";
+            
+            try {
+                pyodide.runPython(`
+import sys
+import io
+sys.stdout = io.StringIO()
+                `);
+                
+                await pyodide.runPythonAsync(code);
+                
+                let stdout = pyodide.runPython("sys.stdout.getvalue()");
+                outputDiv.innerText = stdout || "Execution complete (No output returned).";
+            } catch (err) {
+                outputDiv.innerText = err;
+            }
+        }
+
+        function saveAsTxt() {
+            const name = document.getElementById("student_name").value || "Anonymous_Engineer";
+            
+            const answers = {
+                "Q1": document.getElementById("q1_ans").value,
+                "Q2": document.getElementById("q2_ans").value,
+                "Q3": document.getElementById("q3_ans").value,
+                "Q4": document.getElementById("q4_ans").value,
+                "Q5": document.getElementById("q5_ans").value,
+                "Q6": document.getElementById("q6_ans").value,
+                "Q7": document.getElementById("q7_ans").value,
+                "Q8": document.getElementById("q8_ans").value,
+                "Q9": document.getElementById("q9_ans").value,
+                "Q10": document.getElementById("q10_code").value,
+                "Q10_out": document.getElementById("q10_output").innerText,
+                "Q11": document.getElementById("q11_code").value,
+                "Q11_out": document.getElementById("q11_output").innerText,
+                "Q12": document.getElementById("q12_code").value,
+                "Q12_out": document.getElementById("q12_output").innerText,
+                "Q13": document.getElementById("q13_code").value,
+                "Q13_out": document.getElementById("q13_output").innerText,
+                "Q14": document.getElementById("q14_code").value,
+                "Q14_out": document.getElementById("q14_output").innerText,
+                "Q15": document.getElementById("q15_code").value,
+                "Q15_out": document.getElementById("q15_output").innerText,
+            };
+
+            let content = `INDUSTRY SIMULATION: SOFTWARE AUTOMATION & ML EXAM\nEngineer: ${name}\n`;
+            content += `=====================================================\n\n`;
+            
+            content += `--- PART A: ML & AUTOMATION CONCEPTS ---\n`;
+            for(let i=1; i<=5; i++) { content += `Q${i}: ${answers['Q'+i]}\n`; }
+            
+            content += `\n--- PART B: AI & ARCHITECTURE ANALYSIS ---\n`;
+            for(let i=6; i<=9; i++) { content += `Q${i}:\n${answers['Q'+i]}\n\n`; }
+            
+            content += `--- PART C: LIVE ML SCRIPTING ---\n`;
+            for(let i=10; i<=15; i++) { 
+                content += `>>> Q${i} Source Code:\n${answers['Q'+i]}\n\n`; 
+                content += `>>> Q${i} Execution Output:\n${answers['Q'+i+'_out']}\n\n`;
+                content += `-----------------------------------------------------\n\n`;
+            }
+
+            const blob = new Blob([content], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${name.replace(/\s+/g, '_')}_ML_Automation_Exam.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
