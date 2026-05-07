@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 10 Science — Modified Self-Investigation Task</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #eaf4f0; margin: 0; padding: 0; font-size: 15px; }
+
+        .header {
+            background: linear-gradient(135deg, #004d3d, #007d66);
+            color: white; padding: 18px 24px;
+            text-align: center;
+        }
+        .header h1 { margin: 0; font-size: 1.35em; letter-spacing: 0.5px; }
+        .header p { margin: 6px 0 0; font-size: 0.92em; opacity: 0.88; }
+
+        .subheader {
+            background-color: #007d66;
+            color: white; padding: 9px 20px;
+            text-align: center; font-size: 0.88em;
+            border-bottom: 3px solid #005c4b;
+        }
+
+        .container {
+            max-width: 1020px;
+            margin: 24px auto;
+            background: white;
+            padding: 32px 36px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.13);
+        }
+
+        .section-title {
+            color: #004d3d;
+            border-bottom: 3px solid #007d66;
+            padding-bottom: 7px;
+            margin-top: 44px;
+            font-size: 1.2em;
+        }
+
+        .question-box {
+            margin-bottom: 30px;
+            padding-bottom: 22px;
+            border-bottom: 1px dashed #cde8df;
+        }
+
+        .q-title {
+            font-size: 1.05em;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .marks {
+            color: #007d66;
+            font-weight: bold;
+            font-size: 0.88em;
+            font-style: normal;
+        }
+
+        .info-box {
+            background-color: #e8f5f0;
+            padding: 14px 16px;
+            border-left: 5px solid #007d66;
+            margin: 12px 0 16px;
+            font-size: 0.94em;
+            border-radius: 0 5px 5px 0;
+            line-height: 1.65;
+        }
+
+        .warning-box {
+            background-color: #fff8e1;
+            padding: 13px 16px;
+            border-left: 5px solid #f9a825;
+            margin-bottom: 22px;
+            font-size: 0.93em;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .hypothesis-box {
+            background: #fff3e0;
+            padding: 13px 16px;
+            border-left: 5px solid #e65100;
+            font-style: italic;
+            border-radius: 0 5px 5px 0;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .aim-box {
+            background: #e3f2fd;
+            padding: 13px 16px;
+            border-left: 5px solid #1565c0;
+            border-radius: 0 5px 5px 0;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .student-field {
+            margin-bottom: 30px;
+            background: #f0f8ff;
+            padding: 18px;
+            border-radius: 7px;
+            border: 1px solid #b0cce8;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1.5px solid #aaa;
+            background: #fff;
+            cursor: pointer;
+        }
+        select:focus { border-color: #007d66; outline: none; }
+
+        textarea {
+            width: 100%;
+            border: 1.5px solid #bbb;
+            padding: 11px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            border-radius: 5px;
+            background: #fff;
+            color: #111;
+            line-height: 1.55;
+        }
+        textarea:focus { border-color: #007d66; outline: none; }
+
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 6px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1.5px solid #aaa;
+        }
+        input:focus { border-color: #007d66; outline: none; }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 14px 0;
+            font-size: 0.92em;
+        }
+        th {
+            background-color: #005c4b;
+            color: white;
+            padding: 9px 13px;
+            text-align: center;
+            font-size: 0.93em;
+        }
+        td {
+            border: 1px solid #c5ddd7;
+            padding: 8px 13px;
+            text-align: center;
+        }
+        tr:nth-child(even) td { background-color: #f2f9f6; }
+        tr:hover td { background-color: #dff2ec; }
+        .peak-row td { background-color: #c8f0e0 !important; font-weight: bold; }
+
+        .chart-container {
+            width: 100%;
+            max-width: 740px;
+            margin: 22px auto 6px;
+        }
+
+        .graph-caption {
+            text-align: center;
+            font-size: 0.88em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.15em;
+            display: block;
+            margin: 44px auto 10px;
+            width: 85%;
+            letter-spacing: 0.3px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        .save-btn:hover { background: linear-gradient(135deg, #218838, #155724); transform: translateY(-1px); }
+
+        .method-step {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 9px 14px;
+            margin: 5px 0;
+            line-height: 1.55;
+        }
+        .method-step span { font-weight: bold; color: #005c4b; margin-right: 6px; }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+            padding-left: 0;
+            list-style: none;
+            margin: 10px 0;
+        }
+        .materials-grid li::before {
+            content: "✔ ";
+            color: #007d66;
+            font-weight: bold;
+        }
+
+        .summary-marks {
+            background: #004d3d;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 7px;
+            margin: 28px 0 10px;
+            text-align: center;
+        }
+        .summary-marks table { margin: 10px auto; color: white; max-width: 420px; }
+        .summary-marks th { background: rgba(255,255,255,0.2); }
+        .summary-marks td { border-color: rgba(255,255,255,0.25); }
+
+        .eq-box {
+            background: #1a1a2e;
+            color: #a8f5d0;
+            font-family: monospace;
+            font-size: 1.15em;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .var-badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 12px;
+            font-size: 0.82em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .iv { background: #bbdefb; color: #0d47a1; }
+        .dv { background: #c8e6c9; color: #1b5e20; }
+        .cv { background: #ffe082; color: #6d4c00; }
+
+        .footnote {
+            font-size: 0.82em;
+            color: #888;
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        @media(max-width: 640px) {
+            .container { padding: 18px 14px; }
+            .materials-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <h1>📋 Year 10 Science — Modified Self-Investigation Research Task</h1>
+    <p>Distance Education — Practical Replacement Assessment</p>
+</div>
+<div class="subheader">
+    Topic: <strong>The Effect of Temperature on Enzyme Activity (Catalase)</strong> &nbsp;|&nbsp;
+    Total Marks: <strong>40</strong> &nbsp;|&nbsp; Save your answers using the button at the bottom
+</div>
+
+<div class="container">
+
+    <!-- ===== STUDENT INFO ===== -->
+    <div class="student-field">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div>
+                <label><strong>Full Name:</strong></label>
+                <input type="text" id="student_name" placeholder="e.g. Jordan Smith">
+            </div>
+            <div>
+                <label><strong>Date Submitted:</strong></label>
+                <input type="date" id="student_date">
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NOTICE ===== -->
+    <div class="warning-box">
+        <strong>⚠️ Note to Student (Distance Education — Modified Task):</strong><br>
+        Because you were unable to attend and complete the practical investigation in class, a complete sample experiment has been provided below — including the aim, hypothesis, method, materials, data table, and two graphs. <strong>You did not conduct this experiment yourself.</strong> Your task is to carefully read all the provided information and then answer all questions in <strong>Parts A, B, and C</strong>. When finished, click the green button at the bottom to save your answers as a <strong>.txt file</strong> and submit it to your teacher for marking.
+    </div>
+
+    <!-- ===== MARKS SUMMARY ===== -->
+    <div class="summary-marks">
+        <strong>Assessment Structure</strong>
+        <table>
+            <tr><th>Section</th><th>Type</th><th>Marks</th></tr>
+            <tr><td>Part A (Q1–10)</td><td>Multiple Choice</td><td>10</td></tr>
+            <tr><td>Part B (Q11–17)</td><td>Short Answer</td><td>18</td></tr>
+            <tr><td>Part C (Q18–20)</td><td>Extended Response</td><td>12</td></tr>
+            <tr><td><strong>Total</strong></td><td></td><td><strong>40</strong></td></tr>
+        </table>
+    </div>
+
+    <!-- ===== BACKGROUND ===== -->
+    <h2 class="section-title">📘 Background Information</h2>
+    <div class="info-box">
+        <strong>Enzymes</strong> are biological catalysts — proteins produced by living cells that speed up chemical reactions without being permanently consumed or altered. Each enzyme has a uniquely shaped region called the <strong>active site</strong>, which binds specifically to its target molecule (the <em>substrate</em>). This is described by the <strong>"Lock and Key" model</strong>: just as a specific key fits a specific lock, only the correct substrate fits an enzyme's active site.<br><br>
+        <strong>Catalase</strong> is an enzyme found in nearly all living organisms, including potato cells. It catalyses the breakdown of <strong>hydrogen peroxide (H₂O₂)</strong> — a toxic waste product of cellular metabolism — into harmless <strong>water (H₂O)</strong> and <strong>oxygen gas (O₂)</strong>. The oxygen produced is the bubbling you often see when hydrogen peroxide contacts a cut or a piece of liver/potato.<br><br>
+        Several factors affect how efficiently an enzyme works, including <strong>temperature</strong>, pH, and substrate concentration. There is a specific <em>optimum temperature</em> at which each enzyme functions most efficiently. Below this temperature, enzyme and substrate molecules move slowly (less kinetic energy), reducing the frequency of successful collisions. Above the optimum temperature, the enzyme <strong>denatures</strong> — the high thermal energy breaks the bonds that maintain the enzyme's shape, permanently distorting the active site so the substrate can no longer bind. Denaturation is <em>irreversible</em>.
+    </div>
+
+    <!-- ===== AIM & HYPOTHESIS ===== -->
+    <h2 class="section-title">🎯 Aim &amp; Hypothesis</h2>
+    <div class="aim-box">
+        <strong>Aim:</strong> To investigate the effect of temperature on the rate of catalase enzyme activity by measuring the volume of oxygen gas produced when potato discs are added to hydrogen peroxide solution at eight different temperatures over 60 seconds.
+    </div>
+    <div class="hypothesis-box">
+        <strong>Hypothesis:</strong> "If the temperature of the hydrogen peroxide solution is increased, then the rate of catalase enzyme activity (measured by volume of O₂ produced per minute) will increase up to approximately 37°C, after which the rate will decrease significantly due to the irreversible denaturation of the catalase enzyme at higher temperatures."
+    </div>
+
+    <!-- ===== VARIABLES ===== -->
+    <h2 class="section-title">🔬 Variables</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Variable Type</th>
+                <th>Variable Name</th>
+                <th>How It Was Controlled or Measured</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="var-badge iv">Independent Variable</span></td>
+                <td>Temperature of the H₂O₂ solution (°C)</td>
+                <td>Set using water baths at 8 specific temperatures. Temperature verified with thermometer (±0.5°C).</td>
+            </tr>
+            <tr>
+                <td><span class="var-badge dv">Dependent Variable</span></td>
+                <td>Volume of O₂ gas produced (mL) in 60 seconds</td>
+                <td>Collected and measured using a gas syringe connected via delivery tube. Recorded to nearest 0.5 mL.</td>
+            </tr>
+            <tr>
+                <td><span class="var-badge cv">Controlled Variable</span></td>
+                <td>Concentration of H₂O₂ (3%)</td>
+                <td>Same batch of 3% H₂O₂ solution used for all trials; stored in dark bottle between tests.</td>
+            </tr>
+            <tr>
+                <td><span class="var-badge cv">Controlled Variable</span></td>
+                <td>Volume of H₂O₂ used (20 mL)</td>
+                <td>Measured using a calibrated 25 mL graduated cylinder for each trial.</td>
+            </tr>
+            <tr>
+                <td><span class="var-badge cv">Controlled Variable</span></td>
+                <td>Mass of potato discs (2.0 g)</td>
+                <td>Weighed on an electronic balance (±0.01 g) before each trial; same potato used throughout.</td>
+            </tr>
+            <tr>
+                <td><span class="var-badge cv">Controlled Variable</span></td>
+                <td>Duration of reaction (60 seconds)</td>
+                <td>Stopwatch started immediately when potato was added. Timer stopped at exactly 60 s.</td>
+            </tr>
+            <tr>
+                <td><span class="var-badge cv">Controlled Variable</span></td>
+                <td>Surface area of potato discs</td>
+                <td>Cork borer (6 mm diameter) used to cut uniform cylindrical discs; cut to uniform 5 mm lengths.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ===== MATERIALS ===== -->
+    <h2 class="section-title">🧪 Materials</h2>
+    <ul class="materials-grid">
+        <li>Fresh potato (1 medium, peeled)</li>
+        <li>3% Hydrogen peroxide solution (H₂O₂) — 400 mL</li>
+        <li>Water baths at 10, 20, 30, 37, 40, 50, 60, 70°C</li>
+        <li>Gas syringe (0–100 mL, precision ±0.5 mL)</li>
+        <li>Conical flask (100 mL) × 8</li>
+        <li>Rubber stopper with glass delivery tube</li>
+        <li>Electronic balance (±0.01 g)</li>
+        <li>Graduated cylinder (25 mL)</li>
+        <li>Thermometer (±0.5°C) — one per water bath</li>
+        <li>Digital stopwatch</li>
+        <li>Cork borer (6 mm diameter) and cutting board</li>
+        <li>Tweezers and spatula</li>
+        <li>Safety goggles and latex gloves</li>
+        <li>Ice bath and electric hotplate for temperature control</li>
+        <li>Paper towels and waste disposal container</li>
+    </ul>
+
+    <!-- ===== METHOD ===== -->
+    <h2 class="section-title">📋 Method (Summary)</h2>
+    <div class="method-step"><span>Step 1:</span> Put on safety goggles and gloves. Using the cork borer, cut uniform potato cylinders from the same potato. Cut each cylinder into 5 mm discs. Weigh out 2.0 g of potato discs on the electronic balance for each trial. Set aside.</div>
+    <div class="method-step"><span>Step 2:</span> Measure exactly 20 mL of 3% H₂O₂ solution into a clean 100 mL conical flask using the graduated cylinder.</div>
+    <div class="method-step"><span>Step 3:</span> Place the flask into the water bath set to the first target temperature (10°C). Allow 5 minutes for the H₂O₂ to equilibrate. Use a thermometer to confirm the temperature before proceeding.</div>
+    <div class="method-step"><span>Step 4:</span> Quickly add the 2.0 g of potato discs to the flask, immediately seal with the rubber stopper connected to the gas syringe, and start the stopwatch simultaneously.</div>
+    <div class="method-step"><span>Step 5:</span> After exactly 60 seconds, record the volume of O₂ gas collected in the syringe (in mL) in the results table.</div>
+    <div class="method-step"><span>Step 6:</span> Discard used potato discs and rinse the flask thoroughly. Repeat Steps 1–5 two more times at the same temperature to obtain three trials. Calculate the average O₂ volume.</div>
+    <div class="method-step"><span>Step 7:</span> Repeat the entire process (Steps 1–6) for each of the remaining 7 temperatures: 20°C, 30°C, 37°C, 40°C, 50°C, 60°C, and 70°C.</div>
+    <div class="method-step"><span>Step 8:</span> Record all data in the results table. Calculate the average for each temperature. Plot Graph 1 (O₂ volume vs temperature) and Graph 2 (Rate vs temperature). Analyse results and draw conclusions.</div>
+
+    <!-- ===== RESULTS ===== -->
+    <h2 class="section-title">📊 Results — Sample Data Collected</h2>
+    <p>The following data was collected during the class practical. Each value represents the volume of oxygen gas (mL) collected over <strong>60 seconds</strong> using a gas syringe. The experiment was repeated <strong>three times</strong> at each temperature to improve reliability. The highlighted row indicates the temperature at which the highest enzyme activity was recorded.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Temperature (°C)</th>
+                <th>Trial 1 (mL)</th>
+                <th>Trial 2 (mL)</th>
+                <th>Trial 3 (mL)</th>
+                <th>Average O₂ (mL)</th>
+                <th>Rate (mL/min)*</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>10</td><td>7</td><td>8</td><td>9</td><td>8.0</td><td>8.0</td></tr>
+            <tr><td>20</td><td>16</td><td>18</td><td>20</td><td>18.0</td><td>18.0</td></tr>
+            <tr><td>30</td><td>26</td><td>28</td><td>30</td><td>28.0</td><td>28.0</td></tr>
+            <tr class="peak-row"><td>37 ★</td><td>33</td><td>35</td><td>37</td><td>35.0</td><td>35.0</td></tr>
+            <tr><td>40</td><td>30</td><td>32</td><td>34</td><td>32.0</td><td>32.0</td></tr>
+            <tr><td>50</td><td>10</td><td>12</td><td>14</td><td>12.0</td><td>12.0</td></tr>
+            <tr><td>60</td><td>2</td><td>3</td><td>4</td><td>3.0</td><td>3.0</td></tr>
+            <tr><td>70</td><td>0</td><td>0</td><td>1</td><td>0.3</td><td>0.3</td></tr>
+        </tbody>
+    </table>
+    <p class="footnote">* Since the reaction was measured over exactly 60 seconds (= 1 minute), the Rate (mL/min) equals the Average O₂ (mL) numerically. ★ Peak (optimum) temperature highlighted in green.</p>
+
+    <!-- ===== GRAPHS ===== -->
+    <h2 class="section-title">📈 Graphs</h2>
+    <p>Study both graphs carefully. You will be asked to interpret, describe, and analyse these graphs in Parts A, B, and C below.</p>
+
+    <div class="chart-container">
+        <canvas id="chart1"></canvas>
+        <p class="graph-caption">Graph 1: Average Volume of O₂ Produced (mL) vs Temperature (°C) — Line Graph</p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chart2"></canvas>
+        <p class="graph-caption">Graph 2: Rate of O₂ Production (mL/min) vs Temperature (°C) — Bar Chart</p>
+    </div>
+
+    <div class="info-box" style="margin-top:16px;">
+        <strong>📌 Key observations from the graphs:</strong>
+        <ul style="margin:6px 0 0; padding-left:20px; line-height:1.8;">
+            <li>Enzyme activity rises steadily from 10°C to 37°C.</li>
+            <li>Activity peaks at <strong>37°C</strong> with 35.0 mL O₂ produced — the <em>optimum temperature</em>.</li>
+            <li>A sharp decline occurs above 37°C as denaturation begins.</li>
+            <li>By 70°C, almost no activity remains (0.3 mL) — the enzyme is fully denatured.</li>
+            <li>The overall shape of Graph 1 is a <strong>bell curve</strong> (inverted U-shape).</li>
+        </ul>
+    </div>
+
+    <!-- ===== CHEMICAL EQUATION ===== -->
+    <h2 class="section-title">⚗️ Reaction Summary</h2>
+    <div class="info-box">
+        <strong>Reactants:</strong> Hydrogen peroxide (H₂O₂) — catalysed by Catalase enzyme from potato cells<br>
+        <strong>Products:</strong> Water (H₂O) + Oxygen gas (O₂)
+    </div>
+    <div class="eq-box">2H₂O₂  →  2H₂O  +  O₂ (gas)</div>
+    <p style="font-size:0.9em; color:#555;">The oxygen gas produced is what we measured using the gas syringe. More O₂ produced in 60 seconds = faster reaction rate = higher enzyme activity.</p>
+
+
+    <!-- ============================= PART A ============================= -->
+    <h2 class="section-title">Part A: Multiple Choice <span class="marks">(10 marks — 1 mark each)</span></h2>
+    <p><em>Select the best answer from the dropdown for each question. Use the background information, data table, and graphs provided above to help you.</em></p>
+
+    <div class="question-box">
+        <div class="q-title">Question 1 <span class="marks">(1 mark)</span></div>
+        <p>In this investigation, what is the <strong>independent variable</strong>?</p>
+        <select id="q1_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) The volume of oxygen gas collected in the syringe</option>
+            <option value="B">B) The temperature of the hydrogen peroxide solution</option>
+            <option value="C">C) The mass of potato discs used in each trial</option>
+            <option value="D">D) The concentration of the hydrogen peroxide solution</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 2 <span class="marks">(1 mark)</span></div>
+        <p>According to the data table, at which temperature did the catalase enzyme show the <strong>highest rate of activity</strong>?</p>
+        <select id="q2_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) 30°C — 28.0 mL produced</option>
+            <option value="B">B) 40°C — 32.0 mL produced</option>
+            <option value="C">C) 37°C — 35.0 mL produced</option>
+            <option value="D">D) 50°C — 12.0 mL produced</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 3 <span class="marks">(1 mark)</span></div>
+        <p>The experiment was repeated <strong>three times</strong> at each temperature. What is the main scientific reason for this?</p>
+        <select id="q3_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) To use up all the available potato and hydrogen peroxide</option>
+            <option value="B">B) To improve the reliability of results and reduce the effect of random errors</option>
+            <option value="C">C) To change the independent variable across each trial</option>
+            <option value="D">D) Because the gas syringe can only measure up to one-third of the gas at a time</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 4 <span class="marks">(1 mark)</span></div>
+        <p>At 70°C, only an average of 0.3 mL of oxygen was produced. What is the most scientifically accurate explanation for this?</p>
+        <select id="q4_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) The potato discs were too large at that temperature and blocked the active site</option>
+            <option value="B">B) The hydrogen peroxide fully evaporated before the reaction could start</option>
+            <option value="C">C) The catalase enzyme was denatured — high temperature broke bonds in the enzyme, permanently distorting the active site so H₂O₂ could no longer bind</option>
+            <option value="D">D) The gas syringe was malfunctioning at high temperatures</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 5 <span class="marks">(1 mark)</span></div>
+        <p>Which of the following best describes the <strong>overall shape of Graph 1</strong>?</p>
+        <select id="q5_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) A straight positive line — enzyme activity increases consistently with temperature</option>
+            <option value="B">B) A straight negative line — enzyme activity decreases consistently with temperature</option>
+            <option value="C">C) A bell-shaped (inverted U) curve — activity increases to a peak at 37°C then drops sharply</option>
+            <option value="D">D) A horizontal line — enzyme activity remains constant at all temperatures</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 6 <span class="marks">(1 mark)</span></div>
+        <p>Which of the following is a <strong>controlled variable</strong> in this investigation?</p>
+        <select id="q6_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) The volume of oxygen produced at each temperature</option>
+            <option value="B">B) The temperature of the water bath</option>
+            <option value="C">C) The concentration of hydrogen peroxide (held constant at 3%)</option>
+            <option value="D">D) The type of gas collected in the gas syringe</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 7 <span class="marks">(1 mark)</span></div>
+        <p>Which chemical equation correctly represents the reaction catalysed by catalase in this experiment?</p>
+        <select id="q7_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) 2H₂O → 2H₂O₂ + O₂</option>
+            <option value="B">B) H₂O₂ → H₂O + CO₂</option>
+            <option value="C">C) 2H₂O₂ → 2H₂O + O₂</option>
+            <option value="D">D) 2H₂ + O₂ → 2H₂O</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 8 <span class="marks">(1 mark)</span></div>
+        <p>Looking at the data table, what happens to the average volume of O₂ produced as temperature increases from <strong>10°C to 37°C</strong>?</p>
+        <select id="q8_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) It decreases steadily from 35.0 to 8.0 mL</option>
+            <option value="B">B) It remains constant at approximately 20 mL across all temperatures</option>
+            <option value="C">C) It increases steadily from 8.0 mL at 10°C to 35.0 mL at 37°C</option>
+            <option value="D">D) It fluctuates randomly with no clear pattern</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 9 <span class="marks">(1 mark)</span></div>
+        <p>Which of the following best describes the term <strong>"denaturation"</strong> in the context of enzymes?</p>
+        <select id="q9_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) The enzyme temporarily slows down its activity due to cold temperatures</option>
+            <option value="B">B) The enzyme permanently loses its 3D shape — and therefore function — due to high temperature or other stresses, which cannot be reversed</option>
+            <option value="C">C) The substrate is used up and no longer available for the enzyme to bind to</option>
+            <option value="D">D) The enzyme multiplies and produces extra copies of itself during the reaction</option>
+        </select>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 10 <span class="marks">(1 mark)</span></div>
+        <p>A student wants to improve the <strong>validity</strong> of this experiment. Which of the following changes would best achieve this?</p>
+        <select id="q10_ans">
+            <option value="">— Select an answer —</option>
+            <option value="A">A) Use a different type of enzyme (e.g., amylase) to compare results</option>
+            <option value="B">B) Keep all controlled variables (concentration, volume, mass) constant and only change the temperature — as the method already does</option>
+            <option value="C">C) Change the duration of the reaction from 60 to 30 seconds for some trials</option>
+            <option value="D">D) Increase the number of temperatures tested but use only one trial at each temperature</option>
+        </select>
+    </div>
+
+
+    <!-- ============================= PART B ============================= -->
+    <h2 class="section-title">Part B: Short Answer <span class="marks">(18 marks)</span></h2>
+    <p><em>Answer all questions below. Write in full sentences where appropriate. Reference specific data values from the table or graphs in your answers. Marks are allocated as shown.</em></p>
+
+    <div class="question-box">
+        <div class="q-title">Question 11 — Describing the Trend <span class="marks">(3 marks)</span></div>
+        <p>Using <strong>Graph 1</strong> and the data table, describe the <strong>complete trend</strong> in enzyme activity as temperature increases from 10°C to 70°C. Your answer must reference at least <strong>three specific data values</strong> from the table.</p>
+        <textarea id="q11_ans" rows="6" placeholder="Describe the full trend with specific data values from the table (e.g. '...at 10°C only 8.0 mL of O₂ was produced, rising to...')"></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 12 — Calculating an Average <span class="marks">(2 marks)</span></div>
+        <p>Using the three trial values from the data table for <strong>30°C</strong>, show your working and calculate the average volume of oxygen produced. Express your answer to one decimal place and include units.</p>
+        <textarea id="q12_ans" rows="4" placeholder="Show working: (Trial 1 + Trial 2 + Trial 3) ÷ 3 = ..."></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 13 — Explaining Results at the Optimum Temperature <span class="marks">(3 marks)</span></div>
+        <p>The highest rate of oxygen production occurred at <strong>37°C</strong>. Using your understanding of enzyme structure and the <strong>lock-and-key model</strong>, explain why enzymes work best at this temperature. Your answer should explain what happens to enzyme-substrate collisions as temperature increases toward the optimum.</p>
+        <textarea id="q13_ans" rows="6" placeholder="Discuss molecular movement/kinetic energy, collision frequency, and the lock-and-key model..."></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 14 — Explaining Denaturation <span class="marks">(3 marks)</span></div>
+        <p>Between 40°C and 70°C, average enzyme activity dropped dramatically from <strong>32.0 mL/min to just 0.3 mL/min</strong>. Using the concept of <strong>denaturation</strong>, explain this sharp decrease. Your answer must specifically mention the <strong>active site</strong> and what happens to it at high temperatures.</p>
+        <textarea id="q14_ans" rows="6" placeholder="Explain how high thermal energy affects enzyme bonds, changes the active site shape, and prevents substrate binding..."></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 15 — Identifying Sources of Error <span class="marks">(3 marks)</span></div>
+        <p>Identify <strong>one possible source of error</strong> in this experiment. Classify it as either a <strong>random error</strong> or a <strong>systematic error</strong>, and suggest one specific strategy to minimise its effect on the results.</p>
+        <textarea id="q15_ans" rows="5" placeholder="Format: Source of error: ... | Classification: random / systematic | Minimisation strategy: ..."></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 16 — Comparing Results at Two Temperatures <span class="marks">(2 marks)</span></div>
+        <p>Both <strong>10°C</strong> (8.0 mL) and <strong>60°C</strong> (3.0 mL) produced relatively low amounts of oxygen compared to 37°C. However, the <em>reasons</em> for low activity are different at each temperature. Explain the different scientific reason for low enzyme activity at each of these temperatures.</p>
+        <textarea id="q16_ans" rows="5" placeholder="Explain low activity at 10°C (one reason) and separately explain low activity at 60°C (different reason)..."></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 17 — Suggesting an Improvement <span class="marks">(2 marks)</span></div>
+        <p>Suggest <strong>one specific improvement</strong> to the experimental method that would make the results more <em>reliable</em> or more <em>valid</em>. Clearly explain how your suggestion would improve the quality of the investigation and what it would change about the current method.</p>
+        <textarea id="q17_ans" rows="5" placeholder="State your improvement clearly and explain the scientific reason why it would improve the investigation..."></textarea>
+    </div>
+
+
+    <!-- ============================= PART C ============================= -->
+    <h2 class="section-title">Part C: Extended Response <span class="marks">(12 marks)</span></h2>
+    <p><em>Write detailed, well-structured, paragraph-style responses. Use scientific terminology throughout. Reference the data table and graphs where relevant. Quality of reasoning and use of evidence will be assessed, not just length.</em></p>
+
+    <div class="question-box">
+        <div class="q-title">Question 18 — Evaluating the Hypothesis <span class="marks">(5 marks)</span></div>
+        <div class="info-box">
+            <strong>Recall the hypothesis:</strong> "If the temperature of the hydrogen peroxide solution is increased, then the rate of catalase enzyme activity (measured by volume of O₂ produced per minute) will increase up to approximately 37°C, after which the rate will decrease significantly due to the irreversible denaturation of the catalase enzyme at higher temperatures."
+        </div>
+        <p>Using the data collected and both graphs, write an <strong>evaluation of the hypothesis</strong>. Your response should:</p>
+        <ul style="margin-top:4px; line-height:2; padding-left:20px;">
+            <li>State clearly whether the results <em>support</em>, <em>partially support</em>, or <em>refute</em> the hypothesis</li>
+            <li>Use at least <strong>four specific data values</strong> as evidence</li>
+            <li>Comment on the accuracy of the predicted optimum temperature (37°C)</li>
+            <li>Discuss any limitations or anomalies in the data</li>
+            <li>Suggest what further testing could be done to refine the conclusion</li>
+        </ul>
+        <textarea id="q18_ans" rows="12" placeholder="Write your full evaluation here. Use paragraph structure. Reference at least four data values as evidence..."></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 19 — Real-World Applications <span class="marks">(4 marks)</span></div>
+        <p>Discuss <strong>two real-world situations</strong> where understanding the relationship between temperature and enzyme activity is important. For each application, explain:</p>
+        <ul style="margin-top:4px; line-height:2; padding-left:20px;">
+            <li>What the application is and how it relates to enzymes</li>
+            <li>How the scientific principles from this experiment are relevant to that application</li>
+        </ul>
+        <textarea id="q19_ans" rows="9" placeholder="Application 1: ... (2 marks)&#10;&#10;Application 2: ... (2 marks)"></textarea>
+    </div>
+
+    <div class="question-box">
+        <div class="q-title">Question 20 — Scientific Method Reflection <span class="marks">(3 marks)</span></div>
+        <p>Reflect on the importance of two key aspects of the scientific method demonstrated in this investigation:</p>
+        <ul style="margin-top:4px; line-height:2; padding-left:20px;">
+            <li><strong>(a)</strong> Why is it important for scientists to form a <em>hypothesis</em> <strong>before</strong> conducting an experiment rather than after?</li>
+            <li><strong>(b)</strong> Why is it essential to carefully <em>control variables</em> in an experiment? What could go wrong if variables are not controlled?</li>
+        </ul>
+        <p>Use examples from <em>this</em> investigation to support your points.</p>
+        <textarea id="q20_ans" rows="9" placeholder="(a) Importance of forming a hypothesis before the experiment:&#10;&#10;(b) Importance of controlling variables — with examples from this experiment:"></textarea>
+    </div>
+
+    <!-- ===== SAVE BUTTON ===== -->
+    <button class="save-btn" onclick="saveAsTxt()">💾 Save My Answers as .TXT File &amp; Submit to Teacher</button>
+    <p style="text-align:center; font-size:0.85em; color:#777; margin-bottom:30px;">A text file containing all your answers will be downloaded. Send this file to your teacher for marking.</p>
+
+</div><!-- end container -->
+
+<!-- ============================= SCRIPTS ============================= -->
+<script>
+// ---- CHARTS ----
+window.addEventListener('load', function () {
+
+    const temps  = [10, 20, 30, 37, 40, 50, 60, 70];
+    const avgO2  = [8.0, 18.0, 28.0, 35.0, 32.0, 12.0, 3.0, 0.3];
+    const labels = temps.map(t => t + '°C');
+
+    // Graph 1: Line graph
+    const ctx1 = document.getElementById('chart1').getContext('2d');
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Average O₂ Produced (mL)',
+                data: avgO2,
+                borderColor: '#005c4b',
+                backgroundColor: 'rgba(0, 125, 102, 0.12)',
+                borderWidth: 2.8,
+                pointBackgroundColor: avgO2.map((v, i) => v === 35.0 ? '#e65100' : '#005c4b'),
+                pointRadius: avgO2.map((v, i) => v === 35.0 ? 8 : 5),
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                tension: 0.35,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Graph 1: Average Volume of O₂ Produced vs Temperature',
+                    font: { size: 14, weight: 'bold' },
+                    color: '#004d3d',
+                    padding: { bottom: 12 }
+                },
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `O₂ Produced: ${ctx.parsed.y} mL`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Temperature (°C)', font: { size: 12 }, color: '#333' },
+                    grid: { color: 'rgba(0,0,0,0.06)' }
+                },
+                y: {
+                    title: { display: true, text: 'Average O₂ Produced (mL)', font: { size: 12 }, color: '#333' },
+                    min: 0,
+                    max: 42,
+                    grid: { color: 'rgba(0,0,0,0.06)' }
+                }
+            }
+        }
+    });
+
+    // Graph 2: Bar chart
+    const ctx2 = document.getElementById('chart2').getContext('2d');
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Rate of O₂ Production (mL/min)',
+                data: avgO2,
+                backgroundColor: avgO2.map(v =>
+                    v === 35.0 ? 'rgba(230, 81, 0, 0.75)' :
+                    v >= 25    ? 'rgba(0, 125, 102, 0.80)' :
+                    v >= 10    ? 'rgba(0, 160, 130, 0.65)' :
+                                 'rgba(180, 60, 60, 0.65)'
+                ),
+                borderColor: avgO2.map(v =>
+                    v === 35.0 ? '#bf360c' : '#005c4b'
+                ),
+                borderWidth: 1.5,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Graph 2: Rate of O₂ Production vs Temperature',
+                    font: { size: 14, weight: 'bold' },
+                    color: '#004d3d',
+                    padding: { bottom: 12 }
+                },
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `Rate: ${ctx.parsed.y} mL/min`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Temperature (°C)', font: { size: 12 }, color: '#333' },
+                    grid: { color: 'rgba(0,0,0,0.06)' }
+                },
+                y: {
+                    title: { display: true, text: 'Rate (mL/min)', font: { size: 12 }, color: '#333' },
+                    min: 0,
+                    max: 42,
+                    grid: { color: 'rgba(0,0,0,0.06)' }
+                }
+            }
+        }
+    });
+});
+
+// ---- SAVE AS TXT ----
+function saveAsTxt() {
+    const name = document.getElementById('student_name').value.trim() || 'Unknown Student';
+    const date = document.getElementById('student_date').value || 'Not entered';
+
+    const getVal = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return '[Not found]';
+        return el.value.trim() || '[No answer provided]';
+    };
+
+    const MCLabels = {
+        q1_ans:  'Q1 — Independent Variable',
+        q2_ans:  'Q2 — Highest Rate Temperature',
+        q3_ans:  'Q3 — Reason for 3 Trials',
+        q4_ans:  'Q4 — Low Activity at 70°C',
+        q5_ans:  'Q5 — Shape of Graph 1',
+        q6_ans:  'Q6 — Controlled Variable',
+        q7_ans:  'Q7 — Chemical Equation',
+        q8_ans:  'Q8 — Trend from 10°C to 37°C',
+        q9_ans:  'Q9 — Definition of Denaturation',
+        q10_ans: 'Q10 — Improving Validity'
+    };
+
+    let txt = '';
+    txt += '=================================================================\n';
+    txt += 'YEAR 10 SCIENCE — MODIFIED SELF-INVESTIGATION RESEARCH TASK\n';
+    txt += 'Topic: The Effect of Temperature on Enzyme Activity (Catalase)\n';
+    txt += '=================================================================\n\n';
+    txt += `Student Name   : ${name}\n`;
+    txt += `Date Submitted : ${date}\n`;
+    txt += `Total Marks    : /40\n`;
+    txt += '\n';
+
+    txt += '=================================================================\n';
+    txt += 'PART A — MULTIPLE CHOICE ANSWERS  (10 marks)\n';
+    txt += '=================================================================\n\n';
+    Object.entries(MCLabels).forEach(([id, label], i) => {
+        txt += `${label}\n`;
+        txt += `  Answer: ${getVal(id)}\n\n`;
+    });
+
+    txt += '=================================================================\n';
+    txt += 'PART B — SHORT ANSWER RESPONSES  (18 marks)\n';
+    txt += '=================================================================\n\n';
+
+    const shortAnswers = [
+        ['q11_ans', 'Question 11 — Describing the Trend  (3 marks)'],
+        ['q12_ans', 'Question 12 — Calculating an Average  (2 marks)'],
+        ['q13_ans', 'Question 13 — Optimum Temperature Explanation  (3 marks)'],
+        ['q14_ans', 'Question 14 — Denaturation Explanation  (3 marks)'],
+        ['q15_ans', 'Question 15 — Source of Error  (3 marks)'],
+        ['q16_ans', 'Question 16 — Comparing 10°C and 60°C  (2 marks)'],
+        ['q17_ans', 'Question 17 — Suggesting an Improvement  (2 marks)'],
+    ];
+    shortAnswers.forEach(([id, label]) => {
+        txt += `--- ${label} ---\n`;
+        txt += `${getVal(id)}\n\n`;
+        txt += '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n';
+    });
+
+    txt += '=================================================================\n';
+    txt += 'PART C — EXTENDED RESPONSE  (12 marks)\n';
+    txt += '=================================================================\n\n';
+
+    const extendedAnswers = [
+        ['q18_ans', 'Question 18 — Evaluating the Hypothesis  (5 marks)'],
+        ['q19_ans', 'Question 19 — Real-World Applications  (4 marks)'],
+        ['q20_ans', 'Question 20 — Scientific Method Reflection  (3 marks)'],
+    ];
+    extendedAnswers.forEach(([id, label]) => {
+        txt += `--- ${label} ---\n`;
+        txt += `${getVal(id)}\n\n`;
+        txt += '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n';
+    });
+
+    txt += '=================================================================\n';
+    txt += 'END OF SUBMISSION\n';
+    txt += `Submitted by: ${name}  |  Date: ${date}\n`;
+    txt += '=================================================================\n';
+
+    const blob = new Blob([txt], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${name.replace(/\s+/g, '_')}_Year10_Science_Modified_Task.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+</script>
+
+</body>
+</html>
