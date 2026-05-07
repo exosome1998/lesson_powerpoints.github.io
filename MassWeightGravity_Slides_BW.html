@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mass, Weight & Gravity — Year 7 Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#111111; --dark:#333333; --mid:#666666; --light:#999999;
+  --border:#222222; --shade1:#EEEEEE; --shade2:#DDDDDD; --shade3:#CCCCCC;
+  --white:#FFFFFF; --bg:#D8D8D8;
+  --ans-bg:#1A1A1A; --ans-text:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--black);height:100vh;overflow:hidden;user-select:none}
+
+/* ── TABS ── */
+#tabs{display:flex;height:48px;border-bottom:3px solid var(--black);background:var(--shade1)}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;letter-spacing:.5px;cursor:pointer;color:var(--mid);border-bottom:4px solid transparent;text-transform:uppercase;transition:all .15s}
+.tab:hover{color:var(--black)}
+.tab.active{color:var(--black);border-color:var(--black);background:var(--white)}
+.tab-num{font-family:'Bebas Neue';font-size:20px;margin-right:6px}
+
+/* ── SLIDE AREA ── */
+#area{height:calc(100vh - 48px - 52px);position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:14px}
+.slide{display:none;flex-direction:column;background:var(--white);border:3px solid var(--black);border-radius:6px;width:100%;height:100%;overflow:hidden}
+.slide.active{display:flex}
+
+/* ── SLIDE HEADER ── */
+.sh{background:var(--black);color:var(--white);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.sh-step{font-family:'Bebas Neue';font-size:22px;background:var(--white);color:var(--black);padding:2px 8px;border-radius:3px;letter-spacing:.5px}
+.sh-title{font-family:'Bebas Neue';font-size:26px;letter-spacing:1px;flex:1}
+.sh-ref{font-size:12px;font-weight:700;color:var(--shade3);letter-spacing:.5px}
+
+/* ── SLIDE BODY ── */
+.sb{flex:1;padding:18px 24px;display:flex;flex-direction:column;gap:12px;overflow:hidden;min-height:0}
+.sb-row{display:flex;gap:14px}
+.col{display:flex;flex-direction:column;gap:10px}
+.f1{flex:1}.f2{flex:2}.f3{flex:3}.f4{flex:4}.f5{flex:5}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(6px);transition:all .3s ease;pointer-events:none}
+.rv.on{opacity:1;transform:none;pointer-events:auto}
+
+/* ── COMPONENTS ── */
+.info-box{background:var(--shade1);border-left:5px solid var(--black);padding:12px 16px;border-radius:0 6px 6px 0}
+.info-box .label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:4px}
+.info-box .content{font-size:17px;font-weight:700;line-height:1.4}
+.info-box .sub{font-size:14px;color:var(--mid);margin-top:4px}
+
+.key-box{background:var(--black);color:var(--white);padding:12px 18px;border-radius:6px;font-size:17px;font-weight:800;text-align:center}
+
+.step-row{display:flex;align-items:flex-start;gap:12px;background:var(--shade1);border:2px solid var(--shade3);border-radius:6px;padding:11px 14px}
+.step-n{font-family:'Bebas Neue';font-size:28px;line-height:1;min-width:28px;color:var(--black)}
+.step-body{flex:1;font-size:16px;font-weight:700;line-height:1.4}
+.step-verb{font-size:18px;font-weight:900;text-decoration:underline;text-underline-offset:2px}
+
+/* blank → answer */
+.qa-block{background:var(--shade1);border:2px solid var(--shade3);border-radius:6px;padding:13px 16px}
+.qa-q{font-size:16px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.4}
+.qa-blank{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
+.blank-line{flex:1;border-bottom:2px dashed var(--light);min-width:80px;height:22px}
+.qa-ans{display:none; margin-top:8px}
+.qa-ans.on{display:flex;align-items:flex-start;gap:8px}
+.ans-badge{background:var(--black);color:var(--white);font-size:11px;font-weight:800;letter-spacing:1px;padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:2px}
+.ans-text{font-size:15px;font-weight:800;color:var(--black);line-height:1.4}
+
+/* formula */
+.formula-box{background:var(--shade1);border:3px solid var(--black);border-radius:8px;padding:16px;text-align:center}
+.formula-main{font-family:'Bebas Neue';font-size:44px;letter-spacing:2px;line-height:1}
+.formula-sub{font-size:13px;color:var(--mid);letter-spacing:1px;margin-top:4px}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{background:var(--black);color:var(--white);padding:9px 10px;text-align:center;font-size:13px;font-weight:800;border:2px solid var(--black)}
+.tbl td{padding:9px 10px;text-align:center;border:1.5px solid var(--shade3);font-weight:700}
+.tbl tr:nth-child(even) td{background:var(--shade1)}
+.tbl .ans-cell{color:var(--light);font-style:italic}
+.tbl .ans-cell.on{color:var(--black);font-style:normal;background:var(--shade2)}
+
+/* worked example */
+.worked{background:var(--shade1);border:2px solid var(--black);border-radius:6px;padding:14px 18px}
+.worked-title{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mid);margin-bottom:10px}
+.worked-step{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:15px;font-weight:700}
+.ws-num{font-family:'Bebas Neue';font-size:22px;color:var(--black);min-width:22px}
+.ws-code{font-family:monospace;background:var(--shade2);padding:3px 10px;border-radius:4px;font-size:15px;font-weight:800}
+
+/* sentence frame */
+.sf{background:var(--shade1);border-left:4px solid var(--black);border-radius:0 6px 6px 0;padding:12px 16px;font-size:15px;font-weight:700;line-height:1.8}
+.sf .fill{border-bottom:2px solid var(--black);display:inline-block;min-width:80px;color:var(--light);font-style:italic}
+.sf .fill.on{color:var(--black);font-style:normal;border-bottom:2px solid var(--black)}
+
+/* title slide */
+.title-sl{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:30px;background:var(--white)}
+.title-big{font-family:'Bebas Neue';font-size:62px;letter-spacing:2px;text-align:center;line-height:1;border-bottom:6px solid var(--black);padding-bottom:10px}
+.title-sub{font-size:18px;font-weight:800;color:var(--mid);letter-spacing:.5px;text-transform:uppercase}
+.goal-list{display:flex;flex-direction:column;gap:8px;width:100%;max-width:600px;margin-top:8px}
+.goal-item{display:flex;gap:10px;align-items:flex-start;background:var(--shade1);border:2px solid var(--shade3);border-radius:6px;padding:10px 14px;font-size:15px;font-weight:700}
+.goal-icon{font-size:18px;flex-shrink:0}
+
+/* ── BOTTOM NAV ── */
+#nav{height:52px;background:var(--shade1);border-top:3px solid var(--black);display:flex;align-items:center;gap:12px;padding:0 18px}
+.nbtn{background:var(--black);color:var(--white);border:none;border-radius:4px;padding:7px 16px;font-family:'Nunito';font-size:14px;font-weight:800;cursor:pointer;transition:all .15s}
+.nbtn:hover{background:var(--dark)}
+.nbtn:disabled{opacity:.3;cursor:not-allowed}
+#sc{font-size:13px;font-weight:800;color:var(--mid);min-width:55px;text-align:center}
+#pbar{flex:1;height:6px;background:var(--shade3);border-radius:3px;overflow:hidden;border:1px solid var(--shade2)}
+#pfill{height:100%;background:var(--black);border-radius:3px;transition:width .3s}
+#rc{font-size:12px;font-weight:700;color:var(--mid);min-width:90px;text-align:right}
+</style>
+</head>
+<body>
+
+<div id="tabs">
+  <div class="tab active" data-l="1" onclick="switchLesson(1)"><span class="tab-num">1</span> The Weight of the Universe</div>
+  <div class="tab" data-l="2" onclick="switchLesson(2)"><span class="tab-num">2</span> Planning the Investigation</div>
+  <div class="tab" data-l="3" onclick="switchLesson(3)"><span class="tab-num">3</span> Results &amp; Discussion</div>
+</div>
+
+<div id="area" onclick="handleClick()"></div>
+
+<div id="nav">
+  <button class="nbtn" id="bp" onclick="event.stopPropagation();prevSlide()">◀ Prev</button>
+  <div id="sc">1/12</div>
+  <div id="pbar"><div id="pfill"></div></div>
+  <div id="rc"></div>
+  <button class="nbtn" id="bn" onclick="event.stopPropagation();nextSlide()">Next ▶</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// HELPERS — build slide HTML
+// ═══════════════════════════════════════════════════════════════════
+let _rv = 0; // global reveal counter per slide build
+
+const rv = (html, n) => `<div class="rv" data-r="${n}">${html}</div>`;
+
+const header = (step, title, ref='') =>
+  `<div class="sh"><span class="sh-step">${step}</span><span class="sh-title">${title}</span><span class="sh-ref">${ref}</span></div>`;
+
+const infoBox = (label, content, sub='') =>
+  `<div class="info-box"><div class="label">${label}</div><div class="content">${content}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`;
+
+const keyBox = text => `<div class="key-box">${text}</div>`;
+
+const formulaBox = (main, sub) =>
+  `<div class="formula-box"><div class="formula-main">${main}</div><div class="formula-sub">${sub}</div></div>`;
+
+const stepRow = (n, verb, rest) =>
+  `<div class="step-row"><div class="step-n">${n}</div><div class="step-body"><span class="step-verb">${verb}</span> ${rest}</div></div>`;
+
+// Q with blank, then answer revealed on separate click
+const qa = (q, ans, r) =>
+  `<div class="qa-block">`+
+  `<div class="qa-q">${q}</div>`+
+  `<div class="qa-blank"><div class="blank-line"></div></div>`+
+  `<div class="qa-ans rv" data-r="${r}"><span class="ans-badge">ANSWER</span><span class="ans-text">${ans}</span></div>`+
+  `</div>`;
+
+// Worked example rows (reveal whole block at once)
+const worked = (title, q, steps, ans, r) =>
+  `<div class="worked rv" data-r="${r}">`+
+  `<div class="worked-title">${title}</div>`+
+  `<div style="font-size:15px;font-weight:700;margin-bottom:8px">${q}</div>`+
+  steps.map(([n,l,c])=>`<div class="worked-step"><span class="ws-num">${n}</span><span>${l}</span><span class="ws-code">${c}</span></div>`).join('')+
+  `<div style="margin-top:10px;font-size:15px;font-weight:800">✅ ${ans}</div>`+
+  `</div>`;
+
+// Table with answer cells that reveal
+const tblAns = (headers, rows, ansCols, startR) => {
+  let html = `<table class="tbl"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach((row,ri)=>{
+    html += '<tr>' + row.map((cell,ci)=>{
+      if(ansCols.includes(ci)) return `<td class="ans-cell rv" data-r="${startR+ri}">${cell}</td>`;
+      return `<td>${cell}</td>`;
+    }).join('') + '</tr>';
+  });
+  html += '</tbody></table>';
+  return html;
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// SLIDE DEFINITIONS — 3 lessons × 12
+// ═══════════════════════════════════════════════════════════════════
+const lessons = {
+
+// ─────────────────────────────────────────────
+//  LESSON 1
+// ─────────────────────────────────────────────
+1:[
+
+// L1-S1 Title
+{r:4, html:`
+<div class="sh"><span class="sh-title">MASS, WEIGHT &amp; GRAVITY — LESSON 1</span><span class="sh-ref">Year 7 Science | NESA 2026</span></div>
+<div class="title-sl">
+  <div class="title-big rv" data-r="0">The Weight of<br>the Universe</div>
+  <div class="title-sub rv" data-r="1">Follow along with your workbook</div>
+  <div class="goal-list">
+    <div class="goal-item rv" data-r="2">📌 Understand what a FORCE is and its two types</div>
+    <div class="goal-item rv" data-r="2">📌 Explain what GRAVITY does and know g = 10 N/kg</div>
+    <div class="goal-item rv" data-r="3">📌 Know the difference between MASS and WEIGHT</div>
+    <div class="goal-item rv" data-r="3">📌 Use the formula W = m × g to calculate weight</div>
+  </div>
+</div>`},
+
+// L1-S2 Force & Types (Workbook p.2)
+{r:3, html:`
+${header('1','What is a Force?','Workbook p.2')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Key Fact','Forces are measured in NEWTONS (N).','There are two types: Contact and Non-Contact forces.')}</div>
+  <div class="sb-row" style="flex:1;gap:14px">
+    <div class="col f1 rv" data-r="1">
+      <div style="background:var(--black);color:var(--white);padding:9px 14px;border-radius:5px;font-family:'Bebas Neue';font-size:22px;letter-spacing:1px">CONTACT FORCES</div>
+      <div style="background:var(--shade1);border:2px solid var(--shade3);padding:10px;border-radius:5px;font-size:15px;font-weight:700">Need to TOUCH the object to work. Examples: friction, push, pull.</div>
+    </div>
+    <div class="col f1 rv" data-r="1">
+      <div style="background:var(--black);color:var(--white);padding:9px 14px;border-radius:5px;font-family:'Bebas Neue';font-size:22px;letter-spacing:1px">NON-CONTACT FORCES</div>
+      <div style="background:var(--shade1);border:2px solid var(--shade3);padding:10px;border-radius:5px;font-size:15px;font-weight:700">Work WITHOUT touching the object. Examples: gravity, magnetism.</div>
+    </div>
+  </div>
+  <div class="rv" data-r="2">
+    ${qa('✏️ YOUR TURN: Give ONE example of a contact force and ONE example of a non-contact force from your everyday life.', 'Contact: Kicking a football (push). Non-contact: A magnet picking up a paperclip (magnetism).', 3)}
+  </div>
+</div>`},
+
+// L1-S3 Gravity (Workbook p.2-3)
+{r:3, html:`
+${header('2','What is Gravity?','Workbook p.2-3')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Gravity is a non-contact force','It pulls every object with mass towards every other object with mass.','Earth is enormous, so it has a strong pull: g = 10 N/kg.')}</div>
+  
+  <div class="rv" data-r="1" style="background:var(--shade1);border:2px solid var(--shade3);border-radius:6px;padding:12px 16px;text-align:center;font-size:16px;font-weight:800">
+    A planet with <strong>more mass</strong> has <strong>stronger gravity</strong>.
+  </div>
+
+  <div class="rv" data-r="2">
+    ${qa("✏️ YOUR TURN: Why do you think the Moon's gravitational pull is weaker than Earth's? Write your idea below.", "Because the Moon is much smaller and has less mass than Earth. Less mass means weaker gravity.", 3)}
+  </div>
+</div>`},
+
+// L1-S4 Mass (Workbook p.3)
+{r:4, html:`
+${header('3','What is Mass?','Workbook p.3')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Definition: MASS','The amount of matter (stuff) that makes up an object. Unit: kilograms (kg)','CRITICAL FACT: Mass NEVER changes, no matter where you are in the universe.')}</div>
+  
+  <div class="rv" data-r="1">
+    ${qa("In my own words:", "Mass is how much 'stuff' is inside an object. It is measured in kg and never changes even if you go to space.", 2)}
+  </div>
+
+  <div class="rv" data-r="3">
+    ${qa("✏️ YOUR TURN: If an astronaut has a mass of 75 kg on Earth, what is their mass on the Moon? Explain your answer.", "Their mass is still 75 kg! Mass is the amount of matter and NEVER changes, no matter what planet you are on.", 4)}
+  </div>
+</div>`},
+
+// L1-S5 Weight (Workbook p.4)
+{r:3, html:`
+${header('4','What is Weight?','Workbook p.4')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Definition: WEIGHT','The force of gravity pulling down on an object\'s mass. Unit: Newtons (N)','CRITICAL FACT: Weight DOES change depending on where you are in the universe.')}</div>
+  
+  <div class="rv" data-r="1">
+    ${qa("In my own words:", "Weight is the force of gravity pulling on your mass. It is measured in Newtons and changes depending on the planet's gravity.", 2)}
+  </div>
+
+  <div class="rv" data-r="3">
+    <div style="background:var(--black);color:var(--white);border-radius:6px;padding:12px 18px;font-size:15px;font-weight:800;text-align:center">
+      We measure weight using a SPRING BALANCE (Newton meter).
+    </div>
+  </div>
+</div>`},
+
+// L1-S6 The Formula (Workbook p.5)
+{r:3, html:`
+${header('5','The Formula — W = m × g','Workbook p.5')}
+<div class="sb">
+  <div class="rv" data-r="0">${formulaBox('W = m × g','WEIGHT (N) = MASS (kg) × GRAVITATIONAL FIELD STRENGTH (N/kg)')}</div>
+  <div class="sb-row" style="gap:14px">
+    <div class="col f1 rv" data-r="1">
+      ${worked('WORKED EXAMPLE 1 — Earth',
+        'What is the weight of a 5 kg bag on Earth? (g = 10 N/kg)',
+        [['1','Write formula:','W = m × g'],['2','Substitute:','W = 5 × 10'],['3','Calculate:','W = 50 N']],
+        'The bag weighs 50 N on Earth.',1)}
+    </div>
+    <div class="col f1 rv" data-r="2">
+      ${worked('WORKED EXAMPLE 2 — Moon',
+        'Same 5 kg bag on the Moon. (g = 1.6 N/kg)',
+        [['1','Write formula:','W = m × g'],['2','Substitute:','W = 5 × 1.6'],['3','Calculate:','W = 8 N']],
+        'The bag weighs only 8 N on the Moon.',2)}
+    </div>
+  </div>
+  <div class="rv" data-r="3">${keyBox('Notice how the MASS (5 kg) stayed the exact same in both calculations!')}</div>
+</div>`},
+
+// L1-S7 YOUR TURN Calculations (Workbook p.5)
+{r:5, html:`
+${header('5','YOUR TURN — Calculate Weight','Workbook p.5')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your Task','Fill in the calculation steps in your workbook. Click to reveal the answers.')}</div>
+  <div class="sb-row" style="flex:1;gap:14px">
+    <div class="col f1">
+      <div style="background:var(--shade2);border:2px solid var(--black);border-radius:6px;padding:11px 14px">
+        <div style="font-size:13px;font-weight:800;letter-spacing:1px;margin-bottom:8px">YOUR TURN 1</div>
+        <div style="font-size:15px;font-weight:700">Calculate the weight of a <strong>60 kg person</strong> on <strong>Earth</strong> (g = 10 N/kg).</div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <div class="worked-step rv" data-r="1"><span class="ws-num">1</span><span>Write formula:</span><span class="ws-code">W = m × g</span></div>
+          <div class="worked-step rv" data-r="2"><span class="ws-num">2</span><span>Substitute:</span><span class="ws-code">W = 60 × 10</span></div>
+          <div class="worked-step rv" data-r="3"><span class="ws-num">3</span><span>Calculate:</span><span class="ws-code">W = 600 N</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col f1">
+      <div style="background:var(--shade2);border:2px solid var(--black);border-radius:6px;padding:11px 14px">
+        <div style="font-size:13px;font-weight:800;letter-spacing:1px;margin-bottom:8px">YOUR TURN 2</div>
+        <div style="font-size:15px;font-weight:700">Calculate the weight of <strong>the same person</strong> on <strong>Mars</strong> (g = 3.7 N/kg).</div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <div class="worked-step rv" data-r="3"><span class="ws-num">1</span><span>Write formula:</span><span class="ws-code">W = m × g</span></div>
+          <div class="worked-step rv" data-r="4"><span class="ws-num">2</span><span>Substitute:</span><span class="ws-code">W = 60 × 3.7</span></div>
+          <div class="worked-step rv" data-r="5"><span class="ws-num">3</span><span>Calculate:</span><span class="ws-code">W = 222 N</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`},
+
+// L1-S8 The Astronaut's Journey (Workbook p.6)
+{r:7, html:`
+${header('6','The Astronaut\'s Journey','Workbook p.6')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','An astronaut has a mass of 70 kg. Complete the table.')}</div>
+  ${tblAns(
+    ['Location','Gravity g (N/kg)','Mass (kg)','Working out','Weight (N)'],
+    [['Earth','10','70','70 × 10 =','700 N'],
+     ['Moon','1.6','70','70 × 1.6 =','112 N'],
+     ['Mars','3.7','70','70 × 3.7 =','259 N'],
+     ['Jupiter','24.8','70','70 × 24.8 =','1736 N'],
+     ['Deep Space','~0','70','70 × 0 =','0 N']],
+    [4],[1,2,3,4,5]
+  )}
+  <div class="rv" data-r="6">
+    ${qa("Looking at the table: what stays the same across all locations? What changes? Why?", "The MASS stays the same (70 kg). The WEIGHT changes because gravitational field strength (g) is different in each location.", 7)}
+  </div>
+</div>`},
+
+// L1-S9 Mass vs Weight Summary (Workbook p.6)
+{r:7, html:`
+${header('7','Mass vs Weight — The Big Summary','Workbook p.6')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Review the summary table in your workbook','Make sure you understand these 5 major differences before moving on.')}</div>
+  <table class="tbl">
+    <thead><tr><th style="width:50%">MASS</th><th style="width:50%">WEIGHT</th></tr></thead>
+    <tbody>
+      <tr class="rv" data-r="1"><td>Measured in <strong>kilograms (kg)</strong></td><td>Measured in <strong>Newtons (N)</strong></td></tr>
+      <tr class="rv" data-r="2"><td>Measured with a <strong>digital scale</strong></td><td>Measured with a <strong>spring balance</strong></td></tr>
+      <tr class="rv" data-r="3"><td>The amount of <strong>MATTER</strong> in an object</td><td>The <strong>FORCE</strong> of gravity on an object</td></tr>
+      <tr class="rv" data-r="4"><td><strong>NEVER</strong> changes — same everywhere</td><td><strong>CHANGES</strong> depending on the planet</td></tr>
+      <tr class="rv" data-r="5"><td>Can <strong>never</strong> be zero</td><td>Can be <strong>zero</strong> (in deep space)</td></tr>
+    </tbody>
+  </table>
+  <div class="rv" data-r="6">${keyBox('Key rule: if the unit is N → weight. If the unit is kg → mass.')}</div>
+</div>`},
+
+// L1-S10 True/False (Workbook p.6-7)
+{r:6, html:`
+${header('8','Check Your Understanding (True/False)','Workbook p.6-7')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','Circle TRUE or FALSE. If FALSE, rewrite it correctly on the line below.')}</div>
+  <div class="rv" data-r="1">
+    ${qa('1. Weight is measured in kilograms.', 'FALSE. Weight is measured in Newtons (N). Kilograms measure mass.', 2)}
+  </div>
+  <div class="rv" data-r="3">
+    ${qa("2. An astronaut's mass changes when they travel to the Moon.", "FALSE. An astronaut's mass NEVER changes. Only their weight changes.", 4)}
+  </div>
+  <div class="rv" data-r="5">
+    ${qa('3. Gravity is a non-contact force.', 'TRUE. Gravity pulls without touching the object.', 6)}
+  </div>
+</div>`},
+
+// L1-S11 True/False Cont. (Workbook p.7)
+{r:4, html:`
+${header('8','Check Your Understanding (True/False)','Workbook p.7')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('4. A spring balance measures weight in Newtons.', 'TRUE. A spring balance stretches to show the force of gravity.', 1)}
+  </div>
+  <div class="rv" data-r="2">
+    ${qa('5. An object in deep space has zero mass.', 'FALSE. An object in deep space has zero WEIGHT, but its mass stays the same.', 3)}
+  </div>
+</div>`},
+
+// L1-S12 Lesson 1 Summary Fill in Blanks (Workbook p.7)
+{r:9, html:`
+${header('','Lesson 1 Summary — Complete the Sentences','Workbook p.7')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','Fill in the blanks at the bottom of page 7.')}</div>
+  <div class="rv" data-r="0">${tblAns(
+    ['Sentence (complete in workbook)','Answer'],
+    [['Force is measured in _________________ using the symbol _____.','Newtons · N'],
+     ['Gravity is a _________________ (contact/non-contact) force.','non-contact'],
+     ['Mass is measured in _________________ using a _________________.','kilograms (kg) · digital scale'],
+     ['Weight is measured in _________________ using a _________________.','Newtons (N) · spring balance'],
+     ['The formula for weight is: W = _____ × _____.','m × g'],
+     ['On Earth, gravitational field strength is approximately _____ N/kg.','10'],
+     ['A 10 kg object has a weight of _____ N on Earth.','100'],
+     ['If you travel to the Moon, your MASS will _________________ and your WEIGHT will _________________.','stay the same · decrease']],
+    [1],[1,2,3,4,5,6,7,8]
+  )}</div>
+</div>`},
+
+], // end lesson 1
+
+// ─────────────────────────────────────────────
+//  LESSON 2
+// ─────────────────────────────────────────────
+2:[
+
+// L2-S1 Title
+{r:4, html:`
+<div class="sh"><span class="sh-title">MASS, WEIGHT &amp; GRAVITY — LESSON 2</span><span class="sh-ref">Year 7 Science | NESA 2026</span></div>
+<div class="title-sl">
+  <div class="title-big rv" data-r="0">Planning the<br>Investigation</div>
+  <div class="title-sub rv" data-r="1">Designing a Fair Test</div>
+  <div class="goal-list">
+    <div class="goal-item rv" data-r="2">📌 Write an Inquiry Question and a Hypothesis</div>
+    <div class="goal-item rv" data-r="2">📌 Identify IV, DV and Controlled Variables</div>
+    <div class="goal-item rv" data-r="3">📌 Write a step-by-step Method</div>
+    <div class="goal-item rv" data-r="3">📌 Record results and draw a graph</div>
+  </div>
+</div>`},
+
+// L2-S2 Inquiry Question & Hypothesis (Workbook p.8)
+{r:5, html:`
+${header('1','Inquiry Question &amp; Hypothesis','Workbook p.8')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('My Inquiry Question:', '"How does the mass of an object affect the weight acting on it?"', 1)}
+  </div>
+  <div class="rv" data-r="2">
+    <div class="qa-block">
+      <div class="qa-q">My Hypothesis: Fill in the blanks</div>
+      <div class="sf">
+        IF the mass is <span class="fill on rv" data-r="3">increased</span><br><br>
+        THEN the weight will <span class="fill on rv" data-r="4">increase</span><br><br>
+        BECAUSE <span class="fill on rv" data-r="5">there is more matter for gravity to pull on.</span>
+      </div>
+    </div>
+  </div>
+</div>`},
+
+// L2-S3 Variables (Workbook p.8)
+{r:4, html:`
+${header('2','Identify Your Variables','Workbook p.8')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','Fill in the specific variables for our experiment.')}</div>
+  ${tblAns(
+    ['Variable Type','Code','In our experiment, this is...'],
+    [['Independent — what I CHANGE','IV','The mass (100g, 200g, 300g, etc.)'],
+     ['Dependent — what I MEASURE','DV','The weight (measured in Newtons)'],
+     ['Controlled — what I KEEP THE SAME (list at least 3)','CV','Same spring balance, same location, same person reading the scale.']],
+    [2],[1,2,3]
+  )}
+  <div class="rv" data-r="4">${keyBox('To be a FAIR TEST, you must have only ONE Independent Variable!')}</div>
+</div>`},
+
+// L2-S4 Equipment List (Workbook p.8)
+{r:4, html:`
+${header('3','Equipment List &amp; Safety','Workbook p.8')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','List the equipment you need and how to use it safely.')}</div>
+  ${tblAns(
+    ['Equipment','Quantity','Safety note (if any)'],
+    [['Spring balance (Newton meter)','1','Do not pull past its maximum limit'],
+     ['Slotted masses (100 g each)','5 (total 500g)','Do not drop on feet. Wear enclosed shoes.'],
+     ['Retort stand and clamp','1','Ensure stand is placed safely in the middle of the desk']],
+    [0,1,2],[1,2,3]
+  )}
+</div>`},
+
+// L2-S5 Method 1-4 (Workbook p.9)
+{r:5, html:`
+${header('4','Write Your Step-by-Step Method (1-4)','Workbook p.9')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Method rule','Every step MUST start with a verb (action word). Copy these into steps 1 to 4.')}</div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+    ${[['1','Zero','the spring balance so it reads 0 N.'],
+       ['2','Hang','the 0.1 kg (100 g) mass on the spring balance.'],
+       ['3','Wait','until the mass stops moving.'],
+       ['4','Record','the weight shown on the scale in Newtons into the results table.']].map(([n,v,r],i)=>
+      `<div class="rv" data-r="${i+1}">${stepRow(n,v,r)}</div>`).join('')}
+  </div>
+</div>`},
+
+// L2-S6 Method 5-8 (Workbook p.9)
+{r:5, html:`
+${header('4','Write Your Step-by-Step Method (5-8)','Workbook p.9')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Continuing the Method','Copy these into steps 5 to 8.')}</div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+    ${[['5','Repeat','steps 2 to 4 two more times to get three trials.'],
+       ['6','Increase','the mass by adding another 0.1 kg.'],
+       ['7','Repeat','the process for all masses up to 0.5 kg.'],
+       ['8','Calculate','the average weight for each mass.']].map(([n,v,r],i)=>
+      `<div class="rv" data-r="${i+1}">${stepRow(n,v,r)}</div>`).join('')}
+  </div>
+</div>`},
+
+// L2-S7 Record Results (Workbook p.9)
+{r:6, html:`
+${header('5','Record Your Results','Workbook p.9')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','Conduct the experiment and fill in trials 1 to 3. Then calculate the average. Here is some sample data to check your calculations.')}</div>
+  <div class="rv" data-r="1">
+    <table class="tbl">
+      <thead><tr><th>Mass (kg)</th><th>Trial 1 (N)</th><th>Trial 2 (N)</th><th>Trial 3 (N)</th><th style="background:var(--dark)">Average Weight (N)</th></tr></thead>
+      <tbody>
+        ${[['0.1','1.0','1.1','0.9','1.0'],
+           ['0.2','2.1','2.0','1.9','2.0'],
+           ['0.3','3.0','3.1','2.9','3.0'],
+           ['0.4','4.0','4.1','3.9','4.0'],
+           ['0.5','5.1','5.0','4.9','5.0']].map((row,i)=>
+          `<tr><td style="font-weight:800">${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td class="ans-cell rv" data-r="${i+2}">${row[4]}</td></tr>`
+        ).join('')}
+      </tbody>
+    </table>
+  </div>
+</div>`},
+
+// L2-S8 Average Calculation (Workbook p.10)
+{r:2, html:`
+${header('5','Average Calculation','Workbook p.10')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('Show your average calculation for ONE row here: ( ___ + ___ + ___ ) ÷ 3 = _______ N', '( 1.0 + 1.1 + 0.9 ) ÷ 3 = 1.0 N', 1)}
+  </div>
+  <div class="rv" data-r="2">
+    <div style="background:var(--black);color:var(--white);border-radius:6px;padding:12px 18px;font-size:15px;font-weight:800;text-align:center;margin-top:20px">
+      Make sure you show your working out for at least ONE of the rows on page 10!
+    </div>
+  </div>
+</div>`},
+
+// L2-S9 Draw Your Graph Checklist (Workbook p.10)
+{r:6, html:`
+${header('6','Draw Your Graph','Workbook p.10')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Graphing Rules','Plot Average Weight (Y-axis) vs Mass (X-axis). Tick off the checklist as you go.')}</div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+    ${[['1','☐ TITLE','Describes the graph. (e.g. Average Weight vs Mass)'],
+       ['2','☐ X-axis label + units','Mass (kg) on the bottom axis.'],
+       ['3','☐ Y-axis label + units','Average Weight (N) on the side axis.'],
+       ['4','☐ Points plotted','Use a pencil to plot your averages carefully.'],
+       ['5','☐ Line of best fit drawn','Use a ruler to draw a straight line through the middle of your points.']].map(([r,label,desc])=>
+      `<div class="step-row rv" data-r="${r}">
+        <div class="step-n" style="font-size:20px">✓</div>
+        <div class="step-body" style="font-size:14px"><strong>${label}:</strong> ${desc}</div>
+      </div>`).join('')}
+  </div>
+</div>`},
+
+// L2-S10 Graph Labels (Workbook p.10)
+{r:4, html:`
+${header('6','Draw Your Graph (Labels)','Workbook p.10')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','Fill in the blank lines around the graph box on page 10.')}</div>
+  <div class="rv" data-r="1">
+    ${qa('TITLE: _______________________________________________________', 'Average Weight vs Mass', 2)}
+  </div>
+  <div class="rv" data-r="3">
+    ${qa('Y-axis label: ______________________________ (units: _______)', 'Average Weight (units: N)', 4)}
+  </div>
+</div>`},
+
+// L2-S11 Graph Visual Example
+{r:2, html:`
+${header('6','Graph Example','Workbook p.10')}
+<div class="sb">
+  <div class="rv" data-r="0" style="display:flex;justify-content:center;align-items:center;flex:1">
+    <div style="background:var(--shade1);border:2px solid var(--black);border-radius:6px;padding:20px;width:80%">
+      <div style="font-size:14px;font-weight:800;color:var(--mid);text-align:center;margin-bottom:15px">HOW YOUR GRAPH SHOULD LOOK</div>
+      <svg viewBox="0 0 280 200" width="100%" style="max-height:220px">
+        <line x1="40" y1="170" x2="260" y2="170" stroke="#111" stroke-width="2" marker-end="url(#ax)"/>
+        <line x1="40" y1="170" x2="40" y2="15" stroke="#111" stroke-width="2" marker-end="url(#ay)"/>
+        <defs>
+          <marker id="ax" markerWidth="7" markerHeight="7" refX="3" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#111"/></marker>
+          <marker id="ay" markerWidth="7" markerHeight="7" refX="3" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#111"/></marker>
+        </defs>
+        ${[0,0.1,0.2,0.3,0.4,0.5].map((v,i)=>`<text x="${40+i*36}" y="184" text-anchor="middle" font-size="9" fill="#333">${v}</text><line x1="${40+i*36}" y1="170" x2="${40+i*36}" y2="174" stroke="#111" stroke-width="1"/>`).join('')}
+        ${[0,1,2,3,4,5].map((v,i)=>`<text x="32" y="${174-i*31}" text-anchor="end" font-size="9" fill="#333">${v}</text><line x1="36" y1="${170-i*31}" x2="40" y2="${170-i*31}" stroke="#111" stroke-width="1"/>`).join('')}
+        ${[[1,1],[2,2],[3,3],[4,4],[5,5]].map(([m,w])=>`<circle cx="${40+m*36}" cy="${170-w*31}" r="4" fill="#111" stroke="white" stroke-width="1.5"/>`).join('')}
+        <line class="rv" data-r="1" x1="40" y1="170" x2="220" y2="15" stroke="#111" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="150" y="198" text-anchor="middle" font-size="10" fill="#111" font-weight="700">Mass (kg)</text>
+        <text x="10" y="95" text-anchor="middle" font-size="9" fill="#111" font-weight="700" transform="rotate(-90,10,95)">Average Weight (N)</text>
+        <text x="150" y="12" text-anchor="middle" font-size="10" fill="#111" font-weight="700">Average Weight vs Mass</text>
+      </svg>
+    </div>
+  </div>
+</div>`},
+
+// L2-S12 End Lesson 2
+{r:1, html:`
+${header('RECAP','Lesson 2 Complete','Workbook p.8-10')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    <div style="background:var(--shade2);border:2px solid var(--black);border-radius:6px;padding:20px;text-align:center">
+      <div style="font-family:'Bebas Neue';font-size:40px;margin-bottom:10px">GREAT WORK!</div>
+      <div style="font-size:16px;font-weight:700">You have completed your plan, collected your data, and drawn your graph.</div>
+      <div style="font-size:16px;font-weight:700;margin-top:10px">In Lesson 3, we will analyze these results!</div>
+    </div>
+  </div>
+</div>`},
+
+], // end lesson 2
+
+// ─────────────────────────────────────────────
+//  LESSON 3
+// ─────────────────────────────────────────────
+3:[
+
+// L3-S1 Title
+{r:4, html:`
+<div class="sh"><span class="sh-title">MASS, WEIGHT &amp; GRAVITY — LESSON 3</span><span class="sh-ref">Year 7 Science | NESA 2026</span></div>
+<div class="title-sl">
+  <div class="title-big rv" data-r="0">Results, Analysis<br>&amp; Discussion</div>
+  <div class="title-sub rv" data-r="1">Turning Numbers Into Science</div>
+  <div class="goal-list">
+    <div class="goal-item rv" data-r="2">📌 Describe the trend in your graph</div>
+    <div class="goal-item rv" data-r="2">📌 Write about Reliability, Validity and Accuracy</div>
+    <div class="goal-item rv" data-r="3">📌 Evaluate your hypothesis</div>
+    <div class="goal-item rv" data-r="3">📌 Write a final conclusion</div>
+  </div>
+</div>`},
+
+// L3-S2 Trend (Workbook p.11)
+{r:4, html:`
+${header('1','Describe the Trend in Your Graph','Workbook p.11')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Your task','Circle the correct words in the boxes.')}</div>
+  <div class="rv" data-r="1">
+    ${qa('As the mass [ increased / decreased ], the weight [ increased / decreased / stayed the same ].', 'As the mass <strong>increased</strong>, the weight <strong>increased</strong>.', 2)}
+  </div>
+  <div class="rv" data-r="3">
+    ${qa('This shows a [ direct / inverse ] relationship — when one goes up, the other goes [ up / down ].', 'This shows a <strong>direct</strong> relationship — when one goes up, the other goes <strong>up</strong>.', 4)}
+  </div>
+</div>`},
+
+// L3-S3 Trend paragraph (Workbook p.11)
+{r:4, html:`
+${header('1','Describe the Trend in Your Graph','Workbook p.11')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('The line of best fit is [ straight / curved ], which tells us the relationship is [ linear / non-linear ].', 'The line of best fit is <strong>straight</strong>, which tells us the relationship is <strong>linear</strong>.', 1)}
+  </div>
+  <div class="rv" data-r="2">
+    ${qa('Now write your trend description in your own words (2–3 sentences):', 'As the mass increased, the measured weight also increased. This shows a direct, linear relationship between mass and weight. The line of best fit was a straight line going upwards.', 3)}
+  </div>
+</div>`},
+
+// L3-S4 Reliability Table (Workbook p.11)
+{r:6, html:`
+${header('2','Reliability — Did You Get Consistent Results?','Workbook p.11')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Reliability = Consistency','Check your three trials for each mass. If they are close, they are reliable.')}</div>
+  ${tblAns(
+    ['Mass (kg)','Lowest trial (N)','Highest trial (N)','Reliable? (close = yes)'],
+    [['0.1','0.9','1.1','Yes'],
+     ['0.2','1.9','2.1','Yes'],
+     ['0.3','2.9','3.1','Yes'],
+     ['0.4','3.9','4.1','Yes'],
+     ['0.5','4.9','5.1','Yes']],
+    [3],[1,2,3,4,5]
+  )}
+</div>`},
+
+// L3-S5 Reliability Paragraph (Workbook p.12)
+{r:2, html:`
+${header('2','Reliability Paragraph','Workbook p.12')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('Write about the reliability of your results. Were your three trials close? What does that mean? How could you make your results more reliable?', 'My results were reliable because the three trials for each mass were very close together (e.g. within 0.2 N of each other). This means the measurements were consistent. To make the experiment more reliable, I could repeat it for 5 trials instead of 3 to calculate a better average.', 1)}
+  </div>
+</div>`},
+
+// L3-S6 Validity Paragraph (Workbook p.12)
+{r:6, html:`
+${header('3','Validity — Was It a Fair Test?','Workbook p.12')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Validity = Fairness','Did you only change the Independent Variable?')}</div>
+  <div class="rv" data-r="1">
+    ${qa('In my experiment, the ONE thing I changed was:', 'The mass attached to the spring balance.', 2)}
+  </div>
+  <div class="rv" data-r="3">
+    ${qa('Things I kept the same (to make it fair):', 'The same spring balance, the same location, and the same person reading the scale.', 4)}
+  </div>
+  <div class="rv" data-r="5">
+    ${qa('Was your experiment a valid (fair) test? Give a reason. Was there anything that you accidentally changed that might have affected your results?', 'Yes, the experiment was a valid fair test because only the mass was changed. All other variables were kept the same. I did not accidentally change the spring balance or location.', 6)}
+  </div>
+</div>`},
+
+// L3-S7 Accuracy Table (Workbook p.12)
+{r:6, html:`
+${header('4','Accuracy — How Close Were You to the True Value?','Workbook p.12')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Accuracy = Closeness to truth','Compare your averages to the W = m × 10 expected values.')}</div>
+  ${tblAns(
+    ['Mass (kg)','Expected Weight (W = m × 10)','Your Average (N)','Difference (N)'],
+    [['0.1 kg','0.1 × 10 = 1.0 N','1.0','0.0'],
+     ['0.2 kg','0.2 × 10 = 2.0 N','2.0','0.0'],
+     ['0.3 kg','0.3 × 10 = 3.0 N','3.0','0.0'],
+     ['0.4 kg','0.4 × 10 = 4.0 N','4.0','0.0'],
+     ['0.5 kg','0.5 × 10 = 5.0 N','5.0','0.0']],
+    [2,3],[1,2,3,4,5]
+  )}
+</div>`},
+
+// L3-S8 Accuracy Paragraph (Workbook p.13)
+{r:2, html:`
+${header('4','Accuracy Paragraph','Workbook p.13')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('Were your results accurate? Look at the differences in the table. What could have caused any inaccuracies? Describe at least ONE source of error and how you would fix it if you repeated the experiment.', 'My results were very accurate because they were extremely close to the expected true values (only 0.1 N off). A possible source of error is parallax error, where looking at the scale from an angle changes the reading. I would fix this by making sure my eyes are completely level with the scale next time.', 1)}
+  </div>
+</div>`},
+
+// L3-S9 Hypothesis Evaluation (Workbook p.13)
+{r:4, html:`
+${header('5','Did Your Results Support Your Hypothesis?','Workbook p.13')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Sentence Starter','Complete the blanks using data from YOUR table.')}</div>
+  <div class="rv" data-r="1">
+    ${qa('Sentence starter — circle one and complete:', 'My hypothesis was <strong>SUPPORTED</strong> because my results showed that when the mass was <strong>0.5</strong> kg, the weight was <strong>5.0</strong> N, which <strong>did</strong> match my prediction.', 2)}
+  </div>
+  <div class="rv" data-r="3">
+    ${qa('Write your full hypothesis evaluation here (3–4 sentences using evidence from your data):', 'My hypothesis predicted that increasing the mass would increase the weight. This prediction was fully supported by the data. For example, a mass of 0.1 kg resulted in a weight of 1.0 N, and when mass was increased to 0.5 kg, the weight increased to 5.0 N. As mass went up, weight went up.', 4)}
+  </div>
+</div>`},
+
+// L3-S10 Conclusion Starters (Workbook p.13)
+{r:6, html:`
+${header('6','Write Your Conclusion','Workbook p.13')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('A conclusion has 5 parts','Use these starters to help build your final paragraph.')}</div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+    ${[['1','① This investigation found that as mass increased, the weight...','increased proportionally.'],
+       ['2','② This result supported / refuted my hypothesis, which predicted that...','supported my hypothesis, which predicted that weight would go up with mass.'],
+       ['3','③ For example, when the mass was _____ kg, the measured weight was _____ N.','0.4 kg, the measured weight was 4.0 N.'],
+       ['4','④ This is consistent with the formula W = m × g, because...','because 0.4 kg × 10 N/kg = 4.0 N.'],
+       ['5','⑤ In conclusion, weight is directly proportional to mass, meaning...','the more matter an object has, the stronger the pull of gravity on it.']].map(([r,part,ans])=>
+      `<div class="step-row rv" data-r="${r}">
+        <div class="step-body" style="font-size:15px"><strong>${part}</strong><br><span style="color:#0000AA">${ans}</span></div>
+      </div>`).join('')}
+  </div>
+</div>`},
+
+// L3-S11 Full Conclusion (Workbook p.14)
+{r:2, html:`
+${header('6','Full Conclusion','Workbook p.14')}
+<div class="sb">
+  <div class="rv" data-r="0">
+    ${qa('Write your full conclusion here:', 'This investigation found that as mass increased, the weight also increased. This result supported my hypothesis, which predicted that greater mass would lead to greater weight. For example, when the mass was 0.2 kg, the measured weight was 2.0 N, and at 0.5 kg, it was 5.0 N. This is consistent with the formula W = m × g, because multiplying the mass by Earth\'s gravity (10 N/kg) equals our measured results. In conclusion, weight is directly proportional to mass.', 1)}
+  </div>
+</div>`},
+
+// L3-S12 Reflection (Workbook p.15)
+{r:2, html:`
+${header('✅','Self-Reflection &amp; Teacher Feedback','Workbook p.15')}
+<div class="sb">
+  <div class="rv" data-r="0">${infoBox('Final Step','Turn to page 15 and tick off your skills.')}</div>
+  <div class="rv" data-r="1">
+    <div style="background:var(--shade2);border:2px solid var(--black);border-radius:6px;padding:20px;text-align:center">
+      <div style="font-family:'Bebas Neue';font-size:40px;margin-bottom:10px">CONGRATULATIONS!</div>
+      <div style="font-size:16px;font-weight:700">You have completed the entire Depth Study Workbook!</div>
+      <div style="font-size:16px;font-weight:700;margin-top:10px">Fill in "Something I did well" and "Something to improve" before handing it in to your teacher.</div>
+    </div>
+  </div>
+</div>`},
+
+], // end lesson 3
+};
+
+// ═══════════════════════════════════════════════════════════
+// ENGINE
+// ═══════════════════════════════════════════════════════════
+let lesson=1, slide=0, reveal=0;
+
+function getSlides(){ return lessons[lesson]; }
+function maxR(){ return getSlides()[slide].r || 0; }
+
+function renderSlides(){
+  const area=document.getElementById('area');
+  area.querySelectorAll('.slide').forEach(e=>e.remove());
+  const data=getSlides();
+  data.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.className='slide'+(i===slide?' active':'');
+    d.id='sl'+i;
+    d.innerHTML=s.html;
+    area.appendChild(d);
+  });
+  applyReveal();
+  updateUI();
+}
+
+function applyReveal(){
+  const c=document.getElementById('sl'+slide);
+  if(!c)return;
+  c.querySelectorAll('.rv').forEach(el=>{
+    const r=parseInt(el.dataset.r||0);
+    const show=r<reveal;
+    el.classList.toggle('on',show);
+    // handle qa-ans specifically (uses 'on' class for display:flex)
+    if(el.classList.contains('qa-ans')){
+      el.style.display=show?'flex':'none';
+    }
+  });
+}
+
+function handleClick(){
+  if(reveal<maxR()){ reveal++; applyReveal(); updateUI(); }
+  else nextSlide();
+}
+
+function nextSlide(){
+  const s=getSlides();
+  if(slide<s.length-1){ slide++; reveal=0; showSlide(); }
+}
+
+function prevSlide(){
+  if(slide>0){ slide--; reveal=maxR(); showSlide(); }
+}
+
+function showSlide(){
+  document.querySelectorAll('.slide').forEach((e,i)=>e.classList.toggle('active',i===slide));
+  applyReveal();
+  updateUI();
+}
+
+function switchLesson(n){
+  lesson=n; slide=0; reveal=0;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',+t.dataset.l===n));
+  renderSlides();
+}
+
+function updateUI(){
+  const s=getSlides();
+  document.getElementById('sc').textContent=`${slide+1} / ${s.length}`;
+  document.getElementById('bp').disabled=slide===0;
+  document.getElementById('bn').disabled=slide===s.length-1;
+  document.getElementById('pfill').style.width=(slide/(s.length-1)*100)+'%';
+  const rem=maxR()-reveal;
+  document.getElementById('rc').textContent=rem>0?`${rem} click${rem>1?'s':''} left`:'Click → next slide';
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();handleClick();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(e.key==='1')switchLesson(1);
+  if(e.key==='2')switchLesson(2);
+  if(e.key==='3')switchLesson(3);
+});
+
+renderSlides();
+</script>
+</body>
+</html>
