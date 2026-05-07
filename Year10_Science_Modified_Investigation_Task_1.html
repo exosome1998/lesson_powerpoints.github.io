@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 10 Science — Modified Task</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #edf7f3; color: #1a1a1a; font-size: 15.5px; line-height: 1.6; }
+
+        .header { background: linear-gradient(135deg, #00514a, #00897b); color: #fff; padding: 22px 20px; text-align: center; }
+        .header h1 { font-size: 1.4em; margin-bottom: 4px; }
+        .header p  { font-size: 0.9em; opacity: 0.85; }
+        .subbar { background: #00796b; color: #fff; text-align: center; padding: 8px; font-size: 0.88em; }
+
+        .container { max-width: 980px; margin: 24px auto; background: #fff; border-radius: 12px; padding: 30px 34px; box-shadow: 0 4px 14px rgba(0,0,0,0.10); }
+
+        .student-box { background: #f0f8ff; border: 1.5px solid #b0d4ee; border-radius: 10px; padding: 18px 20px; margin-bottom: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .student-box label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.93em; }
+        .student-box input { width: 100%; padding: 9px 12px; border: 1.5px solid #aaa; border-radius: 6px; font-size: 1em; }
+        .student-box input:focus { border-color: #00897b; outline: none; }
+
+        .notice { background: #fff8e1; border-left: 5px solid #f9a825; border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 24px; font-size: 0.94em; }
+        .notice strong { display: block; margin-bottom: 4px; font-size: 1em; }
+
+        .sec { color: #004d46; border-bottom: 3px solid #00897b; padding-bottom: 7px; margin: 40px 0 16px; font-size: 1.18em; }
+
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+        .card { border-radius: 10px; padding: 14px 16px; font-size: 0.93em; line-height: 1.55; }
+        .card .icon { font-size: 1.7em; margin-bottom: 6px; display: block; }
+        .card .ctitle { font-weight: bold; margin-bottom: 4px; }
+        .card-green  { background: #e8f5e9; border-left: 4px solid #43a047; }
+        .card-blue   { background: #e3f2fd; border-left: 4px solid #1e88e5; }
+        .card-orange { background: #fff3e0; border-left: 4px solid #ef6c00; }
+        .card-purple { background: #f3e5f5; border-left: 4px solid #8e24aa; }
+        .card-red    { background: #fce4ec; border-left: 4px solid #e53935; }
+        .card-teal   { background: #e0f2f1; border-left: 4px solid #00897b; }
+
+        .steps { counter-reset: step; }
+        .step { display: flex; align-items: flex-start; gap: 14px; margin: 9px 0; padding: 10px 14px; background: #f5f5f5; border-radius: 8px; }
+        .step::before { counter-increment: step; content: counter(step); background: #00897b; color: #fff; font-weight: bold; border-radius: 50%; min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.9em; flex-shrink: 0; }
+
+        table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.92em; }
+        th { background: #00514a; color: #fff; padding: 10px 13px; text-align: left; }
+        td { border: 1px solid #c8e6c9; padding: 9px 13px; vertical-align: top; }
+        tr:nth-child(even) td { background: #f1faf6; }
+        .peak-row td { background: #c8f5e0 !important; font-weight: bold; }
+        .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 0.82em; font-weight: bold; white-space: nowrap; }
+        .iv { background: #bbdefb; color: #0d47a1; }
+        .dv { background: #c8e6c9; color: #1b5e20; }
+        .cv { background: #ffe0b2; color: #6d3c00; }
+
+        .eq-box { background: #1a2e2b; color: #64ffda; font-family: monospace; font-size: 1.2em; text-align: center; padding: 12px; border-radius: 8px; margin: 12px 0; letter-spacing: 1.5px; }
+
+        .chart-wrap { max-width: 720px; margin: 20px auto 4px; }
+        .chart-caption { text-align: center; font-size: 0.87em; color: #666; font-style: italic; margin-top: 5px; }
+
+        .mark-summary { background: #00514a; color: #fff; border-radius: 10px; padding: 18px 20px; margin: 24px 0 10px; text-align: center; }
+        .mark-summary table { max-width: 400px; margin: 12px auto 0; color: #fff; }
+        .mark-summary th { background: rgba(255,255,255,0.18); }
+        .mark-summary td { border-color: rgba(255,255,255,0.2); }
+
+        .q-box { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px dashed #b2dfdb; }
+        .q-title { font-size: 1.04em; font-weight: bold; color: #003d35; margin-bottom: 8px; }
+        .marks-badge { background: #e0f2f1; color: #00514a; font-size: 0.82em; font-weight: bold; padding: 2px 9px; border-radius: 10px; margin-left: 6px; }
+        .q-hint { background: #f5f5f5; border-left: 4px solid #bbb; padding: 8px 12px; font-size: 0.89em; color: #555; margin: 8px 0 10px; border-radius: 0 5px 5px 0; }
+
+        select { width: 100%; padding: 10px 12px; font-size: 1em; border-radius: 6px; border: 1.5px solid #aaa; background: #fff; cursor: pointer; }
+        select:focus { border-color: #00897b; outline: none; }
+
+        textarea { width: 100%; border: 1.5px solid #bbb; padding: 11px; font-family: Arial, sans-serif; font-size: 14px; resize: vertical; border-radius: 7px; background: #fff; color: #111; line-height: 1.6; }
+        textarea:focus { border-color: #00897b; outline: none; }
+
+        .save-btn { display: block; width: 84%; margin: 44px auto 8px; padding: 18px; background: linear-gradient(135deg, #2e7d32, #43a047); color: #fff; font-size: 1.18em; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); letter-spacing: 0.3px; }
+        .save-btn:hover { background: linear-gradient(135deg, #1b5e20, #2e7d32); transform: translateY(-1px); }
+        .save-note { text-align: center; font-size: 0.83em; color: #888; margin-bottom: 30px; }
+
+        @media(max-width:620px) {
+            .container { padding: 16px 13px; }
+            .student-box { grid-template-columns: 1fr; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🧪 Year 10 Science — Modified Task</h1>
+    <p>Distance Education · You missed the prac, so we've set it all up for you below</p>
+</div>
+<div class="subbar">Topic: <strong>How Does Temperature Affect Enzymes?</strong> &nbsp;|&nbsp; Total: <strong>40 marks</strong></div>
+
+<div class="container">
+
+    <!-- STUDENT INFO -->
+    <div class="student-box">
+        <div>
+            <label>👤 Your Full Name</label>
+            <input type="text" id="student_name" placeholder="e.g. Jordan Smith">
+        </div>
+        <div>
+            <label>📅 Date Submitted</label>
+            <input type="date" id="student_date">
+        </div>
+    </div>
+
+    <!-- NOTICE -->
+    <div class="notice">
+        <strong>👋 Hey! Here's what to do:</strong>
+        You missed the science prac, so we've written up the full experiment below — including all the data and graphs. <strong>Read through everything first, then answer all the questions.</strong> When you're done, hit the big green button at the bottom to save your answers as a .txt file and email it to your teacher.
+    </div>
+
+    <!-- MARKS SUMMARY -->
+    <div class="mark-summary">
+        <strong>📋 Assessment Overview</strong>
+        <table>
+            <tr><th>Section</th><th>Type</th><th>Marks</th></tr>
+            <tr><td>Part A (Q1–10)</td><td>Multiple Choice</td><td>10</td></tr>
+            <tr><td>Part B (Q11–17)</td><td>Short Answer</td><td>18</td></tr>
+            <tr><td>Part C (Q18–20)</td><td>Extended Response</td><td>12</td></tr>
+            <tr><td><strong>Total</strong></td><td></td><td><strong>40</strong></td></tr>
+        </table>
+    </div>
+
+
+    <!-- ═══ EXPERIMENT OVERVIEW ═══ -->
+    <h2 class="sec">🔬 The Experiment — What Was Done</h2>
+
+    <div class="cards">
+        <div class="card card-blue">
+            <span class="icon">🎯</span>
+            <div class="ctitle">Aim</div>
+            Find out how temperature affects how well the enzyme catalase works.
+        </div>
+        <div class="card card-orange">
+            <span class="icon">🧫</span>
+            <div class="ctitle">What Was Used</div>
+            Potato discs (contain catalase) + hydrogen peroxide (H₂O₂) solution.
+        </div>
+        <div class="card card-teal">
+            <span class="icon">📏</span>
+            <div class="ctitle">What Was Measured</div>
+            How much oxygen gas (O₂) was produced in 60 seconds.
+        </div>
+        <div class="card card-purple">
+            <span class="icon">🌡️</span>
+            <div class="ctitle">What Was Changed</div>
+            The temperature — tested at 8 different temperatures (10°C to 70°C).
+        </div>
+    </div>
+
+    <div class="card card-orange" style="margin-top:10px;">
+        <span class="icon">💡</span>
+        <div class="ctitle">The Hypothesis (prediction before the experiment)</div>
+        "As temperature increases, enzyme activity will go up — until about 37°C. After that, the enzyme gets damaged by heat and stops working."
+    </div>
+
+
+    <!-- ═══ SCIENCE BASICS ═══ -->
+    <h2 class="sec">📘 Key Science — Read This First!</h2>
+
+    <div class="cards">
+        <div class="card card-green">
+            <span class="icon">⚙️</span>
+            <div class="ctitle">What is an Enzyme?</div>
+            A protein that <strong>speeds up chemical reactions</strong> in living things. It doesn't get used up — it can be reused over and over.
+        </div>
+        <div class="card card-blue">
+            <span class="icon">🔑</span>
+            <div class="ctitle">Lock &amp; Key Model</div>
+            Each enzyme has an <strong>active site</strong> — a specific shaped slot. Only the right molecule (substrate) can fit in, like a key in a lock.
+        </div>
+        <div class="card card-teal">
+            <span class="icon">🥔</span>
+            <div class="ctitle">Catalase (in potato)</div>
+            The enzyme used in this experiment. It breaks down hydrogen peroxide (a toxic waste) into safe water + oxygen gas.
+        </div>
+        <div class="card card-red">
+            <span class="icon">🔥</span>
+            <div class="ctitle">Denaturation</div>
+            Too much heat permanently <strong>destroys the enzyme's shape</strong>. The active site breaks — the substrate can't fit anymore. This cannot be reversed.
+        </div>
+        <div class="card card-purple">
+            <span class="icon">⭐</span>
+            <div class="ctitle">Optimum Temperature</div>
+            The <strong>best temperature</strong> for the enzyme. For catalase this is around <strong>37°C</strong> — same as human body temperature.
+        </div>
+        <div class="card card-orange">
+            <span class="icon">🧊</span>
+            <div class="ctitle">Low Temperature</div>
+            Cold = slow molecules = fewer collisions = slow reaction. The enzyme is <strong>fine</strong>, just sluggish. It is NOT damaged.
+        </div>
+    </div>
+
+
+    <!-- ═══ CHEMICAL REACTION ═══ -->
+    <h2 class="sec">⚗️ The Chemical Reaction</h2>
+    <p style="margin-bottom:10px;">Catalase breaks down hydrogen peroxide like this:</p>
+    <div class="eq-box">2H₂O₂  →  2H₂O  +  O₂ ↑</div>
+    <div class="cards" style="margin-top:10px;">
+        <div class="card card-red"><span class="icon">🧪</span><div class="ctitle">Breaks down (reactant)</div>Hydrogen Peroxide — H₂O₂</div>
+        <div class="card card-blue"><span class="icon">💧</span><div class="ctitle">Makes (product 1)</div>Water — H₂O (harmless)</div>
+        <div class="card card-teal"><span class="icon">🫧</span><div class="ctitle">Makes (product 2 — measured)</div>Oxygen gas — O₂ (collected in syringe)</div>
+    </div>
+
+
+    <!-- ═══ VARIABLES ═══ -->
+    <h2 class="sec">📌 Variables</h2>
+    <table>
+        <tr><th>Type</th><th>What it is</th><th>How it was handled</th></tr>
+        <tr>
+            <td><span class="badge iv">Independent — changed</span></td>
+            <td>Temperature of the H₂O₂ (°C)</td>
+            <td>Used water baths at 8 different temperatures</td>
+        </tr>
+        <tr>
+            <td><span class="badge dv">Dependent — measured</span></td>
+            <td>Volume of O₂ gas produced (mL)</td>
+            <td>Collected with a gas syringe over exactly 60 seconds</td>
+        </tr>
+        <tr>
+            <td><span class="badge cv">Controlled — kept the same</span></td>
+            <td>Concentration of H₂O₂</td>
+            <td>Always 3% — same bottle used throughout</td>
+        </tr>
+        <tr>
+            <td><span class="badge cv">Controlled — kept the same</span></td>
+            <td>Volume of H₂O₂</td>
+            <td>Always 20 mL — measured with a graduated cylinder</td>
+        </tr>
+        <tr>
+            <td><span class="badge cv">Controlled — kept the same</span></td>
+            <td>Mass of potato discs</td>
+            <td>Always 2.0 g — weighed on a balance</td>
+        </tr>
+        <tr>
+            <td><span class="badge cv">Controlled — kept the same</span></td>
+            <td>Reaction time</td>
+            <td>Always 60 seconds — stopwatch used every trial</td>
+        </tr>
+    </table>
+
+
+    <!-- ═══ METHOD ═══ -->
+    <h2 class="sec">🧑‍🔬 How the Experiment Was Done</h2>
+    <div class="steps">
+        <div class="step">Cut 2.0 g of potato into small uniform discs using a cork borer.</div>
+        <div class="step">Measure 20 mL of 3% hydrogen peroxide into a flask.</div>
+        <div class="step">Put the flask in the water bath. Wait 5 minutes until it reaches the right temperature. Check with a thermometer.</div>
+        <div class="step">Add the potato discs, seal the flask with a stopper connected to the gas syringe, and start the stopwatch immediately.</div>
+        <div class="step">After exactly 60 seconds, record how much O₂ gas was collected (mL).</div>
+        <div class="step">Repeat steps 1–5 two more times at the same temperature (3 trials total). Calculate the average.</div>
+        <div class="step">Repeat everything for all 8 temperatures: 10, 20, 30, 37, 40, 50, 60, 70°C.</div>
+        <div class="step">Record data in the table, plot the graphs, and analyse the results.</div>
+    </div>
+
+
+    <!-- ═══ RESULTS ═══ -->
+    <h2 class="sec">📊 Results — The Data Collected</h2>
+    <p style="margin-bottom:12px;">Each number = mL of oxygen collected in 60 seconds. Done 3 times at each temperature for reliability. <strong style="color:#00514a;">★ Green row = highest enzyme activity.</strong></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Temp (°C)</th>
+                <th>Trial 1 (mL)</th>
+                <th>Trial 2 (mL)</th>
+                <th>Trial 3 (mL)</th>
+                <th>Average (mL)</th>
+                <th>Rate (mL/min)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>10</td><td>7</td><td>8</td><td>9</td><td>8.0</td><td>8.0</td></tr>
+            <tr><td>20</td><td>16</td><td>18</td><td>20</td><td>18.0</td><td>18.0</td></tr>
+            <tr><td>30</td><td>26</td><td>28</td><td>30</td><td>28.0</td><td>28.0</td></tr>
+            <tr class="peak-row"><td>37 ★</td><td>33</td><td>35</td><td>37</td><td>35.0</td><td>35.0</td></tr>
+            <tr><td>40</td><td>30</td><td>32</td><td>34</td><td>32.0</td><td>32.0</td></tr>
+            <tr><td>50</td><td>10</td><td>12</td><td>14</td><td>12.0</td><td>12.0</td></tr>
+            <tr><td>60</td><td>2</td><td>3</td><td>4</td><td>3.0</td><td>3.0</td></tr>
+            <tr><td>70</td><td>0</td><td>0</td><td>1</td><td>0.3</td><td>0.3</td></tr>
+        </tbody>
+    </table>
+    <p style="font-size:0.83em; color:#777; margin-top:4px;">* Reaction time = 60 sec = 1 minute, so Rate (mL/min) = Average (mL) numerically.</p>
+
+
+    <!-- ═══ GRAPHS ═══ -->
+    <h2 class="sec">📈 Graphs — Study These Carefully!</h2>
+    <p style="margin-bottom:6px;">You will need to refer to these graphs when answering questions below.</p>
+
+    <div class="chart-wrap">
+        <canvas id="chart1"></canvas>
+        <p class="chart-caption">Graph 1 — Line Graph: Average O₂ Produced (mL) at each temperature</p>
+    </div>
+
+    <div class="chart-wrap">
+        <canvas id="chart2"></canvas>
+        <p class="chart-caption">Graph 2 — Bar Chart: Rate of O₂ Production (mL/min) at each temperature</p>
+    </div>
+
+    <!-- QUICK OBSERVATIONS -->
+    <div class="cards" style="margin-top:18px;">
+        <div class="card card-teal">
+            <span class="icon">📈</span>
+            <div class="ctitle">10°C → 37°C</div>
+            Activity goes <strong>up</strong> — more heat = molecules move faster = more reactions per second.
+        </div>
+        <div class="card card-green">
+            <span class="icon">⭐</span>
+            <div class="ctitle">37°C — Peak!</div>
+            <strong>35.0 mL</strong> of O₂ produced — enzyme works best here. This is the optimum temperature.
+        </div>
+        <div class="card card-red">
+            <span class="icon">📉</span>
+            <div class="ctitle">40°C → 70°C</div>
+            Activity <strong>drops sharply</strong> — enzyme starts to denature (its shape is destroyed permanently).
+        </div>
+        <div class="card card-orange">
+            <span class="icon">❌</span>
+            <div class="ctitle">70°C</div>
+            Almost <strong>nothing (0.3 mL)</strong> — enzyme is completely denatured and can no longer function.
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--                   PART A                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2 class="sec">Part A — Multiple Choice <span style="font-weight:normal; font-size:0.85em;">(10 marks — 1 mark each)</span></h2>
+    <p style="margin-bottom:18px; color:#555;">Pick the best answer from the dropdown. Use the info, table, and graphs above to help you.</p>
+
+    <div class="q-box">
+        <div class="q-title">Q1 — What is the independent variable? <span class="marks-badge">1 mark</span></div>
+        <select id="q1_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) The amount of oxygen gas produced</option>
+            <option value="B">B) The temperature of the hydrogen peroxide</option>
+            <option value="C">C) The mass of potato used</option>
+            <option value="D">D) The concentration of hydrogen peroxide</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q2 — At which temperature was enzyme activity the highest? <span class="marks-badge">1 mark</span></div>
+        <div class="q-hint">💡 Check the data table — which temperature had the most O₂ produced?</div>
+        <select id="q2_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) 30°C — 28.0 mL</option>
+            <option value="B">B) 40°C — 32.0 mL</option>
+            <option value="C">C) 37°C — 35.0 mL</option>
+            <option value="D">D) 50°C — 12.0 mL</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q3 — Why was each temperature tested 3 times? <span class="marks-badge">1 mark</span></div>
+        <select id="q3_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) To use up all the hydrogen peroxide</option>
+            <option value="B">B) To make the results more reliable and reduce the effect of mistakes</option>
+            <option value="C">C) To change the independent variable each time</option>
+            <option value="D">D) Because the syringe could only measure one-third of the gas at once</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q4 — Why was only 0.3 mL produced at 70°C? <span class="marks-badge">1 mark</span></div>
+        <select id="q4_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) The potato discs were too big</option>
+            <option value="B">B) The hydrogen peroxide evaporated before the reaction started</option>
+            <option value="C">C) The enzyme was denatured — heat permanently destroyed its shape so the substrate couldn't fit anymore</option>
+            <option value="D">D) The gas syringe stopped working at high temperatures</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q5 — What shape does Graph 1 make? <span class="marks-badge">1 mark</span></div>
+        <div class="q-hint">💡 Look at Graph 1 — does it go up, go down, stay flat, or go up then come back down?</div>
+        <select id="q5_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) A straight line going up — activity always increases with temperature</option>
+            <option value="B">B) A straight line going down — activity always decreases</option>
+            <option value="C">C) A bell shape — activity rises to a peak at 37°C then drops sharply</option>
+            <option value="D">D) A flat horizontal line — activity doesn't change at all</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q6 — Which of these is a controlled variable? <span class="marks-badge">1 mark</span></div>
+        <select id="q6_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) The volume of oxygen produced</option>
+            <option value="B">B) The temperature of the water bath</option>
+            <option value="C">C) The concentration of hydrogen peroxide (always kept at 3%)</option>
+            <option value="D">D) The type of gas collected in the syringe</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q7 — Which equation shows what catalase does? <span class="marks-badge">1 mark</span></div>
+        <select id="q7_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) 2H₂O → 2H₂O₂ + O₂</option>
+            <option value="B">B) H₂O₂ → H₂O + CO₂</option>
+            <option value="C">C) 2H₂O₂ → 2H₂O + O₂</option>
+            <option value="D">D) 2H₂ + O₂ → 2H₂O</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q8 — What happens to O₂ production between 10°C and 37°C? <span class="marks-badge">1 mark</span></div>
+        <div class="q-hint">💡 Look at the table values for 10°C, 20°C, 30°C, and 37°C.</div>
+        <select id="q8_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) It decreases from 35.0 to 8.0 mL</option>
+            <option value="B">B) It stays around 20 mL the whole time</option>
+            <option value="C">C) It steadily increases from 8.0 mL at 10°C to 35.0 mL at 37°C</option>
+            <option value="D">D) It goes up and down randomly with no pattern</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q9 — What does "denaturation" mean for an enzyme? <span class="marks-badge">1 mark</span></div>
+        <select id="q9_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) The enzyme temporarily slows down in the cold</option>
+            <option value="B">B) The enzyme permanently loses its shape due to high heat — it can never go back to normal</option>
+            <option value="C">C) The substrate gets used up and there is nothing left to react with</option>
+            <option value="D">D) The enzyme multiplies and makes extra copies of itself</option>
+        </select>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q10 — Which statement about enzymes is correct? <span class="marks-badge">1 mark</span></div>
+        <select id="q10_ans">
+            <option value="">— Choose an answer —</option>
+            <option value="A">A) Enzymes are used up during the reaction and need to be replaced</option>
+            <option value="B">B) Enzymes are biological catalysts — they are not permanently changed after each reaction</option>
+            <option value="C">C) Enzymes only ever work at exactly 37°C and stop at all other temperatures</option>
+            <option value="D">D) Enzymes increase the energy needed for a reaction to happen</option>
+        </select>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--                   PART B                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2 class="sec">Part B — Short Answer <span style="font-weight:normal; font-size:0.85em;">(18 marks)</span></h2>
+    <p style="margin-bottom:18px; color:#555;">Write your answers in the boxes. Use full sentences where you can. Include data values from the table or graphs when the question asks for them.</p>
+
+    <div class="q-box">
+        <div class="q-title">Q11 — Describe the overall trend <span class="marks-badge">3 marks</span></div>
+        <p>Using Graph 1 and the data table, describe what happens to enzyme activity as temperature increases from 10°C to 70°C. <strong>Include at least 3 specific numbers from the table.</strong></p>
+        <div class="q-hint">💡 Talk about what happens before 37°C, at 37°C, and after 37°C. Use actual data values.</div>
+        <textarea id="q11_ans" rows="6" placeholder="e.g. 'At 10°C only 8.0 mL was produced... this increased to... it peaked at 37°C with... then dropped to...'"></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q12 — Calculate the average at 30°C <span class="marks-badge">2 marks</span></div>
+        <p>Use the three trial values from the table for <strong>30°C</strong>. Show your working and calculate the average. Include units.</p>
+        <div class="q-hint">💡 Formula: (Trial 1 + Trial 2 + Trial 3) ÷ 3</div>
+        <textarea id="q12_ans" rows="4" placeholder="Working: ( __ + __ + __ ) ÷ 3 = __&#10;Answer: __ mL"></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q13 — Why did the enzyme work best at 37°C? <span class="marks-badge">3 marks</span></div>
+        <p>Explain why 37°C is the optimum temperature. Mention <strong>molecular movement</strong>, <strong>collision frequency</strong>, and the <strong>lock and key model</strong>.</p>
+        <div class="q-hint">💡 Think: what happens to molecules as they get warmer? When do enzyme and substrate collide just right?</div>
+        <textarea id="q13_ans" rows="6" placeholder="At 37°C, molecules have enough energy to move quickly... collisions between enzyme and substrate increase... the substrate fits perfectly into the active site..."></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q14 — Why did activity drop so sharply above 40°C? <span class="marks-badge">3 marks</span></div>
+        <p>The average dropped from <strong>32.0 mL at 40°C</strong> down to <strong>0.3 mL at 70°C</strong>. Explain this using the idea of <strong>denaturation</strong>. You must mention the <strong>active site</strong>.</p>
+        <div class="q-hint">💡 What does high heat do to the enzyme's shape? What happens to the active site? Can the enzyme still work?</div>
+        <textarea id="q14_ans" rows="6" placeholder="At high temperatures, heat breaks the bonds holding the enzyme's shape together... the active site changes shape permanently... the substrate can no longer fit..."></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q15 — Identify a source of error <span class="marks-badge">3 marks</span></div>
+        <p>Name <strong>one possible error</strong> in this experiment. Say whether it's a <strong>random</strong> or <strong>systematic</strong> error. Explain how you would fix it.</p>
+        <div class="q-hint">💡 Random error = accidental, varies each time. Systematic error = consistently wrong due to method or equipment.</div>
+        <textarea id="q15_ans" rows="5" placeholder="Source of error: ...&#10;Type (random / systematic): ...&#10;How to fix it: ..."></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q16 — Compare 10°C and 60°C <span class="marks-badge">2 marks</span></div>
+        <p>Both 10°C (8.0 mL) and 60°C (3.0 mL) gave low results. But the <em>reason</em> is different. Explain why enzyme activity was low at <strong>each</strong> temperature separately.</p>
+        <div class="q-hint">💡 At 10°C the enzyme is still fine — just cold and slow. At 60°C something permanent has happened to the enzyme.</div>
+        <textarea id="q16_ans" rows="5" placeholder="At 10°C:&#10;...&#10;&#10;At 60°C:&#10;..."></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q17 — Suggest one improvement <span class="marks-badge">2 marks</span></div>
+        <p>Suggest <strong>one change</strong> to the method that would make the results more reliable or more accurate. Explain why this would help.</p>
+        <textarea id="q17_ans" rows="5" placeholder="Improvement: ...&#10;Why this helps: ..."></textarea>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--                   PART C                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2 class="sec">Part C — Extended Response <span style="font-weight:normal; font-size:0.85em;">(12 marks)</span></h2>
+    <p style="margin-bottom:18px; color:#555;">Write detailed paragraph answers. Use science words. Refer to the data and graphs. Quality of your explanation matters more than length.</p>
+
+    <div class="q-box">
+        <div class="q-title">Q18 — Does the data support the hypothesis? <span class="marks-badge">5 marks</span></div>
+        <div class="card card-orange" style="margin-bottom:12px;">
+            <span class="icon">🔮</span>
+            <div class="ctitle">The hypothesis was:</div>
+            "As temperature increases, enzyme activity will go up until about 37°C. After that, the enzyme gets damaged by heat and stops working."
+        </div>
+        <p>Look at your data and graphs. Does the evidence <strong>support</strong>, <strong>partially support</strong>, or <strong>disprove</strong> this hypothesis? Your answer must:</p>
+        <ul style="margin: 8px 0 12px 20px; line-height: 2;">
+            <li>Clearly state whether the hypothesis is supported or not</li>
+            <li>Use at least <strong>4 specific data values</strong> as evidence</li>
+            <li>Comment on whether the predicted temperature of 37°C was accurate</li>
+            <li>Mention any unusual or unexpected results in the data</li>
+            <li>Suggest one follow-up test to explore further</li>
+        </ul>
+        <textarea id="q18_ans" rows="12" placeholder="The data [supports / partially supports / does not support] the hypothesis because...&#10;&#10;For example, at 10°C only 8.0 mL was produced, which shows... This increased to 35.0 mL at 37°C, demonstrating...&#10;&#10;The hypothesis predicted 37°C as the optimum. The data shows that..."></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q19 — Real-world uses of this science <span class="marks-badge">4 marks</span></div>
+        <p>Describe <strong>two real-world situations</strong> where knowing about temperature and enzyme activity is important. For each one, explain how the science from this experiment is relevant.</p>
+        <div class="q-hint">💡 Ideas: medicine, food storage, cooking, brewing, the human body, washing powder, cheese-making, fermentation — or your own ideas!</div>
+        <textarea id="q19_ans" rows="10" placeholder="Real-world use 1:&#10;...&#10;&#10;How the science connects:&#10;...&#10;&#10;────────────────────&#10;&#10;Real-world use 2:&#10;...&#10;&#10;How the science connects:&#10;..."></textarea>
+    </div>
+
+    <div class="q-box">
+        <div class="q-title">Q20 — Why does the scientific method matter? <span class="marks-badge">3 marks</span></div>
+        <p>Answer <strong>both parts</strong>:</p>
+        <ul style="margin: 6px 0 12px 20px; line-height:2;">
+            <li><strong>(a)</strong> Why is it important to write a hypothesis <em>before</em> you start — not after the experiment is done?</li>
+            <li><strong>(b)</strong> Why is it important to control variables? What could go wrong if you don't? Use an example from <em>this</em> experiment.</li>
+        </ul>
+        <textarea id="q20_ans" rows="9" placeholder="(a) Writing a hypothesis before the experiment matters because...&#10;&#10;(b) Controlling variables is important because... For example, in this experiment, if we hadn't kept the mass of potato the same each time..."></textarea>
+    </div>
+
+
+    <!-- SAVE BUTTON -->
+    <button class="save-btn" onclick="saveAsTxt()">💾 Save My Answers &amp; Download as .TXT File</button>
+    <p class="save-note">Once downloaded, email the .txt file to your teacher at <strong>yiheng.wang6@det.nsw.edu.au</strong></p>
+
+</div>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+window.addEventListener('load', function () {
+    const temps  = [10, 20, 30, 37, 40, 50, 60, 70];
+    const avgO2  = [8.0, 18.0, 28.0, 35.0, 32.0, 12.0, 3.0, 0.3];
+    const labels = temps.map(t => t + '°C');
+
+    new Chart(document.getElementById('chart1').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Average O₂ Produced (mL)',
+                data: avgO2,
+                borderColor: '#00514a',
+                backgroundColor: 'rgba(0,137,123,0.10)',
+                borderWidth: 2.8,
+                pointBackgroundColor: avgO2.map(v => v === 35.0 ? '#e65100' : '#00514a'),
+                pointRadius: avgO2.map(v => v === 35.0 ? 9 : 5),
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                tension: 0.35,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Graph 1: Average O₂ Volume vs Temperature', font: { size: 14, weight: 'bold' }, color: '#003d35', padding: { bottom: 10 } },
+                legend: { position: 'top' }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Temperature (°C)', font: { size: 12 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                y: { title: { display: true, text: 'O₂ Produced (mL)', font: { size: 12 } }, min: 0, max: 42, grid: { color: 'rgba(0,0,0,0.05)' } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('chart2').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Rate of O₂ Production (mL/min)',
+                data: avgO2,
+                backgroundColor: avgO2.map(v => v === 35.0 ? 'rgba(230,81,0,0.85)' : v >= 25 ? 'rgba(0,137,123,0.80)' : v >= 10 ? 'rgba(0,188,168,0.65)' : 'rgba(220,80,80,0.65)'),
+                borderColor: avgO2.map(v => v === 35.0 ? '#bf360c' : '#00514a'),
+                borderWidth: 1.5,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Graph 2: Rate of O₂ Production vs Temperature', font: { size: 14, weight: 'bold' }, color: '#003d35', padding: { bottom: 10 } },
+                legend: { position: 'top' }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Temperature (°C)', font: { size: 12 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                y: { title: { display: true, text: 'Rate (mL/min)', font: { size: 12 } }, min: 0, max: 42, grid: { color: 'rgba(0,0,0,0.05)' } }
+            }
+        }
+    });
+});
+
+function saveAsTxt() {
+    const name = document.getElementById('student_name').value.trim() || 'Unknown Student';
+    const date = document.getElementById('student_date').value || 'Not entered';
+    const get  = id => (document.getElementById(id)?.value.trim() || '[No answer provided]');
+
+    const line = '='.repeat(65);
+    const dash = '-'.repeat(65);
+
+    let txt = `${line}\nYEAR 10 SCIENCE — MODIFIED SELF-INVESTIGATION TASK\nTopic: How Does Temperature Affect Enzyme Activity?\n${line}\n\n`;
+    txt += `Student Name : ${name}\nDate         : ${date}\nTotal Marks  : /40\n\n`;
+
+    txt += `${line}\nPART A — MULTIPLE CHOICE  (10 marks)\n${line}\n\n`;
+    [['q1_ans','Q1  — Independent variable'],['q2_ans','Q2  — Highest enzyme activity temperature'],['q3_ans','Q3  — Reason for 3 trials'],['q4_ans','Q4  — Low activity at 70°C'],['q5_ans','Q5  — Shape of Graph 1'],['q6_ans','Q6  — Controlled variable'],['q7_ans','Q7  — Chemical equation'],['q8_ans','Q8  — Trend from 10°C to 37°C'],['q9_ans','Q9  — Meaning of denaturation'],['q10_ans','Q10 — Correct statement about enzymes']]
+    .forEach(([id, label]) => { txt += `${label}\n  Answer: ${get(id)}\n\n`; });
+
+    txt += `${line}\nPART B — SHORT ANSWER  (18 marks)\n${line}\n\n`;
+    [['q11_ans','Q11 — Overall trend (3 marks)'],['q12_ans','Q12 — Average calculation at 30°C (2 marks)'],['q13_ans','Q13 — Why 37°C is optimum (3 marks)'],['q14_ans','Q14 — Denaturation explanation (3 marks)'],['q15_ans','Q15 — Source of error (3 marks)'],['q16_ans','Q16 — Compare 10°C and 60°C (2 marks)'],['q17_ans','Q17 — Suggested improvement (2 marks)']]
+    .forEach(([id, label]) => { txt += `${dash}\n${label}\n${dash}\n${get(id)}\n\n`; });
+
+    txt += `${line}\nPART C — EXTENDED RESPONSE  (12 marks)\n${line}\n\n`;
+    [['q18_ans','Q18 — Evaluate the hypothesis (5 marks)'],['q19_ans','Q19 — Real-world applications (4 marks)'],['q20_ans','Q20 — Scientific method reflection (3 marks)']]
+    .forEach(([id, label]) => { txt += `${dash}\n${label}\n${dash}\n${get(id)}\n\n`; });
+
+    txt += `${line}\nEND OF SUBMISSION — ${name} — ${date}\n${line}\n`;
+
+    const blob = new Blob([txt], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${name.replace(/\s+/g, '_')}_Year10_Science_Task.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
