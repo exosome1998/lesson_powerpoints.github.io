@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ionic Bonding Practice — Year 10 Science</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#4338ca;   
+  --g12:#059669;       
+  --tm:#d97706;        
+  --g567:#be123c;      
+  --neutral:#475569;   
+  --ans:#b71c1c;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lexend',sans-serif;background:#222;padding:20px;display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;}
+
+/* A4 Landscape Setup */
+.page{width:297mm;height:210mm;background:#fff;padding:8mm 10mm;box-shadow:0 6px 28px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;position:relative;}
+
+/* Header */
+.ph{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3.5px solid var(--primary);padding-bottom:3px;margin-bottom:4px;flex-shrink:0;}
+.ph-title{font-size:.9rem;font-weight:900;text-transform:uppercase;color:var(--primary);letter-spacing:-.3px;}
+.ph-sub{font-size:.75rem;font-weight:900;color:#444;}
+.ph-info{font-size:.65rem;font-weight:700;color:#444;}
+
+/* Continuous Column Layout with Scaling */
+.grid3{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:12px;min-height:0;}
+.col{display:flex;flex-direction:column;gap:6px;min-height:0; overflow:visible; --scale: 1;}
+
+/* Column Toolbars (For zooming) */
+.col-toolbar { display:flex; justify-content:flex-end; gap:4px; margin-bottom:-4px; }
+.btn-zoom { background:#e2e8f0; border:1px solid #cbd5e1; color:#333; font-weight:bold; font-size:0.6rem; cursor:pointer; padding:1px 4px; border-radius:2px; }
+.btn-zoom:hover { background:#cbd5e1; }
+
+/* Section Headers */
+.sh{padding:3px 6px;font-size:calc(.65rem * var(--scale));font-weight:900;text-transform:uppercase;letter-spacing:.2px;color:#fff;background:var(--primary);display:flex;justify-content:space-between;align-items:center;border-radius:2px;}
+.sh.metal{background:var(--g12);}
+.sh.tm{background:var(--tm);}
+.sh.nonmetal{background:var(--g567);}
+.sh.dark{background:#1e293b;}
+
+/* Content Block */
+.sb{display:flex;flex-direction:column;gap:2px;padding:0 2px;}
+
+/* Scalable Text styling */
+.nl{font-size:calc(.62rem * var(--scale));line-height:1.25;color:#111;padding:1px 0;}
+.callout{background:#f1f5f9;border-left:3px solid #64748b;padding:3px 5px;font-size:calc(.6rem * var(--scale));font-style:italic;}
+
+/* Fill in the blanks */
+.bl{display:inline-block;min-width:35px;border-bottom:1px solid #555;cursor:pointer;color:transparent;font-weight:900;font-size:calc(.62rem * var(--scale));text-align:center;transition:color .1s;padding:0 2px;user-select:none;line-height:1;}
+.bl.on{color:var(--ans);border-bottom-color:var(--ans);}
+.blcell{cursor:pointer;color:transparent;transition:color .1s;user-select:none;font-weight:900;}
+.blcell.on{color:var(--ans);}
+
+/* Clickable Writing Lines */
+.wl-ans{display:block;border-bottom:1px solid #a3a3a3;height:calc(1.1rem * var(--scale));line-height:calc(1.1rem * var(--scale));cursor:pointer;color:transparent;font-size:calc(.58rem * var(--scale));font-weight:700;transition:color 0.15s;padding-left:4px;margin-bottom:1px;user-select:none;}
+.wl-ans.on{color:var(--primary);}
+
+/* Standard Tables - Extremely compressed for Page 2 */
+.tft{width:100%;border-collapse:collapse;font-size:calc(.55rem * var(--scale));text-align:center;margin-top:1px;}
+.tft th{background:#475569;color:#fff;padding:1px 2px;font-weight:900;}
+.tft th:first-child{text-align:left;}
+.tft td{border:1px solid #cbd5e1;padding:1px 2px;vertical-align:middle;}
+.tft td:first-child{text-align:left;font-weight:600;}
+
+/* Corrected Mini Periodic Table CSS Grid */
+.pt-grid { display:grid; grid-template-columns: repeat(9, 1fr); gap:1px; background:#e2e8f0; padding:1px; border:1px solid #94a3b8; font-size:calc(.5rem * var(--scale)); text-align:center;}
+.pt-cell { background:#fff; padding:2px 1px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.pt-head { background:#333; color:#fff; font-weight:900; font-size:calc(.55rem * var(--scale)); }
+.pt-charge { font-weight:900; margin-bottom:1px;}
+.pt-sym { font-weight:900; font-size:calc(.65rem * var(--scale)); }
+.pt-name { font-size:calc(.45rem * var(--scale)); color:#555; white-space:nowrap; overflow:hidden;}
+.pt-m { background:#d1fae5; border-bottom:2px solid var(--g12);}
+.pt-nm { background:#ffe4e6; border-bottom:2px solid var(--g567);}
+.pt-neu { background:#f1f5f9; border-bottom:2px solid var(--neutral);}
+
+/* Transition Metal Block Spanning */
+.pt-tm-header { background:var(--tm); color:white; font-weight:900; font-size:calc(.55rem * var(--scale)); }
+.pt-tm-charge { background:#fff; font-weight:900; color:var(--tm); }
+.pt-tm-block { background:#fef3c7; border-bottom:2px solid var(--tm); grid-column: 3; grid-row: 3 / 6; display:flex; align-items:center; justify-content:center; font-weight:bold; color:var(--tm); font-size:calc(.5rem * var(--scale));}
+
+/* Step Box */
+.step-box { background:#f8fafc; border:1px solid #cbd5e1; border-radius:3px; padding:3px 4px; display:flex; flex-direction:column; gap:2px; margin-bottom:2px;}
+.step-title { font-weight:900; font-size:calc(.6rem * var(--scale)); color:var(--primary); text-transform:uppercase; border-bottom:1px solid #cbd5e1; padding-bottom:1px; margin-bottom:2px;}
+
+/* Floating Controls */
+.controls{position:fixed;bottom:25px;right:25px;z-index:1000;}
+.btn-toggle{background:var(--primary);color:white;border:2px solid white;padding:12px 20px;border-radius:30px;font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 8px 16px rgba(0,0,0,0.3);transition:transform 0.2s, background 0.2s;}
+.btn-toggle:hover{transform:translateY(-3px);background:#312e81;}
+
+@media print{
+  @page { size: A4 landscape; margin: 0; }
+  body{background:none;padding:0;gap:0;}
+  .ans-col{display:none;}
+  .no-print{display:none !important;}
+  .page{box-shadow:none;margin:0;width:297mm;height:210mm;padding:8mm 10mm;page-break-after:always;}
+}
+</style>
+</head>
+<body>
+
+<div class="controls no-print">
+  <button class="btn-toggle" onclick="toggleAllAnswers()">👁️ Toggle All Answers</button>
+</div>
+
+<div class="page" id="page1">
+  <div class="ph">
+    <div>
+      <div class="ph-title">Year 10 Science · Chemistry</div>
+      <div class="ph-sub">📋 Lesson 2: Ionic Formula & Naming Consolidation</div>
+    </div>
+    <div class="ph-info">Name: __________________________ &nbsp; Date: ____________</div>
+  </div>
+
+  <div class="grid3">
+    <div class="col" id="c1">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c1', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c1', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh metal"><span>📊 Reference: Ionic Charges</span></div>
+        <div class="sb">
+          <p class="nl">Metals <span class="bl" onclick="this.classList.toggle('on')">lose</span> electrons to form positive ions (cations). Non-metals <span class="bl" onclick="this.classList.toggle('on')">gain</span> electrons to form negative ions (anions).</p>
+          
+          <div class="pt-grid">
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:1;">G1</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:2;">G2</div>
+            <div class="pt-cell pt-tm-header" style="grid-row:1; grid-column:3;">Trans</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:4;">G3</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:5;">G4</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:6;">G5</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:7;">G6</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:8;">G7</div>
+            <div class="pt-cell pt-head" style="grid-row:1; grid-column:9;">G8</div>
+            
+            <div class="pt-cell pt-m pt-charge" style="grid-row:2; grid-column:1; color:var(--g12);">+1</div>
+            <div class="pt-cell pt-m pt-charge" style="grid-row:2; grid-column:2; color:var(--g12);">+2</div>
+            <div class="pt-cell pt-tm-charge" style="grid-row:2; grid-column:3;">Var.</div>
+            <div class="pt-cell pt-m pt-charge" style="grid-row:2; grid-column:4; color:var(--g12);">+3</div>
+            <div class="pt-cell pt-neu pt-charge" style="grid-row:2; grid-column:5;">±4</div>
+            <div class="pt-cell pt-nm pt-charge" style="grid-row:2; grid-column:6; color:var(--g567);">-3</div>
+            <div class="pt-cell pt-nm pt-charge" style="grid-row:2; grid-column:7; color:var(--g567);">-2</div>
+            <div class="pt-cell pt-nm pt-charge" style="grid-row:2; grid-column:8; color:var(--g567);">-1</div>
+            <div class="pt-cell pt-neu pt-charge" style="grid-row:2; grid-column:9;">0</div>
+            
+            <div class="pt-tm-block">Transition<br>Block</div>
+
+            <div class="pt-cell pt-m" style="grid-row:3; grid-column:1;"><span class="pt-sym">Li</span><span class="pt-name">Lithium</span></div>
+            <div class="pt-cell pt-m" style="grid-row:3; grid-column:2;"><span class="pt-sym">Be</span><span class="pt-name">Beryllium</span></div>
+            <div class="pt-cell pt-m" style="grid-row:3; grid-column:4;"><span class="pt-sym">B</span><span class="pt-name">Boron</span></div>
+            <div class="pt-cell pt-neu" style="grid-row:3; grid-column:5;"><span class="pt-sym">C</span><span class="pt-name">Carbon</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:3; grid-column:6;"><span class="pt-sym">N</span><span class="pt-name">Nitrogen</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:3; grid-column:7;"><span class="pt-sym">O</span><span class="pt-name">Oxygen</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:3; grid-column:8;"><span class="pt-sym">F</span><span class="pt-name">Fluorine</span></div>
+            <div class="pt-cell pt-neu" style="grid-row:3; grid-column:9;"><span class="pt-sym">Ne</span><span class="pt-name">Neon</span></div>
+            
+            <div class="pt-cell pt-m" style="grid-row:4; grid-column:1;"><span class="pt-sym">Na</span><span class="pt-name">Sodium</span></div>
+            <div class="pt-cell pt-m" style="grid-row:4; grid-column:2;"><span class="pt-sym">Mg</span><span class="pt-name">Magnesium</span></div>
+            <div class="pt-cell pt-m" style="grid-row:4; grid-column:4;"><span class="pt-sym">Al</span><span class="pt-name">Aluminum</span></div>
+            <div class="pt-cell pt-neu" style="grid-row:4; grid-column:5;"><span class="pt-sym">Si</span><span class="pt-name">Silicon</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:4; grid-column:6;"><span class="pt-sym">P</span><span class="pt-name">Phosphorus</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:4; grid-column:7;"><span class="pt-sym">S</span><span class="pt-name">Sulfur</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:4; grid-column:8;"><span class="pt-sym">Cl</span><span class="pt-name">Chlorine</span></div>
+            <div class="pt-cell pt-neu" style="grid-row:4; grid-column:9;"><span class="pt-sym">Ar</span><span class="pt-name">Argon</span></div>
+
+            <div class="pt-cell pt-m" style="grid-row:5; grid-column:1;"><span class="pt-sym">K</span><span class="pt-name">Potassium</span></div>
+            <div class="pt-cell pt-m" style="grid-row:5; grid-column:2;"><span class="pt-sym">Ca</span><span class="pt-name">Calcium</span></div>
+            <div class="pt-cell pt-m" style="grid-row:5; grid-column:4;"><span class="pt-sym">Ga</span><span class="pt-name">Gallium</span></div>
+            <div class="pt-cell pt-neu" style="grid-row:5; grid-column:5;"><span class="pt-sym">Ge</span><span class="pt-name">Germanium</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:5; grid-column:6;"><span class="pt-sym">As</span><span class="pt-name">Arsenic</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:5; grid-column:7;"><span class="pt-sym">Se</span><span class="pt-name">Selenium</span></div>
+            <div class="pt-cell pt-nm" style="grid-row:5; grid-column:8;"><span class="pt-sym">Br</span><span class="pt-name">Bromine</span></div>
+            <div class="pt-cell pt-neu" style="grid-row:5; grid-column:9;"><span class="pt-sym">Kr</span><span class="pt-name">Krypton</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh tm"><span>⚙️ Transition Metals</span></div>
+        <div class="sb">
+          <p class="nl">Transition metals can form ions with <span class="bl" onclick="this.classList.toggle('on')">different</span> charges. We use Roman Numerals in the name to tell us the exact <span class="bl" onclick="this.classList.toggle('on')">charge</span> of the metal.</p>
+          <table class="tft" style="margin-top:0;">
+            <thead><tr><th>Metal</th><th>Roman Numeral</th><th>Charge</th></tr></thead>
+            <tbody>
+              <tr><td>Iron (II)</td><td>(II)</td><td class="blcell" onclick="this.classList.toggle('on')">Fe²⁺</td></tr>
+              <tr><td>Iron (III)</td><td>(III)</td><td class="blcell" onclick="this.classList.toggle('on')">Fe³⁺</td></tr>
+              <tr><td>Copper (I)</td><td>(I)</td><td class="blcell" onclick="this.classList.toggle('on')">Cu⁺</td></tr>
+              <tr><td>Copper (II)</td><td>(II)</td><td class="blcell" onclick="this.classList.toggle('on')">Cu²⁺</td></tr>
+              <tr><td>Lead (IV)</td><td>(IV)</td><td class="blcell" onclick="this.classList.toggle('on')">Pb⁴⁺</td></tr>
+            </tbody>
+          </table>
+          <div class="callout" style="margin-top:2px;">
+            ⚠️ <b>Exceptions:</b> Silver is always <span class="bl" onclick="this.classList.toggle('on')">Ag⁺</span> and Zinc is always <span class="bl" onclick="this.classList.toggle('on')">Zn²⁺</span>. They do not need Roman Numerals.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c2">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c2', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c2', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh"><span>✍️ The Criss-Cross Method</span></div>
+        <div class="sb">
+          <p class="nl">Use this step-by-step method to turn a name into a chemical formula.</p>
+          
+          <div class="step-box">
+            <div class="step-title">Example 1: Magnesium Chloride</div>
+            <p class="nl"><b>Step 1: Write Symbols & Charges</b></p>
+            <p class="nl" style="padding-left:10px;">Magnesium is Group 2: <span class="bl" onclick="this.classList.toggle('on')">Mg²⁺</span></p>
+            <p class="nl" style="padding-left:10px;">Chlorine is Group 7: <span class="bl" onclick="this.classList.toggle('on')">Cl⁻</span></p>
+            
+            <p class="nl" style="margin-top:2px;"><b>Step 2: Criss-Cross the numbers to the bottom</b></p>
+            <p class="nl" style="padding-left:10px;">The 2 goes to the Cl. The 1 goes to the Mg.</p>
+            <p class="nl" style="padding-left:10px; font-family:monospace; font-weight:bold; font-size:calc(.7rem * var(--scale));">Mg<sub style="color:var(--ans);">1</sub>Cl<sub style="color:var(--ans);">2</sub></p>
+
+            <p class="nl" style="margin-top:2px;"><b>Step 3: Simplify</b> (Drop 1s, divide if possible)</p>
+            <p class="nl" style="padding-left:10px; font-family:monospace; font-weight:bold; font-size:calc(.7rem * var(--scale));">MgCl<sub style="color:var(--ans);">2</sub></p>
+          </div>
+
+          <div class="step-box" style="border-color:var(--tm);">
+            <div class="step-title" style="color:var(--tm);">Example 2: Lead(IV) Oxide</div>
+            <p class="nl"><b>Step 1: Write Symbols & Charges</b></p>
+            <p class="nl" style="padding-left:10px;">Lead has a (IV), so its charge is: <span class="bl" onclick="this.classList.toggle('on')">Pb⁴⁺</span></p>
+            <p class="nl" style="padding-left:10px;">Oxygen is Group 6: <span class="bl" onclick="this.classList.toggle('on')">O²⁻</span></p>
+            
+            <p class="nl" style="margin-top:2px;"><b>Step 2: Criss-Cross</b></p>
+            <p class="nl" style="padding-left:10px; font-family:monospace; font-weight:bold; font-size:calc(.7rem * var(--scale));">Pb<sub style="color:var(--ans);">2</sub>O<sub style="color:var(--ans);">4</sub></p>
+
+            <p class="nl" style="margin-top:2px;"><b>Step 3: Simplify</b></p>
+            <p class="nl" style="padding-left:10px;">Both 2 and 4 can be divided by <span class="bl" onclick="this.classList.toggle('on')">2</span>.</p>
+            <p class="nl" style="padding-left:10px; font-family:monospace; font-weight:bold; font-size:calc(.7rem * var(--scale));">PbO<sub style="color:var(--ans);">2</sub></p>
+          </div>
+
+          <div class="step-box" style="border-color:var(--g12);">
+            <div class="step-title" style="color:var(--g12);">Example 3: Aluminum Oxide</div>
+            <p class="nl"><b>Step 1: Write Symbols & Charges</b></p>
+            <p class="nl" style="padding-left:10px;">Aluminum is Group 3: <span class="bl" onclick="this.classList.toggle('on')">Al³⁺</span></p>
+            <p class="nl" style="padding-left:10px;">Oxygen is Group 6: <span class="bl" onclick="this.classList.toggle('on')">O²⁻</span></p>
+            
+            <p class="nl" style="margin-top:2px;"><b>Step 2: Criss-Cross</b></p>
+            <p class="nl" style="padding-left:10px; font-family:monospace; font-weight:bold; font-size:calc(.7rem * var(--scale));">Al<sub style="color:var(--ans);">2</sub>O<sub style="color:var(--ans);">3</sub></p>
+
+            <p class="nl" style="margin-top:2px;"><b>Step 3: Simplify</b></p>
+            <p class="nl" style="padding-left:10px;">2 and 3 cannot be divided. The formula stays <span class="bl" onclick="this.classList.toggle('on')">Al₂O₃</span>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c3">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c3', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c3', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh nonmetal"><span>🗣️ Naming Ionic Compounds</span></div>
+        <div class="sb">
+          <p class="nl"><b>Rule 1:</b> The <span class="bl" onclick="this.classList.toggle('on')">Metal</span> always goes first.</p>
+          <p class="nl"><b>Rule 2:</b> The non-metal goes second, but change the ending to <span class="bl" onclick="this.classList.toggle('on')">-ide</span>.</p>
+          <p class="nl" style="padding-left:10px; font-style:italic;">NaCl = Sodium <span class="bl" onclick="this.classList.toggle('on')">Chloride</span></p>
+          <p class="nl" style="margin-top:2px;"><b>Rule 3:</b> If the metal is a Transition Metal, you MUST use a <span class="bl" onclick="this.classList.toggle('on')">Roman Numeral</span> to show its charge.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh dark"><span>⏪ Working Backwards (Un-crossing)</span></div>
+        <div class="sb">
+          <p class="nl">To name a transition metal compound, you must "un-cross" the formula to find the original charge!</p>
+          
+          <div class="step-box" style="border-color:#1e293b;">
+            <div class="step-title" style="color:#1e293b;">Example: Name Fe₂O₃</div>
+            <p class="nl"><b>Step 1: Separate the elements</b></p>
+            <p class="nl" style="padding-left:10px;">Fe and O</p>
+
+            <p class="nl" style="margin-top:2px;"><b>Step 2: Un-cross the little numbers up to the top</b></p>
+            <p class="nl" style="padding-left:10px;">The 3 goes back up to the Fe. The 2 goes to the O.</p>
+            <p class="nl" style="padding-left:10px; font-family:monospace; font-weight:bold; font-size:calc(.7rem * var(--scale));">Fe<sup style="color:var(--ans);">3+</sup> &nbsp;&nbsp; O<sup style="color:var(--ans);">2-</sup></p>
+
+            <p class="nl" style="margin-top:2px;"><b>Step 3: Check the non-metal</b></p>
+            <p class="nl" style="padding-left:10px;">Oxygen is in Group 6, so it SHOULD be 2-. Since this matches, the Fe charge is definitely <span class="bl" onclick="this.classList.toggle('on')">3+</span>.</p>
+
+            <p class="nl" style="margin-top:2px;"><b>Step 4: Write the name with the Roman Numeral</b></p>
+            <p class="nl" style="padding-left:10px; font-weight:bold; font-size:calc(.65rem * var(--scale));">Iron (<span class="bl" onclick="this.classList.toggle('on')">III</span>) Oxide</p>
+          </div>
+
+          <div class="step-box" style="border-color:#b71c1c;">
+            <div class="step-title" style="color:#b71c1c;">⚠️ The Simplification Trap: Name CuO</div>
+            <p class="nl"><b>Step 1: Un-cross the invisible 1s</b></p>
+            <p class="nl" style="padding-left:10px;">Cu₁O₁ &nbsp; → &nbsp; Cu<sup style="color:var(--ans);">1+</sup> and O<sup style="color:var(--ans);">1-</sup></p>
+            <p class="nl"><b>Step 2: Check the non-metal</b></p>
+            <p class="nl" style="padding-left:10px;">Wait! Oxygen must ALWAYS be <span class="bl" onclick="this.classList.toggle('on')">2-</span>.</p>
+            <p class="nl"><b>Step 3: Multiply to fix</b></p>
+            <p class="nl" style="padding-left:10px;">Multiply both charges by 2 to get the real ratio: Cu<sup style="color:var(--ans);">2+</sup> O<sup style="color:var(--ans);">2-</sup>.</p>
+            <p class="nl"><b>Answer:</b> Copper (<span class="bl" onclick="this.classList.toggle('on')">II</span>) Oxide</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page2">
+  <div class="ph">
+    <div>
+      <div class="ph-title">Year 10 Science · Chemistry</div>
+      <div class="ph-sub">📝 Practice — Criss-Cross & Naming Drills</div>
+    </div>
+    <div class="ph-info">Name: __________________________ &nbsp; Date: ____________</div>
+  </div>
+
+  <div class="grid3">
+    <div class="col" id="c4">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c4', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c4', 0.05)">A+</button>
+      </div>
+      
+      <div>
+        <div class="sh metal"><span>A — Formula Drill (Main Groups)</span></div>
+        <div class="sb">
+          <p class="nl" style="color:#555;"><i>Write the correct chemical formula. Remember to simplify if needed!</i></p>
+          <table class="tft">
+            <thead><tr><th style="width:65%;">Name</th><th>Formula</th></tr></thead>
+            <tbody>
+              <tr><td>1. Sodium Fluoride</td><td class="blcell" onclick="this.classList.toggle('on')">NaF</td></tr>
+              <tr><td>2. Potassium Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">K₂O</td></tr>
+              <tr><td>3. Magnesium Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">MgCl₂</td></tr>
+              <tr><td>4. Calcium Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">CaS</td></tr>
+              <tr><td>5. Aluminum Bromide</td><td class="blcell" onclick="this.classList.toggle('on')">AlBr₃</td></tr>
+              <tr><td>6. Lithium Nitride</td><td class="blcell" onclick="this.classList.toggle('on')">Li₃N</td></tr>
+              <tr><td>7. Beryllium Phosphide</td><td class="blcell" onclick="this.classList.toggle('on')">Be₃P₂</td></tr>
+              <tr><td>8. Aluminum Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">Al₂O₃</td></tr>
+              <tr><td>9. Barium Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">BaS</td></tr>
+              <tr><td>10. Rubidium Bromide</td><td class="blcell" onclick="this.classList.toggle('on')">RbBr</td></tr>
+              <tr><td>11. Strontium Nitride</td><td class="blcell" onclick="this.classList.toggle('on')">Sr₃N₂</td></tr>
+              <tr><td>12. Gallium Fluoride</td><td class="blcell" onclick="this.classList.toggle('on')">GaF₃</td></tr>
+              <tr><td>13. Lithium Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">Li₂O</td></tr>
+              <tr><td>14. Sodium Phosphide</td><td class="blcell" onclick="this.classList.toggle('on')">Na₃P</td></tr>
+              <tr><td>15. Potassium Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">K₂S</td></tr>
+              <tr><td>16. Magnesium Nitride</td><td class="blcell" onclick="this.classList.toggle('on')">Mg₃N₂</td></tr>
+              <tr><td>17. Calcium Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">CaO</td></tr>
+              <tr><td>18. Barium Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">BaCl₂</td></tr>
+              <tr><td>19. Aluminum Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">Al₂S₃</td></tr>
+              <tr><td>20. Gallium Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">Ga₂O₃</td></tr>
+              <tr><td>21. Strontium Bromide</td><td class="blcell" onclick="this.classList.toggle('on')">SrBr₂</td></tr>
+              <tr><td>22. Beryllium Fluoride</td><td class="blcell" onclick="this.classList.toggle('on')">BeF₂</td></tr>
+              <tr><td>23. Rubidium Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">Rb₂O</td></tr>
+              <tr><td>24. Cesium Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">CsCl</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh tm"><span>B — Formula Drill (Transition)</span></div>
+        <div class="sb">
+          <p class="nl" style="color:#555;"><i>Use the Roman numeral to find the metal's charge before you criss-cross.</i></p>
+          <table class="tft">
+            <thead><tr><th style="width:65%;">Name</th><th>Formula</th></tr></thead>
+            <tbody>
+              <tr><td>1. Copper (I) Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">CuCl</td></tr>
+              <tr><td>2. Copper (II) Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">CuCl₂</td></tr>
+              <tr><td>3. Iron (III) Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">Fe₂O₃</td></tr>
+              <tr><td>4. Lead (IV) Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">PbO₂</td></tr>
+              <tr><td>5. Iron (II) Phosphide</td><td class="blcell" onclick="this.classList.toggle('on')">Fe₃P₂</td></tr>
+              <tr><td>6. Silver Nitride</td><td class="blcell" onclick="this.classList.toggle('on')">Ag₃N</td></tr>
+              <tr><td>7. Lead (II) Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">PbS</td></tr>
+              <tr><td>8. Nickel (II) Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">NiCl₂</td></tr>
+              <tr><td>9. Copper (I) Phosphide</td><td class="blcell" onclick="this.classList.toggle('on')">Cu₃P</td></tr>
+              <tr><td>10. Iron (III) Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">Fe₂S₃</td></tr>
+              <tr><td>11. Iron (II) Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">FeO</td></tr>
+              <tr><td>12. Zinc Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">ZnO</td></tr>
+              <tr><td>13. Silver Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">AgCl</td></tr>
+              <tr><td>14. Lead (IV) Chloride</td><td class="blcell" onclick="this.classList.toggle('on')">PbCl₄</td></tr>
+              <tr><td>15. Copper (II) Bromide</td><td class="blcell" onclick="this.classList.toggle('on')">CuBr₂</td></tr>
+              <tr><td>16. Nickel (II) Oxide</td><td class="blcell" onclick="this.classList.toggle('on')">NiO</td></tr>
+              <tr><td>17. Iron (III) Bromide</td><td class="blcell" onclick="this.classList.toggle('on')">FeBr₃</td></tr>
+              <tr><td>18. Copper (I) Sulfide</td><td class="blcell" onclick="this.classList.toggle('on')">Cu₂S</td></tr>
+              <tr><td>19. Lead (II) Fluoride</td><td class="blcell" onclick="this.classList.toggle('on')">PbF₂</td></tr>
+              <tr><td>20. Zinc Phosphide</td><td class="blcell" onclick="this.classList.toggle('on')">Zn₃P₂</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c5">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c5', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c5', 0.05)">A+</button>
+      </div>
+
+      <div>
+        <div class="sh nonmetal"><span>C — Naming Drill (Main Groups)</span></div>
+        <div class="sb">
+          <p class="nl" style="color:#555;"><i>Write the full name. Change the non-metal ending to "-ide".</i></p>
+          <table class="tft">
+            <thead><tr><th style="width:30%;">Formula</th><th>Name</th></tr></thead>
+            <tbody>
+              <tr><td>1. LiCl</td><td class="blcell" onclick="this.classList.toggle('on')">Lithium Chloride</td></tr>
+              <tr><td>2. MgO</td><td class="blcell" onclick="this.classList.toggle('on')">Magnesium Oxide</td></tr>
+              <tr><td>3. K₂S</td><td class="blcell" onclick="this.classList.toggle('on')">Potassium Sulfide</td></tr>
+              <tr><td>4. CaF₂</td><td class="blcell" onclick="this.classList.toggle('on')">Calcium Fluoride</td></tr>
+              <tr><td>5. AlN</td><td class="blcell" onclick="this.classList.toggle('on')">Aluminum Nitride</td></tr>
+              <tr><td>6. BaBr₂</td><td class="blcell" onclick="this.classList.toggle('on')">Barium Bromide</td></tr>
+              <tr><td>7. Na₃P</td><td class="blcell" onclick="this.classList.toggle('on')">Sodium Phosphide</td></tr>
+              <tr><td>8. SrO</td><td class="blcell" onclick="this.classList.toggle('on')">Strontium Oxide</td></tr>
+              <tr><td>9. BeO</td><td class="blcell" onclick="this.classList.toggle('on')">Beryllium Oxide</td></tr>
+              <tr><td>10. Rb₂S</td><td class="blcell" onclick="this.classList.toggle('on')">Rubidium Sulfide</td></tr>
+              <tr><td>11. SrCl₂</td><td class="blcell" onclick="this.classList.toggle('on')">Strontium Chloride</td></tr>
+              <tr><td>12. Al₂S₃</td><td class="blcell" onclick="this.classList.toggle('on')">Aluminum Sulfide</td></tr>
+              <tr><td>13. Na₂O</td><td class="blcell" onclick="this.classList.toggle('on')">Sodium Oxide</td></tr>
+              <tr><td>14. MgBr₂</td><td class="blcell" onclick="this.classList.toggle('on')">Magnesium Bromide</td></tr>
+              <tr><td>15. KI</td><td class="blcell" onclick="this.classList.toggle('on')">Potassium Iodide</td></tr>
+              <tr><td>16. Ca₃N₂</td><td class="blcell" onclick="this.classList.toggle('on')">Calcium Nitride</td></tr>
+              <tr><td>17. AlP</td><td class="blcell" onclick="this.classList.toggle('on')">Aluminum Phosphide</td></tr>
+              <tr><td>18. Li₂S</td><td class="blcell" onclick="this.classList.toggle('on')">Lithium Sulfide</td></tr>
+              <tr><td>19. BaO</td><td class="blcell" onclick="this.classList.toggle('on')">Barium Oxide</td></tr>
+              <tr><td>20. NaBr</td><td class="blcell" onclick="this.classList.toggle('on')">Sodium Bromide</td></tr>
+              <tr><td>21. MgS</td><td class="blcell" onclick="this.classList.toggle('on')">Magnesium Sulfide</td></tr>
+              <tr><td>22. K₃N</td><td class="blcell" onclick="this.classList.toggle('on')">Potassium Nitride</td></tr>
+              <tr><td>23. SrF₂</td><td class="blcell" onclick="this.classList.toggle('on')">Strontium Fluoride</td></tr>
+              <tr><td>24. BeCl₂</td><td class="blcell" onclick="this.classList.toggle('on')">Beryllium Chloride</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh tm"><span>D — Naming Drill (Transition)</span></div>
+        <div class="sb">
+          <p class="nl" style="color:#555;"><i>You MUST un-cross to figure out the Roman Numeral! Check the non-metal.</i></p>
+          <table class="tft">
+            <thead><tr><th style="width:30%;">Formula</th><th>Name</th></tr></thead>
+            <tbody>
+              <tr><td>1. FeCl₂</td><td class="blcell" onclick="this.classList.toggle('on')">Iron (II) Chloride</td></tr>
+              <tr><td>2. FeCl₃</td><td class="blcell" onclick="this.classList.toggle('on')">Iron (III) Chloride</td></tr>
+              <tr><td>3. Cu₂O</td><td class="blcell" onclick="this.classList.toggle('on')">Copper (I) Oxide</td></tr>
+              <tr><td>4. CuO</td><td class="blcell" onclick="this.classList.toggle('on')">Copper (II) Oxide</td></tr>
+              <tr><td>5. PbS₂</td><td class="blcell" onclick="this.classList.toggle('on')">Lead (IV) Sulfide</td></tr>
+              <tr><td>6. ZnCl₂</td><td class="blcell" onclick="this.classList.toggle('on')">Zinc Chloride</td></tr>
+              <tr><td>7. PbO</td><td class="blcell" onclick="this.classList.toggle('on')">Lead (II) Oxide</td></tr>
+              <tr><td>8. Ag₂S</td><td class="blcell" onclick="this.classList.toggle('on')">Silver Sulfide</td></tr>
+              <tr><td>9. FeN</td><td class="blcell" onclick="this.classList.toggle('on')">Iron (III) Nitride</td></tr>
+              <tr><td>10. CuS</td><td class="blcell" onclick="this.classList.toggle('on')">Copper (II) Sulfide</td></tr>
+              <tr><td>11. FeO</td><td class="blcell" onclick="this.classList.toggle('on')">Iron (II) Oxide</td></tr>
+              <tr><td>12. CuCl</td><td class="blcell" onclick="this.classList.toggle('on')">Copper (I) Chloride</td></tr>
+              <tr><td>13. PbCl₄</td><td class="blcell" onclick="this.classList.toggle('on')">Lead (IV) Chloride</td></tr>
+              <tr><td>14. ZnS</td><td class="blcell" onclick="this.classList.toggle('on')">Zinc Sulfide</td></tr>
+              <tr><td>15. AgI</td><td class="blcell" onclick="this.classList.toggle('on')">Silver Iodide</td></tr>
+              <tr><td>16. NiO</td><td class="blcell" onclick="this.classList.toggle('on')">Nickel (II) Oxide</td></tr>
+              <tr><td>17. Cu₃P</td><td class="blcell" onclick="this.classList.toggle('on')">Copper (I) Phosphide</td></tr>
+              <tr><td>18. Fe₂S₃</td><td class="blcell" onclick="this.classList.toggle('on')">Iron (III) Sulfide</td></tr>
+              <tr><td>19. PbBr₂</td><td class="blcell" onclick="this.classList.toggle('on')">Lead (II) Bromide</td></tr>
+              <tr><td>20. ZnO</td><td class="blcell" onclick="this.classList.toggle('on')">Zinc Oxide</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c6">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c6', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c6', 0.05)">A+</button>
+      </div>
+
+      <div>
+        <div class="sh dark"><span>E — Working Backwards</span></div>
+        <div class="sb">
+          <p class="nl">A scientist discovers a new compound with the formula <b>XCl₄</b>. </p>
+          <p class="nl" style="margin-top:1px;"><b>1. Uncross the numbers to find the charge of Element X:</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Cl is -1. There are 4 of them (total -4).</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Therefore, X must have a charge of +4.</div>
+          
+          <p class="nl" style="margin-top:2px;"><b>2. Which Group must Element X belong to?</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Group 4 (or a Transition Metal with IV).</div>
+
+          <p class="nl" style="margin-top:4px;">Another compound has the formula <b>X₂S₃</b>.</p>
+          <p class="nl" style="margin-top:1px;"><b>3. What is the exact charge of Element X? Show how you checked.</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Uncross: X gets the 3 (+3), S gets the 2 (-2).</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Since Sulfur is naturally -2, X must be exactly +3.</div>
+
+          <p class="nl" style="margin-top:4px;">A third compound has the formula <b>Z₃N₂</b>.</p>
+          <p class="nl" style="margin-top:1px;"><b>4. What is the exact charge of Element Z? Which group is it in?</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Uncross: Z is +2, N is -3. N matches perfectly.</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Z is exactly +2. It must be in Group 2.</div>
+
+          <p class="nl" style="margin-top:4px;">A final transition compound is <b>RT₂</b>. (Where T is Oxygen).</p>
+          <p class="nl" style="margin-top:1px;"><b>5. What is the Roman numeral for R? (Beware the trap!)</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Uncross: R1+, O2-? Incorrect, O must be 2-.</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Multiply by 2. R is actually +4. Roman numeral is (IV).</div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="sh"><span>F — Spot the Mistake</span></div>
+        <div class="sb">
+          <p class="nl">Identify the mistake in each answer below, and provide the correct formula or name.</p>
+          
+          <p class="nl" style="margin-top:2px;"><b>1. "Magnesium Oxide = Mg₂O₂"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Did not simplify. Correct: MgO</div>
+
+          <p class="nl" style="margin-top:2px;"><b>2. "CuCl₂ = Copper Chloride"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Missing Roman Numeral. Correct: Copper (II) Chloride</div>
+
+          <p class="nl" style="margin-top:2px;"><b>3. "Calcium Phosphide = CaP"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Did not criss-cross charges. Correct: Ca₃P₂</div>
+
+          <p class="nl" style="margin-top:2px;"><b>4. "Aluminum Oxide = Al₃O₂"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Crossed numbers backwards. Correct: Al₂O₃</div>
+
+          <p class="nl" style="margin-top:2px;"><b>5. "Ag₂O = Silver (I) Oxide"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Silver is an exception (no numeral). Correct: Silver Oxide</div>
+
+          <p class="nl" style="margin-top:2px;"><b>6. "NaO = Sodium Oxide"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Criss-cross Na(+1) and O(2-). Correct: Na₂O</div>
+
+          <p class="nl" style="margin-top:2px;"><b>7. "Iron (III) Oxide = Fe₃O₂"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Crossed numbers backwards. Correct: Fe₂O₃</div>
+
+          <p class="nl" style="margin-top:2px;"><b>8. "Zinc (II) Chloride = ZnCl₂"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Zinc doesn't need a Roman numeral. Correct: Zinc Chloride</div>
+
+          <p class="nl" style="margin-top:2px;"><b>9. "CaF₂ = Calcium Fluorine"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Forgot to change ending to -ide. Correct: Calcium Fluoride</div>
+
+          <p class="nl" style="margin-top:2px;"><b>10. "PbO₂ = Lead (II) Oxide"</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Mistake: Did not un-simplify. O is 2-. Correct: Lead (IV) Oxide</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Zoom Feature Logic ── */
+function changeScale(colId, delta) {
+  const col = document.getElementById(colId);
+  if(!col) return;
+  let currentScale = parseFloat(getComputedStyle(col).getPropertyValue('--scale')) || 1;
+  currentScale += delta;
+  if(currentScale < 0.6) currentScale = 0.6;
+  if(currentScale > 1.5) currentScale = 1.5;
+  col.style.setProperty('--scale', currentScale);
+}
+
+/* ── Toggle Answers Logic ── */
+let answersRevealed = false;
+function toggleAllAnswers() {
+  answersRevealed = !answersRevealed;
+  
+  const elements = document.querySelectorAll('.bl, .ch, .blcell, .ans-col, .ck, .vm-line, .svbl, .wl-ans');
+  elements.forEach(el => {
+    if (answersRevealed) el.classList.add('on');
+    else el.classList.remove('on');
+  });
+
+  const mcGroups = document.querySelectorAll('.mc-group');
+  mcGroups.forEach(group => {
+    group.querySelectorAll('.mco').forEach(o => o.classList.remove('on'));
+    if (answersRevealed) {
+      const correct = group.querySelector('[data-correct="true"]');
+      if (correct) correct.classList.add('on');
+    }
+  });
+}
+
+/* ── Keyboard shortcuts ── */
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='1'){
+    const p=document.getElementById('page1');
+    p.querySelectorAll('.bl,.ch,.blcell,.ans-col,.ck,.vm-line,.svbl,.wl-ans').forEach(el=>el.classList.add('on'));
+    p.querySelectorAll('.mc-group').forEach(grp=>{
+        const c=grp.querySelector('[data-correct="true"]');if(c)c.classList.add('on');
+    });
+  }
+  if(e.key==='3'){
+    const p=document.getElementById('page2');
+    p.querySelectorAll('.bl,.ch,.blcell,.ans-col,.ck,.vm-line,.svbl,.wl-ans').forEach(el=>el.classList.add('on'));
+    p.querySelectorAll('.mc-group').forEach(grp=>{
+        const c=grp.querySelector('[data-correct="true"]');if(c)c.classList.add('on');
+    });
+  }
+});
+
+/* ── MC Click Logic ── */
+function mcClick(el){
+  const g=el.closest('.mc-group');
+  g.querySelectorAll('.mco').forEach(o=>o.classList.remove('on'));
+  const c=g.querySelector('[data-correct="true"]');
+  if(c)c.classList.add('on');
+}
+</script>
+</body>
+</html>

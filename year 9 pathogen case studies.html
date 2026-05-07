@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Famous Outbreaks & Case Studies — Year 9 Science</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#7f1d1d;   
+  --bac:#15803d;       
+  --vir:#be123c;       
+  --par:#0369a1;       
+  --fun:#b45309;       
+  --epi:#4338ca;       
+  --prion:#4b5563;
+  --ans:#b71c1c;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lexend',sans-serif;background:#222;padding:20px;display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;}
+
+/* A4 Landscape Setup */
+.page{width:297mm;height:210mm;background:#fff;padding:8mm 10mm;box-shadow:0 6px 28px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;position:relative;}
+
+/* Header */
+.ph{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3.5px solid var(--primary);padding-bottom:3px;margin-bottom:4px;flex-shrink:0;}
+.ph-title{font-size:.9rem;font-weight:900;text-transform:uppercase;color:var(--primary);letter-spacing:-.3px;}
+.ph-sub{font-size:.75rem;font-weight:900;color:#444;}
+.ph-info{font-size:.65rem;font-weight:700;color:#444;}
+
+/* Continuous Column Layout with Scaling */
+.grid3{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:12px;min-height:0;}
+.col{display:flex;flex-direction:column;gap:6px;min-height:0; overflow:visible; --scale: 1;}
+
+/* Column Toolbars (For zooming) */
+.col-toolbar { display:flex; justify-content:flex-end; gap:4px; margin-bottom:-4px; }
+.btn-zoom { background:#e2e8f0; border:1px solid #cbd5e1; color:#333; font-weight:bold; font-size:0.6rem; cursor:pointer; padding:1px 4px; border-radius:2px; }
+.btn-zoom:hover { background:#cbd5e1; }
+
+/* Section Headers */
+.sh{padding:3px 6px;font-size:calc(.65rem * var(--scale));font-weight:900;text-transform:uppercase;letter-spacing:.2px;color:#fff;background:var(--primary);display:flex;justify-content:space-between;align-items:center;border-radius:2px;}
+.sh.bac{background:var(--bac);}
+.sh.vir{background:var(--vir);}
+.sh.par{background:var(--par);}
+.sh.fun{background:var(--fun);}
+.sh.epi{background:var(--epi);}
+.sh.prion{background:var(--prion);}
+
+/* Content Block */
+.sb{display:flex;flex-direction:column;gap:3px;padding:0 2px;}
+
+/* SVG Diagram Containers */
+.nsvg{flex-shrink:0;height:45px;border-radius:3px;overflow:hidden;margin-top:2px;margin-bottom:2px;display:flex;align-items:center;justify-content:center;background:#f8fafc;border:1px solid #e2e8f0;}
+.nsvg svg{width:100%;height:100%;display:block;}
+
+/* Scalable Text styling */
+.nl{font-size:calc(.62rem * var(--scale));line-height:1.25;color:#111;padding:1px 0;}
+.callout{background:#f1f5f9;border-left:3px solid #64748b;padding:3px 5px;font-size:calc(.6rem * var(--scale));font-style:italic;}
+
+/* Scalable Fill in the blanks */
+.bl{display:inline-block;min-width:35px;border-bottom:1px solid #555;cursor:pointer;color:transparent;font-weight:900;font-size:calc(.62rem * var(--scale));text-align:center;transition:color .1s;padding:0 2px;user-select:none;line-height:1;}
+.bl.on{color:var(--ans);border-bottom-color:var(--ans);}
+.svbl{fill:transparent !important;cursor:pointer;font-weight:900;}
+.svbl.on{fill:var(--ans) !important;}
+
+/* Scalable Clickable Writing Lines */
+.wl-ans{display:block;border-bottom:1px solid #a3a3a3;height:calc(1.25rem * var(--scale));line-height:calc(1.25rem * var(--scale));cursor:pointer;color:transparent;font-size:calc(.62rem * var(--scale));font-weight:700;transition:color 0.15s;padding-left:4px;margin-bottom:2px;user-select:none;}
+.wl-ans.on{color:var(--primary);}
+
+/* Scalable Tables */
+.tft{width:100%;border-collapse:collapse;font-size:calc(.6rem * var(--scale));text-align:center;margin-top:2px;}
+.tft th{background:#475569;color:#fff;padding:3px;font-weight:900;}
+.tft th:first-child{text-align:left;}
+.tft td{border:1px solid #cbd5e1;padding:3px;vertical-align:middle;}
+.tft td:first-child{text-align:left;font-weight:600;}
+.circ{text-align:center;font-size:calc(.6rem * var(--scale));color:#666;width:20px;cursor:pointer;user-select:none;}
+.circ.picked{color:var(--primary);font-weight:900;text-decoration:underline overline;}
+.ans-col{text-align:center;font-weight:900;color:transparent;cursor:pointer;user-select:none;width:22px;}
+.ans-col.on{color:var(--ans);}
+
+/* Scalable Multiple Choice */
+.mc-group{display:flex;flex-wrap:wrap;gap:2px 8px;margin-top:2px;margin-bottom:3px;}
+.mco{font-size:calc(.6rem * var(--scale));cursor:pointer;user-select:none;padding:1px 3px;color:#222;border-radius:2px;transition:background .1s;}
+.mco:hover{background:#f1f5f9;}
+.mco.on{color:var(--ans);font-weight:900;text-decoration:underline;}
+
+/* Floating Controls */
+.controls{position:fixed;bottom:25px;right:25px;z-index:1000;}
+.btn-toggle{background:var(--primary);color:white;border:2px solid white;padding:12px 20px;border-radius:30px;font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 8px 16px rgba(0,0,0,0.3);transition:transform 0.2s, background 0.2s;}
+.btn-toggle:hover{transform:translateY(-3px);background:#450a0a;}
+
+@media print{
+  @page { size: A4 landscape; margin: 0; }
+  body{background:none;padding:0;gap:0;}
+  .ans-col{display:none;}
+  .no-print{display:none !important;}
+  .page{box-shadow:none;margin:0;width:297mm;height:210mm;padding:8mm 10mm;page-break-after:always;}
+}
+</style>
+</head>
+<body>
+
+<div class="controls no-print">
+  <button class="btn-toggle" onclick="toggleAllAnswers()">👁️ Toggle All Answers</button>
+</div>
+
+<div class="page" id="page1">
+  <div class="ph">
+    <div>
+      <div class="ph-title">Year 9 Science · Health & Disease</div>
+      <div class="ph-sub">📋 Case Studies — Famous Pandemics, Epidemics & Endemics</div>
+    </div>
+    <div class="ph-info">Name: __________________________ &nbsp; Date: ____________</div>
+  </div>
+
+  <div class="grid3">
+    <div class="col" id="c1">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c1', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c1', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh"><span>🔍 Do Now — Pathogen Recap</span><span>~3 min</span></div>
+        <div class="sb" style="background:#fef2f2; border:1px solid #fca5a5; padding:3px; border-radius:2px; margin-top:2px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+            <div>
+              <p class="nl">1. Cured by Antibiotics:</p>
+              <div class="mc-group"><span class="mco" data-correct="true" onclick="mcClick(this)">A) Bacteria</span> <span class="mco" onclick="mcClick(this)">B) Virus</span></div>
+              <p class="nl">2. Spreads via spores:</p>
+              <div class="mc-group"><span class="mco" onclick="mcClick(this)">A) Parasite</span> <span class="mco" data-correct="true" onclick="mcClick(this)">B) Fungus</span></div>
+            </div>
+            <div>
+              <p class="nl">3. Non-living hijacker:</p>
+              <div class="mc-group"><span class="mco" onclick="mcClick(this)">A) Bacteria</span> <span class="mco" data-correct="true" onclick="mcClick(this)">B) Virus</span></div>
+              <p class="nl">4. Steals host nutrients:</p>
+              <div class="mc-group"><span class="mco" data-correct="true" onclick="mcClick(this)">A) Parasite</span> <span class="mco" onclick="mcClick(this)">B) Fungus</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh bac"><span>🟢 BACTERIA: The Black Death</span></div>
+        <div class="sb">
+          <p class="nl">In the 1300s, a horrifying <span class="bl" onclick="this.classList.toggle('on')">pandemic</span> swept across Europe and Asia, killing an estimated 50 million people (one-third of the population). To stop it, coastal cities forced arriving ships to wait 40 days before unloading, creating the first ever <span class="bl" style="min-width:60px" onclick="this.classList.toggle('on')">quarantine</span>.</p>
+          
+          <div class="nsvg" style="height:45px; background:#f0fdf4; border-color:#bbf7d0;">
+            <svg viewBox="0 0 292 45" preserveAspectRatio="xMidYMid meet">
+              <ellipse cx="60" cy="25" rx="15" ry="8" fill="#555"/>
+              <circle cx="45" cy="23" r="6" fill="#555"/>
+              <path d="M 75,25 Q 90,15 85,30" fill="none" stroke="#555" stroke-width="2"/>
+              <path d="M 140,20 Q 146,10 152,20 Z" fill="#78350f"/>
+              <line x1="140" y1="20" x2="135" y2="30" stroke="#78350f" stroke-width="1.5"/>
+              <line x1="152" y1="20" x2="157" y2="30" stroke="#78350f" stroke-width="1.5"/>
+              <circle cx="230" cy="15" r="7" fill="#fca5a5"/>
+              <rect x="223" y="22" width="14" height="18" fill="#3b82f6"/>
+              <line x1="85" y1="20" x2="125" y2="20" stroke="#15803d" stroke-width="2" marker-start="url(#arrow)" stroke-dasharray="3,3"/>
+              <line x1="165" y1="20" x2="205" y2="20" stroke="#15803d" stroke-width="2" marker-start="url(#arrow)" stroke-dasharray="3,3"/>
+              <text x="105" y="15" text-anchor="middle" font-size="5" font-weight="bold" fill="#15803d">CARRIES</text>
+              <text x="185" y="15" text-anchor="middle" font-size="5" font-weight="bold" fill="#15803d">BITES</text>
+              <text x="60" y="40" text-anchor="middle" font-size="6" font-weight="bold">RAT</text>
+              <text x="146" y="40" text-anchor="middle" font-size="6" font-weight="bold">FLEA</text>
+              <text x="230" y="45" text-anchor="middle" font-size="6" font-weight="bold">HUMAN</text>
+            </svg>
+          </div>
+
+          <p class="nl"><b>Transmission:</b> Spread primarily by <span class="bl" onclick="this.classList.toggle('on')">fleas</span> living on black rats. The fleas acted as a <span class="bl" onclick="this.classList.toggle('on')">vector</span>, injecting bacteria directly into the blood.</p>
+          <p class="nl"><b>Damage:</b> Bacteria multiplied in lymph nodes, causing massive painful swellings called <span class="bl" onclick="this.classList.toggle('on')">buboes</span>. It released powerful <span class="bl" onclick="this.classList.toggle('on')">toxins</span> causing tissue to die and turn black.</p>
+          <div class="callout">
+            🩺 <b>Treatment:</b> Today, if a modern human catches the plague, it is easily cured using <span class="bl" style="min-width:60px" onclick="this.classList.toggle('on')">antibiotics</span>.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh bac"><span>💧 BACTERIA: Cholera (1854)</span></div>
+        <div class="sb">
+          <p class="nl">In 1854, a deadly Cholera outbreak hit London. At the time, doctors believed diseases were caused by "Miasma" (bad <span class="bl" onclick="this.classList.toggle('on')">air</span>).</p>
+          <p class="nl">Dr. John Snow didn't have a <span class="bl" onclick="this.classList.toggle('on')">microscope</span> to see the tiny bacteria. Instead, he drew a <span class="bl" onclick="this.classList.toggle('on')">map</span> of all the deaths and realized they clustered around a single <span class="bl" onclick="this.classList.toggle('on')">water</span> pump on Broad Street.</p>
+          <p class="nl"><b>Transmission:</b> Cholera spreads via the <span class="bl" onclick="this.classList.toggle('on')">Vehicle</span> route (drinking contaminated water). Removing the pump handle ended the outbreak! This map helped prove Miasma wrong and supported <span class="bl" onclick="this.classList.toggle('on')">Germ</span> Theory.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c2">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c2', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c2', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh vir"><span>🔴 VIRUS: The 1918 Spanish Flu</span></div>
+        <div class="sb">
+          <p class="nl">As World War I ended, a deadly strain of the influenza virus swept the globe, killing over 50 million. It was a massive <span class="bl" onclick="this.classList.toggle('on')">pandemic</span>.</p>
+          <p class="nl"><b>The Pathogen:</b> The H1N1 <span class="bl" onclick="this.classList.toggle('on')">Virus</span>. Viruses are <span class="bl" onclick="this.classList.toggle('on')">non-living</span> and must enter a host cell to <span class="bl" style="min-width:50px" onclick="this.classList.toggle('on')">reproduce</span>.</p>
+          <p class="nl"><b>Transmission:</b> It spread through <span class="bl" onclick="this.classList.toggle('on')">indirect</span> contact. When an infected soldier sneezed, airborne <span class="bl" onclick="this.classList.toggle('on')">droplets</span> floated into nearby lungs.</p>
+          <p class="nl"><b>Why was it so deadly?</b> It triggered an extreme "cytokine storm"—an overreaction from the body's own <span class="bl" onclick="this.classList.toggle('on')">immune</span> system. Massive <span class="bl" style="min-width:60px" onclick="this.classList.toggle('on')">inflammation</span> caused lungs to fill with fluid.</p>
+          <div class="callout">
+            💉 <b>Prevention:</b> We cannot cure viruses with antibiotics. We rely on annual <span class="bl" style="min-width:50px" onclick="this.classList.toggle('on')">vaccines</span> to create memory cells and achieve <span class="bl" onclick="this.classList.toggle('on')">immunity</span>.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh vir"><span>🦠 VIRUS: Smallpox Eradication</span></div>
+        <div class="sb">
+          <p class="nl">Smallpox was a horrifying virus causing highly contagious blisters. In 1796, Dr. Edward Jenner noticed that milkmaids who caught a mild virus called <span class="bl" onclick="this.classList.toggle('on')">Cowpox</span> never caught Smallpox. He used this discovery to invent the world's first <span class="bl" onclick="this.classList.toggle('on')">vaccine</span>!</p>
+          <p class="nl">Thanks to a global <span class="bl" onclick="this.classList.toggle('on')">vaccination</span> campaign centuries later, Smallpox became the first human disease completely <span class="bl" style="min-width:60px" onclick="this.classList.toggle('on')">eradicated</span> from Earth in 1980.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh fun"><span>🟤 FUNGUS: Candida auris</span></div>
+        <div class="sb">
+          <p class="nl">Fungi normally cause mild issues (Athlete's Foot). But a new fungus, <i>C. auris</i>, emerged in 2009. It spreads rapidly in <span class="bl" onclick="this.classList.toggle('on')">hospitals</span>.</p>
+          <p class="nl"><b>The Threat:</b> Fungi reproduce via tiny <span class="bl" onclick="this.classList.toggle('on')">spores</span>. Due to the overuse of anti-fungal chemicals in farming, it has mutated into a dangerous <span class="bl" onclick="this.classList.toggle('on')">superbug</span> that resists modern medication.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh prion"><span>🥩 PRION: Mad Cow Disease</span></div>
+        <div class="sb">
+          <p class="nl">Not all pathogens are germs! A Prion is a misfolded <span class="bl" onclick="this.classList.toggle('on')">protein</span> in the brain. It contains no DNA. It spreads when humans or animals eat infected <span class="bl" onclick="this.classList.toggle('on')">brain</span> or nervous tissue. Because it isn't alive, you cannot <span class="bl" onclick="this.classList.toggle('on')">kill</span> a prion by cooking the meat! It causes fatal brain damage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c3">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c3', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c3', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh par"><span>🔵 PARASITE: Malaria</span></div>
+        <div class="sb">
+          <p class="nl">Unlike a global pandemic, Malaria is <b>Endemic</b>. It is constantly present in specific tropical <span class="bl" onclick="this.classList.toggle('on')">regions</span>. It kills over 600,000 annually.</p>
+
+          <div class="nsvg" style="height:45px; background:#f0f9ff; border-color:#bae6fd;">
+            <svg viewBox="0 0 292 45" preserveAspectRatio="xMidYMid meet">
+              <ellipse cx="60" cy="22" rx="10" ry="3" fill="#0369a1" transform="rotate(-30 60 22)"/>
+              <line x1="60" y1="22" x2="75" y2="32" stroke="#0369a1" stroke-width="1.5"/>
+              <path d="M 60,22 Q 50,7 40,17" fill="none" stroke="#7dd3fc" stroke-width="2"/>
+              <circle cx="230" cy="22" r="12" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+              <circle cx="230" cy="22" r="5" fill="#ef4444" opacity="0.5"/>
+              <circle cx="225" cy="18" r="2" fill="#1e3a8a"/>
+              <circle cx="235" cy="25" r="2" fill="#1e3a8a"/>
+              <line x1="90" y1="22" x2="190" y2="22" stroke="#0369a1" stroke-width="2" marker-start="url(#arrow)" stroke-dasharray="3,3"/>
+              <text x="140" y="17" text-anchor="middle" font-size="5" font-weight="bold" fill="#0369a1">INJECTS PARASITE INTO BLOOD</text>
+              <text x="60" y="42" text-anchor="middle" font-size="6" font-weight="bold">MOSQUITO</text>
+              <text x="230" y="42" text-anchor="middle" font-size="6" font-weight="bold">RED BLOOD CELL</text>
+            </svg>
+          </div>
+
+          <p class="nl"><b>The Pathogen:</b> A single-celled <span class="bl" onclick="this.classList.toggle('on')">parasite</span> (Plasmodium). Parasites must live inside a <span class="bl" onclick="this.classList.toggle('on')">host</span> to steal nutrients.</p>
+          <p class="nl"><b>Transmission:</b> It relies on the Anopheles <span class="bl" onclick="this.classList.toggle('on')">mosquito</span>. When a mosquito bites an infected person, it sucks up the parasite. When it bites the next person, it injects the germ. The mosquito is a living <span class="bl" onclick="this.classList.toggle('on')">vector</span>.</p>
+          <p class="nl"><b>Damage:</b> It invades and destroys Red Blood <span class="bl" onclick="this.classList.toggle('on')">Cells</span> causing cyclical fevers.</p>
+          <div class="callout">
+            🛡️ <b>Prevention:</b> Because it relies on a flying bug, using insecticide-treated <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">nets</span> over beds at night effectively blocks transmission.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh epi"><span>🦇 Zoonotic Diseases</span></div>
+        <div class="sb">
+          <p class="nl">A Zoonotic disease successfully <span class="bl" onclick="this.classList.toggle('on')">jumps</span> from an animal to a human. For example, the Rabies virus jumps via a dog <span class="bl" onclick="this.classList.toggle('on')">bite</span>. As humans destroy forests (deforestation), we come into closer contact with wild animals, making zoonotic outbreaks more <span class="bl" onclick="this.classList.toggle('on')">common</span>.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh epi"><span>🕵️ Epidemiology & The R-Naught</span></div>
+        <div class="sb">
+          <p class="nl"><b>Epidemiologists</b> (disease detectives) use <span class="bl" onclick="this.classList.toggle('on')">contact</span> tracing to figure out who infected who. They hunt for <b>Patient <span class="bl" onclick="this.classList.toggle('on')">Zero</span></b> (the index case) to locate the source.</p>
+          <p class="nl">They also calculate a germ's <b>R<sub>0</sub></b> (R-Naught) value. This tells us how <span class="bl" onclick="this.classList.toggle('on')">contagious</span> it is. If a virus has an R<sub>0</sub> of 3, one sick person will infect <span class="bl" onclick="this.classList.toggle('on')">three</span> others on average.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page2">
+  <div class="ph">
+    <div>
+      <div class="ph-title">Year 9 Science · Health & Disease</div>
+      <div class="ph-sub">📝 Mixed Practice — Inquiry, Application & Graphing</div>
+    </div>
+    <div class="ph-info">Name: __________________________ &nbsp; Date: ____________</div>
+  </div>
+
+  <div class="grid3">
+    <div class="col" id="c4">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c4', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c4', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh vir"><span>A — Quick Recall Check</span><span>12 marks</span></div>
+        <div class="sb">
+          <table class="tft" style="margin-bottom:2px;">
+            <thead><tr><th style="width:75%;">Statement</th><th>T</th><th>F</th><th class="ans-col" style="background:#7f1d1d;">Ans</th></tr></thead>
+            <tbody>
+              <tr><td>1. The Bubonic Plague was caused by a virus.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">F</td></tr>
+              <tr><td>2. A pandemic spreads across multiple countries.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>3. Mosquitoes are vectors for Malaria.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>4. Antibiotics can easily cure the 1918 Flu.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">F</td></tr>
+              <tr><td>5. Endemic means a disease is constantly present.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>6. Viruses must hijack host cells to reproduce.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>7. C. auris is a superbug fungus.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>8. Smallpox was eradicated by vaccines.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+            </tbody>
+          </table>
+          <p class="nl" style="margin-top:2px;"><b>9. Rewrite ONE False statement above to make it True:</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Ex: The Bubonic Plague was caused by a bacteria.</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Ex: Antibiotics cannot cure the viral 1918 flu.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh fun"><span>B — Pathogen Match-Up</span><span>5 marks</span></div>
+        <div class="sb">
+          <p class="nl" style="font-size:.6rem;color:#555;"><i>Match the Disease to its correct Pathogen Type:</i></p>
+          <div class="vm-row" style="grid-template-columns:15px 1fr 60px;"><span style="font-weight:700;">1.</span><span>The 1918 Spanish Flu:</span><span class="vm-line bl" onclick="this.classList.toggle('on')">Virus</span></div>
+          <div class="vm-row" style="grid-template-columns:15px 1fr 60px;"><span style="font-weight:700;">2.</span><span>The Black Death:</span><span class="vm-line bl" onclick="this.classList.toggle('on')">Bacteria</span></div>
+          <div class="vm-row" style="grid-template-columns:15px 1fr 60px;"><span style="font-weight:700;">3.</span><span>Candida auris:</span><span class="vm-line bl" onclick="this.classList.toggle('on')">Fungus</span></div>
+          <div class="vm-row" style="grid-template-columns:15px 1fr 60px;"><span style="font-weight:700;">4.</span><span>Malaria:</span><span class="vm-line bl" onclick="this.classList.toggle('on')">Parasite</span></div>
+          <div class="vm-row" style="grid-template-columns:15px 1fr 60px;"><span style="font-weight:700;">5.</span><span>Cholera:</span><span class="vm-line bl" onclick="this.classList.toggle('on')">Bacteria</span></div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="sh bac"><span>C — Treatment Check</span><span>4 marks</span></div>
+        <div class="sb">
+          <p class="nl"><b>1.</b> If you traveled back in time with a box of modern <b>Antibiotics</b>, which of the diseases on Page 1 could you completely cure?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">The Black Death (Plague) and Cholera.</div>
+          <p class="nl" style="margin-top:3px;"><b>2.</b> Why wouldn't your antibiotics work on the 1918 Flu?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Because the flu is a virus, and antibiotics only kill</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">living bacterial cells.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c5">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c5', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c5', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh"><span>D — Transmission Analysis</span><span>8 marks</span></div>
+        <div class="sb">
+          <p class="nl"><b>1.</b> The Black Death and Malaria both rely on a "Vector". Explain what a Vector is, and identify the specific vector for each disease.</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">A vector is a living organism that carries/injects a germ.</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Black Death Vector = Fleas (on rats).</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Malaria Vector = Anopheles Mosquito.</div>
+          
+          <p class="nl" style="margin-top:4px;"><b>2.</b> Unlike those two, how did the 1918 Flu spread?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Indirectly via airborne droplets when someone sneezed/coughed.</div>
+
+          <p class="nl" style="margin-top:4px;"><b>3.</b> Why do Fungi like <i>C. auris</i> thrive in hospitals?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Hospitals are warm, and spores can survive for a long time</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">on medical equipment (fomites).</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh epi"><span>E — Epidemiological Logic</span><span>8 marks</span></div>
+        <div class="sb">
+          <p class="nl"><b>1.</b> Dr. John Snow didn't have a microscope to see the Cholera bacteria. How did he logically prove that "bad air" wasn't causing the disease?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">He mapped the deaths and saw they clustered around one</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">specific water pump, proving it was a waterborne vehicle.</div>
+          
+          <p class="nl" style="margin-top:4px;"><b>2.</b> Why do modern epidemiologists want to find "Patient Zero" during a new viral outbreak?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">To understand where the disease came from (e.g. zoonotic jump)</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">and to trace everyone they contacted to stop the spread.</div>
+          
+          <p class="nl" style="margin-top:4px;"><b>3.</b> Disease A has an R<sub>0</sub> of 2. Disease B has an R<sub>0</sub> of 15. Which is more likely to cause a pandemic and why?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Disease B, because it is much more contagious (1 person</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">infects 15 others, causing rapid exponential spread).</div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="sh fun"><span>F — Superbug Threat</span><span>4 marks</span></div>
+        <div class="sb">
+          <p class="nl"><b>1.</b> What does it mean when a pathogen is labeled a "Superbug"?</p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">It means the pathogen has mutated and is highly resistant</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">to standard medications (it can't be killed easily).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c6">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c6', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c6', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh par"><span>G — Data Graphing Task</span><span>6 marks</span></div>
+        <div class="sb">
+          <div class="callout" style="margin-bottom:2px;">
+            <i>A village in Africa introduced free insecticide-treated bed nets in 2012 to stop Malaria.</i>
+          </div>
+          
+          <div style="display:grid; grid-template-columns:100px 1fr; gap:8px; align-items:start;">
+            <table class="tft" style="margin-top:0;">
+              <thead><tr><th>Year</th><th>Malaria Cases</th></tr></thead>
+              <tbody>
+                <tr><td>2010</td><td>800</td></tr>
+                <tr><td>2011</td><td>850</td></tr>
+                <tr><td>2012</td><td><b>[Nets added]</b></td></tr>
+                <tr><td>2013</td><td>400</td></tr>
+                <tr><td>2014</td><td>200</td></tr>
+                <tr><td>2015</td><td>50</td></tr>
+              </tbody>
+            </table>
+            
+            <div>
+              <p class="nl" style="font-weight:900;">TASK: Plot in your book!</p>
+              <p class="nl">1. Put <b>Year</b> on the x-axis.</p>
+              <p class="nl">2. Put <b>Cases</b> on the y-axis.</p>
+              <p class="nl">3. Plot the points and draw a line graph connecting them.</p>
+              <p class="nl">4. Draw an arrow pointing to the year 2012 on your graph.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="sh primary"><span>H — Graph Analysis</span><span>10 marks</span></div>
+        <div class="sb">
+          <p class="nl"><b>1. Describe the trend of Malaria cases from 2010 to 2015.</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Cases were high and rising until 2012, then sharply</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">dropped over the next three years to almost zero.</div>
+
+          <p class="nl" style="margin-top:4px;"><b>2. Based on the data, were the bed nets effective? Use evidence from the table to justify your answer.</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Yes. In 2011 (before nets) there were 850 cases. By 2015</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">(after nets), there were only 50 cases, a massive reduction.</div>
+
+          <p class="nl" style="margin-top:4px;"><b>3. Explain scientifically why bed nets are so effective against Malaria, but would be completely useless against the 1918 Flu.</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Malaria relies on a physical vector (a mosquito) which the</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">net blocks. The Flu spreads via tiny airborne droplets that</div>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">would easily pass right through the holes in a bed net.</div>
+          
+          <p class="nl" style="margin-top:4px;"><b>4. If the nets were removed in 2016, predict the line trend:</b></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">The line would spike back up as mosquitoes resume biting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Zoom Feature Logic ── */
+function changeScale(colId, delta) {
+  const col = document.getElementById(colId);
+  if(!col) return;
+  // Get current scale, default to 1 if not set
+  let currentScale = parseFloat(getComputedStyle(col).getPropertyValue('--scale')) || 1;
+  currentScale += delta;
+  
+  // Constrain scaling limits so it doesn't break entirely
+  if(currentScale < 0.6) currentScale = 0.6;
+  if(currentScale > 1.5) currentScale = 1.5;
+  
+  col.style.setProperty('--scale', currentScale);
+}
+
+/* ── Toggle Answers Logic ── */
+let answersRevealed = false;
+function toggleAllAnswers() {
+  answersRevealed = !answersRevealed;
+  
+  const elements = document.querySelectorAll('.bl, .ch, .blcell, .ans-col, .ck, .vm-line, .svbl, .wl-ans');
+  elements.forEach(el => {
+    if (answersRevealed) el.classList.add('on');
+    else el.classList.remove('on');
+  });
+
+  const mcGroups = document.querySelectorAll('.mc-group');
+  mcGroups.forEach(group => {
+    group.querySelectorAll('.mco').forEach(o => o.classList.remove('on'));
+    if (answersRevealed) {
+      const correct = group.querySelector('[data-correct="true"]');
+      if (correct) correct.classList.add('on');
+    }
+  });
+}
+
+/* ── Keyboard shortcuts ── */
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='1'){
+    const p=document.getElementById('page1');
+    p.querySelectorAll('.bl,.ch,.blcell,.ans-col,.ck,.vm-line,.svbl,.wl-ans').forEach(el=>el.classList.add('on'));
+    p.querySelectorAll('.mc-group').forEach(grp=>{
+        const c=grp.querySelector('[data-correct="true"]');if(c)c.classList.add('on');
+    });
+  }
+  if(e.key==='3'){
+    const p=document.getElementById('page2');
+    p.querySelectorAll('.bl,.ch,.blcell,.ans-col,.ck,.vm-line,.svbl,.wl-ans').forEach(el=>el.classList.add('on'));
+    p.querySelectorAll('.mc-group').forEach(grp=>{
+        const c=grp.querySelector('[data-correct="true"]');if(c)c.classList.add('on');
+    });
+  }
+});
+
+/* ── MC Click Logic ── */
+function mcClick(el){
+  const g=el.closest('.mc-group');
+  g.querySelectorAll('.mco').forEach(o=>o.classList.remove('on'));
+  const c=g.querySelector('[data-correct="true"]');
+  if(c)c.classList.add('on');
+}
+
+/* ── T/F Logic ── */
+function pick(td){
+  td.parentElement.querySelectorAll('.circ').forEach(c=>c.classList.remove('picked'));
+  td.classList.add('picked');
+}
+</script>
+</body>
+</html>
