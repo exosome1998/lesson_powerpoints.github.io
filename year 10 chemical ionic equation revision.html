@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chemical Equations — Polyatomic Ions — Year 10 Science</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#1e3a8a;   /* Blue */
+  --sec1:#047857;      /* Green */
+  --sec2:#be123c;      /* Red */
+  --sec3:#b45309;      /* Orange */
+  --sec4:#6d28d9;      /* Purple */
+  --sec5:#0f766e;      /* Teal */
+  --ans:#b71c1c;       /* Answer Red */
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lexend',sans-serif;background:#222;padding:20px;display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;}
+
+/* A4 Landscape Setup */
+.page{width:297mm;height:210mm;background:#fff;padding:8mm 10mm;box-shadow:0 6px 28px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;position:relative;}
+
+/* Header */
+.ph{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3.5px solid var(--primary);padding-bottom:2px;margin-bottom:3px;flex-shrink:0;}
+.ph-title{font-size:.9rem;font-weight:900;text-transform:uppercase;color:var(--primary);letter-spacing:-.3px;}
+.ph-sub{font-size:.75rem;font-weight:900;color:#444;}
+.ph-info{font-size:.65rem;font-weight:700;color:#444;}
+
+/* Continuous Column Layout with Scaling */
+.grid3{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:10px;min-height:0;}
+.col{display:flex;flex-direction:column;gap:3px;min-height:0; overflow:visible; --scale: 0.82;}
+
+/* Column Toolbars (For zooming) */
+.col-toolbar { display:flex; justify-content:flex-end; gap:4px; margin-bottom:-4px; }
+.btn-zoom { background:#e2e8f0; border:1px solid #cbd5e1; color:#333; font-weight:bold; font-size:0.55rem; cursor:pointer; padding:1px 3px; border-radius:2px; }
+.btn-zoom:hover { background:#cbd5e1; }
+
+/* Section Headers */
+.sh{padding:2px 5px;font-size:calc(.65rem * var(--scale));font-weight:900;text-transform:uppercase;letter-spacing:.2px;color:#fff;background:var(--primary);display:flex;justify-content:space-between;align-items:center;border-radius:2px; margin-top:2px;}
+.sh.sec1{background:var(--sec1);}
+.sh.sec2{background:var(--sec2);}
+.sh.sec3{background:var(--sec3);}
+.sh.sec4{background:var(--sec4);}
+.sh.sec5{background:var(--sec5);}
+
+/* Content Block */
+.sb{display:flex;flex-direction:column;gap:2px;padding:0 2px;}
+
+/* Scalable Text styling */
+.nl{font-size:calc(.62rem * var(--scale));line-height:1.25;color:#111;padding:1px 0;}
+.callout{background:#f1f5f9;border-left:3px solid #64748b;padding:2px 4px;font-size:calc(.6rem * var(--scale));font-style:italic;}
+
+/* Scalable Fill in the blanks */
+.bl{display:inline-block;min-width:30px;border-bottom:1px solid #555;cursor:pointer;color:transparent;font-weight:900;font-size:calc(.62rem * var(--scale));text-align:center;transition:color .1s;padding:0 2px;user-select:none;line-height:1;}
+.bl.on{color:var(--ans);border-bottom-color:var(--ans);}
+
+/* Scalable Clickable Writing Lines */
+.wl-ans{display:block;border-bottom:1px solid #a3a3a3;height:calc(1.1rem * var(--scale));line-height:calc(1.1rem * var(--scale));cursor:pointer;color:transparent;font-size:calc(.6rem * var(--scale));font-weight:700;transition:color 0.15s;padding-left:4px;margin-bottom:1px;user-select:none;}
+.wl-ans.on{color:var(--primary);}
+
+/* Scalable Tables */
+.tft{width:100%;border-collapse:collapse;font-size:calc(.55rem * var(--scale));text-align:center;margin-top:2px;}
+.tft th{background:#475569;color:#fff;padding:2px;font-weight:900;}
+.tft th:first-child{text-align:left;}
+.tft td{border:1px solid #cbd5e1;padding:2px;vertical-align:middle;}
+.tft td:first-child{text-align:left;font-weight:600;}
+.circ{text-align:center;font-size:calc(.55rem * var(--scale));color:#666;width:18px;cursor:pointer;user-select:none;}
+.circ.picked{color:var(--primary);font-weight:900;text-decoration:underline overline;}
+.ans-col{text-align:center;font-weight:900;color:transparent;cursor:pointer;user-select:none;width:20px;}
+.ans-col.on{color:var(--ans);}
+
+/* Scalable Multiple Choice */
+.mc-group{display:flex;flex-wrap:wrap;gap:2px 6px;margin-top:1px;margin-bottom:1px;}
+.mco{font-size:calc(.6rem * var(--scale));cursor:pointer;user-select:none;padding:1px 3px;color:#222;border-radius:2px;transition:background .1s;}
+.mco:hover{background:#f1f5f9;}
+.mco.on{color:var(--ans);font-weight:900;text-decoration:underline;}
+
+/* Match-up rows */
+.vm-row{display:grid;gap:4px;align-items:center;font-size:calc(.6rem * var(--scale));margin-bottom:1px;}
+.vm-line{border-bottom:1px solid #555;text-align:center;height:100%;}
+
+/* Compact lists */
+.compact-list { padding-left:15px; font-size:calc(.6rem * var(--scale)); margin-bottom:2px; color:#111; }
+.compact-list li { margin-bottom:1px; }
+
+/* Floating Controls */
+.controls{position:fixed;bottom:25px;right:25px;z-index:1000;}
+.btn-toggle{background:var(--primary);color:white;border:2px solid white;padding:12px 20px;border-radius:30px;font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 8px 16px rgba(0,0,0,0.3);transition:transform 0.2s, background 0.2s;}
+.btn-toggle:hover{transform:translateY(-3px);background:#1e3a8a;}
+
+@media print{
+  @page { size: A4 landscape; margin: 0; }
+  body{background:none;padding:0;gap:0;}
+  .ans-col{display:none;}
+  .no-print{display:none !important;}
+  .page{box-shadow:none;margin:0;width:297mm;height:210mm;padding:8mm 10mm;page-break-after:always;}
+}
+</style>
+</head>
+<body>
+
+<div class="controls no-print">
+  <button class="btn-toggle" onclick="toggleAllAnswers()">👁️ Toggle All Answers</button>
+</div>
+
+<div class="page" id="page1">
+  <div class="ph">
+    <div>
+      <div class="ph-title">Year 10 Science · Chemistry</div>
+      <div class="ph-sub">📖 Lesson Notes — Polyatomic Ions & Aqueous Solutions</div>
+    </div>
+    <div class="ph-info">Name: __________________________ &nbsp; Date: ____________</div>
+  </div>
+
+  <div class="grid3">
+    <div class="col" id="c1">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c1', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c1', 0.05)">A+</button>
+      </div>
+      <div>
+        <div class="sh"><span>🔍 Do Now — Criss-Cross Warm Up</span></div>
+        <div class="sb" style="background:#eff6ff; border:1px solid #bfdbfe; padding:2px; border-radius:2px;">
+          <p class="nl" style="font-style:italic;">Use the simple crossover method to write the formulas:</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+            <div>
+              <p class="nl">1. K⁺ & Br⁻: <span class="bl" style="min-width:40px;" onclick="this.classList.toggle('on')">KBr</span></p>
+              <p class="nl">2. Ca²⁺ & O²⁻: <span class="bl" style="min-width:40px;" onclick="this.classList.toggle('on')">CaO</span></p>
+            </div>
+            <div>
+              <p class="nl">3. Mg²⁺ & Cl⁻: <span class="bl" style="min-width:40px;" onclick="this.classList.toggle('on')">MgCl₂</span></p>
+              <p class="nl">4. Al³⁺ & O²⁻: <span class="bl" style="min-width:40px;" onclick="this.classList.toggle('on')">Al₂O₃</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh sec1"><span>🧩 1. What is a Polyatomic Ion?</span></div>
+        <div class="sb">
+          <p class="nl">The prefix "Poly" means <span class="bl" onclick="this.classList.toggle('on')">many</span>. A polyatomic ion is a group of atoms bonded together that act as a <span class="bl" onclick="this.classList.toggle('on')">single</span> unit with one overall <span class="bl" onclick="this.classList.toggle('on')">charge</span>.</p>
+          <p class="nl"><b>The Lego Analogy:</b> Imagine super-gluing a few small Lego bricks together. They form a unique new shape that can't be <span class="bl" onclick="this.classList.toggle('on')">broken</span> apart. When you build with it, it moves as one <span class="bl" onclick="this.classList.toggle('on')">solid</span> piece.</p>
+          <div class="callout">
+            ⚠️ <b>Stop!</b> You can NEVER change the small numbers <span class="bl" onclick="this.classList.toggle('on')">inside</span> a polyatomic ion. For example, the '4' in Sulfate (SO₄) must <span class="bl" onclick="this.classList.toggle('on')">always</span> remain a 4!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh sec4"><span>🛡️ 2. The Bracket Rule</span></div>
+        <div class="sb">
+          <p class="nl">When using the criss-cross method, if you need <span class="bl" onclick="this.classList.toggle('on')">more</span> than one of a polyatomic ion, you MUST wrap it in <span class="bl" onclick="this.classList.toggle('on')">brackets</span> before adding the small number outside.</p>
+          <p class="nl" style="font-weight:bold; background:#f0fdf4; border:1px solid #bbf7d0; padding:2px; text-align:center;">Mg²⁺ and NO₃⁻ &nbsp;→&nbsp; <span class="bl" style="min-width:40px;" onclick="this.classList.toggle('on')">Mg(NO₃)₂</span></p>
+          <p class="nl">If you only need <b>one</b>, do <span class="bl" onclick="this.classList.toggle('on')">not</span> use brackets! (e.g., Na⁺ and NO₃⁻ is just NaNO₃).</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh sec5"><span>💧 3. Aqueous (aq) Solutions</span></div>
+        <div class="sb">
+          <p class="nl">When solid ionic compounds dissolve in <span class="bl" onclick="this.classList.toggle('on')">water</span>, they break apart into their free-floating ions. We use the state symbol <span class="bl" onclick="this.classList.toggle('on')">(aq)</span> to show this.</p>
+          <div class="callout" style="background:#eff6ff; border-left-color:#3b82f6;">
+            <b>Remember:</b> Polyatomic ions do <b>not</b> break apart in water! A nitrate ion (NO₃⁻) stays as a single NO₃⁻ chunk floating around.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c2">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c2', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c2', 0.05)">A+</button>
+      </div>
+      
+      <div>
+        <div class="sh sec4"><span>📋 4. Expanded Ion Cheat Sheet</span></div>
+        <div class="sb">
+          <table class="tft" style="font-size:calc(.52rem * var(--scale)); margin-top:2px;">
+            <thead><tr><th style="width:50%; background:#4f46e5;">Cations (+) Full Names</th><th style="background:#e11d48;">Anions (-) Full Names</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="text-align:left; vertical-align:top;">
+                  <b>+1 Charge:</b><br>
+                  Sodium (Na⁺)<br>
+                  Potassium (K⁺)<br>
+                  Silver (Ag⁺)<br>
+                  <span style="color:#1e3a8a; font-weight:900;">Ammonium (NH₄⁺)</span>
+                </td>
+                <td style="text-align:left; vertical-align:top;">
+                  <b>-1 Charge:</b><br>
+                  Chloride (Cl⁻)<br>
+                  Bromide (Br⁻)<br>
+                  <span style="color:#b71c1c; font-weight:900;">Hydroxide (OH⁻)</span><br>
+                  <span style="color:#b71c1c; font-weight:900;">Nitrate (NO₃⁻)</span><br>
+                  <span style="color:#b71c1c; font-weight:900;">Hydrogen Carbonate (HCO₃⁻)</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align:left; vertical-align:top;">
+                  <b>+2 Charge:</b><br>
+                  Magnesium (Mg²⁺)<br>
+                  Calcium (Ca²⁺)<br>
+                  Copper(II) (Cu²⁺)<br>
+                  Iron(II) (Fe²⁺)<br>
+                  Zinc (Zn²⁺)<br>
+                  Barium (Ba²⁺)
+                </td>
+                <td style="text-align:left; vertical-align:top;">
+                  <b>-2 Charge:</b><br>
+                  Oxide (O²⁻)<br>
+                  Sulfide (S²⁻)<br>
+                  <span style="color:#b71c1c; font-weight:900;">Sulfate (SO₄²⁻)</span><br>
+                  <span style="color:#b71c1c; font-weight:900;">Carbonate (CO₃²⁻)</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align:left; vertical-align:top;">
+                  <b>+3 Charge:</b><br>
+                  Aluminum (Al³⁺)<br>
+                  Iron(III) (Fe³⁺)
+                </td>
+                <td style="text-align:left; vertical-align:top;">
+                  <b>-3 Charge:</b><br>
+                  Nitride (N³⁻)<br>
+                  <span style="color:#b71c1c; font-weight:900;">Phosphate (PO₄³⁻)</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="nl" style="font-size:calc(.55rem * var(--scale)); margin-top:2px;"><i>* Colored text indicates common Polyatomic Ions.</i></p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh sec3"><span>⚙️ 5. Step-By-Step Criss-Cross</span></div>
+        <div class="sb">
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold;">Example A: Calcium nitrate</p>
+          <ul class="compact-list">
+            <li>Cation: Calcium is <span class="bl" style="min-width:20px" onclick="this.classList.toggle('on')">Ca²⁺</span> | Anion: Nitrate is <span class="bl" style="min-width:20px" onclick="this.classList.toggle('on')">NO₃⁻</span></li>
+            <li>Cross Over: The '2' drops to the outside of NO₃. Because it's polyatomic, add <span class="bl" onclick="this.classList.toggle('on')">brackets</span>.</li>
+            <li>Formula: <span class="bl" style="min-width:50px" onclick="this.classList.toggle('on')">Ca(NO₃)₂</span></li>
+          </ul>
+
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:2px;">Example B: Ammonium sulfide</p>
+          <ul class="compact-list">
+            <li>Cation: Ammonium is <span class="bl" style="min-width:30px" onclick="this.classList.toggle('on')">NH₄⁺</span> | Anion: Sulfide is <span class="bl" style="min-width:30px" onclick="this.classList.toggle('on')">S²⁻</span></li>
+            <li>Cross Over: The '2' drops to the outside of NH₄. We need brackets around NH₄. The '1' vanishes.</li>
+            <li>Formula: <span class="bl" style="min-width:50px" onclick="this.classList.toggle('on')">(NH₄)₂S</span></li>
+          </ul>
+
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:2px;">Example C: Aluminum phosphate</p>
+          <ul class="compact-list">
+            <li>Cation: Aluminum is <span class="bl" style="min-width:20px" onclick="this.classList.toggle('on')">Al³⁺</span> | Anion: Phosphate is <span class="bl" style="min-width:30px" onclick="this.classList.toggle('on')">PO₄³⁻</span></li>
+            <li>Cross Over: The charges balance out perfectly at 1:1, so no sub-numbers are dropped. No brackets!</li>
+            <li>Formula: <span class="bl" style="min-width:50px" onclick="this.classList.toggle('on')">AlPO₄</span></li>
+          </ul>
+          
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:2px;">Example D: Iron(III) sulfate</p>
+          <ul class="compact-list">
+            <li>Cation: Iron(III) is <span class="bl" style="min-width:20px" onclick="this.classList.toggle('on')">Fe³⁺</span> | Anion: Sulfate is <span class="bl" style="min-width:30px" onclick="this.classList.toggle('on')">SO₄²⁻</span></li>
+            <li>Cross Over: The '2' drops to Fe. The '3' drops outside SO₄. Use brackets!</li>
+            <li>Formula: <span class="bl" style="min-width:50px" onclick="this.classList.toggle('on')">Fe₂(SO₄)₃</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c3">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c3', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c3', 0.05)">A+</button>
+      </div>
+
+      <div>
+        <div class="sh primary"><span>🧪 6. Dissolving & Dissociation</span></div>
+        <div class="sb">
+          <p class="nl">When solid ionic compounds dissolve in water, they separate (dissociate) into their independent positive and negative ions. We write the solid on the left and the free-floating aqueous ions on the right.</p>
+          <p class="nl"><b>Translating these is just breaking them down into their original ions:</b></p>
+          
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:2px;">Ex 1: Solid sodium nitrate dissolves into aqueous sodium ions and aqueous nitrate ions.</p>
+          <ul class="compact-list">
+            <li>Solid Sodium nitrate: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">NaNO₃ (s)</span></li>
+            <li>Aqueous Sodium ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">Na⁺ (aq)</span></li>
+            <li>Aqueous Nitrate ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">NO₃⁻ (aq)</span></li>
+          </ul>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">NaNO₃ (s) → Na⁺ (aq) + NO₃⁻ (aq)</div>
+
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:4px;">Ex 2: Solid potassium hydroxide dissolves into aqueous potassium ions and aqueous hydroxide ions.</p>
+          <ul class="compact-list">
+            <li>Solid Potassium hydroxide: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">KOH (s)</span></li>
+            <li>Aqueous Potassium ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">K⁺ (aq)</span></li>
+            <li>Aqueous Hydroxide ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">OH⁻ (aq)</span></li>
+          </ul>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">KOH (s) → K⁺ (aq) + OH⁻ (aq)</div>
+          
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:4px;">Ex 3: Solid ammonium chloride dissolves into aqueous ammonium ions and aqueous chloride ions.</p>
+          <ul class="compact-list">
+            <li>Solid Ammonium chloride: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">NH₄Cl (s)</span></li>
+            <li>Aqueous Ammonium ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">NH₄⁺ (aq)</span></li>
+            <li>Aqueous Chloride ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">Cl⁻ (aq)</span></li>
+          </ul>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">NH₄Cl (s) → NH₄⁺ (aq) + Cl⁻ (aq)</div>
+
+          <p class="nl" style="background:#f3f4f6; padding:2px; font-weight:bold; margin-top:4px;">Ex 4: Solid magnesium sulfate dissolves into aqueous magnesium ions and aqueous sulfate ions.</p>
+          <ul class="compact-list">
+            <li>Solid Magnesium sulfate: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">MgSO₄ (s)</span></li>
+            <li>Aqueous Magnesium ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">Mg²⁺ (aq)</span></li>
+            <li>Aqueous Sulfate ion: <span class="bl" style="min-width:40px" onclick="this.classList.toggle('on')">SO₄²⁻ (aq)</span></li>
+          </ul>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">MgSO₄ (s) → Mg²⁺ (aq) + SO₄²⁻ (aq)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page2">
+  <div class="ph">
+    <div>
+      <div class="ph-title">Year 10 Science · Chemistry</div>
+      <div class="ph-sub">📝 Mixed Practice — Polyatomic Formations & Equations</div>
+    </div>
+    <div class="ph-info">Name: __________________________ &nbsp; Date: ____________</div>
+  </div>
+
+  <div class="grid3">
+    <div class="col" id="c4">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c4', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c4', 0.05)">A+</button>
+      </div>
+      
+      <div>
+        <div class="sh sec1"><span>A — True/False</span><span>8 marks</span></div>
+        <div class="sb">
+          <table class="tft" style="margin-bottom:1px;">
+            <thead><tr><th style="width:75%;">Statement</th><th>T</th><th>F</th><th class="ans-col" style="background:#1e3a8a;">Ans</th></tr></thead>
+            <tbody>
+              <tr><td>1. A polyatomic ion contains only one type of atom.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">F</td></tr>
+              <tr><td>2. Brackets are needed if you have only one polyatomic ion in a formula.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">F</td></tr>
+              <tr><td>3. The formula for Carbonate is CO₃²⁻.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>4. The state symbol (s) stands for a solid crystal or precipitate.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>5. Free-floating ions in water are labeled as (aq).</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>6. Ammonium (NH₄⁺) is a common polyatomic cation on our sheet.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">T</td></tr>
+              <tr><td>7. Hydroxide ion has a -2 charge.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">F</td></tr>
+              <tr><td>8. The small numbers inside a polyatomic ion can be changed to balance charges.</td><td class="circ" onclick="pick(this)">T</td><td class="circ" onclick="pick(this)">F</td><td class="ans-col" onclick="this.classList.toggle('on')">F</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="sh sec4"><span>B — Step-by-Step Criss-Cross</span><span>15 marks</span></div>
+        <div class="sb">
+          <p class="nl" style="margin-bottom:2px;"><i>Use the crossover method. Remember the Bracket Rule!</i></p>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>1.</b> K⁺ and SO₄²⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">K₂SO₄</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>2.</b> Ca²⁺ and OH⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Ca(OH)₂</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>3.</b> Fe³⁺ and NO₃⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Fe(NO₃)₃</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>4.</b> NH₄⁺ and Cl⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">NH₄Cl</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>5.</b> Mg²⁺ and PO₄³⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Mg₃(PO₄)₂</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>6.</b> Al³⁺ and OH⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Al(OH)₃</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>7.</b> Cu²⁺ and CO₃²⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">CuCO₃</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>8.</b> Na⁺ and NO₃⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">NaNO₃</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>9.</b> NH₄⁺ and SO₄²⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">(NH₄)₂SO₄</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>10.</b> Zn²⁺ and NO₃⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Zn(NO₃)₂</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>11.</b> Ag⁺ and CO₃²⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Ag₂CO₃</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>12.</b> Fe³⁺ and SO₄²⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Fe₂(SO₄)₃</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>13.</b> Ba²⁺ and OH⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Ba(OH)₂</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>14.</b> Cu²⁺ and OH⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Cu(OH)₂</span></div>
+            <div class="nl" style="display:flex; justify-content:space-between; padding-right:10px;"><b>15.</b> Na⁺ and PO₄³⁻ <span class="bl" style="min-width:70px;" onclick="this.classList.toggle('on')">Na₃PO₄</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c5">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c5', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c5', 0.05)">A+</button>
+      </div>
+
+      <div style="flex:1;">
+        <div class="sh sec3"><span>C — Find the Error</span><span>10 marks</span></div>
+        <div class="sb">
+          <p class="nl">Identify the critical mistake in these student formulas and correct them.</p>
+          
+          <p class="nl" style="margin-top:2px;"><b>1. "Barium hydroxide" → </b><span style="font-family:monospace; color:#b45309; font-weight:bold;">BaOH₂</span></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Missing brackets around OH. Should be Ba(OH)₂.</div>
+          
+          <p class="nl" style="margin-top:4px;"><b>2. "Sodium carbonate" → </b><span style="font-family:monospace; color:#b45309; font-weight:bold;">Na(CO₃)₂</span></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Na is 1+ and CO₃ is 2-. Should be Na₂CO₃ (no brackets needed).</div>
+          
+          <p class="nl" style="margin-top:4px;"><b>3. "Calcium nitrate" → </b><span style="font-family:monospace; color:#b45309; font-weight:bold;">Ca₂NO₃</span></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Ca is 2+ and NO₃ is 1-. Crossed over incorrectly. Should be Ca(NO₃)₂.</div>
+
+          <p class="nl" style="margin-top:4px;"><b>4. "Iron(III) hydroxide" → </b><span style="font-family:monospace; color:#b45309; font-weight:bold;">FeOH₃</span></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">Missing brackets around the polyatomic ion OH. Should be Fe(OH)₃.</div>
+
+          <p class="nl" style="margin-top:4px;"><b>5. "Potassium nitrate" → </b><span style="font-family:monospace; color:#b45309; font-weight:bold;">(K)NO₃</span></p>
+          <div class="wl-ans" onclick="this.classList.toggle('on')">No brackets are needed when there is only one metal atom. Just KNO₃.</div>
+        </div>
+      </div>
+      
+      <div style="flex:1;">
+        <div class="sh sec2"><span>D — Word to Formula Translation</span><span>14 marks</span></div>
+        <div class="sb">
+          <p class="nl" style="margin-bottom:1px;"><i>Translate the chemical names into formulas using the Ion Cheat Sheet.</i></p>
+          
+          <div style="display:grid; grid-template-columns:1fr 1fr; column-gap:6px;">
+            <div>
+              <p class="nl" style="margin-top:2px;"><b>1.</b> Sodium nitrate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">NaNO₃</div>
+              
+              <p class="nl" style="margin-top:2px;"><b>2.</b> Magnesium carbonate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">MgCO₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>3.</b> Iron(III) sulfate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Fe₂(SO₄)₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>4.</b> Calcium phosphate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Ca₃(PO₄)₂</div>
+
+              <p class="nl" style="margin-top:2px;"><b>5.</b> Copper(II) hydroxide</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Cu(OH)₂</div>
+
+              <p class="nl" style="margin-top:2px;"><b>6.</b> Ammonium nitrate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">NH₄NO₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>7.</b> Barium nitrate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Ba(NO₃)₂</div>
+            </div>
+            <div>
+              <p class="nl" style="margin-top:2px;"><b>8.</b> Potassium phosphate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">K₃PO₄</div>
+
+              <p class="nl" style="margin-top:2px;"><b>9.</b> Aluminum hydroxide</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Al(OH)₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>10.</b> Ammonium carbonate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">(NH₄)₂CO₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>11.</b> Zinc carbonate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">ZnCO₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>12.</b> Sodium sulfate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Na₂SO₄</div>
+
+              <p class="nl" style="margin-top:2px;"><b>13.</b> Sodium hydrogen carbonate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">NaHCO₃</div>
+
+              <p class="nl" style="margin-top:2px;"><b>14.</b> Iron(II) nitrate</p>
+              <div class="wl-ans" onclick="this.classList.toggle('on')">Fe(NO₃)₂</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="c6">
+      <div class="col-toolbar no-print">
+        <button class="btn-zoom" onclick="changeScale('c6', -0.05)">A-</button>
+        <button class="btn-zoom" onclick="changeScale('c6', 0.05)">A+</button>
+      </div>
+
+      <div>
+        <div class="sh primary"><span>E — Quick Ion Recognition</span><span>4 marks</span></div>
+        <div class="sb">
+          <p class="nl">Circle the formulas that represent <b>Polyatomic</b> ions:</p>
+          <div class="mc-group" style="gap:4px; font-size:calc(.65rem * var(--scale)); margin-top:2px;">
+            <span class="mco" onclick="this.classList.toggle('on')">K⁺</span>
+            <span class="mco" data-correct="true" onclick="this.classList.toggle('on')">CO₃²⁻</span>
+            <span class="mco" onclick="this.classList.toggle('on')">Br⁻</span>
+            <span class="mco" data-correct="true" onclick="this.classList.toggle('on')">OH⁻</span>
+            <span class="mco" onclick="this.classList.toggle('on')">Ca²⁺</span>
+            <span class="mco" data-correct="true" onclick="this.classList.toggle('on')">NH₄⁺</span>
+            <span class="mco" onclick="this.classList.toggle('on')">S²⁻</span>
+            <span class="mco" data-correct="true" onclick="this.classList.toggle('on')">SO₄²⁻</span>
+            <span class="mco" data-correct="true" onclick="this.classList.toggle('on')">HCO₃⁻</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="sh sec5"><span>F — Dissolving & Dissociation Equations</span><span>16 marks</span></div>
+        <div class="sb">
+          <p class="nl" style="margin-bottom:2px;"><i>Translate these descriptions into balanced dissociation equations. Include state symbols: (s) for the initial solid, and (aq) for the separate free-floating ions.</i></p>
+          
+          <p class="nl" style="margin-top:4px;"><b>1.</b> Solid potassium nitrate dissolves into aqueous potassium ions and aqueous nitrate ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">KNO₃ (s) → K⁺ (aq) + NO₃⁻ (aq)</div>
+          
+          <p class="nl" style="margin-top:6px;"><b>2.</b> Solid magnesium sulfate dissolves into aqueous magnesium ions and aqueous sulfate ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">MgSO₄ (s) → Mg²⁺ (aq) + SO₄²⁻ (aq)</div>
+
+          <p class="nl" style="margin-top:6px;"><b>3.</b> Solid sodium hydroxide dissolves into aqueous sodium ions and aqueous hydroxide ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">NaOH (s) → Na⁺ (aq) + OH⁻ (aq)</div>
+
+          <p class="nl" style="margin-top:6px;"><b>4.</b> Solid calcium carbonate dissolves into aqueous calcium ions and aqueous carbonate ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">CaCO₃ (s) → Ca²⁺ (aq) + CO₃²⁻ (aq)</div>
+          
+          <p class="nl" style="margin-top:6px;"><b>5.</b> Solid ammonium chloride dissolves into aqueous ammonium ions and aqueous chloride ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">NH₄Cl (s) → NH₄⁺ (aq) + Cl⁻ (aq)</div>
+
+          <p class="nl" style="margin-top:6px;"><b>6.</b> Solid zinc sulfate dissolves into aqueous zinc ions and aqueous sulfate ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">ZnSO₄ (s) → Zn²⁺ (aq) + SO₄²⁻ (aq)</div>
+
+          <p class="nl" style="margin-top:6px;"><b>7.</b> Solid copper(II) carbonate dissolves into aqueous copper(II) ions and aqueous carbonate ions.</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">CuCO₃ (s) → Cu²⁺ (aq) + CO₃²⁻ (aq)</div>
+
+          <p class="nl" style="margin-top:8px; background:#fff7ed; border-left:3px solid #fb923c; padding-left:4px;"><b>8. Challenge:</b> Solid calcium hydroxide dissolves into aqueous calcium ions and aqueous hydroxide ions. (Hint: Balance the free ions with coefficients!)</p>
+          <div class="wl-ans" style="margin-top:1px;" onclick="this.classList.toggle('on')">Ca(OH)₂ (s) → Ca²⁺ (aq) + 2OH⁻ (aq)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Zoom Feature Logic ── */
+function changeScale(colId, delta) {
+  const col = document.getElementById(colId);
+  if(!col) return;
+  // Get current scale, default to 0.82 if not set
+  let currentScale = parseFloat(getComputedStyle(col).getPropertyValue('--scale')) || 0.82;
+  currentScale += delta;
+  
+  // Constrain scaling limits
+  if(currentScale < 0.6) currentScale = 0.6;
+  if(currentScale > 1.3) currentScale = 1.3;
+  
+  col.style.setProperty('--scale', currentScale);
+}
+
+/* ── Toggle Answers Logic ── */
+let answersRevealed = false;
+function toggleAllAnswers() {
+  answersRevealed = !answersRevealed;
+  
+  const elements = document.querySelectorAll('.bl, .ch, .blcell, .ans-col, .ck, .vm-line, .svbl, .wl-ans');
+  elements.forEach(el => {
+    if (answersRevealed) el.classList.add('on');
+    else el.classList.remove('on');
+  });
+
+  const mcGroups = document.querySelectorAll('.mc-group');
+  mcGroups.forEach(group => {
+    group.querySelectorAll('.mco').forEach(o => o.classList.remove('on'));
+    if (answersRevealed) {
+      const corrects = group.querySelectorAll('[data-correct="true"]');
+      corrects.forEach(c => c.classList.add('on'));
+    }
+  });
+}
+
+/* ── Keyboard shortcuts ── */
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='1'){
+    const p=document.getElementById('page1');
+    p.querySelectorAll('.bl,.ch,.blcell,.ans-col,.ck,.vm-line,.svbl,.wl-ans').forEach(el=>el.classList.add('on'));
+    p.querySelectorAll('.mc-group').forEach(grp=>{
+        const corrects=grp.querySelectorAll('[data-correct="true"]');
+        corrects.forEach(c=>c.classList.add('on'));
+    });
+  }
+  if(e.key==='3'){
+    const p=document.getElementById('page2');
+    p.querySelectorAll('.bl,.ch,.blcell,.ans-col,.ck,.vm-line,.svbl,.wl-ans').forEach(el=>el.classList.add('on'));
+    p.querySelectorAll('.mc-group').forEach(grp=>{
+        const corrects=grp.querySelectorAll('[data-correct="true"]');
+        corrects.forEach(c=>c.classList.add('on'));
+    });
+  }
+});
+
+/* ── T/F Logic ── */
+function pick(td){
+  td.parentElement.querySelectorAll('.circ').forEach(c=>c.classList.remove('picked'));
+  td.classList.add('picked');
+}
+</script>
+</body>
+</html>
