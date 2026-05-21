@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depth Study Workbook — Mass, Weight & Gravity</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#888;font-family:Calibri,Arial,sans-serif;font-size:10pt;line-height:1.4;}
+
+/* ── PAGE ── */
+.page{
+  width:210mm;min-height:297mm;background:#fff;
+  margin:6mm auto;box-shadow:0 2px 10px rgba(0,0,0,.35);
+  display:flex;flex-direction:column;page-break-after:always;
+  position:relative;
+}
+.page-body{padding:8mm 15mm 10mm;flex:1;}
+
+/* ── PAGE HEADER ── */
+.phdr{
+  padding:4px 15mm;display:flex;justify-content:space-between;align-items:center;
+  color:#fff;font-size:7.5pt;font-weight:bold;
+}
+.phdr.l1{background:#1F3864;}
+.phdr.l2{background:#1A6878;}
+.phdr.l3{background:#375B2E;}
+.phdr.ref{background:#1F3864;}
+
+/* ── PAGE FOOTER ── */
+.pftr{
+  padding:4px 15mm;border-top:.4pt solid #ccc;
+  font-size:7.5pt;color:#888;font-style:italic;
+}
+
+/* ── LESSON BANNER ── */
+.lbanner{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 15mm;color:#fff;font-size:12.5pt;font-weight:bold;
+  margin-bottom:6pt;
+}
+.lbanner.l1{background:#1F3864;}
+.lbanner.l2{background:#1A6878;}
+.lbanner.l3{background:#375B2E;}
+.lbanner.ref{background:#1F3864;}
+
+/* ── LEARNING GOAL ── */
+.lgoal{
+  background:#EBF5FB;border-left:4pt solid #4472C4;
+  padding:7px 10px;margin:6pt 0;font-size:9.5pt;
+}
+
+/* ── SECTION HEADER ── */
+.sec{display:flex;align-items:center;gap:8px;margin:10pt 0 5pt;padding:3px 0;}
+.snum{
+  min-width:24px;height:22px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:bold;font-size:10pt;flex-shrink:0;padding:0 6px;
+}
+.snum.l1{background:#1F3864;}
+.snum.l2{background:#1A6878;}
+.snum.l3{background:#375B2E;}
+.snum.ref{background:#1F3864;}
+.stitle{font-size:10.5pt;font-weight:bold;}
+.stitle.l1{color:#1F3864;text-decoration:underline;}
+.stitle.l2{color:#1A6878;text-decoration:underline;}
+.stitle.l3{color:#375B2E;text-decoration:underline;}
+
+/* ── INFO BOXES ── */
+.ibox{
+  background:#EBF5FB;border-left:3.5pt solid #4472C4;
+  padding:7px 10px;margin:6pt 0;font-size:9.5pt;
+}
+.ibox.crit{background:#FEF0F0;}
+.ibox.amber{background:#FFF8E1;border-color:#D4A020;}
+
+/* ── FORMULA BOX ── */
+.fbox{
+  border:1pt solid #aaa;text-align:center;padding:10px;
+  margin:7pt 0;font-size:13pt;font-weight:bold;color:#4472C4;
+}
+.fbox small{display:block;font-size:9pt;color:#555;font-weight:normal;margin-top:3px;}
+
+/* ── WORKED EXAMPLE ── */
+.wex{border:1pt solid #ccc;background:#FAFAFA;padding:8px 12px;margin:5pt 0;font-size:9pt;}
+.wex-title{color:#4472C4;font-weight:bold;margin-bottom:5px;}
+
+/* ── DEFINITION BOX ── */
+.dbox{display:flex;border:1pt solid #ccc;margin:6pt 0;}
+.dlabel{
+  background:#1F3864;color:#fff;width:100px;padding:8px;
+  text-align:center;font-weight:bold;font-size:9.5pt;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;flex-shrink:0;
+}
+.dlabel small{font-size:7.5pt;font-weight:normal;margin-top:3px;}
+.dcontent{padding:8px 10px;font-size:9.5pt;flex:1;}
+
+/* ── TABLES ── */
+table{border-collapse:collapse;width:100%;margin:5pt 0;font-size:9pt;}
+th{padding:5px 8px;text-align:center;color:#fff;font-size:8.5pt;font-weight:bold;}
+td{padding:5px 8px;border:.5pt solid #ccc;}
+.tctr{text-align:center;}
+
+/* ── YOUR TURN BOX ── */
+.ytbox{
+  background:#FFF8E1;border:1pt solid #D4A020;border-radius:2px;
+  padding:8px 10px;margin:8pt 0;cursor:pointer;
+  transition:border-color .15s;
+}
+.ytbox:hover{border-color:#B8860B;}
+.ytprompt{color:#CF8A00;font-weight:bold;font-size:9.5pt;margin-bottom:5px;}
+.ytprompt span.icon{margin-right:4px;}
+.ytlines{
+  min-height:65px;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 21px,#ccc 21px,#ccc 22px);
+  border-bottom:.5pt solid #999;
+  padding-top:4px;
+}
+.ytlines.tall{min-height:110px;}
+.ytlines.xtall{min-height:150px;}
+.click-hint{font-size:6.5pt;color:#bbb;font-style:italic;text-align:right;margin-top:3px;}
+
+/* ── ANSWER REVEAL ── */
+.ans{display:none;margin-top:7px;padding:6px 8px;border-top:1pt solid #ffaaaa;color:#C0000C;font-size:9pt;}
+.ans.show{display:block;}
+.ans-lbl{font-size:6.5pt;text-transform:uppercase;letter-spacing:1px;color:#8b0000;font-weight:bold;margin-bottom:3px;}
+
+/* ── TRUE/FALSE ── */
+.tfrow{margin:7pt 0;padding-bottom:8pt;border-bottom:.5pt solid #ccc;cursor:pointer;}
+.tfrow:last-child{border-bottom:none;}
+.tfstmt{font-size:9.5pt;font-weight:bold;}
+.tfcorr{font-size:9pt;font-style:italic;color:#888;margin-top:2px;}
+.tfans{display:none;color:#C0000C;font-size:9pt;margin-top:4px;font-weight:600;}
+.tfrow.show .tfans{display:block;}
+.tfrow.show .tfcorr{color:#C0000C;}
+
+/* ── FILL-IN SENTENCES ── */
+.fillrow{
+  padding:5pt 4pt;border-bottom:.5pt solid #ddd;cursor:pointer;
+  font-size:9.5pt;
+}
+.fillrow:hover{background:#fafff0;}
+.bq{border-bottom:1pt solid #333;display:inline-block;min-width:90px;}
+.ba{display:none;color:#C0000C;font-weight:bold;border-bottom:1pt solid #C0000C;}
+.fillrow.done .bq{display:none;}
+.fillrow.done .ba{display:inline;}
+
+/* ── PLANET TABLE ROWS ── */
+.prow{cursor:pointer;}
+.prow:hover td{background:#fffbe6!important;}
+.pw-q{color:#333;}
+.pw-a{display:none;color:#C0000C;font-weight:bold;}
+.prow.rv .pw-q{display:none;}
+.prow.rv .pw-a{display:inline;}
+
+/* ── WRITING AREA ── */
+.warea{
+  border:.5pt solid #ccc;min-height:70px;margin:5pt 0;
+  padding:6px;font-size:9pt;color:#aaa;font-style:italic;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 21px,#eee 21px,#eee 22px);
+  cursor:pointer;position:relative;
+}
+.warea.tall{min-height:110px;}
+.warea.xtall{min-height:160px;}
+
+/* ── ITALIC PROMPT BOX ── */
+.ipbox{border:.5pt solid #ccc;padding:7px 10px;margin:5pt 0;font-size:9pt;font-style:italic;color:#555;}
+
+/* ── SENTENCE STARTER BOX ── */
+.ssbox{border:1pt solid #ccc;padding:8px 10px;margin:6pt 0;font-size:9pt;}
+.sslabel{color:#CF8A00;font-weight:bold;font-size:9pt;margin-bottom:5px;}
+
+/* ── VALIDITY TWO-COL ── */
+.val2{display:flex;border:1pt solid #ccc;margin:6pt 0;}
+.val2 th{background:#375B2E;padding:6px 10px;font-size:8.5pt;text-align:left;}
+.val2 td{border:none;border-right:.5pt solid #ccc;min-height:60px;vertical-align:top;font-size:9pt;}
+.val2 td:last-child{border-right:none;}
+
+/* ── STEP ROWS (method) ── */
+.step-item{display:flex;align-items:flex-start;gap:6px;margin:5pt 0;padding-bottom:5pt;border-bottom:.5pt solid #ddd;font-size:9.5pt;cursor:pointer;}
+.step-item:last-child{border-bottom:none;}
+.step-lbl{color:#1A6878;font-weight:bold;min-width:45px;font-size:9.5pt;}
+
+/* ── GRAPH PAPER ── */
+.gpaper{
+  width:140mm;height:210mm;
+  border:1pt solid #999;
+  background-color:#fff;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 4.9mm,#d0d0d0 4.9mm,#d0d0d0 5mm),
+    repeating-linear-gradient(90deg,transparent,transparent 4.9mm,#d0d0d0 4.9mm,#d0d0d0 5mm),
+    repeating-linear-gradient(0deg,transparent,transparent 24.5mm,#999 24.5mm,#999 25mm),
+    repeating-linear-gradient(90deg,transparent,transparent 24.5mm,#999 24.5mm,#999 25mm);
+}
+
+/* ── REFLECTION TABLE ── */
+.reftbl th:first-child{text-align:left;width:65%;background:#1F3864;}
+.reftbl th{background:#1F3864;padding:5px 8px;}
+.reftbl td{padding:5px 8px;}
+.reftbl td:first-child{font-size:9.5pt;}
+.cbox{
+  display:inline-block;width:14px;height:14px;
+  border:1pt solid #555;cursor:pointer;vertical-align:middle;
+}
+.cbox.chk{background:#1F3864;}
+
+/* ── SELF-REFLECTION BOXES ── */
+.sr2col{display:flex;gap:0;margin:8pt 0;}
+.srbox{flex:1;border:1pt solid #D4A020;padding:8px 10px;min-height:55px;}
+.srbox:first-child{background:#FFF8E1;border-right:.5pt solid #D4A020;}
+.srbox:last-child{background:#EBF5FB;border-left:.5pt solid #4472C4;border-color:#4472C4;}
+.srbox-title{font-weight:bold;font-size:9pt;margin-bottom:5px;}
+
+/* ── TEACHER FEEDBACK ── */
+.tfeedback{border:1pt solid #ccc;margin:8pt 0;}
+.tfeedback-hdr{background:#1F3864;color:#fff;padding:6px 10px;font-weight:bold;font-size:9.5pt;}
+.tfeedback-body{padding:8px 12px;}
+.tfeedback-label{color:#1F3864;font-weight:bold;font-size:9.5pt;margin-bottom:4px;}
+.tfeedback-line{border-bottom:.5pt solid #ccc;min-height:28px;margin-bottom:10px;}
+
+/* ── COVER ── */
+.cover-box{background:#1F3864;color:#fff;text-align:center;padding:22px 20mm;margin-bottom:12pt;}
+.cover-badge{font-size:9pt;color:#F0B429;letter-spacing:1px;font-weight:bold;text-transform:uppercase;margin-bottom:8px;}
+.cover-title{font-size:24pt;font-weight:bold;margin-bottom:5px;}
+.cover-sub{font-size:12pt;font-style:italic;}
+.name-row{display:flex;border:1pt solid #ccc;margin:10pt 0;}
+.name-cell{padding:5px 10px;font-size:9.5pt;font-weight:bold;border-right:.5pt solid #ccc;background:#f5f5f5;white-space:nowrap;}
+.name-val{padding:5px 10px;flex:1;font-size:9.5pt;border-right:1pt solid #ccc;}
+.name-val:last-child{border-right:none;}
+.contents-box{background:#FFF8E1;border:1pt solid #D4A020;padding:10px 14px;margin-top:10pt;font-size:9.5pt;}
+.contents-box h4{font-size:10pt;margin-bottom:6px;}
+.contents-box p{padding:3px 0;border-bottom:.5pt dashed #D4A020;}
+.contents-box p:last-child{border-bottom:none;}
+
+/* ── PLANET ILLUSTRATION ── */
+.planet-illo{
+  display:flex;justify-content:center;align-items:flex-end;gap:40mm;
+  margin:10pt 0;
+}
+.planet-fig{text-align:center;}
+.planet-label{font-size:11pt;font-weight:bold;margin-top:8px;}
+.planet-stats{font-size:10pt;font-weight:bold;margin-bottom:6px;}
+.planet-img{font-size:80pt;line-height:1;}
+
+/* ── SUMMARY HEADING ── */
+.sum-heading{color:#CF8A00;font-size:11pt;font-weight:bold;text-decoration:underline;margin:10pt 0 6pt;display:block;}
+
+/* ── PRINT ── */
+@media print{
+  body{background:white;}
+  .page{margin:0;box-shadow:none;}
+  .ans{display:block!important;}
+  .tfans{display:block!important;}
+  .ba{display:inline!important;}
+  .bq{display:none!important;}
+  .pw-a{display:inline!important;}
+  .pw-q{display:none!important;}
+  .click-hint{display:none;}
+  .warea{color:transparent;}
+}
+
+p{font-size:9.5pt;margin:4pt 0;}
+strong{font-weight:bold;}
+em{font-style:italic;}
+</style>
+</head>
+<body>
+
+<!-- ══════════ PAGE 1: COVER ══════════ -->
+<div class="page">
+  <div class="page-body" style="padding-top:12mm;">
+    <div class="cover-box">
+      <div class="cover-badge">Year 7 Science</div>
+      <div class="cover-title">Depth Study Workbook</div>
+      <div class="cover-sub">Mass, Weight and Gravity</div>
+    </div>
+
+    <div class="name-row">
+      <span class="name-cell">Name:</span>
+      <span class="name-val"></span>
+      <span class="name-cell">Class :</span>
+      <span class="name-val"></span>
+    </div>
+
+    <div class="planet-illo">
+      <div class="planet-fig">
+        <div class="planet-stats">Mass: 50 kg<br>Weight: 110 lbs</div>
+        <div class="planet-img">🌍</div>
+        <div class="planet-label">Earth</div>
+      </div>
+      <div class="planet-fig">
+        <div class="planet-stats">Mass: 50 kg<br>Weight: 42 lbs</div>
+        <div class="planet-img">🔴</div>
+        <div class="planet-label">Mars</div>
+      </div>
+    </div>
+
+    <div class="contents-box">
+      <h4>Contents</h4>
+      <p>📚 <strong>Lesson 1 (pages 2–6):</strong> &nbsp;Learn the science: what is force, gravity, mass and weight?</p>
+      <p>🔬 <strong>Lesson 2 (pages 7–9):</strong> &nbsp;Plan and run a fair test, record your results and draw a graph</p>
+      <p>📊 <strong>Lesson 3 (pages 10–13):</strong> &nbsp;Analyse results, write a discussion and conclusion</p>
+      <p>✅ <strong>Reflection (page 14):</strong> &nbsp;Check your learning and receive teacher feedback</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2: LESSON 1 ══════════ -->
+<div class="page">
+  <div class="phdr l1">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 1: The Weight of the Universe</span>
+  </div>
+  <div class="lbanner l1">📚 &nbsp; LESSON 1 — THE WEIGHT OF THE UNIVERSE</div>
+  <div class="page-body" style="padding-top:0;">
+    <div class="lgoal">
+      Learning Goal: Understand what forces are, how gravity works, and the difference between MASS and WEIGHT.<br>
+      By the end of this lesson you should be able to explain why your weight would change on the Moon — but your mass would not!
+    </div>
+
+    <div class="sec">
+      <div class="snum l1">1</div>
+      <div class="stitle l1">What is a Force?</div>
+    </div>
+
+    <p>A force is a push or a pull on an object. You cannot see a force, but you can see what it does — it can make things speed up, slow down, change direction or change shape.</p>
+
+    <div class="ibox">
+      Key fact: Forces are measured in <strong>NEWTONS (N),</strong> named after the scientist Sir Isaac Newton. The symbol for Newtons is a capital N. &nbsp;<strong>Example:</strong> "The force is 10 N."
+    </div>
+
+    <p style="margin-top:6pt;">Forces come in two types:</p>
+
+    <table>
+      <tr>
+        <th style="background:#1F3864;text-align:left;padding:6px 10px;">CONTACT FORCES</th>
+        <th style="background:#1F3864;text-align:left;padding:6px 10px;">NON-CONTACT FORCES</th>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;"><p>Need to TOUCH the object to work.</p><p>Examples: friction, push, pull, air resistance.</p></td>
+        <td style="vertical-align:top;"><p>Work WITHOUT touching the object.</p><p>Examples: gravity, magnetism, static electricity.</p></td>
+      </tr>
+    </table>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt"><span class="icon">✏️</span> YOUR TURN: &nbsp;Give ONE example of a <u>contact force</u> and ONE example of a <u>non-contact force</u> from your everyday life.</div>
+      <div class="ytlines"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        <strong>Contact force:</strong> Friction — when you brake a bicycle, the brake pads touch the wheel and slow it down.<br>
+        <strong>Non-contact force:</strong> Gravity — Earth pulls you downward without touching you.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l1">2</div>
+      <div class="stitle l1">Non-Contact Force: Gravity</div>
+    </div>
+
+    <p>Gravity is a non-contact force that pulls every object with mass towards every other object with mass. The bigger the mass of an object, the stronger its gravitational pull.</p>
+
+    <div class="ibox">
+      Think of it this way: the Earth is enormous, so it has a very strong gravitational pull.<br>
+      This pull is what keeps you on the ground, keeps the Moon orbiting Earth, and keeps<br>
+      Earth orbiting the Sun.
+    </div>
+
+    <p>On Earth, gravity pulls downward with a strength of approximately 10 Newtons for every kilogram of mass. Scientists write this as:</p>
+
+    <div class="fbox"><strong>Earth's gravitational field strength (g) = &nbsp;10 N/kg</strong></div>
+  </div>
+  <div class="pftr">Lesson 1 &nbsp;|&nbsp; Page 2</div>
+</div>
+
+<!-- ══════════ PAGE 3 ══════════ -->
+<div class="page">
+  <div class="phdr l1">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 1: The Weight of the Universe</span>
+  </div>
+  <div class="page-body">
+    <p>This value is different on other planets because they have different amounts of mass. A planet with more mass has stronger gravity; a planet with less mass has weaker gravity.</p>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt"><span class="icon">✏️</span> YOUR TURN: &nbsp;Why do you think the Moon's gravitational pull is weaker than Earth's? Write your idea below.</div>
+      <div class="ytlines"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        The Moon has much <strong>less mass</strong> than Earth. Because gravitational pull depends on the amount of mass, a smaller mass produces a weaker pull. The Moon's gravitational field strength is only about <strong>1.6 N/kg</strong> — roughly one-sixth of Earth's 10 N/kg.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l1">3</div>
+      <div class="stitle l1">What is Mass?</div>
+    </div>
+
+    <div class="dbox">
+      <div class="dlabel">MASS<small>Unit: kilograms (kg)</small></div>
+      <div class="dcontent">
+        <strong>Definition:</strong> The amount of matter (stuff) that makes up an object. A bowling ball has more mass than a tennis ball because it contains more matter.<br>
+        <strong>Example:</strong> <em>A schoolbag full of books might have a mass of 4 kg. An empty schoolbag might have a mass of 0.5 kg.</em>
+      </div>
+    </div>
+
+    <div class="ibox">
+      CRITICAL FACT: Mass NEVER changes, no matter where you are in the universe.<br>
+      If you travel to the Moon or float in deep space, your mass stays exactly the same.<br>
+      Mass does NOT depend on gravity — it is just the amount of stuff inside an object.
+    </div>
+
+    <p>We measure mass using a digital scale or a triple beam balance. These tools measure how much matter is in an object, not how hard gravity pulls on it.</p>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt"><span class="icon">✏️</span> YOUR TURN: &nbsp;If an astronaut has a mass of 75 kg on Earth, what is their mass on the Moon? Explain your answer.</div>
+      <div class="ytlines"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        The astronaut's mass is still <strong>75 kg</strong> on the Moon.<br>
+        Mass measures the amount of matter in an object. Matter does not disappear when location changes. Mass is independent of gravity — it is the same everywhere in the universe.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l1">4</div>
+      <div class="stitle l1">What is Weight?</div>
+    </div>
+
+    <div class="dbox">
+      <div class="dlabel" style="background:#375B2E;">WEIGHT<small>Unit: Newtons (N)</small></div>
+      <div class="dcontent">
+        <strong>Definition:</strong> The force of gravity pulling down on an object's mass. Weight is a FORCE, so it is measured in Newtons — not kilograms!<br>
+        <strong>Example:</strong> <em>A person with a mass of 60 kg has a weight of 600 N on Earth (because g = 10 N/kg).</em>
+      </div>
+    </div>
+
+    <div class="ibox">
+      CRITICAL FACT: Weight DOES change depending on where you are in the universe.<br>
+      If you go to the Moon (where gravity is weaker), your weight will be less.<br>
+      In deep space (almost zero gravity), you would be nearly weightless — but your mass is still the same!
+    </div>
+  </div>
+  <div class="pftr">Lesson 1 &nbsp;|&nbsp; Page 3</div>
+</div>
+
+<!-- ══════════ PAGE 4 ══════════ -->
+<div class="page">
+  <div class="phdr l1">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 1: The Weight of the Universe</span>
+  </div>
+  <div class="page-body">
+    <p>We measure weight using a spring balance (also called a Newton meter). The spring stretches further when a heavier object is attached, and the scale shows the force in Newtons.</p>
+
+    <div class="sec">
+      <div class="snum l1">5</div>
+      <div class="stitle l1">The Formula — Calculating Weight</div>
+    </div>
+
+    <p>We can calculate weight using a simple formula:</p>
+
+    <div class="fbox">
+      Weight &nbsp;=&nbsp; Mass &nbsp;×&nbsp; Gravity<br>
+      W &nbsp;=&nbsp; m &nbsp;×&nbsp; g<br>
+      <small>(Newtons) &nbsp;&nbsp;&nbsp;&nbsp; (kilograms) &nbsp;&nbsp;&nbsp;&nbsp; (N/kg)</small>
+    </div>
+
+    <div class="wex">
+      <div class="wex-title">🔍 WORKED EXAMPLE 1 — Weight on Earth</div>
+      <p>Question: What is the weight of a 5 kg bag of potatoes on Earth? (g = 10 N/kg)</p>
+      <p>Step 1 — Write the formula: &nbsp; W = m × g</p>
+      <p>Step 2 — Substitute values: &nbsp; W = 5 × 10</p>
+      <p>Step 3 — Calculate: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; W = 50 N</p>
+      <p><br>Answer: The bag of potatoes has a weight of 50 N on Earth.</p>
+    </div>
+
+    <div class="wex">
+      <div class="wex-title">🔍 WORKED EXAMPLE 2 — Weight on the Moon</div>
+      <p>Question: The same 5 kg bag of potatoes is taken to the Moon. What is its weight? (g = 1.6 N/kg)</p>
+      <p>Step 1 — Write the formula: &nbsp; W = m × g</p>
+      <p>Step 2 — Substitute values: &nbsp; W = 5 × 1.6</p>
+      <p>Step 3 — Calculate: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; W = 8 N</p>
+      <p><br>Answer: The bag of potatoes has a weight of only 8 N on the Moon — much lighter! But its MASS is still 5 kg.</p>
+    </div>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt"><span class="icon">✏️</span> YOUR TURN: &nbsp;Calculate the weight of a 60 kg person on Earth (g = 10 N/kg). Show all 3 steps.</div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        Step 1 — Write the formula: &nbsp; W = m × g<br>
+        Step 2 — Substitute values: &nbsp; W = 60 × 10<br>
+        Step 3 — Calculate: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>W = 600 N</strong>
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Lesson 1 &nbsp;|&nbsp; Page 4</div>
+</div>
+
+<!-- ══════════ PAGE 5 ══════════ -->
+<div class="page">
+  <div class="phdr l1">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 1: The Weight of the Universe</span>
+  </div>
+  <div class="page-body">
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt"><span class="icon">✏️</span> YOUR TURN: &nbsp;Now calculate their weight on Mars (g = 3.7 N/kg). Show all 3 steps.</div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        Step 1 — Write the formula: &nbsp; W = m × g<br>
+        Step 2 — Substitute values: &nbsp; W = 60 × 3.7<br>
+        Step 3 — Calculate: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>W = 222 N</strong>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l1">6</div>
+      <div class="stitle l1">The Astronaut's Journey — Comparing Planets</div>
+    </div>
+
+    <p>An astronaut has a mass of 70 kg. Use the formula W = m × g to complete the table below. <em style="font-size:8pt;color:#888;">Click any row to reveal the weight.</em></p>
+
+    <table>
+      <tr>
+        <th style="background:#1F3864;">Location</th>
+        <th style="background:#1F3864;">Gravity g (N/kg)</th>
+        <th style="background:#1F3864;">Mass (kg)</th>
+        <th style="background:#1F3864;">Working out</th>
+        <th style="background:#1F3864;">Weight (N)</th>
+      </tr>
+      <tr class="prow" onclick="this.classList.toggle('rv')">
+        <td><strong>Earth</strong></td><td class="tctr">10</td><td class="tctr">70</td><td>70 × 10 =</td>
+        <td class="tctr"><span class="pw-q">_______ N</span><span class="pw-a">700 N</span></td>
+      </tr>
+      <tr class="prow" onclick="this.classList.toggle('rv')" style="background:#f9f9f9;">
+        <td><strong>Moon</strong></td><td class="tctr">1.6</td><td class="tctr">70</td><td>70 × 1.6 =</td>
+        <td class="tctr"><span class="pw-q">_______ N</span><span class="pw-a">112 N</span></td>
+      </tr>
+      <tr class="prow" onclick="this.classList.toggle('rv')">
+        <td><strong>Mars</strong></td><td class="tctr">3.7</td><td class="tctr">70</td><td>70 × 3.7 =</td>
+        <td class="tctr"><span class="pw-q">_______ N</span><span class="pw-a">259 N</span></td>
+      </tr>
+      <tr class="prow" onclick="this.classList.toggle('rv')" style="background:#f9f9f9;">
+        <td><strong>Jupiter</strong></td><td class="tctr">24.8</td><td class="tctr">70</td><td>70 × 24.8 =</td>
+        <td class="tctr"><span class="pw-q">_______ N</span><span class="pw-a">1,736 N</span></td>
+      </tr>
+      <tr class="prow" onclick="this.classList.toggle('rv')">
+        <td><strong>Deep Space</strong></td><td class="tctr">~0</td><td class="tctr">70</td><td>70 × 0 =</td>
+        <td class="tctr"><span class="pw-q">_______ N</span><span class="pw-a">0 N</span></td>
+      </tr>
+    </table>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;">Looking at the table: what stays the same across all locations? What changes? Why?</div>
+      <div class="ytlines"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        <strong>Stays the same:</strong> Mass (70 kg) — mass never changes because it is the amount of matter in the object.<br>
+        <strong>Changes:</strong> Weight — it varies because each planet has a different gravitational field strength (g). Stronger gravity = larger weight force.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l1">7</div>
+      <div class="stitle l1">Mass vs Weight — The Big Summary</div>
+    </div>
+
+    <table>
+      <tr>
+        <th style="background:#1F3864;text-align:left;">MASS</th>
+        <th style="background:#375B2E;text-align:left;">WEIGHT</th>
+      </tr>
+      <tr><td>Measured in kilograms (kg)</td><td>Measured in Newtons (N)</td></tr>
+      <tr style="background:#f9f9f9;"><td>Measured with a digital scale</td><td>Measured with a spring balance</td></tr>
+      <tr><td>The amount of MATTER in an object</td><td>The FORCE of gravity on an object</td></tr>
+      <tr style="background:#f9f9f9;"><td>NEVER changes — same everywhere</td><td>CHANGES depending on the planet</td></tr>
+      <tr><td>Can never be zero</td><td>Can be zero (in deep space)</td></tr>
+    </table>
+  </div>
+  <div class="pftr">Lesson 1 &nbsp;|&nbsp; Page 5</div>
+</div>
+
+<!-- ══════════ PAGE 6 ══════════ -->
+<div class="page">
+  <div class="phdr l1">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 1: The Weight of the Universe</span>
+  </div>
+  <div class="lbanner l1" style="font-size:10.5pt;padding:5px 15mm;">
+    <div class="snum l1" style="margin-right:4px;">8</div>
+    <div class="stitle" style="color:#fff;text-decoration:none;">Check Your Understanding</div>
+  </div>
+  <div class="page-body" style="padding-top:0;">
+    <div class="ibox" style="margin-top:6pt;">Circle TRUE or FALSE. If the statement is FALSE, rewrite it correctly on the line below.</div>
+
+    <div style="margin-top:8pt;">
+      <div class="tfrow" onclick="this.classList.toggle('show')">
+        <div class="tfstmt">1. &nbsp;Weight is measured in kilograms. <span style="margin-left:30px;">TRUE &nbsp;/&nbsp; FALSE</span></div>
+        <div class="tfcorr"><em>Correction: </em></div>
+        <div class="tfans">❌ <strong>FALSE.</strong> &nbsp;Correction: Weight is measured in <strong>Newtons (N)</strong>, not kilograms. Kilograms measure mass.</div>
+        <div class="click-hint">👆 click to reveal answer</div>
+      </div>
+      <div class="tfrow" onclick="this.classList.toggle('show')">
+        <div class="tfstmt">2. &nbsp;An astronaut's mass changes when they travel to the Moon. <span style="margin-left:30px;">TRUE &nbsp;/&nbsp; FALSE</span></div>
+        <div class="tfcorr"><em>Correction: </em></div>
+        <div class="tfans">❌ <strong>FALSE.</strong> &nbsp;Correction: An astronaut's <strong>mass never changes</strong> — it stays the same. Their <em>weight</em> changes because gravity is weaker on the Moon.</div>
+        <div class="click-hint">👆 click to reveal answer</div>
+      </div>
+      <div class="tfrow" onclick="this.classList.toggle('show')">
+        <div class="tfstmt">3. &nbsp;Gravity is a non-contact force. <span style="margin-left:30px;">TRUE &nbsp;/&nbsp; FALSE</span></div>
+        <div class="tfcorr"><em>Correction: </em></div>
+        <div class="tfans">✅ <strong>TRUE.</strong> &nbsp;Gravity acts at a distance without needing physical contact between objects.</div>
+        <div class="click-hint">👆 click to reveal answer</div>
+      </div>
+      <div class="tfrow" onclick="this.classList.toggle('show')">
+        <div class="tfstmt">4. &nbsp;A spring balance measures weight in Newtons. <span style="margin-left:30px;">TRUE &nbsp;/&nbsp; FALSE</span></div>
+        <div class="tfcorr"><em>Correction: </em></div>
+        <div class="tfans">✅ <strong>TRUE.</strong> &nbsp;A spring balance (Newton meter) measures the gravitational force on an object in Newtons.</div>
+        <div class="click-hint">👆 click to reveal answer</div>
+      </div>
+      <div class="tfrow" onclick="this.classList.toggle('show')">
+        <div class="tfstmt">5. &nbsp;An object in deep space has zero mass. <span style="margin-left:30px;">TRUE &nbsp;/&nbsp; FALSE</span></div>
+        <div class="tfcorr"><em>Correction: </em></div>
+        <div class="tfans">❌ <strong>FALSE.</strong> &nbsp;Correction: An object in deep space has <strong>zero weight</strong> (gravity ≈ 0), but its <em>mass remains unchanged</em>. Mass can never be zero.</div>
+        <div class="click-hint">👆 click to reveal answer</div>
+      </div>
+    </div>
+
+    <div style="margin-top:10pt;">
+      <span class="sum-heading">Lesson 1 Summary — Complete the Sentences</span>
+      <div style="font-size:8pt;color:#888;margin-bottom:6pt;font-style:italic;">👆 Click each sentence to reveal the missing words in red.</div>
+
+      <div class="fillrow" onclick="fillin(this)">
+        Force is measured in <span class="bq">_______________</span><span class="ba">Newtons (N)</span> using the symbol <span class="bq">____</span><span class="ba">N</span>.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        Gravity is a <span class="bq">_______________</span><span class="ba">non-contact</span> (contact / non-contact) force.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        Mass is measured in <span class="bq">_______________</span><span class="ba">kilograms (kg)</span> using a <span class="bq">_______________</span><span class="ba">digital scale</span>.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        Weight is measured in <span class="bq">_______________</span><span class="ba">Newtons (N)</span> using a <span class="bq">_______________</span><span class="ba">spring balance</span>.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        The formula for weight is: W = <span class="bq">_____</span><span class="ba">m</span> × <span class="bq">_____</span><span class="ba">g</span>.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        On Earth, gravitational field strength is approximately <span class="bq">____</span><span class="ba">10</span> N/kg.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        A 10 kg object has a weight of <span class="bq">_____</span><span class="ba">100</span> N on Earth.
+      </div>
+      <div class="fillrow" onclick="fillin(this)">
+        If you travel to the Moon, your MASS will <span class="bq">_______________</span><span class="ba">stay the same</span> and your WEIGHT will <span class="bq">_______________</span><span class="ba">decrease</span>.
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Lesson 1 &nbsp;|&nbsp; Page 6</div>
+</div>
+
+<!-- ══════════ PAGE 7: LESSON 2 ══════════ -->
+<div class="page">
+  <div class="phdr l2">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 2: Planning &amp; Recording</span>
+  </div>
+  <div class="lbanner l2">🔬 &nbsp; LESSON 2 — PLANNING, RESULTS &amp; GRAPH</div>
+  <div class="page-body" style="padding-top:0;">
+    <div class="lgoal">Learning Goal: Design a FAIR TEST to investigate how mass affects weight, record your results carefully, and draw a graph.</div>
+
+    <div class="sec">
+      <div class="snum l2">1</div>
+      <div class="stitle l2">Write Your Inquiry Question &amp; Hypothesis</div>
+    </div>
+
+    <p>Complete the Inquiry Question below:</p>
+    <div class="ipbox" onclick="tog(this)" style="cursor:pointer;">
+      <em>Inquiry Question: "How does the <span class="bq" style="min-width:80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ba" style="color:#C0000C;font-weight:bold;">mass</span> of an object affect the <span class="bq" style="min-width:80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ba" style="color:#C0000C;font-weight:bold;">weight</span> acting on it?"</em>
+      <div class="click-hint">👆 click to reveal</div>
+    </div>
+
+    <p style="margin-top:6pt;">Rewrite the hypothesis below:</p>
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Hypothesis (IF – THEN – BECAUSE): If the mass is increased, then the weight will... because...</em></div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        <strong>IF</strong> the mass of an object is increased, <strong>THEN</strong> the weight will also increase, <strong>BECAUSE</strong> weight = mass × gravity (W = m × g), and with gravitational field strength (g) remaining constant, a greater mass produces a greater weight force.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l2">2</div>
+      <div class="stitle l2">Identify Your Variables</div>
+    </div>
+
+    <p>Fill in the table below:</p>
+    <div class="ytbox" onclick="tog(this)" style="padding:0;">
+      <table style="margin:0;">
+        <tr>
+          <th style="background:#1A6878;text-align:left;">Variable Type</th>
+          <th style="background:#1A6878;width:60px;">Code</th>
+          <th style="background:#1A6878;text-align:left;">In our experiment, this is...</th>
+        </tr>
+        <tr><td><strong>Independent Variable</strong></td><td class="tctr" style="color:#1A6878;font-weight:bold;">IV</td><td style="min-height:30px;">&nbsp;</td></tr>
+        <tr style="background:#f9f9f9;"><td><strong>Dependent Variable</strong></td><td class="tctr" style="color:#1A6878;font-weight:bold;">DV</td><td>&nbsp;</td></tr>
+        <tr><td><strong>Controlled Variable</strong><br><small>(list at least 3)</small></td><td class="tctr" style="color:#1A6878;font-weight:bold;">CV</td><td style="min-height:55px;">&nbsp;</td></tr>
+      </table>
+      <div style="padding:4px 8px;" class="click-hint">👆 click table to reveal model answers</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        <strong>IV:</strong> The mass of the object (kg) — this is what you change.<br>
+        <strong>DV:</strong> The weight of the object (N) — this is what you measure.<br>
+        <strong>CV (at least 3):</strong> Same spring balance used throughout &nbsp;|&nbsp; Same location (g = 10 N/kg) &nbsp;|&nbsp; Masses allowed to hang still before recording &nbsp;|&nbsp; Spring balance zeroed before each measurement.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l2">3</div>
+      <div class="stitle l2">Equipment List &amp; Safety</div>
+    </div>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Write down the list of materials required for this experiment</em></div>
+      <div class="ytlines"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        Slotted masses (100 g, 200 g, 300 g, 400 g, 500 g), spring balance / Newton meter (0–10 N), retort stand, clamp, ruler, results table.
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Lesson 2 &nbsp;|&nbsp; Page 7</div>
+</div>
+
+<!-- ══════════ PAGE 8 ══════════ -->
+<div class="page">
+  <div class="phdr l2">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 2: Planning &amp; Recording</span>
+  </div>
+  <div class="page-body">
+    <div class="ytbox" style="padding:0;" onclick="tog(this)">
+      <table style="margin:0;">
+        <tr>
+          <th style="background:#1A6878;">Risk</th>
+          <th style="background:#1A6878;">Hazard</th>
+          <th style="background:#1A6878;">Control</th>
+        </tr>
+        <tr><td style="height:28px;"></td><td></td><td></td></tr>
+        <tr style="background:#f9f9f9;"><td style="height:28px;"></td><td></td><td></td></tr>
+        <tr><td style="height:28px;"></td><td></td><td></td></tr>
+        <tr style="background:#f9f9f9;"><td style="height:28px;"></td><td></td><td></td></tr>
+        <tr><td style="height:28px;"></td><td></td><td></td></tr>
+        <tr style="background:#f9f9f9;"><td style="height:28px;"></td><td></td><td></td></tr>
+      </table>
+      <div style="padding:4px 8px;" class="click-hint">👆 click to reveal model risk assessment</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        <strong>Risk:</strong> Masses falling &nbsp;|&nbsp; <strong>Hazard:</strong> Foot/toe injury &nbsp;|&nbsp; <strong>Control:</strong> Secure retort stand; do not lean over apparatus.<br>
+        <strong>Risk:</strong> Spring overextension &nbsp;|&nbsp; <strong>Hazard:</strong> Inaccurate readings / damaged equipment &nbsp;|&nbsp; <strong>Control:</strong> Only use masses within the spring balance's rated range.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l2">4</div>
+      <div class="stitle l2">Write Your Step-by-Step Method</div>
+    </div>
+
+    <div class="ibox amber">
+      Every step MUST start with a verb (action word). Examples: Zero, Hang, Record, Repeat, Increase, Remove. Be detailed enough that someone who has never done this experiment can follow your instructions exactly.
+    </div>
+
+    <div style="margin-top:6pt;">
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 1.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Set up the retort stand on a stable, flat surface and secure the clamp at a suitable height.</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 2.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Attach the spring balance to the clamp so it hangs vertically.</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 3.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Zero the spring balance by adjusting the pointer to 0 N before attaching any mass.</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 4.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Hang a 100 g (0.1 kg) slotted mass on the hook of the spring balance.</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 5.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Wait for the mass to stop swinging, then record the reading in Newtons in the results table (Trial 1).</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 6.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Remove and re-hang the same mass; repeat Step 5 for Trial 2 and Trial 3.</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 7.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Increase the mass to 200 g (0.2 kg) and repeat Steps 4–6.</div>
+        </div>
+      </div>
+      <div class="step-item" onclick="tog(this)">
+        <span class="step-lbl">Step 8.</span>
+        <div style="flex:1;border-bottom:.5pt solid #ddd;min-height:18px;">
+          <div class="ans" style="margin-top:0;padding-top:2px;border-top:none;">Continue for masses of 300 g, 400 g and 500 g, re-zeroing the spring balance before each new mass set.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Lesson 2 &nbsp;|&nbsp; Page 8</div>
+</div>
+
+<!-- ══════════ PAGE 9 ══════════ -->
+<div class="page">
+  <div class="phdr l2">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 2: Planning &amp; Recording</span>
+  </div>
+  <div class="page-body">
+
+    <div class="sec">
+      <div class="snum l2">5</div>
+      <div class="stitle l2">Record Your Results</div>
+    </div>
+
+    <p>Fill in the table during the experiment. Repeat each mass THREE times for <strong>reliability</strong>. Then calculate the <strong>average.</strong></p>
+    <div class="ibox">Average = (Trial 1 + Trial 2 + Trial 3) ÷ 3. &nbsp;Round your answer to 1 decimal place.</div>
+
+    <div onclick="tog(this)" style="cursor:pointer;">
+      <table>
+        <tr>
+          <th style="background:#1A6878;">Mass (kg)</th>
+          <th style="background:#1A6878;">Trial 1 (N)</th>
+          <th style="background:#1A6878;">Trial 2 (N)</th>
+          <th style="background:#1A6878;">Trial 3 (N)</th>
+          <th style="background:#1A6878;">Average Weight (N)</th>
+        </tr>
+        <tr><td>0.1 (100 g)</td><td></td><td></td><td></td><td></td></tr>
+        <tr style="background:#f9f9f9;"><td>0.2 (200 g)</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>0.3 (300 g)</td><td></td><td></td><td></td><td></td></tr>
+        <tr style="background:#f9f9f9;"><td>0.4 (400 g)</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>0.5 (500 g)</td><td></td><td></td><td></td><td></td></tr>
+      </table>
+      <div class="click-hint" style="font-size:6.5pt;color:#bbb;font-style:italic;text-align:right;margin-top:3px;">👆 click to see expected values</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Expected Values (W = m × 10)</div>
+        0.1 kg → <strong>1.0 N</strong> &nbsp;|&nbsp; 0.2 kg → <strong>2.0 N</strong> &nbsp;|&nbsp; 0.3 kg → <strong>3.0 N</strong> &nbsp;|&nbsp; 0.4 kg → <strong>4.0 N</strong> &nbsp;|&nbsp; 0.5 kg → <strong>5.0 N</strong>
+      </div>
+    </div>
+
+    <p style="margin-top:6pt;">Show your average calculation for ONE row here: &nbsp;( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) ÷ 3 = ____________ N</p>
+
+    <div class="sec" style="margin-top:10pt;">
+      <div class="snum l2">6</div>
+      <div class="stitle l2">Draw Your Graph</div>
+    </div>
+
+    <div class="ibox">
+      Plot Average Weight (Y-axis) vs Mass (X-axis).<br>
+      <strong>Checklist:</strong> &nbsp;☐ Title &nbsp; ☐ X-axis label + units &nbsp; ☐ Y-axis label + units &nbsp; ☐ Points plotted &nbsp; ☐ Line of best fit drawn
+    </div>
+    <p>TITLE: _______________________________________________________</p>
+  </div>
+  <div class="pftr">Lesson 2 &nbsp;|&nbsp; Page 9</div>
+</div>
+
+<!-- ══════════ PAGE 10: GRAPH PAPER ══════════ -->
+<div class="page">
+  <div class="phdr l2">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 2: Planning &amp; Recording</span>
+  </div>
+  <div class="page-body" style="display:flex;justify-content:center;align-items:flex-start;padding-top:5mm;">
+    <div class="gpaper"></div>
+  </div>
+  <div class="pftr">Lesson 2 &nbsp;|&nbsp; Page 10</div>
+</div>
+
+<!-- ══════════ PAGE 11: LESSON 3 ══════════ -->
+<div class="page">
+  <div class="phdr l3">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 3: Analysis &amp; Discussion</span>
+  </div>
+  <div class="lbanner l3">📊 &nbsp; LESSON 3 — ANALYSIS, DISCUSSION &amp; CONCLUSION</div>
+  <div class="page-body" style="padding-top:0;">
+    <div class="lgoal">Learning Goal: Turn your results into a scientific discussion. Use the scaffolds to help you write like a real scientist!</div>
+
+    <div class="sec">
+      <div class="snum l3">1</div>
+      <div class="stitle l3">Describe the Trend in Your Graph</div>
+    </div>
+
+    <div class="ibox">
+      A TREND describes the pattern you see in your graph. Good scientists always describe:<br>
+      &nbsp;&nbsp;&nbsp;(a) what happened to the independent variable (mass)<br>
+      &nbsp;&nbsp;&nbsp;(b) what happened to the dependent variable (weight)<br>
+      &nbsp;&nbsp;&nbsp;(c) the type of relationship between the variables (e.g. direct, proportional, linear).
+    </div>
+
+    <p>Circle the correct words in the boxes below, then copy the completed sentence into the writing space.</p>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div style="border:.5pt solid #ccc;padding:7px 10px;font-size:9.5pt;">
+        As the mass &nbsp;[ increased / decreased ], &nbsp;the weight &nbsp;[ increased / decreased / stayed the same ].<br>
+        This shows a &nbsp;[ direct / inverse ] &nbsp;relationship — when one goes up, the other goes &nbsp;[ up / down ].<br>
+        The line of best fit is &nbsp;[ straight / curved ], &nbsp;which tells us the relationship is &nbsp;[ linear / non-linear ].
+      </div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        As the mass <strong>increased</strong>, the weight <strong>increased</strong>. This shows a <strong>direct</strong> relationship — when one goes up, the other goes <strong>up</strong>. The line of best fit is <strong>straight</strong>, which tells us the relationship is <strong>linear</strong>.
+      </div>
+    </div>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Now write your trend description in your own words (2–3 sentences):</em></div>
+      <div class="ytlines"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        As the mass of the object increased from 0.1 kg to 0.5 kg, the weight measured by the spring balance also increased from approximately 1 N to 5 N. This shows a direct, proportional relationship between mass and weight. The straight line of best fit confirms this linear pattern.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l3">2</div>
+      <div class="stitle l3">Reliability — Did You Get Consistent Results?</div>
+    </div>
+
+    <div class="ibox">
+      RELIABILITY means: if you repeat the experiment, you get similar results each time. In your experiment, you did 3 trials for each mass. If the three trials are CLOSE to each other, your results are RELIABLE. If they are very different, your results are NOT reliable. To improve reliability: repeat the experiment more times and calculate a new average.
+    </div>
+
+    <p>Look at your results table. For each mass, look at how close your three trials were to each other.</p>
+
+    <table>
+      <tr>
+        <th style="background:#375B2E;">Mass (kg)</th>
+        <th style="background:#375B2E;">Lowest trial (N)</th>
+        <th style="background:#375B2E;">Highest trial (N)</th>
+        <th style="background:#375B2E;">Reliable? (close = yes)</th>
+      </tr>
+      <tr><td class="tctr">0.1</td><td></td><td></td><td></td></tr>
+      <tr style="background:#f9f9f9;"><td class="tctr">0.2</td><td></td><td></td><td></td></tr>
+      <tr><td class="tctr">0.3</td><td></td><td></td><td></td></tr>
+      <tr style="background:#f9f9f9;"><td class="tctr">0.4</td><td></td><td></td><td></td></tr>
+      <tr><td class="tctr">0.5</td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+  <div class="pftr">Lesson 3 &nbsp;|&nbsp; Page 11</div>
+</div>
+
+<!-- ══════════ PAGE 12 ══════════ -->
+<div class="page">
+  <div class="phdr l3">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 3: Analysis &amp; Discussion</span>
+  </div>
+  <div class="page-body">
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Write about the reliability of your results. Were your three trials close? What does that mean? How could you make your results more reliable?</em></div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        My results were reliable because the three trials for each mass were close together — for example, for 0.3 kg the trials were approximately 2.9, 3.0 and 3.1 N, a range of only 0.2 N. This shows the experiment gave consistent measurements. To improve reliability further, I could conduct 5 trials instead of 3 and calculate a new average, which would reduce the effect of random errors.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l3">3</div>
+      <div class="stitle l3">Validity — Was It a Fair Test?</div>
+    </div>
+
+    <div class="ibox">
+      VALIDITY means: the experiment actually tested what you intended to test. For an experiment to be VALID, only the independent variable (IV) should change. Everything else — the controlled variables (CVs) — must stay the same. If something else changed accidentally (e.g. you used a different spring balance halfway through), your experiment would NOT be valid because you wouldn't know what caused the difference in results.
+    </div>
+
+    <div class="ytbox" onclick="tog(this)" style="padding:0;">
+      <table style="margin:0;">
+        <tr>
+          <th style="background:#375B2E;text-align:left;width:48%;">In my experiment, the ONE thing I changed was:</th>
+          <th style="background:#375B2E;text-align:left;">Things I kept the same (to make it fair):</th>
+        </tr>
+        <tr><td style="min-height:60px;vertical-align:top;">&nbsp;</td><td style="min-height:60px;vertical-align:top;">&nbsp;</td></tr>
+      </table>
+      <div style="padding:4px 8px;" class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        <strong>ONE thing changed:</strong> The mass of the object (kg) — the independent variable.<br>
+        <strong>Kept the same:</strong> Same spring balance &nbsp;|&nbsp; Same location (g = 10 N/kg) &nbsp;|&nbsp; Masses hanging still before reading &nbsp;|&nbsp; Spring balance re-zeroed each time &nbsp;|&nbsp; Same technique for hanging masses.
+      </div>
+    </div>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Was your experiment a valid (fair) test? Give a reason. Was there anything that you accidentally changed that might have affected your results?</em></div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        Yes, the experiment was largely valid because only the mass changed during the investigation. A possible threat to validity was if the mass was still swinging when the reading was taken — this was caused by inconsistent technique and could have introduced random errors into the results.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l3">4</div>
+      <div class="stitle l3">Accuracy — How Close Were You to the True Value?</div>
+    </div>
+
+    <div class="ibox">
+      ACCURACY means: how close your results are to the TRUE or EXPECTED value. We know from W = m × g that on Earth (g = 10 N/kg), a 0.1 kg mass should weigh exactly 1 N. Compare your averages to the expected values below. The closer they are, the more ACCURATE your experiment was. Sources of INACCURACY include: reading the scale at an angle (parallax error), the spring being old and worn out, masses not hanging still when you read the scale, or not zeroing the spring balance first.
+    </div>
+  </div>
+  <div class="pftr">Lesson 3 &nbsp;|&nbsp; Page 12</div>
+</div>
+
+<!-- ══════════ PAGE 13 ══════════ -->
+<div class="page">
+  <div class="phdr l3">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 3: Analysis &amp; Discussion</span>
+  </div>
+  <div class="page-body">
+    <table>
+      <tr>
+        <th style="background:#375B2E;">Mass (kg)</th>
+        <th style="background:#375B2E;">Expected Weight (W = m × 10)</th>
+        <th style="background:#375B2E;">Your Average (N)</th>
+        <th style="background:#375B2E;">Difference (N)</th>
+      </tr>
+      <tr><td>0.1 kg</td><td class="tctr">0.1 × 10 = 1.0 N</td><td></td><td></td></tr>
+      <tr style="background:#f9f9f9;"><td>0.2 kg</td><td class="tctr">0.2 × 10 = 2.0 N</td><td></td><td></td></tr>
+      <tr><td>0.3 kg</td><td class="tctr">0.3 × 10 = 3.0 N</td><td></td><td></td></tr>
+      <tr style="background:#f9f9f9;"><td>0.4 kg</td><td class="tctr">0.4 × 10 = 4.0 N</td><td></td><td></td></tr>
+      <tr><td>0.5 kg</td><td class="tctr">0.5 × 10 = 5.0 N</td><td></td><td></td></tr>
+    </table>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Were your results accurate? Look at the differences in the table. What could have caused any inaccuracies? Describe at least ONE source of error and how you would fix it if you repeated the experiment.</em></div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        My results were mostly accurate — the differences between my averages and the expected values were small (less than 0.2 N for each mass).<br><br>
+        <strong>Source of error:</strong> Parallax error — reading the spring balance from an angle instead of directly in front makes the reading appear higher or lower than it really is.<br>
+        <strong>Fix:</strong> Always read the scale at eye level, looking straight at the pointer to eliminate parallax error.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="snum l3">5</div>
+      <div class="stitle l3">Did Your Results Support Your Hypothesis?</div>
+    </div>
+
+    <div class="ibox">
+      Your hypothesis was a prediction you made BEFORE the experiment. Now that you have results, you need to say whether your data SUPPORTS or REFUTES your hypothesis. SUPPORTED = your results match your prediction. REFUTED = your results do NOT match your prediction. Always use specific numbers from your data as EVIDENCE.
+    </div>
+
+    <div class="ssbox" onclick="tog(this)" style="cursor:pointer;">
+      <div class="sslabel">Sentence starter — circle one and complete:</div>
+      <p>My hypothesis was SUPPORTED &nbsp;/&nbsp; REFUTED &nbsp; because my results showed that when the mass was _______ kg, the weight was _______ N, which &nbsp;[ did / did not ] &nbsp;match my prediction.</p>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        My hypothesis was <strong>SUPPORTED</strong> because my results showed that when the mass was <strong>0.5 kg</strong>, the weight was <strong>5.0 N</strong>, which <strong>did</strong> match my prediction.
+      </div>
+    </div>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Write your full hypothesis evaluation here (3–4 sentences using evidence from your data):</em></div>
+      <div class="ytlines tall"></div>
+      <div class="click-hint">👆 click to reveal model answer</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        My hypothesis was supported by the results. I predicted that increasing mass would increase weight, and my data confirmed this pattern. For example, when the mass was 0.1 kg the measured weight was approximately 1.0 N, and when the mass was 0.5 kg the weight was approximately 5.0 N. This shows that as mass increased fivefold, weight also increased fivefold, demonstrating a directly proportional relationship consistent with W = m × g.
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Lesson 3 &nbsp;|&nbsp; Page 13</div>
+</div>
+
+<!-- ══════════ PAGE 14 ══════════ -->
+<div class="page">
+  <div class="phdr l3">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Lesson 3: Analysis &amp; Discussion</span>
+  </div>
+  <div class="lbanner l3" style="font-size:10.5pt;padding:5px 15mm;">
+    <div class="snum l3" style="margin-right:4px;">6</div>
+    <div style="color:#fff;font-weight:bold;">Write Your Conclusion</div>
+  </div>
+  <div class="page-body" style="padding-top:0;">
+    <div class="ibox" style="margin-top:6pt;">
+      A conclusion is a short paragraph that directly answers your INQUIRY QUESTION. A good conclusion includes ALL the following:<br>
+      &nbsp;&nbsp;&nbsp;① Answers the inquiry question directly<br>
+      &nbsp;&nbsp;&nbsp;② States whether the hypothesis was supported or refuted<br>
+      &nbsp;&nbsp;&nbsp;③ Refers to specific data (numbers) as evidence<br>
+      &nbsp;&nbsp;&nbsp;④ Mentions the mathematical relationship (W = m × g)<br>
+      &nbsp;&nbsp;&nbsp;⑤ Is written in past tense
+    </div>
+
+    <div class="ssbox" onclick="tog(this)" style="cursor:pointer;margin-top:8pt;">
+      <div class="sslabel">Sentence starters to guide you:</div>
+      <p>① <em>This investigation found that as mass increased, the weight...</em></p>
+      <p>② <em>This result supported / refuted my hypothesis, which predicted that...</em></p>
+      <p>③ <em>For example, when the mass was _____ kg, the measured weight was _____ N.</em></p>
+      <p>④ <em>This is consistent with the formula W = m × g, because...</em></p>
+      <p>⑤ <em>In conclusion, weight is directly proportional to mass, meaning...</em></p>
+      <div class="click-hint">👆 click to reveal model conclusion</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        This investigation found that as the mass of an object increased, the weight acting on it also increased proportionally. This result supported my hypothesis, which predicted that greater mass would produce greater weight due to the constant gravitational field strength on Earth. For example, when the mass was 0.5 kg, the measured weight was 5.0 N — exactly matching the expected value from W = m × g (0.5 × 10 = 5.0 N). This is consistent with the formula W = m × g, because with g held constant at 10 N/kg, weight scales linearly with mass. In conclusion, weight is directly proportional to mass: doubling the mass doubles the weight.
+      </div>
+    </div>
+
+    <div class="ytbox" onclick="tog(this)">
+      <div class="ytprompt" style="font-style:italic;font-weight:normal;color:#555;font-size:9pt;"><em>Write your full conclusion here:</em></div>
+      <div class="ytlines xtall"></div>
+      <div class="click-hint">👆 click to reveal model conclusion</div>
+      <div class="ans">
+        <div class="ans-lbl">✓ Model Answer</div>
+        This investigation found that as the mass of an object increased, the weight acting on it also increased proportionally. This result supported my hypothesis, which predicted that greater mass would produce greater weight. For example, when the mass was 0.5 kg, the measured weight was 5.0 N. This is consistent with W = m × g (g = 10 N/kg). In conclusion, weight is directly proportional to mass: doubling the mass doubles the weight.
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Lesson 3 &nbsp;|&nbsp; Page 14</div>
+</div>
+
+<!-- ══════════ PAGE 15: REFLECTION ══════════ -->
+<div class="page">
+  <div class="phdr ref">
+    <span>MASS, WEIGHT &amp; GRAVITY &nbsp;|&nbsp; Year 7 Science</span>
+    <span>Reflection &amp; Teacher Feedback</span>
+  </div>
+  <div class="lbanner ref">✅ &nbsp; SELF-REFLECTION &amp; TEACHER FEEDBACK</div>
+  <div class="page-body" style="padding-top:0;">
+
+    <div style="margin-top:6pt;">
+      <div style="font-size:11pt;font-weight:bold;color:#1F3864;text-decoration:underline;margin-bottom:8pt;">How did you go? — Tick the box that best describes you.</div>
+
+      <table class="reftbl">
+        <tr>
+          <th>I can...</th>
+          <th style="width:70px;">Not yet 😟</th>
+          <th style="width:80px;">Getting there 🙂</th>
+          <th style="width:60px;">Got it! 😄</th>
+        </tr>
+        <tr><td>Explain the difference between mass and weight.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr style="background:#f9f9f9;"><td>Use W = m × g to calculate weight on different planets.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr><td>Identify the IV, DV and CVs in my experiment.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr style="background:#f9f9f9;"><td>Explain what reliability, validity and accuracy mean.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr><td>Write a step-by-step method with verbs.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr style="background:#f9f9f9;"><td>Record results in a table and calculate averages.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr><td>Plot a graph and draw a line of best fit.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr style="background:#f9f9f9;"><td>Evaluate my results using reliability, validity and accuracy.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+        <tr><td>Write a conclusion that answers the inquiry question.</td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td>
+          <td class="tctr"><span class="cbox" onclick="selCheck(this)"></span></td></tr>
+      </table>
+    </div>
+
+    <div class="sr2col" style="margin-top:8pt;">
+      <div class="srbox">
+        <div class="srbox-title">⭐ SOMETHING I DID WELL</div>
+        <div style="min-height:45px;border-bottom:.5pt solid #D4A020;"></div>
+      </div>
+      <div class="srbox" style="border-color:#4472C4;background:#EBF5FB;">
+        <div class="srbox-title">🎯 SOMETHING TO IMPROVE</div>
+        <div style="min-height:45px;border-bottom:.5pt solid #4472C4;"></div>
+      </div>
+    </div>
+
+    <div class="tfeedback" style="margin-top:8pt;">
+      <div class="tfeedback-hdr">TEACHER FEEDBACK</div>
+      <div class="tfeedback-body">
+        <div class="tfeedback-label">Strengths:</div>
+        <div class="tfeedback-line"></div>
+        <div class="tfeedback-label">To improve:</div>
+        <div class="tfeedback-line"></div>
+        <div style="display:flex;gap:40mm;margin-top:8pt;font-size:9pt;">
+          <span>Signed: &nbsp; _____________________</span>
+          <span>Date: &nbsp; ___________________</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pftr">Reflection &nbsp;|&nbsp; Page 15</div>
+</div>
+
+<script>
+function tog(el){
+  const a = el.querySelector('.ans');
+  if(!a) return;
+  a.classList.toggle('show');
+  const h = el.querySelector('.click-hint');
+  if(h) h.textContent = a.classList.contains('show') ? '👆 click to hide answer' : '👆 click to reveal model answer';
+}
+function fillin(row){
+  row.classList.toggle('done');
+}
+function selCheck(box){
+  const row = box.closest('tr');
+  row.querySelectorAll('.cbox').forEach(b => b.classList.remove('chk'));
+  box.classList.add('chk');
+}
+</script>
+</body>
+</html>
