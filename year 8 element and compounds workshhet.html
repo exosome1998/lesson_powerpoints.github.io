@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elements and Compounds (Worksheet)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; background: #555; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .page { width: 210mm; height: 297mm; background: white; padding: 8mm; box-sizing: border-box; margin-bottom: 20px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* Science Theme Colors — adapted from the uploaded worksheet format 【2†source】 */
+        :root {
+            --primary: #00838f; /* Teal */
+            --accent-num: #e91e63;
+            --accent-master: #fbc02d;
+            --solid: #1565c0;
+            --liquid: #00838f;
+            --gas: #6a1b9a;
+        }
+
+        .full-header { border-bottom: 4px solid var(--primary); margin-bottom: 6px; padding-bottom: 3px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
+        .h-title { font-weight: 900; font-size: 1.35rem; text-transform: uppercase; color: var(--primary); letter-spacing: -0.5px; }
+        .h-info { font-size: 0.85rem; font-weight: bold; color: #333; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; height: 100%; align-content: start; }
+        .col { display: flex; flex-direction: column; gap: 6px; }
+        .module { border: 2px solid #333; border-radius: 6px; padding: 5px 8px; background: #fff; display: flex; flex-direction: column; }
+        .mod-header { background: var(--primary); color: white; padding: 2px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin: -5px -8px 4px -8px; border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; }
+        .mod-header.numeracy { background: var(--accent-num); }
+        .mod-header.master { background: var(--accent-master); color: #000; }
+        .mod-header.extra { background: #555; color: #fff;}
+        p { font-size: 0.78rem; margin: 0 0 2px 0; line-height: 1.25; color: #222; }
+        strong { font-weight: 900; color: var(--primary); }
+        .diagram-container { background: #f5f5f5; border: 1px dashed #bbb; border-radius: 4px; margin: 2px 0 4px 0; display: flex; justify-content: center; align-items: center; height: 48px; width: 100%; overflow: hidden; }
+        svg { display: block; max-height: 100%; width: 100%; object-fit: contain; }
+        
+        /* Click-to-reveal answers in RED — same interaction style as uploaded file 【2†source】 */
+        .line { border-bottom: 1.5px solid #000; display: inline-block; min-width: 40px; height: 12px; text-align: center; font-weight: 700; color: transparent; cursor: pointer; transition: color 0.1s; }
+        .line.revealed { color: #d32f2f; border-bottom-color: #d32f2f; }
+        .mcq { cursor: pointer; color: inherit; font-weight: 400; }
+        .mcq.revealed { color: #d32f2f; font-weight: 900; text-decoration: underline; }
+        
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; height: 100vh; } }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Year 8 Science — Elements &amp; Compounds</div>
+        <div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+    </div>
+    <div class="content-grid">
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L1 — What is an Element?</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="18" y="8" width="38" height="28" rx="3" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+                        <text x="37" y="26" text-anchor="middle" font-size="18" font-weight="900" fill="#00838f">O</text>
+                        <circle cx="100" cy="22" r="16" fill="#fffde7" stroke="#f57f17" stroke-width="1.5"/>
+                        <circle cx="100" cy="22" r="5" fill="#f57f17"/>
+                        <ellipse cx="100" cy="22" rx="24" ry="8" fill="none" stroke="#333" stroke-width="1"/>
+                        <circle cx="124" cy="22" r="3" fill="#1565c0"/>
+                        <rect x="150" y="8" width="32" height="28" rx="3" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+                        <text x="166" y="26" text-anchor="middle" font-size="16" font-weight="900" fill="#1565c0">Fe</text>
+                    </svg>
+                </div>
+                <p>1. An element is a substance made from only one type of <span class="line answer" onclick="this.classList.toggle('revealed')">atom</span>.</p>
+                <p>2. Oxygen, gold and iron are examples of <span class="line answer" onclick="this.classList.toggle('revealed')">elements</span>.</p>
+                <p>3. Elements are shown on the periodic <span class="line answer" onclick="this.classList.toggle('revealed')">table</span>.</p>
+                <p>4. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Element / (b) Mixture</span> — copper is one type of atom. (circle)</p>
+                <p>5. The symbol for oxygen is <span class="line answer" onclick="this.classList.toggle('revealed')">O</span>.</p>
+                <p>6. True or False: Elements can be broken down into simpler substances by normal chemical reactions. <span class="line answer" onclick="this.classList.toggle('revealed')">False</span></p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header"><span>L2 — Metals ⚙️</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="35" y="9" width="52" height="26" rx="3" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+                        <line x1="40" y1="14" x2="82" y2="14" stroke="#90caf9" stroke-width="2"/>
+                        <line x1="40" y1="22" x2="82" y2="22" stroke="#90caf9" stroke-width="2"/>
+                        <line x1="40" y1="30" x2="82" y2="30" stroke="#90caf9" stroke-width="2"/>
+                        <text x="61" y="25" text-anchor="middle" font-size="9" fill="#1565c0" font-weight="900">METAL</text>
+                        <path d="M 110 30 L 140 10 L 165 30 Z" fill="#fff8e1" stroke="#f57f17" stroke-width="1.5"/>
+                        <circle cx="140" cy="22" r="5" fill="#fbc02d"/>
+                        <text x="140" y="39" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">shiny</text>
+                    </svg>
+                </div>
+                <p>1. Metals are usually shiny and <span class="line answer" onclick="this.classList.toggle('revealed')">solid</span> at room temperature.</p>
+                <p>2. Metals conduct heat and <span class="line answer" onclick="this.classList.toggle('revealed')">electricity</span> well.</p>
+                <p>3. Metals can be bent or hammered into shape. This is called <span class="line answer" onclick="this.classList.toggle('revealed')">malleable</span>.</p>
+                <p>4. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Copper / (b) Oxygen</span> is a metal. (circle)</p>
+                <p>5. Iron is used to make strong <span class="line answer" onclick="this.classList.toggle('revealed')">steel</span>.</p>
+                <p>6. Aluminium is useful because it is light and does not <span class="line answer" onclick="this.classList.toggle('revealed')">rust</span> easily.</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header"><span>L3 — Non-metals 🌬️</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="48" cy="22" r="16" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
+                        <text x="48" y="26" text-anchor="middle" font-size="15" fill="#6a1b9a" font-weight="900">O₂</text>
+                        <rect x="88" y="10" width="30" height="24" rx="3" fill="#fff9c4" stroke="#f57f17" stroke-width="1.5"/>
+                        <text x="103" y="26" text-anchor="middle" font-size="14" fill="#e65100" font-weight="900">S</text>
+                        <path d="M 140 12 L 168 12 L 156 32 Z" fill="#eeeeee" stroke="#333" stroke-width="1.5"/>
+                        <text x="154" y="39" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">brittle</text>
+                    </svg>
+                </div>
+                <p>1. Non-metals are usually poor conductors of heat and <span class="line answer" onclick="this.classList.toggle('revealed')">electricity</span>.</p>
+                <p>2. Many non-metals are gases, such as oxygen and <span class="line answer" onclick="this.classList.toggle('revealed')">nitrogen</span>.</p>
+                <p>3. Solid non-metals are often dull and <span class="line answer" onclick="this.classList.toggle('revealed')">brittle</span>.</p>
+                <p>4. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Sulfur / (b) Iron</span> is a non-metal. (circle)</p>
+                <p>5. Carbon can exist as diamond or <span class="line answer" onclick="this.classList.toggle('revealed')">graphite</span>.</p>
+                <p>6. Oxygen is needed for animals to <span class="line answer" onclick="this.classList.toggle('revealed')">breathe/respire</span>.</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header numeracy"><span>L4 — Numeracy: Symbols &amp; Names</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="6" width="180" height="32" rx="4" fill="#fce4ec" stroke="#e91e63" stroke-width="1.5"/>
+                        <text x="40" y="19" text-anchor="middle" font-size="9" fill="#880e4f" font-weight="900">H</text>
+                        <text x="80" y="19" text-anchor="middle" font-size="9" fill="#880e4f" font-weight="900">O</text>
+                        <text x="120" y="19" text-anchor="middle" font-size="9" fill="#880e4f" font-weight="900">C</text>
+                        <text x="160" y="19" text-anchor="middle" font-size="9" fill="#880e4f" font-weight="900">Na</text>
+                        <text x="40" y="31" text-anchor="middle" font-size="7" fill="#333">hydrogen</text>
+                        <text x="80" y="31" text-anchor="middle" font-size="7" fill="#333">oxygen</text>
+                        <text x="120" y="31" text-anchor="middle" font-size="7" fill="#333">carbon</text>
+                        <text x="160" y="31" text-anchor="middle" font-size="7" fill="#333">sodium</text>
+                    </svg>
+                </div>
+                <p>1. The symbol H stands for <span class="line answer" onclick="this.classList.toggle('revealed')">hydrogen</span>.</p>
+                <p>2. The symbol O stands for <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span>.</p>
+                <p>3. The symbol C stands for <span class="line answer" onclick="this.classList.toggle('revealed')">carbon</span>.</p>
+                <p>4. Sodium has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">Na</span>.</p>
+                <p>5. How many different element symbols are shown above? <span class="line answer" onclick="this.classList.toggle('revealed')">4</span></p>
+                <p>6. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) One / (b) Two</span> letters — Some element symbols have ______ letters. (circle)</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L5 — What is a Compound?</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="70" cy="22" r="8" fill="#d32f2f"/>
+                        <circle cx="54" cy="22" r="5" fill="#1565c0"/>
+                        <circle cx="86" cy="22" r="5" fill="#1565c0"/>
+                        <line x1="60" y1="22" x2="64" y2="22" stroke="#333" stroke-width="1.5"/>
+                        <line x1="76" y1="22" x2="80" y2="22" stroke="#333" stroke-width="1.5"/>
+                        <text x="70" y="39" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">H₂O</text>
+                        <circle cx="134" cy="22" r="7" fill="#333"/>
+                        <circle cx="118" cy="22" r="7" fill="#d32f2f"/>
+                        <circle cx="150" cy="22" r="7" fill="#d32f2f"/>
+                        <line x1="125" y1="22" x2="127" y2="22" stroke="#333" stroke-width="1.5"/>
+                        <line x1="141" y1="22" x2="143" y2="22" stroke="#333" stroke-width="1.5"/>
+                        <text x="134" y="39" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">CO₂</text>
+                    </svg>
+                </div>
+                <p>1. A compound is made when two or more different <span class="line answer" onclick="this.classList.toggle('revealed')">elements</span> chemically join.</p>
+                <p>2. Water is a compound made from hydrogen and <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span>.</p>
+                <p>3. Carbon dioxide is made from carbon and <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span>.</p>
+                <p>4. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Element / (b) Compound</span> — H₂O is a... (circle)</p>
+                <p>5. Compounds usually have different properties from the elements that make <span class="line answer" onclick="this.classList.toggle('revealed')">them</span>.</p>
+                <p>6. Sodium chloride is the chemical name for table <span class="line answer" onclick="this.classList.toggle('revealed')">salt</span>.</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header"><span>L6 — Water: H₂O 💧</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 40 8 C 25 25 35 38 50 38 C 65 38 75 25 60 8 C 55 18 45 18 40 8 Z" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+                        <circle cx="115" cy="22" r="10" fill="#d32f2f"/>
+                        <circle cx="96" cy="25" r="6" fill="#1565c0"/>
+                        <circle cx="134" cy="25" r="6" fill="#1565c0"/>
+                        <line x1="102" y1="24" x2="107" y2="22" stroke="#333" stroke-width="1.5"/>
+                        <line x1="123" y1="22" x2="128" y2="24" stroke="#333" stroke-width="1.5"/>
+                        <text x="115" y="39" text-anchor="middle" font-size="8" fill="#333" font-weight="bold">water molecule</text>
+                    </svg>
+                </div>
+                <p>1. Water has the chemical formula <span class="line answer" onclick="this.classList.toggle('revealed')">H₂O</span>.</p>
+                <p>2. It contains two hydrogen atoms and one <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span> atom.</p>
+                <p>3. Water is useful for drinking, washing and growing <span class="line answer" onclick="this.classList.toggle('revealed')">plants</span>.</p>
+                <p>4. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Compound / (b) Element</span> — Water is a... (circle)</p>
+                <p>5. Water is usually a liquid at room <span class="line answer" onclick="this.classList.toggle('revealed')">temperature</span>.</p>
+                <p>6. Pure water is colourless and has no <span class="line answer" onclick="this.classList.toggle('revealed')">smell/odour</span>.</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header"><span>L7 — Carbon Dioxide: CO₂</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="10" width="45" height="25" rx="3" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
+                        <text x="42" y="26" text-anchor="middle" font-size="10" fill="#6a1b9a" font-weight="900">CO₂</text>
+                        <path d="M 95 34 C 95 20 105 15 112 8 C 120 16 128 21 128 34 Z" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+                        <line x1="112" y1="34" x2="112" y2="18" stroke="#2e7d32" stroke-width="1.5"/>
+                        <text x="112" y="40" text-anchor="middle" font-size="7" fill="#333">plants use it</text>
+                        <circle cx="160" cy="22" r="12" fill="#fff3e0" stroke="#ef6c00" stroke-width="1.5"/>
+                        <text x="160" y="25" text-anchor="middle" font-size="8" fill="#ef6c00" font-weight="900">gas</text>
+                    </svg>
+                </div>
+                <p>1. Carbon dioxide has the formula <span class="line answer" onclick="this.classList.toggle('revealed')">CO₂</span>.</p>
+                <p>2. It contains one carbon atom and two <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span> atoms.</p>
+                <p>3. Carbon dioxide is a <span class="line answer" onclick="this.classList.toggle('revealed')">gas</span> at room temperature.</p>
+                <p>4. Plants use carbon dioxide during <span class="line answer" onclick="this.classList.toggle('revealed')">photosynthesis</span>.</p>
+                <p>5. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Yes / (b) No</span> — Is CO₂ a compound? (circle)</p>
+                <p>6. CO₂ is also found in fizzy <span class="line answer" onclick="this.classList.toggle('revealed')">drinks</span>.</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header master"><span>L8 — Master: Elements vs Compounds</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="7" width="72" height="30" rx="4" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+                        <circle cx="28" cy="22" r="6" fill="#1565c0"/><circle cx="44" cy="22" r="6" fill="#1565c0"/><circle cx="60" cy="22" r="6" fill="#1565c0"/>
+                        <text x="46" y="39" text-anchor="middle" font-size="7" fill="#333">same atoms</text>
+                        <rect x="118" y="7" width="72" height="30" rx="4" fill="#fff3e0" stroke="#ef6c00" stroke-width="1.5"/>
+                        <circle cx="140" cy="22" r="7" fill="#d32f2f"/><circle cx="158" cy="22" r="5" fill="#1565c0"/>
+                        <line x1="147" y1="22" x2="153" y2="22" stroke="#333" stroke-width="1.5"/>
+                        <text x="154" y="39" text-anchor="middle" font-size="7" fill="#333">different atoms</text>
+                    </svg>
+                </div>
+                <p>1. An element has only one type of <span class="line answer" onclick="this.classList.toggle('revealed')">atom</span>.</p>
+                <p>2. A compound has two or more different elements chemically <span class="line answer" onclick="this.classList.toggle('revealed')">joined</span>.</p>
+                <p>3. Oxygen gas, O₂, is an element because both atoms are <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span>.</p>
+                <p>4. Water, H₂O, is a compound because it has hydrogen and <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span>.</p>
+                <p>5. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) O₂ / (b) CO₂</span> is an element. (circle)</p>
+                <p>6. Explain why NaCl is a compound: <span class="line answer" style="min-width:130px;" onclick="this.classList.toggle('revealed')">It contains sodium and chlorine</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="full-header">
+        <div class="h-title">Year 8 Science — Elements &amp; Compounds (cont.)</div>
+        <div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+    </div>
+    <div class="content-grid">
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L9 — Sodium Chloride: Salt</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="38" y="8" width="42" height="28" rx="3" fill="#e0f2f1" stroke="#00838f" stroke-width="1.5"/>
+                        <text x="59" y="26" text-anchor="middle" font-size="13" fill="#00838f" font-weight="900">Na</text>
+                        <text x="96" y="26" text-anchor="middle" font-size="15" fill="#333" font-weight="900">+</text>
+                        <rect x="116" y="8" width="42" height="28" rx="3" fill="#f1f8e9" stroke="#689f38" stroke-width="1.5"/>
+                        <text x="137" y="26" text-anchor="middle" font-size="13" fill="#33691e" font-weight="900">Cl</text>
+                        <text x="98" y="39" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">sodium chloride</text>
+                    </svg>
+                </div>
+                <p>1. Sodium chloride has the formula <span class="line answer" onclick="this.classList.toggle('revealed')">NaCl</span>.</p>
+                <p>2. It is commonly known as table <span class="line answer" onclick="this.classList.toggle('revealed')">salt</span>.</p>
+                <p>3. It is made from sodium and <span class="line answer" onclick="this.classList.toggle('revealed')">chlorine</span>.</p>
+                <p>4. Salt is used to flavour and preserve <span class="line answer" onclick="this.classList.toggle('revealed')">food</span>.</p>
+                <p>5. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Compound / (b) Element</span> — NaCl is a... (circle)</p>
+                <p>6. Sodium chloride forms tiny solid <span class="line answer" onclick="this.classList.toggle('revealed')">crystals</span>.</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header"><span>L10 — Everyday Uses</span><span>★★☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="12" width="32" height="20" rx="2" fill="#e3f2fd" stroke="#1565c0"/>
+                        <text x="26" y="25" text-anchor="middle" font-size="8" fill="#1565c0" font-weight="900">Fe</text>
+                        <path d="M 65 8 L 90 22 L 65 36 Z" fill="#eeeeee" stroke="#616161"/>
+                        <text x="72" y="25" text-anchor="middle" font-size="7" fill="#333" font-weight="900">Al</text>
+                        <circle cx="120" cy="22" r="13" fill="#e0f7fa" stroke="#00838f"/>
+                        <text x="120" y="25" text-anchor="middle" font-size="8" fill="#00838f" font-weight="900">H₂O</text>
+                        <rect x="152" y="10" width="30" height="24" rx="4" fill="#fff9c4" stroke="#f57f17"/>
+                        <text x="167" y="25" text-anchor="middle" font-size="8" fill="#e65100" font-weight="900">NaCl</text>
+                    </svg>
+                </div>
+                <p>1. Iron is used in bridges, buildings and <span class="line answer" onclick="this.classList.toggle('revealed')">cars</span>.</p>
+                <p>2. Aluminium is used in aircraft because it is <span class="line answer" onclick="this.classList.toggle('revealed')">light</span>.</p>
+                <p>3. Copper is used in electrical wires because it conducts <span class="line answer" onclick="this.classList.toggle('revealed')">electricity</span>.</p>
+                <p>4. Water is used for drinking, cleaning and <span class="line answer" onclick="this.classList.toggle('revealed')">cooling</span>.</p>
+                <p>5. Salt can be used to preserve <span class="line answer" onclick="this.classList.toggle('revealed')">food</span>.</p>
+                <p>6. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Property / (b) Random</span> — A use depends on a material's... (circle)</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header"><span>L11 — Properties Decide Uses</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="7" width="54" height="30" rx="4" fill="#fff9c4" stroke="#f57f17"/>
+                        <text x="35" y="19" text-anchor="middle" font-size="7" fill="#e65100" font-weight="900">PROPERTY</text>
+                        <text x="35" y="30" text-anchor="middle" font-size="7" fill="#333">conducts</text>
+                        <line x1="68" y1="22" x2="92" y2="22" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+                        <rect x="104" y="7" width="84" height="30" rx="4" fill="#e3f2fd" stroke="#1565c0"/>
+                        <text x="146" y="19" text-anchor="middle" font-size="7" fill="#1565c0" font-weight="900">USE</text>
+                        <text x="146" y="30" text-anchor="middle" font-size="7" fill="#333">electrical wires</text>
+                        <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/></marker></defs>
+                    </svg>
+                </div>
+                <p>1. Materials are chosen because of their <span class="line answer" onclick="this.classList.toggle('revealed')">properties</span>.</p>
+                <p>2. A pan is often made from metal because metal conducts <span class="line answer" onclick="this.classList.toggle('revealed')">heat</span>.</p>
+                <p>3. A window is made from glass because it is <span class="line answer" onclick="this.classList.toggle('revealed')">transparent</span>.</p>
+                <p>4. A bike frame may use aluminium because it is light and <span class="line answer" onclick="this.classList.toggle('revealed')">strong</span>.</p>
+                <p>5. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Copper / (b) Sulfur</span> is better for electrical wiring. (circle)</p>
+                <p>6. Explain why rubber is used around wires: <span class="line answer" style="min-width:135px;" onclick="this.classList.toggle('revealed')">It is an electrical insulator</span></p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header numeracy"><span>L12 — Formula Counting</span><span>📊</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="6" width="180" height="32" rx="4" fill="#fce4ec" stroke="#e91e63" stroke-width="1.5"/>
+                        <text x="42" y="26" text-anchor="middle" font-size="13" fill="#880e4f" font-weight="900">H₂O</text>
+                        <text x="88" y="26" text-anchor="middle" font-size="13" fill="#880e4f" font-weight="900">CO₂</text>
+                        <text x="134" y="26" text-anchor="middle" font-size="13" fill="#880e4f" font-weight="900">O₂</text>
+                        <text x="170" y="26" text-anchor="middle" font-size="13" fill="#880e4f" font-weight="900">NaCl</text>
+                    </svg>
+                </div>
+                <p>1. H₂O has <span class="line answer" onclick="this.classList.toggle('revealed')">2</span> hydrogen atoms.</p>
+                <p>2. H₂O has <span class="line answer" onclick="this.classList.toggle('revealed')">1</span> oxygen atom.</p>
+                <p>3. CO₂ has <span class="line answer" onclick="this.classList.toggle('revealed')">2</span> oxygen atoms.</p>
+                <p>4. O₂ is an element because it only contains <span class="line answer" onclick="this.classList.toggle('revealed')">oxygen</span>.</p>
+                <p>5. NaCl contains <span class="line answer" onclick="this.classList.toggle('revealed')">2</span> different elements.</p>
+                <p>6. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) H₂O / (b) O₂</span> has two different types of atom. (circle)</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="module">
+                <div class="mod-header"><span>L13 — Key Vocabulary</span><span>★☆☆</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="34" rx="5" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+                        <text x="100" y="18" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Key Terms</text>
+                        <text x="39" y="32" text-anchor="middle" font-size="8" fill="#333">Element</text>
+                        <text x="100" y="32" text-anchor="middle" font-size="8" fill="#333">Compound</text>
+                        <text x="163" y="32" text-anchor="middle" font-size="8" fill="#333">Property</text>
+                    </svg>
+                </div>
+                <p>1. <strong>Atom:</strong> a tiny particle that makes up <span class="line answer" onclick="this.classList.toggle('revealed')">matter</span>.</p>
+                <p>2. <strong>Element:</strong> a substance made of one type of <span class="line answer" onclick="this.classList.toggle('revealed')">atom</span>.</p>
+                <p>3. <strong>Compound:</strong> two or more different elements chemically <span class="line answer" onclick="this.classList.toggle('revealed')">joined</span>.</p>
+                <p>4. <strong>Property:</strong> a feature or characteristic of a <span class="line answer" onclick="this.classList.toggle('revealed')">material</span>.</p>
+                <p>5. <strong>Conduct:</strong> to allow heat or electricity to <span class="line answer" onclick="this.classList.toggle('revealed')">pass through</span>.</p>
+                <p>6. <strong>Brittle:</strong> <span class="mcq" onclick="this.classList.toggle('revealed')">(a) breaks easily / (b) bends easily</span>. (circle)</p>
+            </div>
+
+            <div class="module">
+                <div class="mod-header master"><span>L14 — Master Extension</span><span>★★★</span></div>
+                <div class="diagram-container">
+                    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="190" height="34" rx="5" fill="#fff3e0" stroke="#ff8f00" stroke-width="2"/>
+                        <text x="100" y="18" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">Challenge Scenario</text>
+                        <text x="100" y="32" text-anchor="middle" font-size="8" fill="#333">Choose a material for a cooking pan.</text>
+                    </svg>
+                </div>
+                <p>1. A cooking pan needs to conduct <span class="line answer" onclick="this.classList.toggle('revealed')">heat</span> well.</p>
+                <p>2. Metals are good choices because they are good heat <span class="line answer" onclick="this.classList.toggle('revealed')">conductors</span>.</p>
+                <p>3. The handle should not get too hot, so it should be an <span class="line answer" onclick="this.classList.toggle('revealed')">insulator</span>.</p>
+                <p>4. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Metal / (b) Rubber</span> would be better for the pan base. (circle)</p>
+                <p>5. <span class="mcq" onclick="this.classList.toggle('revealed')">(a) Metal / (b) Plastic</span> would be better for the handle. (circle)</p>
+                <p>6. Explain your choice for the handle: <span class="line answer" style="min-width:145px;" onclick="this.classList.toggle('revealed')">Plastic is a poor conductor of heat</span></p>
+            </div>
+
+            <div class="module" style="flex-grow:1; justify-content:space-between;">
+                <div class="mod-header extra"><span>L15 — Completion &amp; Reflection</span><span>✅</span></div>
+                <p style="font-size:0.82rem; margin-top:4px;"><strong>I can describe what an element is:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>I can explain what a compound is:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>I can link a property to a use:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>One common element or compound I use every day:</strong></p>
+                <p>____________________________________________________</p>
+                <p style="margin-top:6px;"><strong>One thing I still want to know:</strong></p>
+                <p>____________________________________________________</p>
+                <div style="display:flex; justify-content:space-between; margin-top:10px; border-top:1px solid #ccc; padding-top:6px;">
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Student Signature:</p>
+                        <div style="border-bottom:1.5px solid #333; width:120px; margin-top:14px;"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Teacher Signature:</p>
+                        <div style="border-bottom:1.5px solid #333; width:120px; margin-top:14px;"></div>
+                    </div>
+                    <div>
+                        <p style="font-size:0.72rem; color:#555;">Date:</p>
+                        <div style="border-bottom:1.5px solid #333; width:80px; margin-top:14px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
