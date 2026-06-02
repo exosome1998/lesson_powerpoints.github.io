@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<!-- saved from url=(0187)https://sass-node2.chatshare.biz/file_download/saasnexus-6a1f395c-ab18-8327-9223-f540cf0218c3:14255a29-b4c4-4b29-9038-c963a64f007d:mnt_data_periodic_table_click_by_click_presentation.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Periodic Table Intro — Click-by-Click Slides</title>
+<style>
+:root{
+  --teal:#00838f;
+  --blue:#1565c0;
+  --purple:#6a1b9a;
+  --orange:#ef6c00;
+  --green:#2e7d32;
+  --pink:#e91e63;
+  --yellow:#fbc02d;
+  --ink:#213137;
+  --muted:#607177;
+  --bg:#263238;
+  --soft:#f3f8f9;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+.toolbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:54px;
+  background:#111b1f;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  z-index:20;
+  font-size:14px;
+}
+.toolbar button{
+  border:0;
+  border-radius:9px;
+  padding:8px 13px;
+  font-weight:800;
+  background:var(--teal);
+  color:#fff;
+  cursor:pointer;
+}
+.deck{padding-top:58px}
+.slide{
+  display:none;
+  width:min(1180px, 95vw);
+  min-height:calc(100vh - 78px);
+  margin:10px auto 24px;
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 14px 36px rgba(0,0,0,.38);
+  padding:28px;
+  position:relative;
+  overflow:hidden;
+}
+.slide.active{display:block}
+.slide-grid{
+  display:grid;
+  grid-template-columns: 1.05fr 1.45fr;
+  gap:26px;
+  min-height:calc(100vh - 150px);
+}
+.map-panel{
+  background:#f7fbfc;
+  border:4px solid #dce8eb;
+  border-radius:22px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.content-panel{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+  padding:10px 6px;
+}
+h1,h2,h3,p{margin:0}
+h1{
+  font-size:54px;
+  line-height:.98;
+  letter-spacing:-1.5px;
+  color:var(--teal);
+  text-transform:uppercase;
+}
+h2{
+  font-size:43px;
+  line-height:1.03;
+  color:var(--teal);
+}
+h3{
+  font-size:30px;
+  color:var(--ink);
+}
+.big{
+  font-size:34px;
+  line-height:1.25;
+  font-weight:800;
+}
+.plain{
+  font-size:27px;
+  line-height:1.28;
+}
+.small{
+  font-size:18px;
+  color:var(--muted);
+  font-weight:700;
+}
+.badge{
+  display:inline-block;
+  width:max-content;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#e0f7fa;
+  border:2px solid var(--teal);
+  color:var(--teal);
+  font-weight:900;
+  font-size:18px;
+}
+.board{
+  background:var(--soft);
+  border:4px solid #d7e5e8;
+  border-radius:22px;
+  padding:22px;
+}
+.note{
+  background:#fff8e1;
+  border:3px solid var(--yellow);
+  border-radius:18px;
+  padding:16px 18px;
+  font-size:21px;
+  line-height:1.28;
+  font-weight:800;
+}
+.step{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  background:#eef8f9;
+  border-left:10px solid var(--teal);
+  border-radius:18px;
+  padding:15px 18px;
+  font-size:28px;
+  font-weight:900;
+}
+.num{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--teal);
+  color:white;
+  font-size:29px;
+  flex:0 0 auto;
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  background:#fff;
+  border:4px solid #d7e5e8;
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+}
+.card-title{
+  font-size:30px;
+  font-weight:900;
+  color:var(--teal);
+  margin-bottom:8px;
+}
+.card-text{
+  font-size:23px;
+  line-height:1.25;
+  font-weight:800;
+}
+.element-box{
+  width:190px;
+  height:190px;
+  border:6px solid var(--pink);
+  background:#fce4ec;
+  border-radius:18px;
+  position:relative;
+  margin:auto;
+}
+.atomic{
+  position:absolute;
+  top:12px;
+  left:15px;
+  font-size:36px;
+  font-weight:900;
+  color:#880e4f;
+}
+.symbol{
+  position:absolute;
+  inset:50px 0 auto 0;
+  text-align:center;
+  font-size:76px;
+  line-height:1;
+  font-weight:900;
+  color:#880e4f;
+}
+.ename{
+  position:absolute;
+  bottom:18px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:25px;
+  font-weight:900;
+}
+.pt{
+  display:grid;
+  grid-template-columns:repeat(18, 1fr);
+  gap:4px;
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+}
+.cell{
+  aspect-ratio:1;
+  border:1.8px solid #34474e;
+  border-radius:4px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:900;
+  background:#fff;
+  position:relative;
+}
+.blank{border:0;background:transparent}
+.metal{background:#e3f2fd;color:var(--blue)}
+.nonmetal{background:#f3e5f5;color:var(--purple)}
+.metalloid{background:#fff3e0;color:var(--orange)}
+.noble{background:#ede7f6;color:#4527a0}
+.focus{outline:5px solid var(--pink);outline-offset:2px;z-index:3}
+.focus-green{outline:5px solid var(--green);outline-offset:2px;z-index:3}
+.focus-yellow{outline:5px solid var(--yellow);outline-offset:2px;z-index:3}
+.fade{opacity:.23}
+.label{
+  text-align:center;
+  font-weight:900;
+  color:#485b61;
+  font-size:20px;
+  margin-bottom:12px;
+}
+.legend{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:14px;
+  font-size:15px;
+  font-weight:900;
+}
+.swatch{display:inline-block;width:14px;height:14px;border:1.5px solid #333;margin-right:4px;vertical-align:-2px}
+.map-note{
+  margin-top:12px;
+  text-align:center;
+  font-size:17px;
+  line-height:1.25;
+  font-weight:800;
+  color:#52676d;
+}
+.stair-line{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.map-wrap{position:relative}
+.callout{
+  display:inline-block;
+  border-radius:18px;
+  padding:18px 22px;
+  color:#fff;
+  font-size:31px;
+  font-weight:900;
+  text-align:center;
+}
+.c-blue{background:var(--blue)}
+.c-purple{background:var(--purple)}
+.c-orange{background:var(--orange)}
+.c-green{background:var(--green)}
+.c-violet{background:#4527a0}
+.c-yellow{background:var(--yellow); color:#111}
+.quiz{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.choice{
+  background:#fff;
+  border:4px solid #d7e5e8;
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+  font-size:31px;
+  font-weight:900;
+  cursor:pointer;
+}
+.choice.correct.show-answer, .choice:hover{
+  border-color:var(--teal);
+  background:#e0f7fa;
+  color:var(--teal);
+}
+.footer{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  color:#687a80;
+  font-size:15px;
+  font-weight:800;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .28s ease, transform .28s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal.hide-then-show{visibility:hidden}
+.reveal.hide-then-show.visible{visibility:visible}
+.clickhint{
+  position:absolute;
+  top:66px;
+  right:42px;
+  color:#789;
+  font-size:16px;
+  font-weight:900;
+}
+@media print{
+  body{background:#fff}
+  .toolbar,.clickhint{display:none}
+  .deck{padding-top:0}
+  .slide{
+    display:block !important;
+    width:100%;
+    min-height:100vh;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+    page-break-after:always;
+  }
+  .reveal{opacity:1;transform:none;visibility:visible}
+}
+@media(max-width:850px){
+  .slide-grid,.grid2,.grid3,.quiz{grid-template-columns:1fr}
+  h1{font-size:40px}
+  h2{font-size:34px}
+  .plain,.big{font-size:24px}
+  .pt{max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div><strong>Periodic Table Intro</strong> · click / space / → to reveal · ← to go back</div>
+  <div>
+    <button onclick="previous()">Back</button>
+    <button onclick="advance()">Next</button>
+  </div>
+</div>
+
+<main class="deck">
+
+<!-- Reusable periodic table pattern is written into each slide so every slide has the reference map. -->
+
+<section class="slide active">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal visible">
+      <div class="label">Our map for today</div>
+      <div class="map-wrap">
+        <div class="pt">
+          <div class="cell nonmetal">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble">He</div>
+          <div class="cell metal">Li</div><div class="cell metal">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid">B</div><div class="cell nonmetal">C</div><div class="cell nonmetal">N</div><div class="cell nonmetal">O</div><div class="cell nonmetal">F</div><div class="cell noble">Ne</div>
+          <div class="cell metal">Na</div><div class="cell metal">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal">Al</div><div class="cell metalloid">Si</div><div class="cell nonmetal">P</div><div class="cell nonmetal">S</div><div class="cell nonmetal">Cl</div><div class="cell noble">Ar</div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="swatch metal"></i>metals</span>
+        <span><i class="swatch nonmetal"></i>non-metals</span>
+        <span><i class="swatch metalloid"></i>metalloids</span>
+        <span><i class="swatch noble"></i>noble gases</span>
+      </div>
+    </div>
+    <div class="content-panel">
+      <h1 class="reveal">The Periodic Table</h1>
+      <p class="big reveal">Think of it as a <strong>map of elements</strong>.</p>
+      <div class="board reveal">
+        <p class="plain">An <strong>element</strong> is a pure substance made from one type of atom.</p>
+      </div>
+      <div class="note reveal">Today: learn how to read the map before the worksheet.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Big idea: a map of elements</span><span>1 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Every square is one element</div>
+      <div class="map-wrap">
+        <div class="pt">
+          <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+          <div class="cell metal fade">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal focus">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble fade">Ne</div>
+          <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+        </div>
+      </div>
+      <div class="map-note">Highlighted example: carbon</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Reading one element box</h2>
+      <div class="element-box reveal">
+        <div class="atomic">6</div>
+        <div class="symbol">C</div>
+        <div class="ename">Carbon</div>
+      </div>
+      <div class="step reveal"><span class="num">6</span>Atomic number</div>
+      <div class="step reveal"><span class="num">C</span>Chemical symbol</div>
+      <div class="step reveal"><span class="num">✓</span>Element name: Carbon</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet links: L1, L4</span><span>2 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Numbers go up across the table</div>
+      <div class="pt">
+        <div class="cell nonmetal focus">1<br>H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble focus">2<br>He</div>
+        <div class="cell metal focus">3<br>Li</div><div class="cell metal focus">4<br>Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid">5<br>B</div><div class="cell nonmetal">6<br>C</div><div class="cell nonmetal">7<br>N</div><div class="cell nonmetal">8<br>O</div><div class="cell nonmetal">9<br>F</div><div class="cell noble">10<br>Ne</div>
+        <div class="cell metal">11<br>Na</div><div class="cell metal">12<br>Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal">13<br>Al</div><div class="cell metalloid">14<br>Si</div><div class="cell nonmetal">15<br>P</div><div class="cell nonmetal">16<br>S</div><div class="cell nonmetal">17<br>Cl</div><div class="cell noble">18<br>Ar</div>
+      </div>
+      <div class="map-note">Atomic number = number of protons</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Atomic number</h2>
+      <div class="board reveal"><p class="big">The atomic number tells us how many <strong>protons</strong> are in one atom.</p></div>
+      <div class="grid3">
+        <div class="card reveal"><div class="card-title">H</div><div class="card-text">1 proton</div></div>
+        <div class="card reveal"><div class="card-title">C</div><div class="card-text">6 protons</div></div>
+        <div class="card reveal"><div class="card-title">O</div><div class="card-text">8 protons</div></div>
+      </div>
+      <div class="note reveal">Every element has its own atomic number.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L4</span><span>3 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Metals: left and middle</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal focus-green">Li</div><div class="cell metal focus-green">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble fade">Ne</div>
+        <div class="cell metal focus-green">Na</div><div class="cell metal focus-green">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal focus-green">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Examples: lithium, sodium, magnesium, aluminium</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Metals</h2>
+      <div class="callout c-blue reveal">left + middle</div>
+      <div class="grid3">
+        <div class="card reveal"><div class="card-title">Shiny</div><div class="card-text">often looks bright</div></div>
+        <div class="card reveal"><div class="card-title">Strong</div><div class="card-text">many are hard</div></div>
+        <div class="card reveal"><div class="card-title">Conduct</div><div class="card-text">heat + electricity</div></div>
+      </div>
+      <div class="note reveal">Everyday examples: pans, wires, foil, coins.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L2</span><span>4 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Non-metals: mostly right side</div>
+      <div class="pt">
+        <div class="cell nonmetal focus">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal fade">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal focus">C</div><div class="cell nonmetal focus">N</div><div class="cell nonmetal focus">O</div><div class="cell nonmetal focus">F</div><div class="cell noble fade">Ne</div>
+        <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal focus">P</div><div class="cell nonmetal focus">S</div><div class="cell nonmetal focus">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Hydrogen is the special non-metal on the far left.</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Non-metals</h2>
+      <div class="callout c-purple reveal">mostly on the right</div>
+      <div class="grid3">
+        <div class="card reveal"><div class="card-title">Poor conductors</div><div class="card-text">do not carry heat/electricity well</div></div>
+        <div class="card reveal"><div class="card-title">Many gases</div><div class="card-text">oxygen, nitrogen, chlorine</div></div>
+        <div class="card reveal"><div class="card-title">Some brittle</div><div class="card-text">can break easily</div></div>
+      </div>
+      <div class="note reveal">Everyday link: oxygen gas in air is a non-metal.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L3</span><span>5 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">The staircase line</div>
+      <div class="map-wrap">
+        <div class="pt">
+          <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+          <div class="cell metal fade">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid focus">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble fade">Ne</div>
+          <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid focus">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+        </div>
+      </div>
+      <div class="map-note">Near the staircase = metalloids</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Metalloids</h2>
+      <div class="callout c-orange reveal">between metals and non-metals</div>
+      <div class="board reveal"><p class="big">Metalloids have <strong>some metal properties</strong> and <strong>some non-metal properties</strong>.</p></div>
+      <div class="card reveal"><div class="card-title">Silicon</div><div class="card-text">used in computer chips</div></div>
+      <div class="note reveal">Everyday language: “not fully metal, not fully non-metal.”</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet links: L7, L16</span><span>6 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Groups go down</div>
+      <div class="pt">
+        <div class="cell nonmetal focus-green">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal focus-green">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble fade">Ne</div>
+        <div class="cell metal focus-green">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Column = group</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Groups</h2>
+      <div class="callout c-green reveal">vertical columns</div>
+      <div class="step reveal"><span class="num">↓</span>Groups go down</div>
+      <div class="board reveal"><p class="big">Elements in the same group often behave in a similar way.</p></div>
+      <div class="note reveal">Class phrase: “Same column, similar character.”</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L5</span><span>7 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Periods go across</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal focus-yellow">Li</div><div class="cell metal focus-yellow">Be</div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="cell metalloid focus-yellow">B</div><div class="cell nonmetal focus-yellow">C</div><div class="cell nonmetal focus-yellow">N</div><div class="cell nonmetal focus-yellow">O</div><div class="cell nonmetal focus-yellow">F</div><div class="cell noble focus-yellow">Ne</div>
+        <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Row = period</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Periods</h2>
+      <div class="callout c-yellow reveal">horizontal rows</div>
+      <div class="step reveal"><span class="num">→</span>Periods go across</div>
+      <div class="board reveal"><p class="big">Across a period, elements gradually change from metallic to non-metallic.</p></div>
+      <div class="note reveal">Class phrase: “Period = row.”</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L6</span><span>8 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Group 1: alkali metals</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal focus-green">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble fade">Ne</div>
+        <div class="cell metal focus-green">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Lithium, sodium, potassium are group 1 examples.</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Group 1</h2>
+      <div class="callout c-green reveal">alkali metals</div>
+      <div class="grid2">
+        <div class="card reveal"><div class="card-title">Reactive</div><div class="card-text">react with water</div></div>
+        <div class="card reveal"><div class="card-title">Stored safely</div><div class="card-text">often under oil</div></div>
+      </div>
+      <div class="step reveal"><span class="num">↓</span>Reactivity increases down the group</div>
+      <div class="note reveal">Everyday-science language: they are metals that react quickly, so we handle them carefully.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L9</span><span>9 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Group 2: alkaline earth metals</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal fade">Li</div><div class="cell metal focus-green">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble fade">Ne</div>
+        <div class="cell metal fade">Na</div><div class="cell metal focus-green">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Magnesium and calcium are common examples.</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Group 2</h2>
+      <div class="callout c-blue reveal">alkaline earth metals</div>
+      <div class="grid2">
+        <div class="card reveal"><div class="card-title">Metals</div><div class="card-text">conduct heat and electricity</div></div>
+        <div class="card reveal"><div class="card-title">Reactive</div><div class="card-text">usually less reactive than group 1</div></div>
+      </div>
+      <div class="note reveal">Everyday link: calcium is important for strong bones and teeth.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L10</span><span>10 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Group 7: halogens</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal fade">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal focus">F</div><div class="cell noble fade">Ne</div>
+        <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal focus">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Fluorine, chlorine, bromine, iodine</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Group 7</h2>
+      <div class="callout c-purple reveal">halogens</div>
+      <div class="grid2">
+        <div class="card reveal"><div class="card-title">Non-metals</div><div class="card-text">found on the right</div></div>
+        <div class="card reveal"><div class="card-title">Make salts</div><div class="card-text">react with metals</div></div>
+      </div>
+      <div class="step reveal"><span class="num">↓</span>Reactivity decreases down the group</div>
+      <div class="note reveal">Everyday link: chlorine is used to keep swimming pool water clean.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L11</span><span>11 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Group 0 / 18: noble gases</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble focus">He</div>
+        <div class="cell metal fade">Li</div><div class="cell metal fade">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid fade">B</div><div class="cell nonmetal fade">C</div><div class="cell nonmetal fade">N</div><div class="cell nonmetal fade">O</div><div class="cell nonmetal fade">F</div><div class="cell noble focus">Ne</div>
+        <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble focus">Ar</div>
+      </div>
+      <div class="map-note">Far right column</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Noble gases</h2>
+      <div class="callout c-violet reveal">very unreactive</div>
+      <div class="grid3">
+        <div class="card reveal"><div class="card-title">He</div><div class="card-text">helium</div></div>
+        <div class="card reveal"><div class="card-title">Ne</div><div class="card-text">neon</div></div>
+        <div class="card reveal"><div class="card-title">Ar</div><div class="card-text">argon</div></div>
+      </div>
+      <div class="note reveal">Everyday link: helium is used in balloons because it is very light.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L13</span><span>12 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Use row + column to find an element</div>
+      <div class="pt">
+        <div class="cell nonmetal fade">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble fade">He</div>
+        <div class="cell metal focus-yellow">Li</div><div class="cell metal focus-yellow">Be</div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="blank focus-yellow"></div><div class="cell metalloid focus-yellow">B</div><div class="cell nonmetal focus">C</div><div class="cell nonmetal focus-yellow">N</div><div class="cell nonmetal focus-yellow">O</div><div class="cell nonmetal focus-yellow">F</div><div class="cell noble focus-yellow">Ne</div>
+        <div class="cell metal fade">Na</div><div class="cell metal fade">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal fade">Al</div><div class="cell metalloid fade">Si</div><div class="cell nonmetal fade">P</div><div class="cell nonmetal fade">S</div><div class="cell nonmetal fade">Cl</div><div class="cell noble fade">Ar</div>
+      </div>
+      <div class="map-note">Carbon = period 2, group 14</div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Finding an element</h2>
+      <div class="step reveal"><span class="num">1</span>Find the group = column</div>
+      <div class="step reveal"><span class="num">2</span>Find the period = row</div>
+      <div class="step reveal"><span class="num">3</span>Where they meet = element</div>
+      <div class="board reveal"><p class="big">Example: Carbon is in <strong>group 14</strong> and <strong>period 2</strong>.</p></div>
+    </div>
+  </div>
+  <div class="footer"><span>Worksheet link: L8</span><span>13 / 14</span></div>
+</section>
+
+<section class="slide">
+  <div class="clickhint">Click to build the slide</div>
+  <div class="slide-grid">
+    <div class="map-panel reveal">
+      <div class="label">Final reference map</div>
+      <div class="pt">
+        <div class="cell nonmetal">H</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell noble">He</div>
+        <div class="cell metal">Li</div><div class="cell metal">Be</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metalloid">B</div><div class="cell nonmetal">C</div><div class="cell nonmetal">N</div><div class="cell nonmetal">O</div><div class="cell nonmetal">F</div><div class="cell noble">Ne</div>
+        <div class="cell metal">Na</div><div class="cell metal">Mg</div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="cell metal">Al</div><div class="cell metalloid">Si</div><div class="cell nonmetal">P</div><div class="cell nonmetal">S</div><div class="cell nonmetal">Cl</div><div class="cell noble">Ar</div>
+      </div>
+      <div class="legend">
+        <span><i class="swatch metal"></i>metals</span>
+        <span><i class="swatch nonmetal"></i>non-metals</span>
+        <span><i class="swatch metalloid"></i>metalloids</span>
+        <span><i class="swatch noble"></i>noble gases</span>
+      </div>
+    </div>
+    <div class="content-panel">
+      <h2 class="reveal">Before the worksheet, remember...</h2>
+      <div class="step reveal"><span class="num">1</span>Each box is an element.</div>
+      <div class="step reveal"><span class="num">2</span>Atomic number = protons.</div>
+      <div class="step reveal"><span class="num">3</span>Metals left/middle; non-metals mostly right.</div>
+      <div class="step reveal"><span class="num">4</span>Group = column. Period = row.</div>
+      <div class="note reveal">Now students are ready for L1–L16.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Move to worksheet</span><span>14 / 14</span></div>
+</section>
+
+</main>
+
+<script>
+let currentSlide = 0;
+const slides = Array.from(document.querySelectorAll('.slide'));
+
+function revealFirst(slide){
+  const items = Array.from(slide.querySelectorAll('.reveal'));
+  items.forEach(item => item.classList.remove('visible'));
+  if(items[0]) items[0].classList.add('visible');
+}
+
+function revealNext(){
+  const slide = slides[currentSlide];
+  const items = Array.from(slide.querySelectorAll('.reveal'));
+  const next = items.find(item => !item.classList.contains('visible'));
+  if(next){
+    next.classList.add('visible');
+    return true;
+  }
+  return false;
+}
+
+function showSlide(index){
+  currentSlide = Math.max(0, Math.min(slides.length - 1, index));
+  slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+  revealFirst(slides[currentSlide]);
+}
+
+function advance(){
+  if(!revealNext()){
+    showSlide(currentSlide + 1);
+  }
+}
+
+function previous(){
+  const slide = slides[currentSlide];
+  const items = Array.from(slide.querySelectorAll('.reveal.visible'));
+  if(items.length > 1){
+    items[items.length - 1].classList.remove('visible');
+  } else {
+    showSlide(currentSlide - 1);
+    const prevItems = Array.from(slides[currentSlide].querySelectorAll('.reveal'));
+    prevItems.forEach(item => item.classList.add('visible'));
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter'){
+    e.preventDefault();
+    advance();
+  }
+  if(e.key === 'ArrowLeft'){
+    e.preventDefault();
+    previous();
+  }
+});
+
+document.addEventListener('click', e => {
+  if(e.target.tagName.toLowerCase() === 'button') return;
+  if(e.target.classList.contains('choice')){
+    e.target.classList.toggle('show-answer');
+    return;
+  }
+  advance();
+});
+
+showSlide(0);
+</script>
+<script defer="" src="./Periodic Table Intro — Click-by-Click Slides_files/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;1c1c7799c54e46349cc23295b5e08299&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+</body></html>
