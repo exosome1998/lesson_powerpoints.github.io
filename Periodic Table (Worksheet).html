@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!-- saved from url=(0199)https://sass-node2.chatshare.biz/file_download/saasnexus-6a1de87f-abd0-83eb-839d-6db26dd6b989:1397ff6b-2fd1-4b60-9fbc-052bccbb5101:mnt_data_year_8_periodic_table_worksheet_FIXED_2_COLUMNS_NO_L17.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Periodic Table (Worksheet)</title>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; background: #555; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .page { width: 210mm; height: 297mm; background: white; padding: 8mm; box-sizing: border-box; margin-bottom: 20px; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* Science Theme Colors — matched to the uploaded worksheet format */
+        :root {
+            --primary: #00838f; /* Teal */
+            --accent-num: #e91e63;
+            --accent-master: #fbc02d;
+            --metal: #1565c0;
+            --nonmetal: #6a1b9a;
+            --metalloid: #ef6c00;
+            --group: #2e7d32;
+        }
+
+        .full-header { border-bottom: 4px solid var(--primary); margin-bottom: 6px; padding-bottom: 3px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
+        .h-title { font-weight: 900; font-size: 1.35rem; text-transform: uppercase; color: var(--primary); letter-spacing: -0.5px; }
+        .h-info { font-size: 0.85rem; font-weight: bold; color: #333; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; height: 100%; align-content: start; }
+        .page2-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; column-gap: 12px; }
+
+        .col { display: flex; flex-direction: column; gap: 6px; }
+        .module { border: 2px solid #333; border-radius: 6px; padding: 5px 8px; background: #fff; display: flex; flex-direction: column; }
+        .mod-header { background: var(--primary); color: white; padding: 2px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin: -5px -8px 4px -8px; border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; }
+        .mod-header.numeracy { background: var(--accent-num); }
+        .mod-header.master { background: var(--accent-master); color: #000; }
+        .mod-header.extra { background: #555; color: #fff; }
+        p { font-size: 0.78rem; margin: 0 0 2px 0; line-height: 1.25; color: #222; }
+        strong { font-weight: 900; color: var(--primary); }
+        .diagram-container { background: #f5f5f5; border: 1px dashed #bbb; border-radius: 4px; margin: 2px 0 4px 0; display: flex; justify-content: center; align-items: center; height: 48px; width: 100%; overflow: hidden; }
+        .diagram-tall { height: 76px; }
+        svg { display: block; max-height: 100%; width: 100%; object-fit: contain; }
+        
+        /* Click-to-reveal answers in RED — same interaction style as uploaded file */
+        .line { border-bottom: 1.5px solid #000; display: inline-block; min-width: 40px; height: 12px; text-align: center; font-weight: 700; color: transparent; cursor: pointer; transition: color 0.1s; }
+        .line.revealed { color: #d32f2f; border-bottom-color: #d32f2f; }
+        .mcq { cursor: pointer; color: inherit; font-weight: 400; }
+        .mcq.revealed { color: #d32f2f; font-weight: 900; text-decoration: underline; }
+        .mini-key { display:flex; gap:7px; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; color:#333; margin-top:1px; }
+        .keybox { width:10px; height:10px; border:1px solid #333; display:inline-block; vertical-align:middle; margin-right:2px; }
+        
+        @media print { body { background: none; padding: 0; } .page { margin: 0; box-shadow: none; page-break-after: always; height: 100vh; } }
+    </style>
+</head>
+<body>
+<div class="page">
+<div class="full-header">
+<div class="h-title">Year 8 Science — The Periodic Table</div>
+<div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+</div>
+<div class="content-grid">
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L1 — What is the Periodic Table?</span><span>★☆☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#e0f7fa" height="32" rx="4" stroke="#00838f" stroke-width="1.5" width="180" x="10" y="6"></rect>
+<rect fill="#e3f2fd" height="18" stroke="#1565c0" width="18" x="22" y="12"></rect><text fill="#1565c0" font-size="9" font-weight="900" text-anchor="middle" x="31" y="25">H</text>
+<rect fill="#fff3e0" height="18" stroke="#ef6c00" width="18" x="50" y="12"></rect><text fill="#ef6c00" font-size="8" font-weight="900" text-anchor="middle" x="59" y="25">B</text>
+<rect fill="#f3e5f5" height="18" stroke="#6a1b9a" width="18" x="78" y="12"></rect><text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="87" y="25">C</text>
+<rect fill="#e3f2fd" height="18" stroke="#1565c0" width="18" x="106" y="12"></rect><text fill="#1565c0" font-size="8" font-weight="900" text-anchor="middle" x="115" y="25">Fe</text>
+<rect fill="#f3e5f5" height="18" stroke="#6a1b9a" width="18" x="134" y="12"></rect><text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="143" y="25">O</text>
+<rect fill="#ede7f6" height="18" stroke="#4527a0" width="18" x="162" y="12"></rect><text fill="#4527a0" font-size="8" font-weight="900" text-anchor="middle" x="171" y="25">Ne</text>
+</svg>
+</div>
+<p>1. The periodic table shows all known chemical <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">elements</span>.</p>
+<p>2. Each element has a name and a chemical <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">symbol</span>.</p>
+<p>3. Elements are arranged by increasing atomic <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">number</span>.</p>
+<p>4. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Element / (b) Compound</span> — oxygen is shown on the table. (circle)</p>
+<p>5. The symbol for iron is <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">Fe</span>.</p>
+<p>6. True or False: The periodic table helps scientists classify elements. <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">True</span></p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L2 — Metals: Where are they?</span><span>★☆☆</span></div>
+<div class="diagram-container diagram-tall">
+<svg viewBox="0 0 200 72" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="56" rx="4" stroke="#333" stroke-width="1" width="176" x="12" y="8"></rect>
+<g stroke="#333" stroke-width="0.7">
+<rect fill="#e3f2fd" height="13" width="13" x="20" y="16"></rect><rect fill="#e3f2fd" height="13" width="13" x="20" y="31"></rect><rect fill="#e3f2fd" height="13" width="13" x="20" y="46"></rect>
+<rect fill="#e3f2fd" height="13" width="13" x="35" y="31"></rect><rect fill="#e3f2fd" height="13" width="13" x="35" y="46"></rect>
+<rect fill="#e3f2fd" height="13" width="13" x="56" y="31"></rect><rect fill="#e3f2fd" height="13" width="13" x="71" y="31"></rect><rect fill="#e3f2fd" height="13" width="13" x="86" y="31"></rect><rect fill="#e3f2fd" height="13" width="13" x="101" y="31"></rect>
+<rect fill="#e3f2fd" height="13" width="13" x="56" y="46"></rect><rect fill="#e3f2fd" height="13" width="13" x="71" y="46"></rect><rect fill="#e3f2fd" height="13" width="13" x="86" y="46"></rect><rect fill="#e3f2fd" height="13" width="13" x="101" y="46"></rect>
+<rect fill="#e3f2fd" height="13" width="13" x="116" y="46"></rect>
+<rect fill="#f3e5f5" height="13" width="13" x="131" y="46"></rect><rect fill="#f3e5f5" height="13" width="13" x="146" y="46"></rect><rect fill="#f3e5f5" height="13" width="13" x="161" y="46"></rect>
+<rect fill="#ede7f6" height="13" width="13" x="161" y="16"></rect>
+</g>
+<text fill="#1565c0" font-size="9" font-weight="900" x="75" y="25">METALS</text>
+<text fill="#6a1b9a" font-size="7" font-weight="900" x="149" y="38">non-metals</text>
+</svg>
+</div>
+<p>1. Most elements on the periodic table are <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metals</span>.</p>
+<p>2. Metals are mainly found on the left and in the <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">middle</span>.</p>
+<p>3. Metals are usually shiny, strong and good <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">conductors</span>.</p>
+<p>4. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Sodium / (b) Oxygen</span> is a metal. (circle)</p>
+<p>5. The staircase line separates many metals from <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">non-metals</span>.</p>
+<p>6. Iron, copper and aluminium are examples of <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metals</span>.</p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L3 — Non-metals: Where are they?</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fafafa" height="32" rx="4" stroke="#333" width="184" x="8" y="6"></rect>
+<path d="M 118 8 L 132 8 L 132 22 L 146 22 L 146 36" fill="none" stroke="#ef6c00" stroke-dasharray="3 2" stroke-width="2"></path>
+<rect fill="#e3f2fd" height="18" stroke="#1565c0" width="18" x="22" y="13"></rect><text fill="#1565c0" font-size="7" font-weight="900" text-anchor="middle" x="31" y="25">Na</text>
+<rect fill="#f3e5f5" height="18" stroke="#6a1b9a" width="18" x="130" y="13"></rect><text fill="#6a1b9a" font-size="7" font-weight="900" text-anchor="middle" x="139" y="25">O</text>
+<rect fill="#f3e5f5" height="18" stroke="#6a1b9a" width="18" x="152" y="13"></rect><text fill="#6a1b9a" font-size="7" font-weight="900" text-anchor="middle" x="161" y="25">Cl</text>
+<text fill="#333" font-size="8" font-weight="bold" text-anchor="middle" x="101" y="24">right side</text>
+</svg>
+</div>
+<p>1. Most non-metals are found on the right side of the periodic <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">table</span>.</p>
+<p>2. Hydrogen is a non-metal found on the far <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">left</span>.</p>
+<p>3. Non-metals are usually poor conductors of heat and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">electricity</span>.</p>
+<p>4. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Chlorine / (b) Iron</span> is a non-metal. (circle)</p>
+<p>5. Many non-metals are gases, such as nitrogen and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">oxygen</span>.</p>
+<p>6. Solid non-metals are often dull and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">brittle</span>.</p>
+</div>
+<div class="module">
+<div class="mod-header numeracy"><span>L4 — Numeracy: Atomic Number</span><span>📊</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fce4ec" height="34" rx="3" stroke="#e91e63" stroke-width="1.5" width="50" x="75" y="5"></rect>
+<text fill="#880e4f" font-size="7" font-weight="900" x="83" y="15">6</text>
+<text fill="#880e4f" font-size="17" font-weight="900" text-anchor="middle" x="100" y="27">C</text>
+<text fill="#333" font-size="6" text-anchor="middle" x="100" y="36">Carbon</text>
+<text fill="#333" font-size="7" font-weight="bold" text-anchor="middle" x="36" y="24">atomic number</text>
+<line marker-end="url(#arrow1)" stroke="#333" x1="63" x2="81" y1="22" y2="13"></line>
+<defs><marker id="arrow1" markerHeight="4" markerWidth="4" orient="auto-start-reverse" refX="5" refY="5" viewBox="0 0 10 10"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333"></path></marker></defs>
+</svg>
+</div>
+<p>1. The atomic number tells us how many protons are in an <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">atom</span>.</p>
+<p>2. Hydrogen has atomic number <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">1</span>.</p>
+<p>3. Carbon has atomic number <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">6</span>.</p>
+<p>4. Oxygen has atomic number <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">8</span>.</p>
+<p>5. Elements are ordered by increasing atomic <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">number</span>.</p>
+<p>6. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Protons / (b) Neutrons</span> — atomic number counts these. (circle)</p>
+</div>
+</div>
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L5 — Groups: Columns</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="30" rx="4" stroke="#333" width="164" x="18" y="7"></rect>
+<g stroke="#333" stroke-width="0.8">
+<rect fill="#c8e6c9" height="22" width="13" x="28" y="11"></rect><rect fill="#fff" height="22" width="13" x="48" y="11"></rect><rect fill="#fff" height="22" width="13" x="68" y="11"></rect><rect fill="#fff" height="22" width="13" x="88" y="11"></rect><rect fill="#fff" height="22" width="13" x="108" y="11"></rect><rect fill="#fff" height="22" width="13" x="128" y="11"></rect><rect fill="#fff" height="22" width="13" x="148" y="11"></rect>
+</g>
+<text fill="#2e7d32" font-size="8" font-weight="900" text-anchor="middle" x="34" y="25">1</text>
+<text fill="#333" font-size="8" font-weight="bold" text-anchor="middle" x="96" y="25">columns</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="34" y="40">group</text>
+</svg>
+</div>
+<p>1. A vertical column on the periodic table is called a <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">group</span>.</p>
+<p>2. Elements in the same group often have similar <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">properties</span>.</p>
+<p>3. Group 1 elements are called the alkali <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metals</span>.</p>
+<p>4. Group 7 elements are called the <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">halogens</span>.</p>
+<p>5. Group 0 or 18 elements are called noble <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">gases</span>.</p>
+<p>6. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Down / (b) Across</span> — groups go ______. (circle)</p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L6 — Periods: Rows</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="30" rx="4" stroke="#333" width="164" x="18" y="7"></rect>
+<g stroke="#333" stroke-width="0.8">
+<rect fill="#fff9c4" height="9" width="132" x="28" y="12"></rect><rect fill="#fff" height="9" width="132" x="28" y="23"></rect>
+<line x1="48" x2="48" y1="12" y2="32"></line><line x1="68" x2="68" y1="12" y2="32"></line><line x1="88" x2="88" y1="12" y2="32"></line><line x1="108" x2="108" y1="12" y2="32"></line><line x1="128" x2="128" y1="12" y2="32"></line><line x1="148" x2="148" y1="12" y2="32"></line>
+</g>
+<text fill="#e65100" font-size="7" font-weight="900" text-anchor="middle" x="94" y="20">PERIOD</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="95" y="39">rows go across</text>
+</svg>
+</div>
+<p>1. A horizontal row on the periodic table is called a <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">period</span>.</p>
+<p>2. Periods go across from left to <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">right</span>.</p>
+<p>3. The first period contains hydrogen and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">helium</span>.</p>
+<p>4. The second period starts with lithium and ends with <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">neon</span>.</p>
+<p>5. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Row / (b) Column</span> — a period is a... (circle)</p>
+<p>6. Elements change gradually across a <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">period</span>.</p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L7 — The Staircase Line</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="28" rx="4" stroke="#333" width="140" x="28" y="8"></rect>
+<path d="M 92 8 L 108 8 L 108 18 L 124 18 L 124 28 L 140 28 L 140 36" fill="none" stroke="#ef6c00" stroke-width="3"></path>
+<text fill="#1565c0" font-size="8" font-weight="900" text-anchor="middle" x="64" y="24">metals</text>
+<text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="146" y="18">non-metals</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="112" y="40">metalloids sit near the line</text>
+</svg>
+</div>
+<p>1. The staircase line helps separate metals and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">non-metals</span>.</p>
+<p>2. Elements near the staircase are often called <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metalloids</span>.</p>
+<p>3. Metalloids can have properties of both metals and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">non-metals</span>.</p>
+<p>4. Silicon is a useful <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metalloid</span>.</p>
+<p>5. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Silicon / (b) Sodium</span> is near the staircase. (circle)</p>
+<p>6. Silicon is used in computer <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">chips</span>.</p>
+</div>
+<div class="module master">
+<div class="mod-header master"><span>L8 — Master: Locate an Element</span><span>★★★</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff8e1" height="34" rx="4" stroke="#fbc02d" stroke-width="2" width="80" x="60" y="5"></rect>
+<text fill="#333" font-size="7" font-weight="bold" text-anchor="middle" x="100" y="16">Find Carbon</text>
+<rect fill="#f3e5f5" height="16" stroke="#6a1b9a" width="24" x="88" y="19"></rect>
+<text fill="#6a1b9a" font-size="12" font-weight="900" text-anchor="middle" x="100" y="31">C</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="35" y="24">group 14</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="166" y="24">period 2</text>
+</svg>
+</div>
+<p>1. To locate an element, use its group and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">period</span>.</p>
+<p>2. The group tells the vertical <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">column</span>.</p>
+<p>3. The period tells the horizontal <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">row</span>.</p>
+<p>4. Carbon is in period <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">2</span>.</p>
+<p>5. Sodium is in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">1</span>.</p>
+<p>6. Explain how to find chlorine: <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)" style="min-width:130px;">Use its group and period</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="page">
+<div class="full-header">
+<div class="h-title">Year 8 Science — The Periodic Table (cont.)</div>
+<div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+</div>
+<div class="content-grid page2-grid">
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L9 — Group 1: Alkali Metals</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="30" rx="4" stroke="#333" width="176" x="12" y="7"></rect>
+<rect fill="#c8e6c9" height="22" stroke="#2e7d32" width="16" x="28" y="11"></rect><text fill="#2e7d32" font-size="8" font-weight="900" text-anchor="middle" x="36" y="24">Li</text>
+<rect fill="#c8e6c9" height="22" stroke="#2e7d32" width="16" x="50" y="11"></rect><text fill="#2e7d32" font-size="8" font-weight="900" text-anchor="middle" x="58" y="24">Na</text>
+<rect fill="#c8e6c9" height="22" stroke="#2e7d32" width="16" x="72" y="11"></rect><text fill="#2e7d32" font-size="8" font-weight="900" text-anchor="middle" x="80" y="24">K</text>
+<path d="M 124 11 C 113 22 116 33 130 33 C 144 33 147 22 136 11 C 133 18 127 18 124 11 Z" fill="#e0f7fa" stroke="#00838f"></path>
+<text fill="#333" font-size="7" text-anchor="middle" x="130" y="41">react with water</text>
+</svg>
+</div>
+<p>1. Group 1 elements are called alkali <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metals</span>.</p>
+<p>2. Lithium, sodium and potassium are in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">1</span>.</p>
+<p>3. They react with water to make hydrogen <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">gas</span>.</p>
+<p>4. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Potassium / (b) Neon</span> is an alkali metal. (circle)</p>
+<p>5. Alkali metals are stored under oil because they are <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">reactive</span>.</p>
+<p>6. Reactivity increases as you go <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">down</span> group 1.</p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L10 — Group 2 Metals</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="28" rx="4" stroke="#333" width="168" x="16" y="8"></rect>
+<rect fill="#e3f2fd" height="18" stroke="#1565c0" width="18" x="36" y="12"></rect><text fill="#1565c0" font-size="8" font-weight="900" text-anchor="middle" x="45" y="25">Be</text>
+<rect fill="#e3f2fd" height="18" stroke="#1565c0" width="18" x="62" y="12"></rect><text fill="#1565c0" font-size="8" font-weight="900" text-anchor="middle" x="71" y="25">Mg</text>
+<rect fill="#e3f2fd" height="18" stroke="#1565c0" width="18" x="88" y="12"></rect><text fill="#1565c0" font-size="8" font-weight="900" text-anchor="middle" x="97" y="25">Ca</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="139" y="18">alkaline earth</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="139" y="29">metals</text>
+</svg>
+</div>
+<p>1. Group 2 elements are called alkaline earth <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metals</span>.</p>
+<p>2. Magnesium and calcium are in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">2</span>.</p>
+<p>3. Group 2 metals are reactive, but usually less reactive than group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">1</span>.</p>
+<p>4. Calcium is important for strong bones and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">teeth</span>.</p>
+<p>5. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Magnesium / (b) Chlorine</span> is a group 2 metal. (circle)</p>
+<p>6. Magnesium burns with a bright white <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">flame</span>.</p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L11 — Group 7: Halogens</span><span>★★★</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#f3e5f5" height="28" rx="4" stroke="#6a1b9a" width="170" x="15" y="8"></rect>
+<rect fill="#fff" height="18" stroke="#6a1b9a" width="20" x="34" y="12"></rect><text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="44" y="25">F</text>
+<rect fill="#fff" height="18" stroke="#6a1b9a" width="20" x="63" y="12"></rect><text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="73" y="25">Cl</text>
+<rect fill="#fff" height="18" stroke="#6a1b9a" width="20" x="92" y="12"></rect><text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="102" y="25">Br</text>
+<rect fill="#fff" height="18" stroke="#6a1b9a" width="20" x="121" y="12"></rect><text fill="#6a1b9a" font-size="8" font-weight="900" text-anchor="middle" x="131" y="25">I</text>
+<text fill="#333" font-size="7" font-weight="bold" text-anchor="middle" x="162" y="24">salts</text>
+</svg>
+</div>
+<p>1. Group 7 elements are called the <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">halogens</span>.</p>
+<p>2. Fluorine, chlorine, bromine and iodine are <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">halogens</span>.</p>
+<p>3. Halogens are <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">non-metals</span>.</p>
+<p>4. They react with metals to form <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">salts</span>.</p>
+<p>5. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Chlorine / (b) Sodium</span> is a halogen. (circle)</p>
+<p>6. Reactivity decreases as you go <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">down</span> group 7.</p>
+</div>
+<div class="module numeracy">
+<div class="mod-header numeracy"><span>L12 — Numeracy: Symbols &amp; Groups</span><span>📊</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fce4ec" height="32" rx="4" stroke="#e91e63" stroke-width="1.5" width="180" x="10" y="6"></rect>
+<text fill="#880e4f" font-size="8" font-weight="900" text-anchor="middle" x="36" y="19">Na</text><text fill="#333" font-size="7" text-anchor="middle" x="36" y="31">G1</text>
+<text fill="#880e4f" font-size="8" font-weight="900" text-anchor="middle" x="76" y="19">Mg</text><text fill="#333" font-size="7" text-anchor="middle" x="76" y="31">G2</text>
+<text fill="#880e4f" font-size="8" font-weight="900" text-anchor="middle" x="116" y="19">Cl</text><text fill="#333" font-size="7" text-anchor="middle" x="116" y="31">G7</text>
+<text fill="#880e4f" font-size="8" font-weight="900" text-anchor="middle" x="156" y="19">Ne</text><text fill="#333" font-size="7" text-anchor="middle" x="156" y="31">G0</text>
+</svg>
+</div>
+<p>1. Sodium, Na, is in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">1</span>.</p>
+<p>2. Magnesium, Mg, is in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">2</span>.</p>
+<p>3. Chlorine, Cl, is in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">7</span>.</p>
+<p>4. Neon, Ne, is in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">0/18</span>.</p>
+<p>5. How many elements are shown above? <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">4</span></p>
+<p>6. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Na / (b) Cl</span> is an alkali metal. (circle)</p>
+</div>
+</div>
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L13 — Group 0/18: Noble Gases</span><span>★★☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ede7f6" height="28" rx="4" stroke="#4527a0" width="172" x="14" y="8"></rect>
+<circle cx="42" cy="22" fill="#fff" r="10" stroke="#4527a0"></circle><text fill="#4527a0" font-size="8" font-weight="900" text-anchor="middle" x="42" y="25">He</text>
+<circle cx="78" cy="22" fill="#fff" r="10" stroke="#4527a0"></circle><text fill="#4527a0" font-size="8" font-weight="900" text-anchor="middle" x="78" y="25">Ne</text>
+<circle cx="114" cy="22" fill="#fff" r="10" stroke="#4527a0"></circle><text fill="#4527a0" font-size="8" font-weight="900" text-anchor="middle" x="114" y="25">Ar</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="158" y="20">unreactive</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="158" y="30">gases</text>
+</svg>
+</div>
+<p>1. Noble gases are found in group <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">0/18</span>.</p>
+<p>2. Helium, neon and argon are noble <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">gases</span>.</p>
+<p>3. Noble gases are very <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">unreactive</span>.</p>
+<p>4. They are found on the far <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">right</span> of the periodic table.</p>
+<p>5. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Neon / (b) Lithium</span> is a noble gas. (circle)</p>
+<p>6. Helium is used in balloons because it is very <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">light</span>.</p>
+</div>
+<div class="module">
+<div class="mod-header"><span>L14 — Key Vocabulary</span><span>★☆☆</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff9c4" height="34" rx="5" stroke="#f57f17" stroke-width="2" width="190" x="5" y="5"></rect>
+<text fill="#e65100" font-size="9" font-weight="bold" text-anchor="middle" x="100" y="17">Key Terms</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="38" y="31">Group</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="78" y="31">Period</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="126" y="31">Metalloid</text>
+<text fill="#333" font-size="7" text-anchor="middle" x="168" y="31">Symbol</text>
+</svg>
+</div>
+<p>1. <strong>Group:</strong> a vertical <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">column</span>.</p>
+<p>2. <strong>Period:</strong> a horizontal <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">row</span>.</p>
+<p>3. <strong>Metal:</strong> usually a good conductor and often <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">shiny</span>.</p>
+<p>4. <strong>Non-metal:</strong> usually a poor <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">conductor</span>.</p>
+<p>5. <strong>Metalloid:</strong> has properties of metals and <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">non-metals</span>.</p>
+<p>6. <strong>Symbol:</strong> <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) one or two letters / (b) a full sentence</span>. (circle)</p>
+</div>
+<div class="module master">
+<div class="mod-header master"><span>L15 — Master Extension</span><span>★★★</span></div>
+<div class="diagram-container">
+<svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff3e0" height="34" rx="5" stroke="#ff8f00" stroke-width="2" width="190" x="5" y="5"></rect>
+<text fill="#e65100" font-size="9" font-weight="bold" text-anchor="middle" x="100" y="18">Challenge: Unknown Element</text>
+<text fill="#333" font-size="8" text-anchor="middle" x="100" y="32">Group 1, shiny, reacts with water.</text>
+</svg>
+</div>
+<p>1. The unknown element is probably a <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metal</span>.</p>
+<p>2. Because it is in group 1, it is an alkali <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metal</span>.</p>
+<p>3. It will likely conduct electricity <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">well</span>.</p>
+<p>4. It may react strongly with <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">water</span>.</p>
+<p>5. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) Sodium / (b) Argon</span> best fits the clues. (circle)</p>
+<p>6. Explain your choice: <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)" style="min-width:135px;">Sodium is a group 1 metal</span></p>
+</div>
+
+<div class="module">
+<div class="mod-header"><span>L16 — Mini Periodic Table Map</span><span>★★☆</span></div>
+<div class="diagram-container diagram-tall">
+<svg viewBox="0 0 200 72" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#fff" height="50" rx="4" stroke="#333" width="184" x="8" y="6"></rect>
+<g stroke="#333" stroke-width="0.6">
+<rect fill="#f3e5f5" height="12" width="12" x="18" y="12"></rect><text fill="#6a1b9a" font-size="6" font-weight="900" text-anchor="middle" x="24" y="21">H</text>
+<rect fill="#ede7f6" height="12" width="12" x="166" y="12"></rect><text fill="#4527a0" font-size="6" font-weight="900" text-anchor="middle" x="172" y="21">He</text>
+<rect fill="#e3f2fd" height="12" width="12" x="18" y="27"></rect><text fill="#1565c0" font-size="6" font-weight="900" text-anchor="middle" x="24" y="36">Li</text>
+<rect fill="#e3f2fd" height="12" width="12" x="33" y="27"></rect><text fill="#1565c0" font-size="6" font-weight="900" text-anchor="middle" x="39" y="36">Be</text>
+<rect fill="#fff3e0" height="12" width="12" x="106" y="27"></rect><text fill="#ef6c00" font-size="6" font-weight="900" text-anchor="middle" x="112" y="36">B</text>
+<rect fill="#f3e5f5" height="12" width="12" x="121" y="27"></rect><text fill="#6a1b9a" font-size="6" font-weight="900" text-anchor="middle" x="127" y="36">C</text>
+<rect fill="#f3e5f5" height="12" width="12" x="136" y="27"></rect><text fill="#6a1b9a" font-size="6" font-weight="900" text-anchor="middle" x="142" y="36">N</text>
+<rect fill="#f3e5f5" height="12" width="12" x="151" y="27"></rect><text fill="#6a1b9a" font-size="6" font-weight="900" text-anchor="middle" x="157" y="36">O</text>
+<rect fill="#ede7f6" height="12" width="12" x="166" y="27"></rect><text fill="#4527a0" font-size="6" font-weight="900" text-anchor="middle" x="172" y="36">Ne</text>
+<rect fill="#e3f2fd" height="12" width="12" x="18" y="42"></rect><text fill="#1565c0" font-size="6" font-weight="900" text-anchor="middle" x="24" y="51">Na</text>
+<rect fill="#e3f2fd" height="12" width="12" x="33" y="42"></rect><text fill="#1565c0" font-size="6" font-weight="900" text-anchor="middle" x="39" y="51">Mg</text>
+<rect fill="#f3e5f5" height="12" width="12" x="151" y="42"></rect><text fill="#6a1b9a" font-size="6" font-weight="900" text-anchor="middle" x="157" y="51">Cl</text>
+<rect fill="#ede7f6" height="12" width="12" x="166" y="42"></rect><text fill="#4527a0" font-size="6" font-weight="900" text-anchor="middle" x="172" y="51">Ar</text>
+</g>
+<path d="M 105 24 L 119 24 L 119 39 L 134 39 L 134 55" fill="none" stroke="#ef6c00" stroke-width="1.6"></path>
+<text fill="#333" font-size="6.5" text-anchor="middle" x="100" y="66">blue = metals, purple = non-metals, orange = metalloids</text>
+</svg>
+</div>
+<p>1. The blue elements on this map are mostly <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metals</span>.</p>
+<p>2. The purple elements are mostly <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">non-metals</span>.</p>
+<p>3. The orange elements are near the <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">staircase</span>.</p>
+<p>4. Neon is on the far <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">right</span>.</p>
+<p>5. Sodium is on the left and is a <span class="line answer" onclick="this.classList.toggle(&#39;revealed&#39;)">metal</span>.</p>
+<p>6. <span class="mcq" onclick="this.classList.toggle(&#39;revealed&#39;)">(a) C / (b) Mg</span> is a non-metal. (circle)</p>
+</div></div>
+
+</div>
+</div>
+<script defer="" src="./Periodic Table (Worksheet)_files/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;1c1c7799c54e46349cc23295b5e08299&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+</body></html>
