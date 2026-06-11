@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Year 10 Chemistry Revision Worksheet</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #e8e8e8;
+  margin: 0;
+  padding: 20px;
+  color: #111;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  margin: 0 auto 20px auto;
+  padding: 10mm;
+  border: 1px solid #bbb;
+  page-break-after: always;
+}
+
+.title {
+  text-align: center;
+  border-bottom: 2px solid #111;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 21px;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.student-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin: 8px 0 10px 0;
+}
+
+.click-note {
+  text-align: center;
+  font-size: 11px;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.columns {
+  column-count: 2;
+  column-gap: 9mm;
+}
+
+.topic {
+  break-inside: avoid;
+  border: 1px solid #222;
+  padding: 7px;
+  margin-bottom: 9px;
+}
+
+h2 {
+  font-size: 14px;
+  background: #222;
+  color: white;
+  margin: -7px -7px 7px -7px;
+  padding: 5px;
+}
+
+.q {
+  font-size: 11.3px;
+  margin-bottom: 7px;
+  break-inside: avoid;
+}
+
+.line {
+  display: inline-block;
+  min-width: 82px;
+  height: 15px;
+  border-bottom: 1px solid #111;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.long-line {
+  display: block;
+  width: 100%;
+  height: 18px;
+  border-bottom: 1px solid #111;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.answer {
+  display: none;
+  background: #eef6ff;
+  border-left: 3px solid #1d70b8;
+  padding: 4px;
+  margin-top: 3px;
+  font-size: 10.8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.2px;
+  margin-bottom: 6px;
+}
+
+td, th {
+  border: 1px solid #555;
+  padding: 3px;
+  text-align: left;
+}
+
+th {
+  background: #f2f2f2;
+}
+
+.small {
+  font-size: 10.5px;
+}
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+
+  .page {
+    border: none;
+    margin: 0;
+    width: 210mm;
+    min-height: 297mm;
+    page-break-after: always;
+  }
+
+  .answer {
+    display: none !important;
+  }
+}
+</style>
+
+<script>
+function toggleAnswer(id) {
+  const answer = document.getElementById(id);
+  answer.style.display = answer.style.display === "block" ? "none" : "block";
+}
+</script>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="title">
+    <h1>Year 10 Chemistry Revision Worksheet</h1>
+    <div class="subtitle">Reactions, pH, acids, bases, bonding, ions, equations and rates</div>
+  </div>
+
+  <div class="student-line">
+    <div>Name: ___________________________</div>
+    <div>Date: ___________________________</div>
+  </div>
+
+  <div class="click-note">Click the answer line to reveal the answer.</div>
+
+  <div class="columns">
+
+    <div class="topic">
+      <h2>Reference Box: Common Ions</h2>
+
+      <table>
+        <tr>
+          <th>Metal ion</th>
+          <th>Charge</th>
+          <th>Non-metal ion</th>
+          <th>Charge</th>
+        </tr>
+        <tr><td>Lithium</td><td>Li⁺</td><td>Fluoride</td><td>F⁻</td></tr>
+        <tr><td>Sodium</td><td>Na⁺</td><td>Chloride</td><td>Cl⁻</td></tr>
+        <tr><td>Potassium</td><td>K⁺</td><td>Bromide</td><td>Br⁻</td></tr>
+        <tr><td>Silver</td><td>Ag⁺</td><td>Iodide</td><td>I⁻</td></tr>
+        <tr><td>Magnesium</td><td>Mg²⁺</td><td>Oxide</td><td>O²⁻</td></tr>
+        <tr><td>Calcium</td><td>Ca²⁺</td><td>Sulfide</td><td>S²⁻</td></tr>
+        <tr><td>Barium</td><td>Ba²⁺</td><td>Nitride</td><td>N³⁻</td></tr>
+        <tr><td>Zinc</td><td>Zn²⁺</td><td></td><td></td></tr>
+        <tr><td>Copper(II)</td><td>Cu²⁺</td><td></td><td></td></tr>
+        <tr><td>Iron(II)</td><td>Fe²⁺</td><td></td><td></td></tr>
+        <tr><td>Iron(III)</td><td>Fe³⁺</td><td></td><td></td></tr>
+        <tr><td>Aluminium</td><td>Al³⁺</td><td></td><td></td></tr>
+      </table>
+
+      <table>
+        <tr>
+          <th>Polyatomic ion</th>
+          <th>Formula</th>
+        </tr>
+        <tr><td>Hydroxide</td><td>OH⁻</td></tr>
+        <tr><td>Nitrate</td><td>NO₃⁻</td></tr>
+        <tr><td>Carbonate</td><td>CO₃²⁻</td></tr>
+        <tr><td>Sulfate</td><td>SO₄²⁻</td></tr>
+        <tr><td>Phosphate</td><td>PO₄³⁻</td></tr>
+        <tr><td>Ammonium</td><td>NH₄⁺</td></tr>
+      </table>
+
+      <table>
+        <tr>
+          <th>Common insoluble salt</th>
+          <th>Formula</th>
+        </tr>
+        <tr><td>Silver chloride</td><td>AgCl</td></tr>
+        <tr><td>Barium sulfate</td><td>BaSO₄</td></tr>
+        <tr><td>Lead iodide</td><td>PbI₂</td></tr>
+        <tr><td>Calcium carbonate</td><td>CaCO₃</td></tr>
+      </table>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 1: Reaction Types</h2>
+
+      <div class="q">1. A reaction that gives out heat is called <span class="line" onclick="toggleAnswer('a1')"></span>.
+        <div class="answer" id="a1">Exothermic.</div>
+      </div>
+
+      <div class="q">2. A reaction that absorbs heat is called <span class="line" onclick="toggleAnswer('a2')"></span>.
+        <div class="answer" id="a2">Endothermic.</div>
+      </div>
+
+      <div class="q">3. A substance reacting with oxygen is called <span class="line" onclick="toggleAnswer('a3')"></span>.
+        <div class="answer" id="a3">Combustion.</div>
+      </div>
+
+      <div class="q">4. A compound breaking into simpler substances is called <span class="line" onclick="toggleAnswer('a4')"></span>.
+        <div class="answer" id="a4">Decomposition.</div>
+      </div>
+
+      <div class="q">5. Acid + base is called <span class="line" onclick="toggleAnswer('a5')"></span>.
+        <div class="answer" id="a5">Neutralisation.</div>
+      </div>
+
+      <div class="q">6. A reaction that forms a solid from two solutions is called a <span class="line" onclick="toggleAnswer('a6')"></span> reaction.
+        <div class="answer" id="a6">Precipitation.</div>
+      </div>
+
+      <div class="q">7. One sign of a chemical reaction is:
+        <span class="long-line" onclick="toggleAnswer('a7')"></span>
+        <div class="answer" id="a7">Bubbles, heat, colour change, light, or solid forming.</div>
+      </div>
+
+      <div class="q">8. Is melting ice a chemical reaction?
+        <span class="long-line" onclick="toggleAnswer('a8')"></span>
+        <div class="answer" id="a8">No. It is a physical change.</div>
+      </div>
+
+      <div class="q">9. Is burning paper a chemical reaction?
+        <span class="long-line" onclick="toggleAnswer('a9')"></span>
+        <div class="answer" id="a9">Yes. New substances form.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 2: Acids, Bases and pH</h2>
+
+      <div class="q">10. Acids have pH values <span class="line" onclick="toggleAnswer('a10')"></span> than 7.
+        <div class="answer" id="a10">Lower / less.</div>
+      </div>
+
+      <div class="q">11. Bases have pH values <span class="line" onclick="toggleAnswer('a11')"></span> than 7.
+        <div class="answer" id="a11">Higher / greater.</div>
+      </div>
+
+      <div class="q">12. A neutral solution has pH <span class="line" onclick="toggleAnswer('a12')"></span>.
+        <div class="answer" id="a12">7.</div>
+      </div>
+
+      <div class="q">13. A very acidic solution has a pH close to <span class="line" onclick="toggleAnswer('a13')"></span>.
+        <div class="answer" id="a13">0 or 1.</div>
+      </div>
+
+      <div class="q">14. A very basic solution has a pH close to <span class="line" onclick="toggleAnswer('a14')"></span>.
+        <div class="answer" id="a14">13 or 14.</div>
+      </div>
+
+      <div class="q">15. An indicator is used to show:
+        <span class="long-line" onclick="toggleAnswer('a15')"></span>
+        <div class="answer" id="a15">Whether a solution is acidic, neutral, or basic.</div>
+      </div>
+
+      <div class="q">16. Universal indicator changes <span class="line" onclick="toggleAnswer('a16')"></span> depending on pH.
+        <div class="answer" id="a16">Colour.</div>
+      </div>
+
+      <div class="q">17. Red universal indicator suggests the solution is <span class="line" onclick="toggleAnswer('a17')"></span>.
+        <div class="answer" id="a17">Acidic.</div>
+      </div>
+
+      <div class="q">18. Green universal indicator suggests the solution is <span class="line" onclick="toggleAnswer('a18')"></span>.
+        <div class="answer" id="a18">Neutral.</div>
+      </div>
+
+      <div class="q">19. Blue or purple universal indicator suggests the solution is <span class="line" onclick="toggleAnswer('a19')"></span>.
+        <div class="answer" id="a19">Basic / alkaline.</div>
+      </div>
+
+      <div class="q">20. When an acid is neutralised, pH usually moves towards <span class="line" onclick="toggleAnswer('a20')"></span>.
+        <div class="answer" id="a20">7.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 3: Acid Reactions</h2>
+
+      <div class="q">21. Acid + metal → salt + <span class="line" onclick="toggleAnswer('a21')"></span>.
+        <div class="answer" id="a21">Hydrogen.</div>
+      </div>
+
+      <div class="q">22. Acid + carbonate → salt + water + <span class="line" onclick="toggleAnswer('a22')"></span>.
+        <div class="answer" id="a22">Carbon dioxide.</div>
+      </div>
+
+      <div class="q">23. Acid + base → salt + <span class="line" onclick="toggleAnswer('a23')"></span>.
+        <div class="answer" id="a23">Water.</div>
+      </div>
+
+      <div class="q">24. Bubbles usually show that a <span class="line" onclick="toggleAnswer('a24')"></span> is produced.
+        <div class="answer" id="a24">Gas.</div>
+      </div>
+
+      <div class="q">25. A squeaky pop test shows the gas is <span class="line" onclick="toggleAnswer('a25')"></span>.
+        <div class="answer" id="a25">Hydrogen.</div>
+      </div>
+
+      <div class="q">26. Limewater turning cloudy shows the gas is <span class="line" onclick="toggleAnswer('a26')"></span>.
+        <div class="answer" id="a26">Carbon dioxide.</div>
+      </div>
+
+      <div class="q">27. If pH rises during an acid reaction, the solution is becoming:
+        <span class="long-line" onclick="toggleAnswer('a27')"></span>
+        <div class="answer" id="a27">Less acidic.</div>
+      </div>
+
+      <div class="q">28. If a solid disappears in acid, it may have:
+        <span class="long-line" onclick="toggleAnswer('a28')"></span>
+        <div class="answer" id="a28">Reacted and formed dissolved products.</div>
+      </div>
+
+      <div class="q">29. Give one household acid:
+        <span class="long-line" onclick="toggleAnswer('a29')"></span>
+        <div class="answer" id="a29">Vinegar, lemon juice, fizzy drink.</div>
+      </div>
+
+      <div class="q">30. Give one household base:
+        <span class="long-line" onclick="toggleAnswer('a30')"></span>
+        <div class="answer" id="a30">Soap, toothpaste, baking soda solution.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="title">
+    <h1>Year 10 Chemistry Revision Worksheet</h1>
+    <div class="subtitle">Ionic bonding, covalent bonding and formula writing</div>
+  </div>
+
+  <div class="student-line">
+    <div>Name: ___________________________</div>
+    <div>Date: ___________________________</div>
+  </div>
+
+  <div class="click-note">Click the answer line to reveal the answer.</div>
+
+  <div class="columns">
+
+    <div class="topic">
+      <h2>Topic 4: Ionic Bonding</h2>
+
+      <div class="q">31. Ionic bonding involves the transfer of <span class="line" onclick="toggleAnswer('a31')"></span>.
+        <div class="answer" id="a31">Electrons.</div>
+      </div>
+
+      <div class="q">32. Metals usually <span class="line" onclick="toggleAnswer('a32')"></span> electrons.
+        <div class="answer" id="a32">Lose.</div>
+      </div>
+
+      <div class="q">33. Non-metals usually <span class="line" onclick="toggleAnswer('a33')"></span> electrons.
+        <div class="answer" id="a33">Gain.</div>
+      </div>
+
+      <div class="q">34. A positive ion is called a <span class="line" onclick="toggleAnswer('a34')"></span>.
+        <div class="answer" id="a34">Cation.</div>
+      </div>
+
+      <div class="q">35. A negative ion is called an <span class="line" onclick="toggleAnswer('a35')"></span>.
+        <div class="answer" id="a35">Anion.</div>
+      </div>
+
+      <div class="q">36. Sodium forms Na⁺ by losing <span class="line" onclick="toggleAnswer('a36')"></span> electron.
+        <div class="answer" id="a36">One.</div>
+      </div>
+
+      <div class="q">37. Magnesium forms Mg²⁺ by losing <span class="line" onclick="toggleAnswer('a37')"></span> electrons.
+        <div class="answer" id="a37">Two.</div>
+      </div>
+
+      <div class="q">38. Chlorine forms Cl⁻ by gaining <span class="line" onclick="toggleAnswer('a38')"></span> electron.
+        <div class="answer" id="a38">One.</div>
+      </div>
+
+      <div class="q">39. Oppositely charged ions are held by strong:
+        <span class="long-line" onclick="toggleAnswer('a39')"></span>
+        <div class="answer" id="a39">Electrostatic attraction.</div>
+      </div>
+
+      <div class="q">40. Ionic compounds are overall electrically:
+        <span class="long-line" onclick="toggleAnswer('a40')"></span>
+        <div class="answer" id="a40">Neutral.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 5: Covalent Bonding and Noble Gases</h2>
+
+      <div class="q">41. Covalent bonding involves sharing <span class="line" onclick="toggleAnswer('a41')"></span>.
+        <div class="answer" id="a41">Electrons.</div>
+      </div>
+
+      <div class="q">42. Covalent bonding usually occurs between <span class="line" onclick="toggleAnswer('a42')"></span> atoms.
+        <div class="answer" id="a42">Non-metal.</div>
+      </div>
+
+      <div class="q">43. Noble gases are stable because their outer shells are <span class="line" onclick="toggleAnswer('a43')"></span>.
+        <div class="answer" id="a43">Full.</div>
+      </div>
+
+      <div class="q">44. Atoms bond to become more:
+        <span class="long-line" onclick="toggleAnswer('a44')"></span>
+        <div class="answer" id="a44">Stable.</div>
+      </div>
+
+      <div class="q">45. Water is made from hydrogen and <span class="line" onclick="toggleAnswer('a45')"></span>.
+        <div class="answer" id="a45">Oxygen.</div>
+      </div>
+
+      <div class="q">46. The formula for water is <span class="line" onclick="toggleAnswer('a46')"></span>.
+        <div class="answer" id="a46">H₂O.</div>
+      </div>
+
+      <div class="q">47. In one water molecule, there are <span class="line" onclick="toggleAnswer('a47')"></span> hydrogen atoms.
+        <div class="answer" id="a47">Two.</div>
+      </div>
+
+      <div class="q">48. In one water molecule, there is <span class="line" onclick="toggleAnswer('a48')"></span> oxygen atom.
+        <div class="answer" id="a48">One.</div>
+      </div>
+
+      <div class="q">49. Why do noble gases not usually react?
+        <span class="long-line" onclick="toggleAnswer('a49')"></span>
+        <div class="answer" id="a49">They already have full outer electron shells.</div>
+      </div>
+
+      <div class="q">50. Is water ionic or covalent?
+        <span class="long-line" onclick="toggleAnswer('a50')"></span>
+        <div class="answer" id="a50">Covalent.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 6: Simple Ionic Formulae</h2>
+
+      <div class="q">51. Formula for sodium chloride:
+        <span class="long-line" onclick="toggleAnswer('a51')"></span>
+        <div class="answer" id="a51">NaCl.</div>
+      </div>
+
+      <div class="q">52. Formula for potassium bromide:
+        <span class="long-line" onclick="toggleAnswer('a52')"></span>
+        <div class="answer" id="a52">KBr.</div>
+      </div>
+
+      <div class="q">53. Formula for lithium fluoride:
+        <span class="long-line" onclick="toggleAnswer('a53')"></span>
+        <div class="answer" id="a53">LiF.</div>
+      </div>
+
+      <div class="q">54. Formula for magnesium oxide:
+        <span class="long-line" onclick="toggleAnswer('a54')"></span>
+        <div class="answer" id="a54">MgO.</div>
+      </div>
+
+      <div class="q">55. Formula for calcium chloride:
+        <span class="long-line" onclick="toggleAnswer('a55')"></span>
+        <div class="answer" id="a55">CaCl₂.</div>
+      </div>
+
+      <div class="q">56. Formula for magnesium chloride:
+        <span class="long-line" onclick="toggleAnswer('a56')"></span>
+        <div class="answer" id="a56">MgCl₂.</div>
+      </div>
+
+      <div class="q">57. Formula for aluminium oxide:
+        <span class="long-line" onclick="toggleAnswer('a57')"></span>
+        <div class="answer" id="a57">Al₂O₃.</div>
+      </div>
+
+      <div class="q">58. Formula for aluminium chloride:
+        <span class="long-line" onclick="toggleAnswer('a58')"></span>
+        <div class="answer" id="a58">AlCl₃.</div>
+      </div>
+
+      <div class="q">59. Formula for iron(III) oxide:
+        <span class="long-line" onclick="toggleAnswer('a59')"></span>
+        <div class="answer" id="a59">Fe₂O₃.</div>
+      </div>
+
+      <div class="q">60. Formula for copper(II) sulfide:
+        <span class="long-line" onclick="toggleAnswer('a60')"></span>
+        <div class="answer" id="a60">CuS.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 7: Polyatomic Formulae</h2>
+
+      <div class="q">61. Formula for sodium hydroxide:
+        <span class="long-line" onclick="toggleAnswer('a61')"></span>
+        <div class="answer" id="a61">NaOH.</div>
+      </div>
+
+      <div class="q">62. Formula for calcium hydroxide:
+        <span class="long-line" onclick="toggleAnswer('a62')"></span>
+        <div class="answer" id="a62">Ca(OH)₂.</div>
+      </div>
+
+      <div class="q">63. Formula for sodium nitrate:
+        <span class="long-line" onclick="toggleAnswer('a63')"></span>
+        <div class="answer" id="a63">NaNO₃.</div>
+      </div>
+
+      <div class="q">64. Formula for magnesium nitrate:
+        <span class="long-line" onclick="toggleAnswer('a64')"></span>
+        <div class="answer" id="a64">Mg(NO₃)₂.</div>
+      </div>
+
+      <div class="q">65. Formula for aluminium nitrate:
+        <span class="long-line" onclick="toggleAnswer('a65')"></span>
+        <div class="answer" id="a65">Al(NO₃)₃.</div>
+      </div>
+
+      <div class="q">66. Formula for calcium carbonate:
+        <span class="long-line" onclick="toggleAnswer('a66')"></span>
+        <div class="answer" id="a66">CaCO₃.</div>
+      </div>
+
+      <div class="q">67. Formula for sodium carbonate:
+        <span class="long-line" onclick="toggleAnswer('a67')"></span>
+        <div class="answer" id="a67">Na₂CO₃.</div>
+      </div>
+
+      <div class="q">68. Formula for magnesium sulfate:
+        <span class="long-line" onclick="toggleAnswer('a68')"></span>
+        <div class="answer" id="a68">MgSO₄.</div>
+      </div>
+
+      <div class="q">69. Formula for ammonium chloride:
+        <span class="long-line" onclick="toggleAnswer('a69')"></span>
+        <div class="answer" id="a69">NH₄Cl.</div>
+      </div>
+
+      <div class="q">70. Why are brackets used in Ca(OH)₂?
+        <span class="long-line" onclick="toggleAnswer('a70')"></span>
+        <div class="answer" id="a70">There are two hydroxide ions, and hydroxide is a group.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="title">
+    <h1>Year 10 Chemistry Revision Worksheet</h1>
+    <div class="subtitle">Chemical equations, balancing and double replacement</div>
+  </div>
+
+  <div class="student-line">
+    <div>Name: ___________________________</div>
+    <div>Date: ___________________________</div>
+  </div>
+
+  <div class="click-note">Click the answer line to reveal the answer.</div>
+
+  <div class="columns">
+
+    <div class="topic">
+      <h2>Topic 8: Balancing Equations</h2>
+
+      <div class="q">71. Balance: Mg + O₂ → MgO
+        <span class="long-line" onclick="toggleAnswer('a71')"></span>
+        <div class="answer" id="a71">2Mg + O₂ → 2MgO.</div>
+      </div>
+
+      <div class="q">72. Balance: Na + Cl₂ → NaCl
+        <span class="long-line" onclick="toggleAnswer('a72')"></span>
+        <div class="answer" id="a72">2Na + Cl₂ → 2NaCl.</div>
+      </div>
+
+      <div class="q">73. Balance: H₂ + O₂ → H₂O
+        <span class="long-line" onclick="toggleAnswer('a73')"></span>
+        <div class="answer" id="a73">2H₂ + O₂ → 2H₂O.</div>
+      </div>
+
+      <div class="q">74. Balance: Al + O₂ → Al₂O₃
+        <span class="long-line" onclick="toggleAnswer('a74')"></span>
+        <div class="answer" id="a74">4Al + 3O₂ → 2Al₂O₃.</div>
+      </div>
+
+      <div class="q">75. Balance: Fe + O₂ → Fe₂O₃
+        <span class="long-line" onclick="toggleAnswer('a75')"></span>
+        <div class="answer" id="a75">4Fe + 3O₂ → 2Fe₂O₃.</div>
+      </div>
+
+      <div class="q">76. Balance: Zn + HCl → ZnCl₂ + H₂
+        <span class="long-line" onclick="toggleAnswer('a76')"></span>
+        <div class="answer" id="a76">Zn + 2HCl → ZnCl₂ + H₂.</div>
+      </div>
+
+      <div class="q">77. Balance: Mg + HCl → MgCl₂ + H₂
+        <span class="long-line" onclick="toggleAnswer('a77')"></span>
+        <div class="answer" id="a77">Mg + 2HCl → MgCl₂ + H₂.</div>
+      </div>
+
+      <div class="q">78. Balance: CaCO₃ + HCl → CaCl₂ + H₂O + CO₂
+        <span class="long-line" onclick="toggleAnswer('a78')"></span>
+        <div class="answer" id="a78">CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂.</div>
+      </div>
+
+      <div class="q">79. Balance: NaOH + H₂SO₄ → Na₂SO₄ + H₂O
+        <span class="long-line" onclick="toggleAnswer('a79')"></span>
+        <div class="answer" id="a79">2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O.</div>
+      </div>
+
+      <div class="q">80. Balance: Al + HCl → AlCl₃ + H₂
+        <span class="long-line" onclick="toggleAnswer('a80')"></span>
+        <div class="answer" id="a80">2Al + 6HCl → 2AlCl₃ + 3H₂.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 9: Word Equations</h2>
+
+      <div class="q">81. Complete: metal + acid → salt + 
+        <span class="long-line" onclick="toggleAnswer('a81')"></span>
+        <div class="answer" id="a81">Hydrogen.</div>
+      </div>
+
+      <div class="q">82. Complete: carbonate + acid → salt + water +
+        <span class="long-line" onclick="toggleAnswer('a82')"></span>
+        <div class="answer" id="a82">Carbon dioxide.</div>
+      </div>
+
+      <div class="q">83. Complete: acid + base → salt +
+        <span class="long-line" onclick="toggleAnswer('a83')"></span>
+        <div class="answer" id="a83">Water.</div>
+      </div>
+
+      <div class="q">84. Magnesium + oxygen →
+        <span class="long-line" onclick="toggleAnswer('a84')"></span>
+        <div class="answer" id="a84">Magnesium oxide.</div>
+      </div>
+
+      <div class="q">85. Sodium + chlorine →
+        <span class="long-line" onclick="toggleAnswer('a85')"></span>
+        <div class="answer" id="a85">Sodium chloride.</div>
+      </div>
+
+      <div class="q">86. Zinc + hydrochloric acid →
+        <span class="long-line" onclick="toggleAnswer('a86')"></span>
+        <div class="answer" id="a86">Zinc chloride + hydrogen.</div>
+      </div>
+
+      <div class="q">87. Copper carbonate heated →
+        <span class="long-line" onclick="toggleAnswer('a87')"></span>
+        <div class="answer" id="a87">Copper oxide + carbon dioxide.</div>
+      </div>
+
+      <div class="q">88. Sodium hydroxide + hydrochloric acid →
+        <span class="long-line" onclick="toggleAnswer('a88')"></span>
+        <div class="answer" id="a88">Sodium chloride + water.</div>
+      </div>
+
+      <div class="q">89. Magnesium carbonate + acid produces which gas?
+        <span class="long-line" onclick="toggleAnswer('a89')"></span>
+        <div class="answer" id="a89">Carbon dioxide.</div>
+      </div>
+
+      <div class="q">90. Iron + acid produces which gas?
+        <span class="long-line" onclick="toggleAnswer('a90')"></span>
+        <div class="answer" id="a90">Hydrogen.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 10: Double Replacement</h2>
+
+      <div class="small">
+        Pattern: <strong>AB + CD → AD + CB</strong><br>
+        The positive ions swap partners with the negative ions.
+      </div>
+      <br>
+
+      <div class="q">91. In double replacement, positive ions swap:
+        <span class="long-line" onclick="toggleAnswer('a91')"></span>
+        <div class="answer" id="a91">Negative ions / partners.</div>
+      </div>
+
+      <div class="q">92. A solid formed from two solutions is a:
+        <span class="long-line" onclick="toggleAnswer('a92')"></span>
+        <div class="answer" id="a92">Precipitate.</div>
+      </div>
+
+      <div class="q">93. Predict products: AgNO₃ + NaCl →
+        <span class="long-line" onclick="toggleAnswer('a93')"></span>
+        <div class="answer" id="a93">AgCl + NaNO₃.</div>
+      </div>
+
+      <div class="q">94. Precipitate in AgNO₃ + NaCl:
+        <span class="long-line" onclick="toggleAnswer('a94')"></span>
+        <div class="answer" id="a94">AgCl.</div>
+      </div>
+
+      <div class="q">95. Predict products: BaCl₂ + Na₂SO₄ →
+        <span class="long-line" onclick="toggleAnswer('a95')"></span>
+        <div class="answer" id="a95">BaSO₄ + 2NaCl.</div>
+      </div>
+
+      <div class="q">96. Precipitate in BaCl₂ + Na₂SO₄:
+        <span class="long-line" onclick="toggleAnswer('a96')"></span>
+        <div class="answer" id="a96">BaSO₄.</div>
+      </div>
+
+      <div class="q">97. Predict products: Pb(NO₃)₂ + 2KI →
+        <span class="long-line" onclick="toggleAnswer('a97')"></span>
+        <div class="answer" id="a97">PbI₂ + 2KNO₃.</div>
+      </div>
+
+      <div class="q">98. Precipitate in Pb(NO₃)₂ + 2KI:
+        <span class="long-line" onclick="toggleAnswer('a98')"></span>
+        <div class="answer" id="a98">PbI₂.</div>
+      </div>
+
+      <div class="q">99. Predict products: CaCl₂ + Na₂CO₃ →
+        <span class="long-line" onclick="toggleAnswer('a99')"></span>
+        <div class="answer" id="a99">CaCO₃ + 2NaCl.</div>
+      </div>
+
+      <div class="q">100. Precipitate in CaCl₂ + Na₂CO₃:
+        <span class="long-line" onclick="toggleAnswer('a100')"></span>
+        <div class="answer" id="a100">CaCO₃.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 11: Spectator Ions</h2>
+
+      <div class="q">101. Spectator ions are ions that do not:
+        <span class="long-line" onclick="toggleAnswer('a101')"></span>
+        <div class="answer" id="a101">Take part in forming the precipitate.</div>
+      </div>
+
+      <div class="q">102. Spectator ions in AgNO₃ + NaCl:
+        <span class="long-line" onclick="toggleAnswer('a102')"></span>
+        <div class="answer" id="a102">Na⁺ and NO₃⁻.</div>
+      </div>
+
+      <div class="q">103. Net ionic equation for AgCl:
+        <span class="long-line" onclick="toggleAnswer('a103')"></span>
+        <div class="answer" id="a103">Ag⁺ + Cl⁻ → AgCl.</div>
+      </div>
+
+      <div class="q">104. Spectator ions in BaCl₂ + Na₂SO₄:
+        <span class="long-line" onclick="toggleAnswer('a104')"></span>
+        <div class="answer" id="a104">Na⁺ and Cl⁻.</div>
+      </div>
+
+      <div class="q">105. Net ionic equation for BaSO₄:
+        <span class="long-line" onclick="toggleAnswer('a105')"></span>
+        <div class="answer" id="a105">Ba²⁺ + SO₄²⁻ → BaSO₄.</div>
+      </div>
+
+      <div class="q">106. Spectator ions in Pb(NO₃)₂ + 2KI:
+        <span class="long-line" onclick="toggleAnswer('a106')"></span>
+        <div class="answer" id="a106">K⁺ and NO₃⁻.</div>
+      </div>
+
+      <div class="q">107. Net ionic equation for PbI₂:
+        <span class="long-line" onclick="toggleAnswer('a107')"></span>
+        <div class="answer" id="a107">Pb²⁺ + 2I⁻ → PbI₂.</div>
+      </div>
+
+      <div class="q">108. What does (aq) mean?
+        <span class="long-line" onclick="toggleAnswer('a108')"></span>
+        <div class="answer" id="a108">Dissolved in water.</div>
+      </div>
+
+      <div class="q">109. What does (s) mean?
+        <span class="long-line" onclick="toggleAnswer('a109')"></span>
+        <div class="answer" id="a109">Solid.</div>
+      </div>
+
+      <div class="q">110. What does (g) mean?
+        <span class="long-line" onclick="toggleAnswer('a110')"></span>
+        <div class="answer" id="a110">Gas.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="title">
+    <h1>Year 10 Chemistry Revision Worksheet</h1>
+    <div class="subtitle">Rates of reaction, observations and mixed review</div>
+  </div>
+
+  <div class="student-line">
+    <div>Name: ___________________________</div>
+    <div>Date: ___________________________</div>
+  </div>
+
+  <div class="click-note">Click the answer line to reveal the answer.</div>
+
+  <div class="columns">
+
+    <div class="topic">
+      <h2>Topic 12: Rates of Reaction</h2>
+
+      <div class="q">111. A faster reaction forms products more:
+        <span class="long-line" onclick="toggleAnswer('a111')"></span>
+        <div class="answer" id="a111">Quickly.</div>
+      </div>
+
+      <div class="q">112. Increasing temperature makes particles move:
+        <span class="long-line" onclick="toggleAnswer('a112')"></span>
+        <div class="answer" id="a112">Faster.</div>
+      </div>
+
+      <div class="q">113. Faster particles collide more:
+        <span class="long-line" onclick="toggleAnswer('a113')"></span>
+        <div class="answer" id="a113">Often / frequently.</div>
+      </div>
+
+      <div class="q">114. Higher concentration means more particles in the same:
+        <span class="long-line" onclick="toggleAnswer('a114')"></span>
+        <div class="answer" id="a114">Volume / space.</div>
+      </div>
+
+      <div class="q">115. Smaller solid pieces have larger:
+        <span class="long-line" onclick="toggleAnswer('a115')"></span>
+        <div class="answer" id="a115">Surface area.</div>
+      </div>
+
+      <div class="q">116. A catalyst speeds up a reaction without being:
+        <span class="long-line" onclick="toggleAnswer('a116')"></span>
+        <div class="answer" id="a116">Used up / consumed.</div>
+      </div>
+
+      <div class="q">117. Which reacts faster: powder or large pieces?
+        <span class="long-line" onclick="toggleAnswer('a117')"></span>
+        <div class="answer" id="a117">Powder.</div>
+      </div>
+
+      <div class="q">118. Why does powder react faster?
+        <span class="long-line" onclick="toggleAnswer('a118')"></span>
+        <div class="answer" id="a118">It has greater surface area.</div>
+      </div>
+
+      <div class="q">119. Why does concentration affect rate?
+        <span class="long-line" onclick="toggleAnswer('a119')"></span>
+        <div class="answer" id="a119">More particles cause more frequent collisions.</div>
+      </div>
+
+      <div class="q">120. Why does temperature affect rate?
+        <span class="long-line" onclick="toggleAnswer('a120')"></span>
+        <div class="answer" id="a120">Particles move faster and collide more often with more energy.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 13: Observations vs Explanations</h2>
+
+      <div class="q">121. “Bubbles formed” is an observation or explanation?
+        <span class="long-line" onclick="toggleAnswer('a121')"></span>
+        <div class="answer" id="a121">Observation.</div>
+      </div>
+
+      <div class="q">122. “Carbon dioxide was produced” is an observation or explanation?
+        <span class="long-line" onclick="toggleAnswer('a122')"></span>
+        <div class="answer" id="a122">Explanation.</div>
+      </div>
+
+      <div class="q">123. “The test tube became warm” is an observation or explanation?
+        <span class="long-line" onclick="toggleAnswer('a123')"></span>
+        <div class="answer" id="a123">Observation.</div>
+      </div>
+
+      <div class="q">124. “The reaction released energy” is an observation or explanation?
+        <span class="long-line" onclick="toggleAnswer('a124')"></span>
+        <div class="answer" id="a124">Explanation.</div>
+      </div>
+
+      <div class="q">125. “The white solid disappeared” is an observation or explanation?
+        <span class="long-line" onclick="toggleAnswer('a125')"></span>
+        <div class="answer" id="a125">Observation.</div>
+      </div>
+
+      <div class="q">126. “The acid was used up” is an observation or explanation?
+        <span class="long-line" onclick="toggleAnswer('a126')"></span>
+        <div class="answer" id="a126">Explanation.</div>
+      </div>
+
+      <div class="q">127. Give one observation for gas formation:
+        <span class="long-line" onclick="toggleAnswer('a127')"></span>
+        <div class="answer" id="a127">Bubbles or fizzing.</div>
+      </div>
+
+      <div class="q">128. Give one observation for a precipitation reaction:
+        <span class="long-line" onclick="toggleAnswer('a128')"></span>
+        <div class="answer" id="a128">A solid forms.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 14: Mixed Short Review</h2>
+
+      <div class="q">129. What particle is transferred in ionic bonding?
+        <span class="long-line" onclick="toggleAnswer('a129')"></span>
+        <div class="answer" id="a129">Electron.</div>
+      </div>
+
+      <div class="q">130. What particle is shared in covalent bonding?
+        <span class="long-line" onclick="toggleAnswer('a130')"></span>
+        <div class="answer" id="a130">Electron.</div>
+      </div>
+
+      <div class="q">131. What is the charge of nitrate?
+        <span class="long-line" onclick="toggleAnswer('a131')"></span>
+        <div class="answer" id="a131">NO₃⁻.</div>
+      </div>
+
+      <div class="q">132. What is the charge of carbonate?
+        <span class="long-line" onclick="toggleAnswer('a132')"></span>
+        <div class="answer" id="a132">CO₃²⁻.</div>
+      </div>
+
+      <div class="q">133. What is the formula for sulfate?
+        <span class="long-line" onclick="toggleAnswer('a133')"></span>
+        <div class="answer" id="a133">SO₄²⁻.</div>
+      </div>
+
+      <div class="q">134. What is the formula for ammonium?
+        <span class="long-line" onclick="toggleAnswer('a134')"></span>
+        <div class="answer" id="a134">NH₄⁺.</div>
+      </div>
+
+      <div class="q">135. Which ion is positive: Na⁺ or Cl⁻?
+        <span class="long-line" onclick="toggleAnswer('a135')"></span>
+        <div class="answer" id="a135">Na⁺.</div>
+      </div>
+
+      <div class="q">136. Which ion is negative: Mg²⁺ or O²⁻?
+        <span class="long-line" onclick="toggleAnswer('a136')"></span>
+        <div class="answer" id="a136">O²⁻.</div>
+      </div>
+
+      <div class="q">137. What is the product of neutralisation besides salt?
+        <span class="long-line" onclick="toggleAnswer('a137')"></span>
+        <div class="answer" id="a137">Water.</div>
+      </div>
+
+      <div class="q">138. What happens to pH when acid becomes less acidic?
+        <span class="long-line" onclick="toggleAnswer('a138')"></span>
+        <div class="answer" id="a138">pH increases.</div>
+      </div>
+    </div>
+
+    <div class="topic">
+      <h2>Topic 15: Mini Explanation Practice</h2>
+
+      <div class="q">139. Explain why noble gases are usually unreactive.
+        <span class="long-line" onclick="toggleAnswer('a139')"></span>
+        <div class="answer" id="a139">They have full outer electron shells, so they are stable.</div>
+      </div>
+
+      <div class="q">140. Explain why ionic compounds have no overall charge.
+        <span class="long-line" onclick="toggleAnswer('a140')"></span>
+        <div class="answer" id="a140">The positive and negative charges balance.</div>
+      </div>
+
+      <div class="q">141. Explain why a carbonate fizzes in acid.
+        <span class="long-line" onclick="toggleAnswer('a141')"></span>
+        <div class="answer" id="a141">Carbon dioxide gas is produced.</div>
+      </div>
+
+      <div class="q">142. Explain why a metal fizzes in acid.
+        <span class="long-line" onclick="toggleAnswer('a142')"></span>
+        <div class="answer" id="a142">Hydrogen gas is produced.</div>
+      </div>
+
+      <div class="q">143. Explain why pH can increase during a carbonate-acid reaction.
+        <span class="long-line" onclick="toggleAnswer('a143')"></span>
+        <div class="answer" id="a143">The acid is being used up, so the solution becomes less acidic.</div>
+      </div>
+
+      <div class="q">144. Explain why catalysts are useful.
+        <span class="long-line" onclick="toggleAnswer('a144')"></span>
+        <div class="answer" id="a144">They make reactions faster and are not used up.</div>
+      </div>
+
+      <div class="q">145. Explain why heating a reaction often makes it faster.
+        <span class="long-line" onclick="toggleAnswer('a145')"></span>
+        <div class="answer" id="a145">Particles move faster and collide more often with enough energy.</div>
+      </div>
+
+      <div class="q">146. Explain why higher concentration makes a reaction faster.
+        <span class="long-line" onclick="toggleAnswer('a146')"></span>
+        <div class="answer" id="a146">There are more particles per volume, so collisions happen more often.</div>
+      </div>
+
+      <div class="q">147. Explain why a precipitate forms.
+        <span class="long-line" onclick="toggleAnswer('a147')"></span>
+        <div class="answer" id="a147">Two ions join to form an insoluble solid.</div>
+      </div>
+
+      <div class="q">148. Explain what a spectator ion is.
+        <span class="long-line" onclick="toggleAnswer('a148')"></span>
+        <div class="answer" id="a148">An ion that stays dissolved and does not take part in the main reaction.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
