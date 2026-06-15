@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<title>Year 8 Science — Common Elements &amp; Compounds</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #555;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: white;
+    padding: 8mm;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+:root {
+    --primary: #00838f;
+    --accent-num: #e91e63;
+    --accent-master: #fbc02d;
+    --metal: #1565c0;
+    --nonmetal: #6a1b9a;
+    --noble: #4527a0;
+    --green: #2e7d32;
+    --orange: #ef6c00;
+}
+
+.full-header {
+    border-bottom: 4px solid var(--primary);
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+.h-title {
+    font-weight: 900;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+}
+
+.h-info {
+    font-size: 0.82rem;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12px;
+    height: 100%;
+    align-content: start;
+}
+
+.page2-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    column-gap: 12px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.module {
+    border: 2px solid #333;
+    border-radius: 6px;
+    padding: 5px 8px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.mod-header {
+    background: var(--primary);
+    color: white;
+    padding: 2px 8px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: -5px -8px 4px -8px;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mod-header.numeracy { background: var(--accent-num); }
+.mod-header.master { background: var(--accent-master); color: #000; }
+.mod-header.extra { background: #555; color: #fff; }
+
+p {
+    font-size: 0.76rem;
+    margin: 0 0 2px 0;
+    line-height: 1.22;
+    color: #222;
+}
+
+strong {
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.diagram-container {
+    background: #f5f5f5;
+    border: 1px dashed #bbb;
+    border-radius: 4px;
+    margin: 2px 0 4px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.diagram-tall { height: 76px; }
+
+svg {
+    display: block;
+    max-height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.line {
+    border-bottom: 1.5px solid #000;
+    display: inline-block;
+    min-width: 40px;
+    height: 12px;
+    text-align: center;
+    font-weight: 700;
+    color: transparent;
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.line.revealed {
+    color: #d32f2f;
+    border-bottom-color: #d32f2f;
+}
+
+@media print {
+    body { background: none; padding: 0; }
+    .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+        height: 100vh;
+    }
+}
+</style>
+</head><body>
+<div class="page">
+<div class="full-header">
+<div class="h-title">Year 8 Science — Common Elements & Compounds</div>
+<div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+</div>
+<div class="content-grid">
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L1 — Element or Compound</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><rect x="20" y="8" width="34" height="28" rx="5" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="37" y="27" text-anchor="middle" font-size="9" font-weight="900">element</text><rect x="100" y="8" width="34" height="28" rx="5" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="117" y="27" text-anchor="middle" font-size="9" font-weight="900">compound</text></svg></div>
+<p>1. An element has one type of <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">atom</span>.</p>
+<p>2. A compound has two or more elements <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:54px;">joined</span> together.</p>
+<p>3. Oxygen is an <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">element</span>.</p>
+<p>4. Water is a <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:70px;">compound</span>.</p>
+<p>5. Elements and compounds are types of <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:78px;">substances</span>.</p>
+<p>6. True or False: A compound has only one element. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">False</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L2 — Oxygen: O₂</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="92" cy="16" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">O₂</text></svg></div>
+<p>1. Oxygen has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">O</span>.</p>
+<p>2. Oxygen gas is written as <span class="line answer" onclick="this.classList.toggle('revealed')">O₂</span>.</p>
+<p>3. O₂ has two oxygen <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">atoms</span>.</p>
+<p>4. Humans use oxygen for <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:72px;">breathing</span>.</p>
+<p>5. Medical oxygen is used in some <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:74px;">hospitals</span>.</p>
+<p>6. True or False: O₂ is made from oxygen atoms only. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L3 — Water: H₂O</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="92" cy="16" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="120" cy="23" r="12" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">H₂O</text></svg></div>
+<p>1. Water is made from hydrogen and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>2. The formula for water is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:42px;">H₂O</span>.</p>
+<p>3. H₂O has two hydrogen atoms and one oxygen <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">atom</span>.</p>
+<p>4. Water is used for drinking and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:68px;">cleaning</span>.</p>
+<p>5. Hydrogen has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">H</span>.</p>
+<p>6. True or False: Water is a compound. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L4 — Carbon Dioxide: CO₂</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="92" cy="16" r="12" fill="#424242" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#fff">C</text><circle cx="120" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">CO₂</text></svg></div>
+<p>1. Carbon dioxide contains carbon and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>2. The formula for carbon dioxide is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">CO₂</span>.</p>
+<p>3. CO₂ is a <span class="line answer" onclick="this.classList.toggle('revealed')">gas</span> at room temperature.</p>
+<p>4. Plants use carbon dioxide in <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:94px;">photosynthesis</span>.</p>
+<p>5. CO₂ can make fizzy drinks <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">bubbly</span>.</p>
+<p>6. True or False: CO₂ contains calcium. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">False</span></p>
+</div>
+</div>
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L5 — Table Salt: NaCl</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#ffe0b2" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Na</text><circle cx="92" cy="16" r="12" fill="#e1bee7" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Cl</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">NaCl</text></svg></div>
+<p>1. Table salt is sodium <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:66px;">chloride</span>.</p>
+<p>2. Sodium has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">Na</span>.</p>
+<p>3. Chlorine has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">Cl</span>.</p>
+<p>4. The formula for table salt is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:50px;">NaCl</span>.</p>
+<p>5. Salt is used to flavour and preserve <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">food</span>.</p>
+<p>6. True or False: NaCl contains sodium and chlorine. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L6 — Calcium Carbonate</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="120" y1="23" x2="148" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="148" y1="16" x2="36" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="10" fill="#fff9c4" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Ca</text><circle cx="92" cy="16" r="10" fill="#424242" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#fff">C</text><circle cx="120" cy="23" r="10" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="148" cy="16" r="10" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="148" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="36" cy="16" r="10" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="36" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">CaCO₃</text></svg></div>
+<p>1. Calcium carbonate has calcium, carbon and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>2. Its formula is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">CaCO₃</span>.</p>
+<p>3. It is found in limestone, shells and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:46px;">chalk</span>.</p>
+<p>4. It is used in cement and building <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:72px;">materials</span>.</p>
+<p>5. Calcium has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">Ca</span>.</p>
+<p>6. True or False: Calcium carbonate is a compound. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L7 — Iron Oxide: Rust</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#bcaaa4" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Fe</text><circle cx="92" cy="16" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="120" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">iron oxide</text></svg></div>
+<p>1. Rust is a type of iron <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">oxide</span>.</p>
+<p>2. Rust forms when iron reacts with <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>3. Water can make rust happen <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:52px;">faster</span>.</p>
+<p>4. Paint can help stop iron from <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:60px;">rusting</span>.</p>
+<p>5. Rust can weaken cars, bikes and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:60px;">bridges</span>.</p>
+<p>6. True or False: Rust makes iron stronger. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">False</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L8 — Aluminium Oxide</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#cfd8dc" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Al</text><circle cx="92" cy="16" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="120" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">Al₂O₃</text></svg></div>
+<p>1. Aluminium has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">Al</span>.</p>
+<p>2. Aluminium is a light <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">metal</span>.</p>
+<p>3. Aluminium oxide can protect aluminium from <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:76px;">corrosion</span>.</p>
+<p>4. Aluminium is used for cans and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">foil</span>.</p>
+<p>5. The compound contains aluminium and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>6. True or False: Aluminium is useful because it is light. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="page">
+<div class="full-header">
+<div class="h-title">Year 8 Science — Common Elements & Compounds (cont.)</div>
+<div class="h-info">Name: _________________________ &nbsp; Date: ____________</div>
+</div>
+<div class="content-grid page2-grid">
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L9 — Silicon Dioxide: Glass</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="92" cy="16" r="12" fill="#ffecb3" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Si</text><circle cx="120" cy="23" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">SiO₂</text></svg></div>
+<p>1. Silicon dioxide is also called <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:50px;">silica</span>.</p>
+<p>2. Its formula is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">SiO₂</span>.</p>
+<p>3. It contains silicon and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>4. Sand can contain silicon <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:62px;">dioxide</span>.</p>
+<p>5. Silicon dioxide is used to make <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:46px;">glass</span>.</p>
+<p>6. True or False: SiO₂ contains sodium. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">False</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L10 — Methane: CH₄</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="120" y1="23" x2="148" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="148" y1="16" x2="36" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="10" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="92" cy="16" r="10" fill="#424242" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#fff">C</text><circle cx="120" cy="23" r="10" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="148" cy="16" r="10" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="148" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="36" cy="16" r="10" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="36" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">CH₄</text></svg></div>
+<p>1. Methane contains carbon and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:68px;">hydrogen</span>.</p>
+<p>2. The formula for methane is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:46px;">CH₄</span>.</p>
+<p>3. Methane can be used as a <span class="line answer" onclick="this.classList.toggle('revealed')">fuel</span>.</p>
+<p>4. Burning methane releases energy as <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">heat</span>.</p>
+<p>5. Carbon has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">C</span>.</p>
+<p>6. True or False: Methane contains oxygen. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:48px;">False</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L11 — Ammonia: NH₃</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="120" y1="23" x2="148" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="92" cy="16" r="12" fill="#d1c4e9" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">N</text><circle cx="120" cy="23" r="12" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="148" cy="16" r="12" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="148" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">NH₃</text></svg></div>
+<p>1. Ammonia contains nitrogen and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:68px;">hydrogen</span>.</p>
+<p>2. The formula for ammonia is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:46px;">NH₃</span>.</p>
+<p>3. Nitrogen has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">N</span>.</p>
+<p>4. Ammonia is used to make some <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:82px;">fertilisers</span>.</p>
+<p>5. Fertilisers help plants <span class="line answer" onclick="this.classList.toggle('revealed')">grow</span>.</p>
+<p>6. True or False: Ammonia contains nitrogen. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L12 — Magnesium Oxide</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="12" fill="#cfd8dc" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">Mg</text><circle cx="92" cy="16" r="12" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">MgO</text></svg></div>
+<p>1. Magnesium oxide contains magnesium and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>2. The formula is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">MgO</span>.</p>
+<p>3. Magnesium has the symbol <span class="line answer" onclick="this.classList.toggle('revealed')">Mg</span>.</p>
+<p>4. Magnesium oxide can be used in heat-resistant <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:50px;">bricks</span>.</p>
+<p>5. A compound has elements chemically <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:54px;">joined</span>.</p>
+<p>6. True or False: MgO is made from two elements. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div>
+</div>
+<div class="col">
+<div class="module">
+<div class="mod-header"><span>L13 — Glucose: Food Energy</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><line x1="64" y1="23" x2="92" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="92" y1="16" x2="120" y2="23" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="120" y1="23" x2="148" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><line x1="148" y1="16" x2="36" y2="16" stroke="#333" stroke-width="1.5" opacity="0.6"/><circle cx="64" cy="23" r="10" fill="#424242" stroke="#333" stroke-width="1.4"/><text x="64" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#fff">C</text><circle cx="92" cy="16" r="10" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="92" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="120" cy="23" r="10" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="120" y="27" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><circle cx="148" cy="16" r="10" fill="#424242" stroke="#333" stroke-width="1.4"/><text x="148" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#fff">C</text><circle cx="36" cy="16" r="10" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="36" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="#111">H</text><circle cx="168" cy="28" r="10" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="168" y="32" text-anchor="middle" font-size="8" font-weight="900" fill="#111">O</text><text x="100" y="40" text-anchor="middle" font-size="8" font-weight="900">C₆H₁₂O₆</text></svg></div>
+<p>1. Glucose contains carbon, hydrogen and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>2. Its formula is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:76px;">C₆H₁₂O₆</span>.</p>
+<p>3. Plants make glucose during <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:94px;">photosynthesis</span>.</p>
+<p>4. Animals use glucose for <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:52px;">energy</span>.</p>
+<p>5. Glucose is a type of <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:46px;">sugar</span>.</p>
+<p>6. True or False: Glucose contains carbon. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header"><span>L14 — Applications Table</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><rect x="20" y="8" width="34" height="28" rx="5" fill="#bbdefb" stroke="#333" stroke-width="1.4"/><text x="37" y="27" text-anchor="middle" font-size="9" font-weight="900">H₂O</text><rect x="60" y="8" width="34" height="28" rx="5" fill="#c8e6c9" stroke="#333" stroke-width="1.4"/><text x="77" y="27" text-anchor="middle" font-size="9" font-weight="900">NaCl</text><rect x="100" y="8" width="34" height="28" rx="5" fill="#fff59d" stroke="#333" stroke-width="1.4"/><text x="117" y="27" text-anchor="middle" font-size="9" font-weight="900">CO₂</text><rect x="140" y="8" width="34" height="28" rx="5" fill="#ffe0b2" stroke="#333" stroke-width="1.4"/><text x="157" y="27" text-anchor="middle" font-size="9" font-weight="900">CaCO₃</text></svg></div>
+<p>1. H₂O is used for drinking and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:68px;">cleaning</span>.</p>
+<p>2. NaCl is used as table <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">salt</span>.</p>
+<p>3. CO₂ is used in fizzy <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:50px;">drinks</span>.</p>
+<p>4. CaCO₃ is used in cement and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:46px;">chalk</span>.</p>
+<p>5. The formula shows which atoms are <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:62px;">present</span>.</p>
+<p>6. True or False: Compounds can be useful in everyday life. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header master"><span>L15 — Property → Use</span><span>★☆☆</span></div>
+<div class="diagram-container"><svg viewBox="0 0 200 44"><rect x="20" y="8" width="34" height="28" rx="5" fill="#fff8e1" stroke="#333" stroke-width="1.4"/><text x="37" y="27" text-anchor="middle" font-size="9" font-weight="900">property</text><rect x="100" y="8" width="34" height="28" rx="5" fill="#e8f5e9" stroke="#333" stroke-width="1.4"/><text x="117" y="27" text-anchor="middle" font-size="9" font-weight="900">use</text></svg></div>
+<p>1. Oxygen is useful because living things need it to <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">breathe</span>.</p>
+<p>2. Aluminium is useful because it is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">light</span>.</p>
+<p>3. Neon is useful because it can <span class="line answer" onclick="this.classList.toggle('revealed')">glow</span>.</p>
+<p>4. Calcium is useful because it helps bones stay <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:54px;">strong</span>.</p>
+<p>5. A property helps explain an <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:82px;">application</span>.</p>
+<p>6. True or False: Properties can explain why we use materials. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div><div class="module">
+<div class="mod-header extra"><span>L16 — Exit Ticket</span><span>★☆☆</span></div>
+<div class="diagram-container diagram-tall"><svg viewBox="0 0 200 44"><rect x="20" y="8" width="34" height="28" rx="5" fill="#fff8e1" stroke="#333" stroke-width="1.4"/><text x="37" y="27" text-anchor="middle" font-size="9" font-weight="900">Choose one compound</text><rect x="73" y="8" width="34" height="28" rx="5" fill="#e3f2fd" stroke="#333" stroke-width="1.4"/><text x="90" y="27" text-anchor="middle" font-size="9" font-weight="900">formula</text><rect x="127" y="8" width="34" height="28" rx="5" fill="#e8f5e9" stroke="#333" stroke-width="1.4"/><text x="144" y="27" text-anchor="middle" font-size="9" font-weight="900">use</text></svg></div>
+<p>1. One compound I know is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">water</span>.</p>
+<p>2. Its formula is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:42px;">H₂O</span>.</p>
+<p>3. It is made from hydrogen and <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:58px;">oxygen</span>.</p>
+<p>4. One application is <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:66px;">drinking</span>.</p>
+<p>5. A compound is made when elements are <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:54px;">joined</span>.</p>
+<p>6. True or False: A formula gives information about atoms. <span class="line answer" onclick="this.classList.toggle('revealed')" style="min-width:44px;">True</span></p>
+</div>
+</div>
+</div>
+</div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
