@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Year 9 Science — Bonding Question Challenge</title>
+<style>
+:root{
+  --green:#00a651;--red:#e60000;--orange:#ff8a00;--blue:#0077b6;--purple:#7b2cbf;
+  --yellow:#fff200;--ink:#111;--soft:#f7fbff;--metal:#dcecff;--ionp:#ff9a7d;--ionn:#7fd0ff;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#dfe5eb;color:var(--ink);font-family:"Arial Narrow","Roboto Condensed",Arial,sans-serif;overflow:hidden}
+body{display:grid;place-items:center}
+#deck{width:1365px;height:768px;background:#fff;box-shadow:0 24px 70px rgba(0,0,0,.25);position:relative;overflow:hidden;transform-origin:center center}
+#progress{position:absolute;left:0;bottom:0;height:7px;background:var(--green);width:0;z-index:45;transition:width .2s ease}
+#counter{position:absolute;left:18px;bottom:12px;color:#555;font-size:16px;z-index:40}
+#score{position:absolute;right:196px;bottom:12px;font-size:16px;font-weight:900;color:#333;z-index:40}
+.btnbar{position:absolute;right:18px;bottom:15px;display:flex;gap:8px;z-index:40}
+.btnbar button,.utility button{font-size:16px;border:0;border-radius:999px;padding:9px 14px;background:#111;color:#fff;cursor:pointer}
+.btnbar button:disabled{opacity:.35;cursor:default}
+.utility{position:absolute;left:18px;top:14px;display:flex;gap:8px;z-index:40}
+.utility button{padding:8px 12px}
+.utility button[data-cat="metallic"]{background:var(--blue)}
+.utility button[data-cat="ionic"]{background:var(--orange)}
+.utility button[data-cat="covalent"]{background:var(--green)}
+.utility button[data-cat="mixed"]{background:var(--purple)}
+.utility button.active{outline:4px solid var(--yellow);outline-offset:2px}
+.slide{position:absolute;inset:0;padding:62px 52px 70px;background:#fff;overflow:hidden}
+h1,h2,h3,p{margin:0}
+h2{font-size:43px;line-height:1.02;font-weight:900}
+.hl{background:var(--yellow);padding:.02em .14em}
+.clickhint{position:absolute;right:52px;top:24px;font-size:16px;border:2px solid #ddd;border-radius:999px;padding:6px 12px;background:#fafafa;color:#555}
+.qtag{display:inline-block;border:4px solid #111;border-radius:999px;padding:5px 12px;font-size:17px;font-weight:900;margin-bottom:10px;background:#fff}
+.qtag.metallic{border-color:var(--blue);background:#eef8ff}
+.qtag.ionic{border-color:var(--orange);background:#fff5e8}
+.qtag.covalent{border-color:var(--green);background:#effff3}
+.qtag.mixed{border-color:var(--purple);background:#f6efff}
+.qLayout{display:grid;grid-template-columns:730px 1fr;gap:30px;align-items:center;margin-top:20px;height:525px}
+.visual{border:5px solid #111;border-radius:28px;background:var(--soft);height:500px;padding:12px;display:grid;place-items:center}
+.visual svg{width:100%;height:100%}
+.visual .formulaHero{font-size:110px;font-weight:900;letter-spacing:2px;text-align:center}
+.visual .formulaSub{font-size:25px;font-weight:900;text-align:center;color:#444;margin-top:12px}
+.visual .pairGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:90%}
+.pairChip{border:5px solid #111;border-radius:22px;padding:22px;text-align:center;font-size:50px;font-weight:900}
+.answers{display:flex;flex-direction:column;gap:13px}
+.option{border:5px solid #111;border-radius:20px;background:#fff;padding:11px 14px;min-height:86px;cursor:pointer;display:grid;grid-template-columns:58px 1fr 42px;align-items:center;gap:12px;text-align:left}
+.option:hover{background:#fafafa}
+.option:disabled{cursor:default}
+.letter{width:52px;height:52px;border:4px solid #111;border-radius:15px;display:grid;place-items:center;font-size:27px;font-weight:900;background:var(--yellow)}
+.optionText{font-size:24px;font-weight:900;line-height:1.02}
+.mark{font-size:35px;font-weight:900;text-align:center}
+.option.correct{background:#effff2;border-color:var(--green)}
+.option.correct .letter{background:#c9f7d2;border-color:var(--green)}
+.option.wrong{background:#fff0f0;border-color:var(--red)}
+.option.wrong .letter{background:#ffd9d9;border-color:var(--red)}
+.option.showCorrect{border-color:var(--green);background:#f5fff7}
+.feedback{border:5px solid #111;border-radius:18px;padding:10px 13px;background:var(--yellow);font-size:21px;font-weight:900;line-height:1.05;min-height:76px;display:flex;align-items:center}
+.feedback.good{background:#effff2;border-color:var(--green)}
+.feedback.bad{background:#fff0f0;border-color:var(--red)}
+.smallRule{font-size:17px;color:#444;font-weight:900;margin-top:4px}
+.legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.legend span{border:3px solid #111;border-radius:999px;padding:5px 9px;background:#fff;font-size:15px;font-weight:900}
+.atomLabel{fill:#111;font-size:23px;font-weight:900;text-anchor:middle;dominant-baseline:middle}
+.label{fill:#111;font-size:22px;font-weight:900;text-anchor:middle}
+.smallLabel{fill:#333;font-size:17px;font-weight:900;text-anchor:middle}
+.electron{fill:var(--purple);stroke:#111;stroke-width:2}
+.ionPlus{fill:var(--ionp);stroke:#111;stroke-width:3}
+.ionMinus{fill:var(--ionn);stroke:#111;stroke-width:3}
+.bond{stroke:var(--green);stroke-width:7;stroke-linecap:round}
+.endScreen{height:620px;display:grid;place-items:center;text-align:center}
+.endBox{border:7px solid #111;border-radius:32px;background:#fff;padding:34px 48px;max-width:900px}
+.endBox h1{font-size:62px;line-height:1}
+.endScore{font-size:105px;font-weight:900;color:var(--green);margin:12px 0}
+.endBox p{font-size:26px;font-weight:900}
+.endBox button{margin-top:22px;border:0;border-radius:999px;background:#111;color:#fff;font-size:22px;font-weight:900;padding:13px 22px;cursor:pointer}
+@media print{html,body{overflow:auto;background:#fff}#deck{width:100%!important;height:auto!important;transform:none!important;box-shadow:none}.btnbar,.utility,#progress,#counter,#score{display:none}}
+
+/* --- Visual note-taking pages --- */
+.notePage{height:610px;display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.noteHead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.noteHead h2{font-size:42px}
+.noteInstruction{border:4px solid #111;border-radius:999px;background:var(--yellow);padding:7px 12px;font-size:17px;font-weight:900;white-space:nowrap}
+.noteTable{display:grid;gap:9px;align-content:start;margin-top:4px}
+.noteRow{display:grid;grid-template-columns:118px 1.25fr 1.1fr 1.35fr;border:4px solid #111;border-radius:17px;overflow:hidden;background:#fff;min-height:91px}
+.noteRow>div{padding:9px 11px;border-left:3px solid #111;display:flex;align-items:center}
+.noteRow>div:first-child{border-left:0;justify-content:center;background:#f7fbff}
+.noteRow .noteKey{font-size:21px;font-weight:900;line-height:1.02}
+.noteRow .noteWhy{font-size:18px;font-weight:900;line-height:1.06;color:#333}
+.noteRow .noteExample{font-size:18px;font-weight:900;line-height:1.06;background:#fffbea}
+.noteRow .noteExample b{font-size:22px}
+.noteViz svg{width:92px;height:66px;display:block}
+.noteViz .formulaMini{font-size:30px;font-weight:900;text-align:center}
+.noteFoot{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.noteRule{border:5px solid #111;border-radius:18px;background:var(--yellow);padding:9px 14px;font-size:23px;font-weight:900;line-height:1.02;flex:1;text-align:center}
+.noteCue{font-size:17px;color:#555;font-weight:900}
+.notePage.metallic .noteRow{border-color:#496a91}.notePage.metallic .noteRow>div{border-color:#496a91}
+.notePage.ionic .noteRow{border-color:var(--orange)}.notePage.ionic .noteRow>div{border-color:var(--orange)}
+.notePage.covalent .noteRow{border-color:var(--green)}.notePage.covalent .noteRow>div{border-color:var(--green)}
+.notePage.mixed .noteRow{border-color:var(--purple)}.notePage.mixed .noteRow>div{border-color:var(--purple)}
+.noteNameGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.noteNameCard{border:4px solid #111;border-radius:17px;background:#fff;padding:8px;text-align:center;min-height:118px;display:grid;place-items:center}
+.noteNameCard .f{font-size:31px;font-weight:900}
+.noteNameCard .n{font-size:17px;font-weight:900;background:#effff2;border:3px solid #111;border-radius:10px;padding:4px 7px;margin-top:5px}
+.noteCompare{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.noteCompareCard{border:5px solid #111;border-radius:22px;padding:10px;background:#fff;text-align:center}
+.noteCompareCard svg{width:100%;height:125px}
+.noteCompareCard h3{font-size:27px;margin-bottom:5px}
+.noteCompareCard .line{border-top:2px solid #111;padding:5px 3px;font-size:17px;font-weight:900}
+.noteCompareCard.m{border-color:#496a91}.noteCompareCard.i{border-color:var(--orange)}.noteCompareCard.c{border-color:var(--green)}
+
+</style>
+</head>
+<body>
+<div id="deck">
+  <div id="progress"></div>
+  <div id="counter"></div>
+  <div id="score"></div>
+
+  <div class="utility">
+    <button data-cat="all">ALL</button>
+    <button data-cat="metallic">METALLIC</button>
+    <button data-cat="ionic">IONIC</button>
+    <button data-cat="covalent">COVALENT</button>
+    <button data-cat="mixed">MIXED</button>
+  </div>
+
+  <div class="btnbar">
+    <button id="prev">Back</button>
+    <button id="next">Next</button>
+  </div>
+
+  <section class="slide" id="slide"></section>
+</div>
+
+<script>
+const V = {
+metallic: () => `<svg viewBox="0 0 700 470" aria-label="metallic bonding picture">
+  <text x="350" y="38" class="label">positive metal ions + moving electrons</text>
+  <g>
+    <circle class="ionPlus" cx="135" cy="125" r="45"/><circle class="ionPlus" cx="350" cy="125" r="45"/><circle class="ionPlus" cx="565" cy="125" r="45"/>
+    <circle class="ionPlus" cx="135" cy="300" r="45"/><circle class="ionPlus" cx="350" cy="300" r="45"/><circle class="ionPlus" cx="565" cy="300" r="45"/>
+    <text x="135" y="125" class="atomLabel">M+</text><text x="350" y="125" class="atomLabel">M+</text><text x="565" y="125" class="atomLabel">M+</text>
+    <text x="135" y="300" class="atomLabel">M+</text><text x="350" y="300" class="atomLabel">M+</text><text x="565" y="300" class="atomLabel">M+</text>
+  </g>
+  <g>
+    <circle class="electron" cx="240" cy="98" r="11"/><circle class="electron" cx="455" cy="98" r="11"/>
+    <circle class="electron" cx="240" cy="215" r="11"/><circle class="electron" cx="455" cy="215" r="11"/>
+    <circle class="electron" cx="240" cy="345" r="11"/><circle class="electron" cx="455" cy="345" r="11"/>
+  </g>
+  <path d="M205 412 C285 372,415 372,495 412" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-dasharray="12 8"/>
+  <text x="350" y="447" class="label">electrons can move</text>
+</svg>`,
+ionicTransfer: () => `<svg viewBox="0 0 700 470" aria-label="ionic transfer picture">
+  <circle cx="165" cy="205" r="78" fill="#e7f2ff" stroke="#111" stroke-width="5"/><text x="165" y="205" class="atomLabel" style="font-size:39px">Na</text>
+  <circle cx="535" cy="205" r="78" fill="#ecfff1" stroke="#111" stroke-width="5"/><text x="535" y="205" class="atomLabel" style="font-size:39px">Cl</text>
+  <circle class="electron" cx="240" cy="165" r="13"/>
+  <path d="M260 155 C340 95,425 95,470 155" fill="none" stroke="#e60000" stroke-width="7"/>
+  <polygon points="468,138 500,155 469,172" fill="#e60000"/>
+  <text x="350" y="78" class="label">electron moves</text>
+  <circle class="ionPlus" cx="200" cy="365" r="52"/><text x="200" y="365" class="atomLabel">Na+</text>
+  <circle class="ionMinus" cx="500" cy="365" r="52"/><text x="500" y="365" class="atomLabel">Cl−</text>
+</svg>`,
+ionicLattice: () => `<svg viewBox="0 0 700 470" aria-label="ionic lattice">
+  <text x="350" y="35" class="label">alternating positive and negative ions</text>
+  <g>
+    <circle class="ionPlus" cx="145" cy="105" r="38"/><circle class="ionMinus" cx="245" cy="105" r="38"/><circle class="ionPlus" cx="345" cy="105" r="38"/><circle class="ionMinus" cx="445" cy="105" r="38"/><circle class="ionPlus" cx="545" cy="105" r="38"/>
+    <circle class="ionMinus" cx="145" cy="205" r="38"/><circle class="ionPlus" cx="245" cy="205" r="38"/><circle class="ionMinus" cx="345" cy="205" r="38"/><circle class="ionPlus" cx="445" cy="205" r="38"/><circle class="ionMinus" cx="545" cy="205" r="38"/>
+    <circle class="ionPlus" cx="145" cy="305" r="38"/><circle class="ionMinus" cx="245" cy="305" r="38"/><circle class="ionPlus" cx="345" cy="305" r="38"/><circle class="ionMinus" cx="445" cy="305" r="38"/><circle class="ionPlus" cx="545" cy="305" r="38"/>
+    <text x="145" y="105" class="atomLabel">+</text><text x="245" y="105" class="atomLabel">−</text><text x="345" y="105" class="atomLabel">+</text><text x="445" y="105" class="atomLabel">−</text><text x="545" y="105" class="atomLabel">+</text>
+    <text x="145" y="205" class="atomLabel">−</text><text x="245" y="205" class="atomLabel">+</text><text x="345" y="205" class="atomLabel">−</text><text x="445" y="205" class="atomLabel">+</text><text x="545" y="205" class="atomLabel">−</text>
+    <text x="145" y="305" class="atomLabel">+</text><text x="245" y="305" class="atomLabel">−</text><text x="345" y="305" class="atomLabel">+</text><text x="445" y="305" class="atomLabel">−</text><text x="545" y="305" class="atomLabel">+</text>
+  </g>
+  <text x="350" y="410" class="label">giant lattice</text>
+</svg>`,
+covalent: () => `<svg viewBox="0 0 700 470" aria-label="covalent bonding picture">
+  <text x="350" y="42" class="label">non-metal + non-metal</text>
+  <circle cx="270" cy="220" r="95" fill="#ecfff1" stroke="#111" stroke-width="5"/>
+  <circle cx="430" cy="220" r="95" fill="#ecfff1" stroke="#111" stroke-width="5"/>
+  <text x="270" y="220" class="atomLabel" style="font-size:44px">Cl</text>
+  <text x="430" y="220" class="atomLabel" style="font-size:44px">Cl</text>
+  <circle class="electron" cx="340" cy="195" r="13"/><circle class="electron" cx="360" cy="245" r="13"/>
+  <path class="bond" d="M320 305H380"/>
+  <text x="350" y="350" class="label">shared pair</text>
+</svg>`,
+h2: () => `<svg viewBox="0 0 700 470"><circle cx="265" cy="220" r="72" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="435" cy="220" r="72" fill="#dff6ff" stroke="#111" stroke-width="5"/><path class="bond" d="M330 220H370"/><text x="265" y="220" class="atomLabel" style="font-size:42px">H</text><text x="435" y="220" class="atomLabel" style="font-size:42px">H</text><text x="350" y="365" class="label">H₂</text></svg>`,
+o2: () => `<svg viewBox="0 0 700 470"><circle cx="265" cy="220" r="72" fill="#ffe9e9" stroke="#111" stroke-width="5"/><circle cx="435" cy="220" r="72" fill="#ffe9e9" stroke="#111" stroke-width="5"/><path class="bond" d="M330 210H370M330 232H370"/><text x="265" y="220" class="atomLabel" style="font-size:42px">O</text><text x="435" y="220" class="atomLabel" style="font-size:42px">O</text><text x="350" y="365" class="label">O₂</text></svg>`,
+h2o: () => `<svg viewBox="0 0 700 470"><circle cx="350" cy="175" r="72" fill="#ffe9e9" stroke="#111" stroke-width="5"/><circle cx="205" cy="310" r="55" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="495" cy="310" r="55" fill="#dff6ff" stroke="#111" stroke-width="5"/><path class="bond" d="M300 225L245 275M400 225L455 275"/><text x="350" y="175" class="atomLabel" style="font-size:42px">O</text><text x="205" y="310" class="atomLabel" style="font-size:36px">H</text><text x="495" y="310" class="atomLabel" style="font-size:36px">H</text></svg>`,
+nh3: () => `<svg viewBox="0 0 700 470"><circle cx="350" cy="175" r="70" fill="#e9edff" stroke="#111" stroke-width="5"/><circle cx="180" cy="310" r="52" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="350" cy="350" r="52" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="520" cy="310" r="52" fill="#dff6ff" stroke="#111" stroke-width="5"/><path class="bond" d="M305 225L220 275M350 245V298M395 225L480 275"/><text x="350" y="175" class="atomLabel" style="font-size:42px">N</text><text x="180" y="310" class="atomLabel">H</text><text x="350" y="350" class="atomLabel">H</text><text x="520" y="310" class="atomLabel">H</text></svg>`,
+ch4: () => `<svg viewBox="0 0 700 470"><circle cx="350" cy="225" r="66" fill="#eee" stroke="#111" stroke-width="5"/><circle cx="350" cy="80" r="48" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="350" cy="385" r="48" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="170" cy="225" r="48" fill="#dff6ff" stroke="#111" stroke-width="5"/><circle cx="530" cy="225" r="48" fill="#dff6ff" stroke="#111" stroke-width="5"/><path class="bond" d="M350 128V160M350 290V337M218 225H282M418 225H482"/><text x="350" y="225" class="atomLabel" style="font-size:38px">C</text><text x="350" y="80" class="atomLabel">H</text><text x="350" y="385" class="atomLabel">H</text><text x="170" y="225" class="atomLabel">H</text><text x="530" y="225" class="atomLabel">H</text></svg>`,
+co2: () => `<svg viewBox="0 0 700 470"><circle cx="350" cy="225" r="62" fill="#eee" stroke="#111" stroke-width="5"/><circle cx="160" cy="225" r="62" fill="#ffe9e9" stroke="#111" stroke-width="5"/><circle cx="540" cy="225" r="62" fill="#ffe9e9" stroke="#111" stroke-width="5"/><path class="bond" d="M220 212H288M220 238H288M412 212H480M412 238H480"/><text x="160" y="225" class="atomLabel" style="font-size:38px">O</text><text x="350" y="225" class="atomLabel" style="font-size:38px">C</text><text x="540" y="225" class="atomLabel" style="font-size:38px">O</text></svg>`,
+solidIonic: () => `<svg viewBox="0 0 700 470"><text x="350" y="45" class="label">solid ionic compound</text>${[
+  [180,130,'+','p'],[280,130,'−','m'],[380,130,'+','p'],[480,130,'−','m'],
+  [180,230,'−','m'],[280,230,'+','p'],[380,230,'−','m'],[480,230,'+','p'],
+  [180,330,'+','p'],[280,330,'−','m'],[380,330,'+','p'],[480,330,'−','m']
+].map(([x,y,s,t])=>`<circle class="${t==='p'?'ionPlus':'ionMinus'}" cx="${x}" cy="${y}" r="38"/><text x="${x}" y="${y}" class="atomLabel">${s}</text>`).join('')}<text x="350" y="420" class="label">ions fixed in place</text></svg>`,
+moltenIonic: () => `<svg viewBox="0 0 700 470"><text x="350" y="45" class="label">molten ionic compound</text><circle class="ionPlus" cx="140" cy="150" r="42"/><circle class="ionMinus" cx="500" cy="120" r="42"/><circle class="ionMinus" cx="260" cy="300" r="42"/><circle class="ionPlus" cx="560" cy="320" r="42"/><path d="M100 400H600" stroke="#0077b6" stroke-width="6"/><path d="M150 400l40-22M550 400l-40-22" stroke="#0077b6" stroke-width="6"/><text x="350" y="445" class="label">ions can move</text></svg>`,
+heatLattice: () => `<svg viewBox="0 0 700 470"><text x="350" y="55" class="label">strong ionic lattice</text><path d="M350 410 C220 330,265 225,350 120 C435 225,480 330,350 410Z" fill="#ff8a00" stroke="#111" stroke-width="6"/><path d="M350 375 C290 330,315 265,350 220 C385 265,410 330,350 375Z" fill="#fff200" stroke="#111" stroke-width="4"/><text x="350" y="445" class="label">lots of energy needed</text></svg>`,
+simpleMolecules: () => `<svg viewBox="0 0 700 470"><text x="350" y="45" class="label">separate simple molecules</text><g fill="#dff6ff" stroke="#111" stroke-width="4"><circle cx="170" cy="130" r="34"/><circle cx="215" cy="130" r="34"/><circle cx="465" cy="155" r="34"/><circle cx="510" cy="155" r="34"/><circle cx="230" cy="330" r="34"/><circle cx="275" cy="330" r="34"/><circle cx="470" cy="340" r="34"/><circle cx="515" cy="340" r="34"/></g><text x="350" y="425" class="label">not a giant ionic lattice</text></svg>`,
+three: () => `<svg viewBox="0 0 700 470">
+  <rect x="15" y="35" width="205" height="390" rx="24" fill="#eaf3ff" stroke="#111" stroke-width="5"/><text x="117" y="75" class="label">METALLIC</text>
+  <circle class="ionPlus" cx="75" cy="150" r="30"/><circle class="ionPlus" cx="160" cy="150" r="30"/><circle class="ionPlus" cx="75" cy="260" r="30"/><circle class="ionPlus" cx="160" cy="260" r="30"/><circle class="electron" cx="117" cy="115" r="9"/><circle class="electron" cx="117" cy="205" r="9"/><circle class="electron" cx="117" cy="320" r="9"/>
+  <rect x="248" y="35" width="205" height="390" rx="24" fill="#fff5e8" stroke="#111" stroke-width="5"/><text x="350" y="75" class="label">IONIC</text><circle class="ionPlus" cx="310" cy="155" r="34"/><circle class="ionMinus" cx="390" cy="155" r="34"/><circle class="ionMinus" cx="310" cy="260" r="34"/><circle class="ionPlus" cx="390" cy="260" r="34"/><text x="310" y="155" class="atomLabel">+</text><text x="390" y="155" class="atomLabel">−</text><text x="310" y="260" class="atomLabel">−</text><text x="390" y="260" class="atomLabel">+</text>
+  <rect x="480" y="35" width="205" height="390" rx="24" fill="#effff3" stroke="#111" stroke-width="5"/><text x="582" y="75" class="label">COVALENT</text><circle cx="550" cy="220" r="50" fill="#dff6ff" stroke="#111" stroke-width="4"/><circle cx="615" cy="220" r="50" fill="#dff6ff" stroke="#111" stroke-width="4"/><circle class="electron" cx="575" cy="207" r="9"/><circle class="electron" cx="590" cy="236" r="9"/>
+</svg>`
+};
+
+function formulaVisual(formula, note='name the compound'){
+  return `<div><div class="formulaHero">${formula}</div><div class="formulaSub">${note}</div></div>`;
+}
+function pairVisual(a,b){
+  return `<div class="pairGrid"><div class="pairChip" style="background:#e7f2ff">${a}</div><div class="pairChip" style="background:#ecfff1">${b}</div></div>`;
+}
+function emojiVisual(big, text){
+  return `<div style="text-align:center"><div style="font-size:150px">${big}</div><div class="formulaSub">${text}</div></div>`;
+}
+
+const Q = [
+{cat:'metallic',q:'Which type of bonding is shown?',v:V.metallic(),o:['Metallic','Ionic','Covalent'],a:0,r:'Metal atoms are held together by positive ions and moving electrons.'},
+{cat:'metallic',q:'What are the small purple particles?',v:V.metallic(),o:['Neutrons','Moving electrons','Positive ions'],a:1,r:'In metallic bonding, delocalised electrons can move through the structure.'},
+{cat:'metallic',q:'Why can a metal conduct electricity?',v:V.metallic(),o:['The electrons can move','The metal ions leave the metal','The atoms become non-metals'],a:0,r:'Moving electrons carry electrical charge.'},
+{cat:'metallic',q:'Why can metals bend and be shaped?',v:emojiVisual('🔨','metal sheet being shaped'),o:['Metal layers can move while bonding remains','The metal melts when hit','The ions disappear'],a:0,r:'Metallic bonding remains as layers of metal ions shift.'},
+{cat:'mixed',q:'Which set contains only metals?',v:pairVisual('Mg','Al'),o:['Mg and Al','O and Cl','C and N'],a:0,r:'Mg and Al are metals. O, Cl, C and N are non-metals.'},
+
+{cat:'ionic',q:'What type of bonding is likely between Na and Cl?',v:pairVisual('Na','Cl'),o:['Metallic','Ionic','Covalent'],a:1,r:'Metal + non-metal usually forms ionic bonding.'},
+{cat:'ionic',q:'What is happening to the electron?',v:V.ionicTransfer(),o:['It is transferred','It is shared equally','It is destroyed'],a:0,r:'Ionic bonding involves electron transfer.'},
+{cat:'ionic',q:'After Na loses an electron, what does it become?',v:V.ionicTransfer(),o:['Na−','Na+','Cl−'],a:1,r:'Losing a negative electron leaves sodium positively charged.'},
+{cat:'ionic',q:'After Cl gains an electron, what does it become?',v:V.ionicTransfer(),o:['Cl−','Cl+','Na+'],a:0,r:'Gaining an electron makes chlorine negatively charged.'},
+{cat:'ionic',q:'Why do Na+ and Cl− stay together?',v:V.ionicTransfer(),o:['Opposite charges attract','They share a proton','They become the same atom'],a:0,r:'Positive and negative ions attract electrostatically.'},
+
+{cat:'ionic',q:'Name this ionic compound.',v:formulaVisual('NaCl'),o:['sodium chlorine','sodium chloride','nitrogen chloride'],a:1,r:'Use the metal name + non-metal ending in -ide.'},
+{cat:'ionic',q:'Name this ionic compound.',v:formulaVisual('MgO'),o:['magnesium oxide','magnesium oxygen','manganese oxide'],a:0,r:'Mg = magnesium; O becomes oxide.'},
+{cat:'ionic',q:'Name this ionic compound.',v:formulaVisual('LiF'),o:['lithium fluoride','lithium fluorine','lithium oxide'],a:0,r:'Li = lithium; F becomes fluoride.'},
+{cat:'ionic',q:'Name this ionic compound.',v:formulaVisual('CaCl₂'),o:['calcium chlorine','calcium chloride','carbon chloride'],a:1,r:'Ca = calcium; Cl becomes chloride.'},
+{cat:'ionic',q:'Name this ionic compound.',v:formulaVisual('K₂O'),o:['potassium oxide','potassium oxygen','calcium oxide'],a:0,r:'K = potassium; O becomes oxide.'},
+{cat:'ionic',q:'Name this ionic compound.',v:formulaVisual('Al₂O₃'),o:['aluminium oxide','aluminium oxygen','argon oxide'],a:0,r:'Al = aluminium; O becomes oxide.'},
+
+{cat:'ionic',q:'What structure is shown?',v:V.ionicLattice(),o:['Separate molecules','A giant ionic lattice','A sea of electrons'],a:1,r:'Ionic solids contain a repeating lattice of positive and negative ions.'},
+{cat:'ionic',q:'Does a solid ionic compound conduct electricity?',v:V.solidIonic(),o:['Yes, very well','No, because the ions are fixed','Only because electrons move'],a:1,r:'Solid ionic ions cannot move, so they cannot carry charge.'},
+{cat:'ionic',q:'Does a molten ionic compound conduct electricity?',v:V.moltenIonic(),o:['Yes, the ions can move','No, the ions are fixed','Only if it becomes metallic'],a:0,r:'Molten ions are free to move and carry charge.'},
+{cat:'ionic',q:'Why do ionic compounds usually have high melting points?',v:V.heatLattice(),o:['Strong attractions in the lattice','They contain moving metal electrons','Their molecules are very small'],a:0,r:'A lot of energy is needed to overcome strong ionic attractions.'},
+
+{cat:'covalent',q:'Which type of bonding is shown?',v:V.covalent(),o:['Metallic','Ionic','Covalent'],a:2,r:'Covalent bonding is sharing electrons between non-metals.'},
+{cat:'covalent',q:'Which pair is most likely to form a covalent bond?',v:pairVisual('C','O'),o:['C and O','Na and Cl','Mg and O'],a:0,r:'Non-metal + non-metal forms covalent bonding.'},
+{cat:'covalent',q:'What does the shared pair of electrons make?',v:V.covalent(),o:['A covalent bond','An ionic lattice','A metal ion'],a:0,r:'A shared pair of electrons is a covalent bond.'},
+{cat:'covalent',q:'Which molecule is shown?',v:V.h2(),o:['H₂','O₂','CO₂'],a:0,r:'Two hydrogen atoms form H₂.'},
+{cat:'covalent',q:'Which molecule is shown?',v:V.o2(),o:['H₂','O₂','CH₄'],a:1,r:'Two oxygen atoms form O₂.'},
+{cat:'covalent',q:'Which molecule is shown?',v:V.h2o(),o:['H₂O','CO₂','NH₃'],a:0,r:'Water contains two H atoms and one O atom.'},
+{cat:'covalent',q:'Which molecule is shown?',v:V.nh3(),o:['CH₄','NH₃','H₂O'],a:1,r:'Ammonia is NH₃: one nitrogen and three hydrogen atoms.'},
+{cat:'covalent',q:'Which molecule is shown?',v:V.ch4(),o:['CH₄','CO₂','NH₃'],a:0,r:'Methane is CH₄: one carbon and four hydrogen atoms.'},
+{cat:'covalent',q:'Which molecule is shown?',v:V.co2(),o:['O₂','CO₂','H₂O'],a:1,r:'Carbon dioxide is CO₂: one carbon and two oxygens.'},
+{cat:'covalent',q:'Simple covalent molecules usually have...',v:V.simpleMolecules(),o:['Low melting / boiling points','Very high melting points like ionic lattices','Moving metal electrons'],a:0,r:'For this lesson, simple covalent molecules are compared as having relatively low melting / boiling points.'},
+{cat:'covalent',q:'Do simple covalent molecules usually conduct electricity?',v:emojiVisual('🚫⚡','simple covalent substance'),o:['Usually no','Always yes','Only because ions move'],a:0,r:'Simple covalent substances usually do not have mobile charged particles.'},
+
+{cat:'mixed',q:'Mg atoms bonded together: which bonding type?',v:formulaVisual('Mg','metal atoms only'),o:['Metallic','Ionic','Covalent'],a:0,r:'A pure metal such as magnesium has metallic bonding.'},
+{cat:'mixed',q:'MgO: which bonding type?',v:formulaVisual('MgO','metal + non-metal'),o:['Metallic','Ionic','Covalent'],a:1,r:'Magnesium is a metal and oxygen is a non-metal, so MgO is ionic.'},
+{cat:'mixed',q:'CO₂: which bonding type?',v:formulaVisual('CO₂','non-metal + non-metal'),o:['Metallic','Ionic','Covalent'],a:2,r:'Carbon and oxygen are non-metals, so CO₂ is covalent.'},
+{cat:'mixed',q:'Match the key word to the bond: moving electrons.',v:V.three(),o:['Metallic','Ionic','Covalent'],a:0,r:'Metallic = moving electrons. Ionic = transfer. Covalent = share.'},
+{cat:'mixed',q:'Match the key word to the bond: electron transfer.',v:V.three(),o:['Metallic','Ionic','Covalent'],a:1,r:'Ionic bonding involves electron transfer.'},
+{cat:'mixed',q:'Match the key word to the bond: electron sharing.',v:V.three(),o:['Metallic','Ionic','Covalent'],a:2,r:'Covalent bonding involves electron sharing.'}
+];
+
+
+const NOTE = {
+  metallic:{
+    cat:'metallic',title:'Metallic bonding — copy these 4 ideas',
+    rule:'METALLIC = metal atoms + moving electrons',
+    rows:[
+      {v:`<svg viewBox="0 0 100 70"><rect x="5" y="8" width="40" height="40" rx="9" fill="#e7f2ff" stroke="#111" stroke-width="3"/><rect x="55" y="8" width="40" height="40" rx="9" fill="#e7f2ff" stroke="#111" stroke-width="3"/><text x="25" y="34" text-anchor="middle" font-size="17" font-weight="900">Mg</text><text x="75" y="34" text-anchor="middle" font-size="17" font-weight="900">Al</text></svg>`,k:'Metal atoms only',w:'A pure metal has metallic bonding.',e:'Examples: <b>Mg, Al, Na, Ca</b>'},
+      {v:`<svg viewBox="0 0 100 70"><circle cx="25" cy="22" r="15" fill="#ff9a7d" stroke="#111" stroke-width="2"/><circle cx="70" cy="22" r="15" fill="#ff9a7d" stroke="#111" stroke-width="2"/><circle cx="25" cy="55" r="15" fill="#ff9a7d" stroke="#111" stroke-width="2"/><circle cx="70" cy="55" r="15" fill="#ff9a7d" stroke="#111" stroke-width="2"/><circle cx="48" cy="11" r="5" fill="#7b2cbf"/><circle cx="48" cy="38" r="5" fill="#7b2cbf"/><circle cx="48" cy="64" r="5" fill="#7b2cbf"/></svg>`,k:'Positive ions + e⁻',w:'Electrons are delocalised and can move.',e:'Picture: <b>ion lattice + electron sea</b>'},
+      {v:`<svg viewBox="0 0 100 70"><path d="M10 38H80" stroke="#0077b6" stroke-width="7"/><polygon points="78,26 95,38 78,50" fill="#0077b6"/><circle cx="28" cy="22" r="6" fill="#7b2cbf"/><circle cx="50" cy="50" r="6" fill="#7b2cbf"/></svg>`,k:'Conducts electricity',w:'Moving electrons carry charge.',e:'Example: <b>metal wire</b>'},
+      {v:`<svg viewBox="0 0 100 70"><rect x="10" y="42" width="80" height="15" rx="5" fill="#dcecff" stroke="#111" stroke-width="3"/><path d="M35 5H65L75 30H25Z" fill="#777" stroke="#111" stroke-width="3"/></svg>`,k:'Can bend / be shaped',w:'Layers shift while metallic bonding remains.',e:'Examples: <b>foil, wire, sheet</b>'}
+    ]
+  },
+  ionicBond:{
+    cat:'ionic',title:'Ionic bonding — transfer then attraction',
+    rule:'IONIC = metal + non-metal → transfer e⁻ → + and − ions attract',
+    rows:[
+      {v:`<svg viewBox="0 0 100 70"><rect x="5" y="12" width="38" height="38" rx="8" fill="#e7f2ff" stroke="#111" stroke-width="3"/><rect x="57" y="12" width="38" height="38" rx="8" fill="#ecfff1" stroke="#111" stroke-width="3"/><text x="24" y="37" text-anchor="middle" font-size="17" font-weight="900">Na</text><text x="76" y="37" text-anchor="middle" font-size="17" font-weight="900">Cl</text></svg>`,k:'Metal + non-metal',w:'This combination usually forms ionic bonding.',e:'Examples: <b>NaCl, MgO, LiF</b>'},
+      {v:`<svg viewBox="0 0 100 70"><circle cx="20" cy="35" r="15" fill="#e7f2ff" stroke="#111" stroke-width="2"/><circle cx="80" cy="35" r="15" fill="#ecfff1" stroke="#111" stroke-width="2"/><circle cx="38" cy="22" r="5" fill="#7b2cbf"/><path d="M43 20C55 10 64 12 68 21" fill="none" stroke="#e60000" stroke-width="4"/><polygon points="66,15 75,21 66,27" fill="#e60000"/></svg>`,k:'Electron transfer',w:'Metal loses e⁻; non-metal gains e⁻.',e:'Na → Na⁺ &nbsp; Cl → Cl⁻'},
+      {v:`<svg viewBox="0 0 100 70"><circle cx="25" cy="35" r="20" fill="#ff9a7d" stroke="#111" stroke-width="3"/><circle cx="75" cy="35" r="20" fill="#7fd0ff" stroke="#111" stroke-width="3"/><text x="25" y="42" text-anchor="middle" font-size="24" font-weight="900">+</text><text x="75" y="42" text-anchor="middle" font-size="24" font-weight="900">−</text></svg>`,k:'Ions form',w:'Losing e⁻ makes + ; gaining e⁻ makes −.',e:'Example: <b>Na⁺ and Cl⁻</b>'},
+      {v:`<svg viewBox="0 0 100 70"><circle cx="23" cy="35" r="18" fill="#ff9a7d" stroke="#111" stroke-width="3"/><circle cx="77" cy="35" r="18" fill="#7fd0ff" stroke="#111" stroke-width="3"/><path d="M43 35H57" stroke="#7b2cbf" stroke-width="5"/></svg>`,k:'Opposites attract',w:'Electrostatic attraction holds ions together.',e:'This attraction is the <b>ionic bond</b>'}
+    ]
+  },
+  ionicNames:{
+    cat:'ionic',title:'Naming ionic compounds — formula → name',
+    rule:'metal name + non-metal ending in -ide',
+    names:[
+      ['NaCl','sodium chloride'],['MgO','magnesium oxide'],['LiF','lithium fluoride'],
+      ['CaCl₂','calcium chloride'],['K₂O','potassium oxide'],['Al₂O₃','aluminium oxide']
+    ]
+  },
+  ionicProps:{
+    cat:'ionic',title:'Ionic properties — link structure to behaviour',
+    rule:'Ask: are the ions fixed or free to move?',
+    rows:[
+      {v:`<svg viewBox="0 0 100 70"><circle cx="25" cy="22" r="14" fill="#ff9a7d" stroke="#111" stroke-width="2"/><circle cx="60" cy="22" r="14" fill="#7fd0ff" stroke="#111" stroke-width="2"/><circle cx="25" cy="55" r="14" fill="#7fd0ff" stroke="#111" stroke-width="2"/><circle cx="60" cy="55" r="14" fill="#ff9a7d" stroke="#111" stroke-width="2"/></svg>`,k:'Giant lattice',w:'Positive and negative ions repeat in a regular pattern.',e:'Many strong attractions'},
+      {v:`<svg viewBox="0 0 100 70"><rect x="12" y="10" width="76" height="48" rx="9" fill="#f7fbff" stroke="#111" stroke-width="3"/><text x="50" y="42" text-anchor="middle" font-size="22" font-weight="900">🚫⚡</text></svg>`,k:'Solid: no conduction',w:'Ions are fixed and cannot carry charge.',e:'Solid <b>NaCl</b>: no'},
+      {v:`<svg viewBox="0 0 100 70"><path d="M12 48H88" stroke="#0077b6" stroke-width="4"/><circle cx="25" cy="24" r="12" fill="#ff9a7d"/><circle cx="72" cy="18" r="12" fill="#7fd0ff"/><circle cx="48" cy="45" r="12" fill="#7fd0ff"/></svg>`,k:'Molten: conducts',w:'Ions are free to move and carry charge.',e:'Molten <b>NaCl</b>: yes'},
+      {v:`<svg viewBox="0 0 100 70"><path d="M50 65C15 43 28 22 50 3C72 22 85 43 50 65Z" fill="#ff8a00" stroke="#111" stroke-width="3"/><path d="M50 56C38 45 42 32 50 24C58 32 62 45 50 56Z" fill="#fff200"/></svg>`,k:'High melting point',w:'Lots of energy is needed to overcome strong attractions.',e:'Strong lattice → <b>high mp</b>'}
+    ]
+  },
+  covalentBond:{
+    cat:'covalent',title:'Covalent bonding — shared electron pairs',
+    rule:'COVALENT = non-metal + non-metal → share e⁻ → molecules',
+    rows:[
+      {v:`<svg viewBox="0 0 100 70"><rect x="5" y="12" width="38" height="38" rx="8" fill="#ecfff1" stroke="#111" stroke-width="3"/><rect x="57" y="12" width="38" height="38" rx="8" fill="#ecfff1" stroke="#111" stroke-width="3"/><text x="24" y="37" text-anchor="middle" font-size="17" font-weight="900">Cl</text><text x="76" y="37" text-anchor="middle" font-size="17" font-weight="900">Cl</text></svg>`,k:'Non-metal + non-metal',w:'This combination usually forms covalent bonding.',e:'Examples: <b>H₂, O₂, H₂O, CO₂</b>'},
+      {v:`<svg viewBox="0 0 100 70"><circle cx="35" cy="35" r="25" fill="#ecfff1" stroke="#111" stroke-width="2"/><circle cx="65" cy="35" r="25" fill="#ecfff1" stroke="#111" stroke-width="2"/><circle cx="47" cy="28" r="5" fill="#7b2cbf"/><circle cx="53" cy="43" r="5" fill="#7b2cbf"/></svg>`,k:'Electrons are shared',w:'A shared pair belongs to both atoms.',e:'Shared pair = <b>covalent bond</b>'},
+      {v:`<svg viewBox="0 0 100 70"><circle cx="32" cy="35" r="20" fill="#dff6ff" stroke="#111" stroke-width="2"/><circle cx="68" cy="35" r="20" fill="#dff6ff" stroke="#111" stroke-width="2"/><path d="M50 35H51" stroke="#00a651" stroke-width="6"/></svg>`,k:'Forms molecules',w:'Atoms join into small groups called molecules.',e:'H₂, O₂, H₂O, NH₃, CH₄, CO₂'},
+      {v:`<svg viewBox="0 0 100 70"><text x="50" y="44" text-anchor="middle" font-size="28" font-weight="900">CO₂</text></svg>`,k:'Formula shows atom numbers',w:'Small number tells how many atoms of that element.',e:'CO₂ = <b>1 C + 2 O</b>'}
+    ]
+  },
+  molecules:{
+    cat:'covalent',title:'Molecules — picture + formula + name',
+    rule:'Learn the picture and the formula together',
+    molecules:[
+      ['H₂','hydrogen','H—H'],['O₂','oxygen','O=O'],['H₂O','water','H—O—H'],
+      ['NH₃','ammonia','N + 3H'],['CH₄','methane','C + 4H'],['CO₂','carbon dioxide','O=C=O']
+    ]
+  },
+  covalentProps:{
+    cat:'covalent',title:'Simple covalent properties',
+    rule:'Simple molecules: usually low mp/bp and no electrical conduction',
+    rows:[
+      {v:`<svg viewBox="0 0 100 70"><circle cx="20" cy="22" r="13" fill="#dff6ff"/><circle cx="38" cy="22" r="13" fill="#dff6ff"/><circle cx="65" cy="48" r="13" fill="#dff6ff"/><circle cx="83" cy="48" r="13" fill="#dff6ff"/></svg>`,k:'Separate molecules',w:'They are not one giant ionic lattice.',e:'Examples: H₂O, CH₄, CO₂'},
+      {v:`<svg viewBox="0 0 100 70"><text x="50" y="46" text-anchor="middle" font-size="35">🌡️</text></svg>`,k:'Usually low mp/bp',w:'Simple molecules separate relatively easily.',e:'Compared with ionic lattices'},
+      {v:`<svg viewBox="0 0 100 70"><text x="50" y="46" text-anchor="middle" font-size="34">🚫⚡</text></svg>`,k:'Usually no conduction',w:'No mobile ions or metallic electron sea.',e:'No moving charged particles'},
+      {v:`<svg viewBox="0 0 100 70"><rect x="8" y="15" width="36" height="36" rx="8" fill="#ecfff1" stroke="#111" stroke-width="2"/><rect x="56" y="15" width="36" height="36" rx="8" fill="#ecfff1" stroke="#111" stroke-width="2"/><text x="26" y="38" text-anchor="middle" font-size="15" font-weight="900">C</text><text x="74" y="38" text-anchor="middle" font-size="15" font-weight="900">O</text></svg>`,k:'Non-metals only',w:'Covalent bonding is between non-metal atoms.',e:'C, H, O, N, Cl…'}
+    ]
+  },
+  compare:{
+    cat:'mixed',title:'Final comparison — one table for all three',
+    rule:'metallic = move • ionic = transfer • covalent = share',
+    compare:true
+  }
+};
+
+const NOTE_AFTER = {
+  4:'metallic',
+  9:'ionicBond',
+  15:'ionicNames',
+  19:'ionicProps',
+  22:'covalentBond',
+  28:'molecules',
+  30:'covalentProps',
+  36:'compare'
+};
+
+const ALL_ITEMS=[];
+Q.forEach((q,qi)=>{
+  ALL_ITEMS.push({type:'q',qi,cat:q.cat});
+  if(NOTE_AFTER[qi]) ALL_ITEMS.push({type:'note',key:NOTE_AFTER[qi],cat:NOTE[NOTE_AFTER[qi]].cat});
+});
+
+let idx=0;
+let answers=Array(Q.length).fill(null);
+let currentFilter='all';
+let filtered=[...ALL_ITEMS];
+
+const slide=document.getElementById('slide');
+const progress=document.getElementById('progress');
+const counter=document.getElementById('counter');
+const scoreEl=document.getElementById('score');
+const prevBtn=document.getElementById('prev');
+const nextBtn=document.getElementById('next');
+const catBtns=[...document.querySelectorAll('.utility button[data-cat]')];
+
+function score(){return answers.reduce((s,a,i)=>s+(a===Q[i].a?1:0),0)}
+function answeredCount(){return answers.filter(a=>a!==null).length}
+function currentItem(){return filtered[idx]}
+
+function updateUtility(){
+  catBtns.forEach(b=>b.classList.toggle('active',b.dataset.cat===currentFilter));
+}
+function setFilter(cat){
+  currentFilter=cat;
+  filtered=ALL_ITEMS.filter(item=>cat==='all'||item.cat===cat);
+  idx=0;
+  updateUtility();
+  render();
+}
+catBtns.forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.cat)));
+
+function optionHTML(q,qi,oi){
+  const answered=answers[qi]!==null;
+  let cls='option',mark='';
+  if(answered){
+    if(oi===q.a){cls+=answers[qi]===oi?' correct':' showCorrect';mark='✓'}
+    else if(answers[qi]===oi){cls+=' wrong';mark='✕'}
+  }
+  return `<button class="${cls}" data-opt="${oi}" ${answered?'disabled':''}>
+    <span class="letter">${String.fromCharCode(65+oi)}</span>
+    <span class="optionText">${q.o[oi]}</span>
+    <span class="mark">${mark}</span>
+  </button>`;
+}
+function feedbackHTML(q,qi){
+  if(answers[qi]===null) return `<div class="feedback">Choose A, B or C.<div class="smallRule">&nbsp; Keyboard: 1 / 2 / 3</div></div>`;
+  const good=answers[qi]===q.a;
+  return `<div class="feedback ${good?'good':'bad'}"><div><b>${good?'✓ Correct':'✕ Not quite'}</b><div class="smallRule">${q.r}</div></div></div>`;
+}
+
+function renderRows(n){
+  return `<div class="noteTable">${n.rows.map(r=>`
+    <div class="noteRow">
+      <div class="noteViz">${r.v}</div>
+      <div class="noteKey">${r.k}</div>
+      <div class="noteWhy">${r.w}</div>
+      <div class="noteExample">${r.e}</div>
+    </div>`).join('')}</div>`;
+}
+function renderNames(n){
+  return `<div class="noteNameGrid">${n.names.map(([f,name])=>`
+    <div class="noteNameCard"><div><div class="f">${f}</div><div class="n">${name}</div></div></div>`).join('')}</div>`;
+}
+function renderMolecules(n){
+  const mini = {
+    'H₂':'H—H','O₂':'O=O','H₂O':'H—O—H','NH₃':'N + 3H','CH₄':'C + 4H','CO₂':'O=C=O'
+  };
+  return `<div class="noteNameGrid">${n.molecules.map(([f,name,pic])=>`
+    <div class="noteNameCard">
+      <div>
+        <div style="font-size:23px;font-weight:900;margin-bottom:4px">${pic}</div>
+        <div class="f">${f}</div>
+        <div class="n">${name}</div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+function renderCompare(){
+  return `<div class="noteCompare">
+    <div class="noteCompareCard m">
+      <h3>METALLIC</h3>
+      <svg viewBox="0 0 240 125"><circle class="ionPlus" cx="55" cy="42" r="24"/><circle class="ionPlus" cx="120" cy="42" r="24"/><circle class="ionPlus" cx="185" cy="42" r="24"/><circle class="electron" cx="87" cy="18" r="7"/><circle class="electron" cx="152" cy="75" r="7"/><circle class="ionPlus" cx="87" cy="95" r="24"/><circle class="ionPlus" cx="152" cy="95" r="24"/></svg>
+      <div class="line">metal atoms</div><div class="line">moving e⁻</div><div class="line">conducts</div><div class="line">Mg, Al, Cu</div>
+    </div>
+    <div class="noteCompareCard i">
+      <h3>IONIC</h3>
+      <svg viewBox="0 0 240 125"><circle class="ionPlus" cx="60" cy="40" r="26"/><circle class="ionMinus" cx="130" cy="40" r="26"/><circle class="ionPlus" cx="200" cy="40" r="26"/><circle class="ionMinus" cx="95" cy="95" r="26"/><circle class="ionPlus" cx="165" cy="95" r="26"/></svg>
+      <div class="line">metal + non-metal</div><div class="line">transfer e⁻</div><div class="line">high mp</div><div class="line">NaCl, MgO</div>
+    </div>
+    <div class="noteCompareCard c">
+      <h3>COVALENT</h3>
+      <svg viewBox="0 0 240 125"><circle cx="90" cy="62" r="42" fill="#ecfff1" stroke="#111" stroke-width="3"/><circle cx="150" cy="62" r="42" fill="#ecfff1" stroke="#111" stroke-width="3"/><circle class="electron" cx="115" cy="50" r="7"/><circle class="electron" cx="125" cy="75" r="7"/></svg>
+      <div class="line">non-metals</div><div class="line">share e⁻</div><div class="line">usually no conduction</div><div class="line">H₂O, CO₂</div>
+    </div>
+  </div>`;
+}
+function renderNote(item){
+  const n=NOTE[item.key];
+  let body='';
+  if(n.rows) body=renderRows(n);
+  else if(n.names) body=renderNames(n);
+  else if(n.molecules) body=renderMolecules(n);
+  else if(n.compare) body=renderCompare();
+
+  slide.innerHTML=`
+    <div class="notePage ${n.cat}">
+      <div class="noteHead">
+        <div><div class="qtag ${n.cat}">NOTE PAGE</div><h2><span class="hl">${n.title}</span></h2></div>
+        <div class="noteInstruction">✍ write 1 short line per row</div>
+      </div>
+      ${body}
+      <div class="noteFoot">
+        <div class="noteRule">${n.rule}</div>
+        <div class="noteCue">Picture → key word → example</div>
+      </div>
+    </div>`;
+  counter.textContent=`${idx+1} / ${filtered.length} • NOTE PAGE`;
+  progress.style.width=`${((idx+1)/filtered.length)*100}%`;
+  scoreEl.textContent=`Score ${score()} • Attempted ${answeredCount()}/${Q.length}`;
+  prevBtn.disabled=idx===0;
+  nextBtn.disabled=false;
+  nextBtn.textContent=idx===filtered.length-1?'Finish':'Next';
+}
+
+function renderQuestion(item){
+  const qi=item.qi,q=Q[qi],answered=answers[qi]!==null;
+  slide.innerHTML=`
+    <span class="clickhint">${answered?'Answer checked':'Choose before moving on'}</span>
+    <div class="qtag ${q.cat}">${q.cat.toUpperCase()}</div>
+    <h2>Question ${qi+1}: <span class="hl">${q.q}</span></h2>
+    <div class="qLayout">
+      <div class="visual">${q.v}</div>
+      <div class="answers">
+        ${q.o.map((_,oi)=>optionHTML(q,qi,oi)).join('')}
+        ${feedbackHTML(q,qi)}
+      </div>
+    </div>`;
+  slide.querySelectorAll('.option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(answers[qi]!==null)return;
+      answers[qi]=Number(btn.dataset.opt);
+      render();
+    });
+  });
+  counter.textContent=`${idx+1} / ${filtered.length} • overall Q${qi+1}/${Q.length}`;
+  progress.style.width=`${((idx+1)/filtered.length)*100}%`;
+  scoreEl.textContent=`Score ${score()} • Attempted ${answeredCount()}/${Q.length}`;
+  prevBtn.disabled=idx===0;
+  nextBtn.disabled=false;
+  nextBtn.textContent=idx===filtered.length-1?'Finish':'Next';
+}
+
+function renderEnd(){
+  slide.innerHTML=`<div class="endScreen"><div class="endBox">
+    <h1><span class="hl">Question challenge complete</span></h1>
+    <div class="endScore">${score()} / ${Q.length}</div>
+    <p>${answeredCount()} questions attempted</p>
+    <div class="legend"><span>metallic = move e⁻</span><span>ionic = transfer e⁻</span><span>covalent = share e⁻</span></div>
+    <button id="restart">Restart all questions</button>
+  </div></div>`;
+  document.getElementById('restart').onclick=()=>{answers=Array(Q.length).fill(null);setFilter('all')};
+  counter.textContent='Complete';
+  progress.style.width='100%';
+  scoreEl.textContent=`Score ${score()} / ${Q.length}`;
+  prevBtn.disabled=false;
+  nextBtn.disabled=true;
+}
+function render(){
+  if(idx>=filtered.length){renderEnd();return}
+  const item=currentItem();
+  if(item.type==='note') renderNote(item); else renderQuestion(item);
+}
+
+prevBtn.addEventListener('click',()=>{if(idx>0){idx--;render()}});
+nextBtn.addEventListener('click',()=>{if(idx<filtered.length){idx++;render()}});
+document.addEventListener('keydown',e=>{
+  if(idx>=filtered.length)return;
+  const item=currentItem();
+  if(['1','2','3'].includes(e.key)&&item.type==='q'&&answers[item.qi]===null){
+    answers[item.qi]=Number(e.key)-1;render();
+  }
+  if(e.key==='ArrowRight'){e.preventDefault();if(!nextBtn.disabled)nextBtn.click()}
+  if(e.key==='ArrowLeft'){e.preventDefault();if(!prevBtn.disabled)prevBtn.click()}
+  if(e.key.toLowerCase()==='r'){answers=Array(Q.length).fill(null);setFilter('all')}
+});
+updateUtility();
+render();
+
+(function fit(){
+  const scale=Math.min(innerWidth/1365,innerHeight/768,1);
+  document.getElementById('deck').style.transform=`scale(${scale})`;
+})();
+addEventListener('resize',()=>{
+  const scale=Math.min(innerWidth/1365,innerHeight/768,1);
+  document.getElementById('deck').style.transform=`scale(${scale})`;
+});
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299"}' crossorigin="anonymous"></script>
+</body>
+</html>

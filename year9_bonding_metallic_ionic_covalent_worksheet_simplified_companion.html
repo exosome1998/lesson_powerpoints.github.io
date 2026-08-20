@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Year 9 Bonding — Simplified Companion Worksheet</title>
+<style>
+:root{--ink:#111;--red:#d60000;--blue:#1f4e8c;--green:#0d8b44;--purple:#7137a8;--orange:#df7800;--yellow:#fff3a6;--paper:#fff;--metal:#e9f2ff;--ionic:#fff0df;--covalent:#e9f9ee;--soft:#f4f7fb}
+*{box-sizing:border-box}html,body{margin:0;background:#cfd5dc;color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{padding:16px}
+.toolbar{position:sticky;top:0;z-index:20;width:min(100%,210mm);margin:0 auto 12px;display:flex;gap:8px;justify-content:flex-end;align-items:center;background:#fff;padding:8px 10px;border:2px solid #111;border-radius:12px}.toolbar .label{margin-right:auto;font-size:13px;font-weight:800}.toolbar button{border:0;border-radius:999px;padding:9px 14px;background:#111;color:#fff;font-weight:700;cursor:pointer}.toolbar button:nth-of-type(2){background:var(--blue)}.toolbar button:nth-of-type(3){background:var(--red)}
+.page{width:210mm;height:297mm;margin:0 auto 16px;background:var(--paper);padding:8mm 9mm 8mm;box-shadow:0 10px 30px rgba(0,0,0,.22);position:relative;overflow:hidden}
+.header{border-bottom:3px solid #111;padding-bottom:5px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}.header h1{font-size:20px;margin:0;line-height:1.05}.header .subtitle{font-size:11.3px;font-weight:700;color:#333;margin-top:3px}.student{display:grid;grid-template-columns:auto 105px;gap:7px;font-size:11px;font-weight:700;min-width:238px}.line{border-bottom:1.5px solid #111;height:17px}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:6mm;height:calc(100% - 43px)}.column{min-width:0}.section{border:1.8px solid #111;border-radius:8px;margin-bottom:5px;padding:5px 6px;background:#fff}.section h2,.row-panel h2{margin:0 0 4px;font-size:13.4px;line-height:1.08;background:var(--yellow);padding:3px 5px;border-radius:5px}.tag{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:2px 6px;font-size:8.5px;margin-right:5px;vertical-align:1px}
+.rule-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:3px 0}.rule{border:1.4px solid #111;border-radius:6px;padding:4px 2px;text-align:center;font-size:8.6px;font-weight:900}.rule.m{background:var(--metal)}.rule.i{background:var(--ionic)}.rule.c{background:var(--covalent)}
+.q{font-size:9.2px;line-height:1.12;margin:3px 0 2px;font-weight:700}.q strong{font-weight:900}.fact{border-left:5px solid var(--blue);background:#eef8ff;padding:4px 5px;font-size:9px;font-weight:750;line-height:1.12;margin:3px 0}.fact.green{border-left-color:var(--green);background:#f1fff6}.fact.orange{border-left-color:var(--orange);background:#fff6eb}
+.answer-box{margin:2px 0 4px;min-height:23px;padding:3px 5px 2px;border:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 13px,#333 14px,transparent 15px);color:transparent;font-size:9px;line-height:14px;font-weight:800;cursor:pointer;display:block}.answer-box.lines2{min-height:35px}.answer-box.revealed{color:var(--red);background:repeating-linear-gradient(to bottom,rgba(255,246,246,.95) 0,rgba(255,246,246,.95) 13px,#c77 14px,rgba(255,246,246,.95) 15px)}
+.inline-answer,.ans{cursor:pointer;color:transparent;font-weight:900;text-align:center;user-select:none}.inline-answer.revealed,.ans.revealed{color:var(--red);background:#fff3f3}
+.table{border-collapse:collapse;width:100%;font-size:8.55px;font-weight:750}.table th,.table td{border:1.3px solid #111;padding:2.5px;text-align:center}.table th{background:#fff3a6}.table td.cell-answer{height:22px;min-width:28px;cursor:pointer;color:transparent;font-weight:900;background:#fff}.table td.cell-answer.revealed{color:var(--red);background:#fff3f3}
+.chip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}.chip{border:1.3px solid #111;border-radius:6px;padding:4px 2px;text-align:center;font-size:9px;font-weight:900;min-height:34px}.chip b{font-size:11px}.chip .ans{display:block;min-height:11px;font-size:7.8px;margin-top:2px}
+.bond-icons{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.bond-icon{border:1.4px solid #111;border-radius:7px;padding:3px;text-align:center;background:#fff}.bond-icon svg{width:100%;height:69px;display:block}.bond-icon .ans{display:block;min-height:14px;font-size:8px;border-top:1px solid #aaa;padding-top:2px}
+.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.prop{border:1.3px solid #111;border-radius:5px;padding:3px;text-align:center;font-size:8.1px;font-weight:850;min-height:39px;display:flex;flex-direction:column;justify-content:center}.prop .ans{display:block;min-height:11px;font-size:7.8px;margin-top:2px}
+.transfer-box{border:1.4px solid #111;border-radius:7px;background:#fffaf5;padding:3px;text-align:center}.transfer-box svg{width:100%;height:118px;display:block}.mini-qa{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px}.mini-q{border:1.2px solid #111;border-radius:5px;padding:3px;text-align:center;font-size:8px;font-weight:800}.mini-q .ans{display:block;min-height:11px;font-size:7.6px;margin-top:2px}
+.formula-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.formula-card{border:1.3px solid #111;border-radius:5px;padding:4px 3px;text-align:center;min-height:43px}.formula-card b{font-size:11px}.formula-card .ans{display:block;min-height:12px;font-size:7.6px;margin-top:3px}
+.page2grid{height:calc(100% - 43px);display:grid;grid-template-rows:auto auto 1fr;gap:3mm}.row-panel{border:1.8px solid #111;border-radius:8px;padding:5px;background:#fff;min-height:0}.molecule-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.molecule{border:1.4px solid #111;border-radius:6px;padding:3px;text-align:center}.molecule svg{width:100%;height:77px;display:block}.molecule .ans{display:block;min-height:14px;border-top:1px solid #aaa;padding-top:2px;font-size:7.6px}
+.statement-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}.statement{border-bottom:1px solid #bbb;padding:2px 0;font-size:8.3px;font-weight:750;display:grid;grid-template-columns:1fr 47px;gap:4px;align-items:center}.statement .ans{height:18px;border:1px solid #111;border-radius:4px;display:grid;place-items:center;font-size:7.5px}
+.mixed-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.mixed{border:1.3px solid #111;border-radius:5px;padding:3px;text-align:center;font-size:7.8px;font-weight:850;min-height:45px}.mixed b{display:block;font-size:10px}.mixed .ans{display:block;min-height:12px;margin-top:2px;font-size:7.2px}
+.detective-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.detective{border:1.3px solid #111;border-radius:6px;padding:4px;font-size:8px;font-weight:800;line-height:1.1;min-height:64px}.detective .ans{display:block;margin-top:4px;min-height:15px;border-top:1px solid #aaa;padding-top:2px;font-size:8px}
+.page-number{position:absolute;bottom:3mm;right:9mm;font-size:9px;font-weight:700}.small{font-size:8px}.center{text-align:center}
+.page:first-of-type .section{padding:6px 7px;margin-bottom:6px}.page:first-of-type .section h2{font-size:14px}.page:first-of-type .chip{min-height:38px;font-size:9.5px}.page:first-of-type .bond-icon svg{height:78px}.page:first-of-type .prop{min-height:44px;font-size:8.5px}.page:first-of-type .formula-card{min-height:47px}.page:first-of-type .table{font-size:8.9px}.page:first-of-type .q{font-size:9.6px}
+@media print{@page{size:A4 portrait;margin:0}html,body{background:#fff;padding:0}.toolbar{display:none}.page{margin:0;box-shadow:none;page-break-after:always}.page:last-child{page-break-after:auto}}
+</style>
+</head>
+<body>
+<div class="toolbar"><div class="label">Year 9 bonding • simplified companion worksheet</div><button id="printBtn">Print</button><button id="showAllBtn">Show answers</button><button id="resetBtn">Reset</button></div>
+
+<section class="page">
+<div class="header"><div><h1>Metallic, Ionic and Covalent Bonding</h1><div class="subtitle">Year 9 Science • use the same 3 rules as the lesson</div></div><div class="student"><span>Name:</span><span class="line"></span><span>Date:</span><span class="line"></span></div></div>
+<div class="columns">
+<div class="column">
+
+<div class="section"><h2><span class="tag">Start</span>1. Metal or non-metal?</h2>
+<div class="chip-grid">
+<div class="chip"><b>Li</b><span class="ans" data-answer="metal"></span></div><div class="chip"><b>Mg</b><span class="ans" data-answer="metal"></span></div><div class="chip"><b>Al</b><span class="ans" data-answer="metal"></span></div><div class="chip"><b>Ca</b><span class="ans" data-answer="metal"></span></div>
+<div class="chip"><b>H</b><span class="ans" data-answer="non-metal"></span></div><div class="chip"><b>O</b><span class="ans" data-answer="non-metal"></span></div><div class="chip"><b>S</b><span class="ans" data-answer="non-metal"></span></div><div class="chip"><b>Cl</b><span class="ans" data-answer="non-metal"></span></div>
+</div>
+<div class="rule-strip"><div class="rule m">metal + metal<br><span class="inline-answer" data-answer="METALLIC"></span></div><div class="rule i">metal + non-metal<br><span class="inline-answer" data-answer="IONIC"></span></div><div class="rule c">non-metal + non-metal<br><span class="inline-answer" data-answer="COVALENT"></span></div></div>
+</div>
+
+<div class="section"><h2><span class="tag">Look</span>2. Which bonding picture?</h2>
+<div class="bond-icons">
+<div class="bond-icon"><svg viewBox="0 0 110 72"><g fill="#b8cde5" stroke="#111" stroke-width="2"><circle cx="25" cy="24" r="13"/><circle cx="55" cy="24" r="13"/><circle cx="85" cy="24" r="13"/><circle cx="40" cy="52" r="13"/><circle cx="70" cy="52" r="13"/></g><g fill="#7137a8"><circle cx="40" cy="10" r="4"/><circle cx="70" cy="10" r="4"/><circle cx="55" cy="40" r="4"/></g></svg><span class="ans" data-answer="metallic"></span></div>
+<div class="bond-icon"><svg viewBox="0 0 110 72"><circle cx="30" cy="25" r="19" fill="#ff9b78" stroke="#111" stroke-width="2"/><circle cx="78" cy="25" r="19" fill="#7ed0ff" stroke="#111" stroke-width="2"/><circle cx="30" cy="61" r="19" fill="#7ed0ff" stroke="#111" stroke-width="2"/><circle cx="78" cy="61" r="19" fill="#ff9b78" stroke="#111" stroke-width="2"/><text x="30" y="29" text-anchor="middle" font-size="14" font-weight="900">+</text><text x="78" y="29" text-anchor="middle" font-size="14" font-weight="900">−</text><text x="30" y="65" text-anchor="middle" font-size="14" font-weight="900">−</text><text x="78" y="65" text-anchor="middle" font-size="14" font-weight="900">+</text></svg><span class="ans" data-answer="ionic"></span></div>
+<div class="bond-icon"><svg viewBox="0 0 110 72"><circle cx="42" cy="36" r="25" fill="#ecfff1" stroke="#111" stroke-width="2"/><circle cx="68" cy="36" r="25" fill="#ecfff1" stroke="#111" stroke-width="2"/><circle cx="52" cy="31" r="4" fill="#7137a8"/><circle cx="58" cy="42" r="4" fill="#7137a8"/></svg><span class="ans" data-answer="covalent"></span></div>
+</div></div>
+
+<div class="section"><h2><span class="tag">Metallic</span>3. Moving electrons</h2>
+<div class="property-grid">
+<div class="prop">metal atoms only<span class="ans" data-answer="YES"></span></div><div class="prop">electrons can move<span class="ans" data-answer="YES"></span></div><div class="prop">electrons transfer<span class="ans" data-answer="NO"></span></div>
+<div class="prop">conducts electricity<span class="ans" data-answer="YES"></span></div><div class="prop">can bend / be shaped<span class="ans" data-answer="YES"></span></div><div class="prop">forms molecules<span class="ans" data-answer="NO"></span></div>
+</div>
+<div class="mini-qa"><div class="mini-q">Mg bonding?<span class="ans" data-answer="metallic"></span></div><div class="mini-q">Al bonding?<span class="ans" data-answer="metallic"></span></div><div class="mini-q">Why conduct?<span class="ans" data-answer="electrons can move"></span></div><div class="mini-q">Can it be shaped?<span class="ans" data-answer="YES"></span></div></div>
+</div>
+
+<div class="section"><h2><span class="tag">Remember</span>The 3 key words</h2><div class="rule-strip"><div class="rule m">METALLIC<br><b>MOVE</b></div><div class="rule i">IONIC<br><b>TRANSFER</b></div><div class="rule c">COVALENT<br><b>SHARE</b></div></div></div>
+</div>
+
+<div class="column">
+<div class="section"><h2><span class="tag">Ionic</span>4. Sodium + chlorine</h2>
+<div class="transfer-box"><svg viewBox="0 0 300 120"><circle cx="65" cy="55" r="34" fill="#e7f2ff" stroke="#111" stroke-width="3"/><text x="65" y="61" text-anchor="middle" font-size="17" font-weight="900">Na</text><circle cx="235" cy="55" r="34" fill="#ecfff1" stroke="#111" stroke-width="3"/><text x="235" y="61" text-anchor="middle" font-size="17" font-weight="900">Cl</text><circle cx="98" cy="40" r="6" fill="#7137a8"/><path d="M108 36 C145 8 185 8 205 34" fill="none" stroke="#d60000" stroke-width="4"/><polygon points="201,26 216,35 201,43" fill="#d60000"/><text x="150" y="17" text-anchor="middle" font-size="9" font-weight="900">electron moves</text><circle cx="95" cy="100" r="18" fill="#ff9b78" stroke="#111" stroke-width="2"/><text x="95" y="104" text-anchor="middle" font-size="9" font-weight="900">Na+</text><circle cx="205" cy="100" r="18" fill="#7ed0ff" stroke="#111" stroke-width="2"/><text x="205" y="104" text-anchor="middle" font-size="9" font-weight="900">Cl−</text></svg></div>
+<div class="mini-qa"><div class="mini-q">metal?<span class="ans" data-answer="sodium"></span></div><div class="mini-q">non-metal?<span class="ans" data-answer="chlorine"></span></div><div class="mini-q">electron is…<span class="ans" data-answer="transferred"></span></div><div class="mini-q">bonding?<span class="ans" data-answer="ionic"></span></div></div>
+</div>
+
+<div class="section"><h2><span class="tag">Names</span>5. Name the ionic compounds</h2>
+<div class="fact orange"><strong>Rule:</strong> metal name + non-metal ending in <strong>-ide</strong></div>
+<div class="formula-grid">
+<div class="formula-card"><b>NaCl</b><span class="ans" data-answer="sodium chloride"></span></div><div class="formula-card"><b>MgO</b><span class="ans" data-answer="magnesium oxide"></span></div><div class="formula-card"><b>LiF</b><span class="ans" data-answer="lithium fluoride"></span></div>
+<div class="formula-card"><b>CaCl₂</b><span class="ans" data-answer="calcium chloride"></span></div><div class="formula-card"><b>K₂O</b><span class="ans" data-answer="potassium oxide"></span></div><div class="formula-card"><b>Al₂O₃</b><span class="ans" data-answer="aluminium oxide"></span></div>
+<div class="formula-card"><b>KCl</b><span class="ans" data-answer="potassium chloride"></span></div><div class="formula-card"><b>CaO</b><span class="ans" data-answer="calcium oxide"></span></div><div class="formula-card"><b>Na₂O</b><span class="ans" data-answer="sodium oxide"></span></div>
+<div class="formula-card"><b>MgCl₂</b><span class="ans" data-answer="magnesium chloride"></span></div><div class="formula-card"><b>CaF₂</b><span class="ans" data-answer="calcium fluoride"></span></div><div class="formula-card"><b>Li₂O</b><span class="ans" data-answer="lithium oxide"></span></div>
+</div></div>
+
+<div class="section"><h2><span class="tag">Properties</span>6. Ionic: solid, molten or both?</h2>
+<table class="table"><tr><th>Clue</th><th>Answer</th></tr>
+<tr><td>ions are fixed</td><td class="inline-answer cell-answer" data-answer="solid"></td></tr>
+<tr><td>ions can move</td><td class="inline-answer cell-answer" data-answer="molten"></td></tr>
+<tr><td>does not conduct electricity</td><td class="inline-answer cell-answer" data-answer="solid"></td></tr>
+<tr><td>conducts electricity</td><td class="inline-answer cell-answer" data-answer="molten"></td></tr>
+<tr><td>high melting point</td><td class="inline-answer cell-answer" data-answer="both"></td></tr>
+</table>
+<div class="q">Why does molten NaCl conduct?</div><div class="answer-box" data-answer="The ions can move."></div>
+<div class="q">Why is the melting point high?</div><div class="answer-box" data-answer="It has a strong ionic lattice."></div>
+</div>
+</div>
+</div>
+<div class="page-number">Page 1 of 2</div>
+</section>
+
+<section class="page">
+<div class="header"><div><h1>Covalent Bonding + Compare the Three</h1><div class="subtitle">share electrons • name molecules • choose the bonding type</div></div><div class="student"><span>Name:</span><span class="line"></span><span>Class:</span><span class="line"></span></div></div>
+<div class="page2grid">
+
+<div class="row-panel"><h2><span class="tag">Covalent</span>7. Shared electrons make molecules</h2>
+<div class="molecule-row">
+<div class="molecule"><svg viewBox="0 0 120 85"><circle cx="42" cy="42" r="28" fill="#dff6ff" stroke="#111" stroke-width="2"/><circle cx="78" cy="42" r="28" fill="#dff6ff" stroke="#111" stroke-width="2"/><text x="42" y="47" text-anchor="middle" font-size="14" font-weight="900">H</text><text x="78" y="47" text-anchor="middle" font-size="14" font-weight="900">H</text><circle cx="56" cy="36" r="4" fill="#7137a8"/><circle cx="64" cy="48" r="4" fill="#7137a8"/></svg><span class="ans" data-answer="H₂ • hydrogen"></span></div>
+<div class="molecule"><svg viewBox="0 0 120 85"><circle cx="42" cy="42" r="28" fill="#ffe9e9" stroke="#111" stroke-width="2"/><circle cx="78" cy="42" r="28" fill="#ffe9e9" stroke="#111" stroke-width="2"/><text x="42" y="47" text-anchor="middle" font-size="14" font-weight="900">O</text><text x="78" y="47" text-anchor="middle" font-size="14" font-weight="900">O</text><line x1="56" y1="35" x2="64" y2="35" stroke="#0d8b44" stroke-width="3"/><line x1="56" y1="49" x2="64" y2="49" stroke="#0d8b44" stroke-width="3"/></svg><span class="ans" data-answer="O₂ • oxygen"></span></div>
+<div class="molecule"><svg viewBox="0 0 120 85"><circle cx="60" cy="30" r="22" fill="#ffe9e9" stroke="#111" stroke-width="2"/><text x="60" y="35" text-anchor="middle" font-size="14" font-weight="900">O</text><circle cx="24" cy="68" r="13" fill="#dff6ff" stroke="#111" stroke-width="2"/><circle cx="96" cy="68" r="13" fill="#dff6ff" stroke="#111" stroke-width="2"/><text x="24" y="72" text-anchor="middle" font-size="10" font-weight="900">H</text><text x="96" y="72" text-anchor="middle" font-size="10" font-weight="900">H</text><line x1="44" y1="45" x2="33" y2="57" stroke="#0d8b44" stroke-width="3"/><line x1="76" y1="45" x2="87" y2="57" stroke="#0d8b44" stroke-width="3"/></svg><span class="ans" data-answer="H₂O • water"></span></div>
+<div class="molecule"><svg viewBox="0 0 120 85"><circle cx="60" cy="42" r="19" fill="#ddd" stroke="#111" stroke-width="2"/><text x="60" y="47" text-anchor="middle" font-size="13" font-weight="900">C</text><circle cx="60" cy="8" r="9" fill="#dff6ff" stroke="#111" stroke-width="1.5"/><circle cx="60" cy="77" r="9" fill="#dff6ff" stroke="#111" stroke-width="1.5"/><circle cx="20" cy="42" r="9" fill="#dff6ff" stroke="#111" stroke-width="1.5"/><circle cx="100" cy="42" r="9" fill="#dff6ff" stroke="#111" stroke-width="1.5"/><line x1="60" y1="22" x2="60" y2="17" stroke="#0d8b44" stroke-width="3"/><line x1="60" y1="61" x2="60" y2="68" stroke="#0d8b44" stroke-width="3"/><line x1="41" y1="42" x2="30" y2="42" stroke="#0d8b44" stroke-width="3"/><line x1="79" y1="42" x2="90" y2="42" stroke="#0d8b44" stroke-width="3"/></svg><span class="ans" data-answer="CH₄ • methane"></span></div>
+</div>
+<div class="mini-qa"><div class="mini-q">atoms are…<span class="ans" data-answer="non-metals"></span></div><div class="mini-q">electrons are…<span class="ans" data-answer="shared"></span></div><div class="mini-q">forms…<span class="ans" data-answer="molecules"></span></div><div class="mini-q">usually conducts?<span class="ans" data-answer="NO"></span></div></div>
+</div>
+
+<div class="row-panel"><h2><span class="tag">Names</span>8. Name the molecules</h2>
+<div class="formula-grid" style="grid-template-columns:repeat(4,1fr)">
+<div class="formula-card"><b>H₂</b><span class="ans" data-answer="hydrogen"></span></div><div class="formula-card"><b>O₂</b><span class="ans" data-answer="oxygen"></span></div><div class="formula-card"><b>N₂</b><span class="ans" data-answer="nitrogen"></span></div><div class="formula-card"><b>Cl₂</b><span class="ans" data-answer="chlorine"></span></div>
+<div class="formula-card"><b>H₂O</b><span class="ans" data-answer="water"></span></div><div class="formula-card"><b>NH₃</b><span class="ans" data-answer="ammonia"></span></div><div class="formula-card"><b>CH₄</b><span class="ans" data-answer="methane"></span></div><div class="formula-card"><b>CO₂</b><span class="ans" data-answer="carbon dioxide"></span></div>
+</div>
+</div>
+
+<div class="row-panel" style="display:grid;grid-template-rows:auto auto auto;gap:2.5mm;min-height:0">
+<div><h2><span class="tag">Compare</span>9. Which bonding type?</h2><div class="statement-grid">
+<div class="statement"><span>electrons can move</span><span class="ans" data-answer="metallic"></span></div><div class="statement"><span>electrons are transferred</span><span class="ans" data-answer="ionic"></span></div>
+<div class="statement"><span>electrons are shared</span><span class="ans" data-answer="covalent"></span></div><div class="statement"><span>metal atoms only</span><span class="ans" data-answer="metallic"></span></div>
+<div class="statement"><span>metal + non-metal</span><span class="ans" data-answer="ionic"></span></div><div class="statement"><span>non-metal + non-metal</span><span class="ans" data-answer="covalent"></span></div>
+<div class="statement"><span>conducts as a solid</span><span class="ans" data-answer="metallic"></span></div><div class="statement"><span>conducts when molten</span><span class="ans" data-answer="ionic"></span></div>
+<div class="statement"><span>usually does not conduct</span><span class="ans" data-answer="covalent"></span></div><div class="statement"><span>can bend / be shaped</span><span class="ans" data-answer="metallic"></span></div>
+<div class="statement"><span>high melting point</span><span class="ans" data-answer="ionic"></span></div><div class="statement"><span>usually low melting / boiling</span><span class="ans" data-answer="covalent"></span></div>
+</div></div>
+
+<div><h2><span class="tag">Mixed</span>10. Rapid fire</h2><div class="mixed-grid">
+<div class="mixed"><b>Mg</b>bonding<span class="ans" data-answer="metallic"></span></div><div class="mixed"><b>NaCl</b>bonding<span class="ans" data-answer="ionic"></span></div><div class="mixed"><b>CO₂</b>bonding<span class="ans" data-answer="covalent"></span></div><div class="mixed"><b>Ca</b>bonding<span class="ans" data-answer="metallic"></span></div><div class="mixed"><b>H₂O</b>bonding<span class="ans" data-answer="covalent"></span></div>
+<div class="mixed"><b>Al₂O₃</b>bonding<span class="ans" data-answer="ionic"></span></div><div class="mixed"><b>K</b>bonding<span class="ans" data-answer="metallic"></span></div><div class="mixed"><b>O₂</b>bonding<span class="ans" data-answer="covalent"></span></div><div class="mixed"><b>MgO</b>bonding<span class="ans" data-answer="ionic"></span></div><div class="mixed"><b>Al</b>bonding<span class="ans" data-answer="metallic"></span></div>
+<div class="mixed"><b>CaCl₂</b>name<span class="ans" data-answer="calcium chloride"></span></div><div class="mixed"><b>K₂O</b>name<span class="ans" data-answer="potassium oxide"></span></div><div class="mixed"><b>LiF</b>name<span class="ans" data-answer="lithium fluoride"></span></div><div class="mixed"><b>NH₃</b>name<span class="ans" data-answer="ammonia"></span></div><div class="mixed"><b>CH₄</b>name<span class="ans" data-answer="methane"></span></div>
+</div></div>
+
+<div><h2><span class="tag">Final</span>11. Property detective</h2><div class="detective-grid">
+<div class="detective"><strong>A</strong> Conducts electricity and can be shaped.<span class="ans" data-answer="metallic"></span></div>
+<div class="detective"><strong>B</strong> Solid does not conduct. Molten does.<span class="ans" data-answer="ionic"></span></div>
+<div class="detective"><strong>C</strong> Small molecules. Usually no conduction.<span class="ans" data-answer="covalent"></span></div>
+<div class="detective"><strong>D</strong> Metal + non-metal. Electrons transfer.<span class="ans" data-answer="ionic"></span></div>
+<div class="detective"><strong>E</strong> Non-metals share electrons.<span class="ans" data-answer="covalent"></span></div>
+<div class="detective"><strong>F</strong> Metal atoms with moving electrons.<span class="ans" data-answer="metallic"></span></div>
+</div></div>
+</div>
+</div>
+<div class="page-number">Page 2 of 2</div>
+</section>
+<script>
+const answerEls=[...document.querySelectorAll('.answer-box,.inline-answer,.ans')];let nextIndex=0;
+function reveal(el){if(!el.classList.contains('revealed')){el.textContent=el.dataset.answer||'';el.classList.add('revealed')}const i=answerEls.indexOf(el);if(i>=nextIndex)nextIndex=i+1}
+function hide(el){el.textContent='';el.classList.remove('revealed')}
+answerEls.forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();el.classList.contains('revealed')?hide(el):reveal(el)}));
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();while(nextIndex<answerEls.length&&answerEls[nextIndex].classList.contains('revealed'))nextIndex++;if(nextIndex<answerEls.length){reveal(answerEls[nextIndex]);answerEls[nextIndex].scrollIntoView({behavior:'smooth',block:'center'})}}});
+document.getElementById('showAllBtn').addEventListener('click',()=>{answerEls.forEach(reveal);nextIndex=answerEls.length});document.getElementById('resetBtn').addEventListener('click',()=>{answerEls.forEach(hide);nextIndex=0;window.scrollTo({top:0,behavior:'smooth'})});document.getElementById('printBtn').addEventListener('click',()=>window.print());
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299"}' crossorigin="anonymous"></script>
+</body></html>
