@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Year 9 Bonding + Alloys — Visual Companion Worksheet</title>
+<style>
+:root{--ink:#111;--red:#d60000;--blue:#1f4e8c;--green:#0d8b44;--purple:#7137a8;--orange:#df7800;--brown:#6f4e37;--yellow:#fff3a6;--paper:#fff;--ionic:#fff0df;--covalent:#e9f9ee;--alloy:#f4ece6;--soft:#f4f7fb;--pos:#ff9b78;--neg:#7ed0ff}
+*{box-sizing:border-box}html,body{margin:0;background:#cfd5dc;color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{padding:16px}
+.toolbar{position:sticky;top:0;z-index:20;width:min(100%,210mm);margin:0 auto 12px;display:flex;gap:8px;justify-content:flex-end;align-items:center;background:#fff;padding:8px 10px;border:2px solid #111;border-radius:12px}.toolbar .label{margin-right:auto;font-size:13px;font-weight:800}.toolbar button{border:0;border-radius:999px;padding:9px 14px;background:#111;color:#fff;font-weight:700;cursor:pointer}.toolbar button:nth-of-type(2){background:var(--blue)}.toolbar button:nth-of-type(3){background:var(--red)}
+.page{width:210mm;height:297mm;margin:0 auto 16px;background:var(--paper);padding:8mm 9mm 8mm;box-shadow:0 10px 30px rgba(0,0,0,.22);position:relative;overflow:hidden}.header{border-bottom:3px solid #111;padding-bottom:5px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}.header h1{font-size:20px;margin:0;line-height:1.05}.header .subtitle{font-size:11.3px;font-weight:700;color:#333;margin-top:3px}.student{display:grid;grid-template-columns:auto 105px;gap:7px;font-size:11px;font-weight:700;min-width:238px}.line{border-bottom:1.5px solid #111;height:17px}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:6mm;height:calc(100% - 43px)}.column{min-width:0}.section,.panel{border:1.8px solid #111;border-radius:8px;margin-bottom:5px;padding:5px 6px;background:#fff}.section h2,.panel h2{margin:0 0 4px;font-size:13.4px;line-height:1.08;background:var(--yellow);padding:3px 5px;border-radius:5px}.tag{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:2px 6px;font-size:8.5px;margin-right:5px;vertical-align:1px}
+.rule-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:3px 0}.rule{border:1.4px solid #111;border-radius:6px;padding:5px 2px;text-align:center;font-size:8.8px;font-weight:900}.rule.i{background:var(--ionic)}.rule.c{background:var(--covalent)}.rule.a{background:var(--alloy)}
+.q{font-size:9.2px;line-height:1.12;margin:3px 0 2px;font-weight:700}.fact{border-left:5px solid var(--orange);background:#fff6eb;padding:4px 5px;font-size:9px;font-weight:800;line-height:1.12;margin:3px 0}.fact.green{border-left-color:var(--green);background:#f1fff6}.fact.brown{border-left-color:var(--brown);background:#faf3ef}
+.answer-box{margin:2px 0 4px;min-height:23px;padding:3px 5px 2px;border:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 13px,#333 14px,transparent 15px);color:transparent;font-size:9px;line-height:14px;font-weight:800;cursor:pointer;display:block}.answer-box.lines2{min-height:35px}.answer-box.revealed{color:var(--red);background:repeating-linear-gradient(to bottom,rgba(255,246,246,.95) 0,rgba(255,246,246,.95) 13px,#c77 14px,rgba(255,246,246,.95) 15px)}
+.inline-answer,.ans{cursor:pointer;color:transparent;font-weight:900;text-align:center;user-select:none}.inline-answer.revealed,.ans.revealed{color:var(--red);background:#fff3f3}.mini-qa{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px}.mini-q{border:1.2px solid #111;border-radius:5px;padding:3px;text-align:center;font-size:8px;font-weight:800}.mini-q .ans{display:block;min-height:11px;font-size:7.6px;margin-top:2px}
+.ion-work{border:1.4px solid #111;border-radius:7px;background:#fffaf5;padding:3px;text-align:center}.ion-work svg{width:100%;height:128px;display:block}.dot-label{font-size:8px;font-weight:900;color:#555;text-align:center;margin-top:-2px}
+.formula-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.formula-card{border:1.3px solid #111;border-radius:5px;padding:4px 3px;text-align:center;min-height:45px}.formula-card b{font-size:11px}.formula-card .ans{display:block;min-height:12px;font-size:7.6px;margin-top:3px}
+.page2grid{height:calc(100% - 43px);display:grid;grid-template-rows:auto auto 1fr;gap:3mm}.panel{margin:0;min-height:0}.sequence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.seq{border:1.4px solid #111;border-radius:7px;padding:3px;text-align:center;background:#fff}.seq h3{margin:0 0 2px;font-size:9px}.seq svg{width:100%;height:90px;display:block}.seq .ans{display:block;min-height:14px;font-size:8px;border-top:1px solid #aaa;padding-top:2px}.seq .tiny{font-size:7px;font-weight:800;color:#444}
+.bond-practice{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.bond-card{border:1.4px solid #111;border-radius:7px;padding:3px;text-align:center}.bond-card svg{width:100%;height:74px;display:block}.bond-card .ans{display:block;min-height:14px;font-size:8px;border-top:1px solid #aaa;padding-top:2px}.bond-key{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3px}.bond-key>div{border:1.2px solid #111;border-radius:5px;text-align:center;padding:3px;font-size:8px;font-weight:900}
+.alloy-visual{display:grid;grid-template-columns:1fr 1fr;gap:4px}.alloy-box{border:1.4px solid #111;border-radius:7px;padding:3px;text-align:center}.alloy-box svg{width:100%;height:96px;display:block}.alloy-box .ans{display:block;min-height:14px;font-size:8px;border-top:1px solid #aaa;padding-top:2px}.property-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:3px}.prop{border:1.3px solid #111;border-radius:5px;padding:3px;text-align:center;font-size:7.8px;font-weight:850;min-height:39px;display:flex;flex-direction:column;justify-content:center}.prop .ans{display:block;min-height:11px;font-size:7.4px;margin-top:2px}
+.alloy-examples{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.alloy-chip{border:1.3px solid #111;border-radius:5px;padding:4px 3px;text-align:center;min-height:44px;font-size:8px;font-weight:850}.alloy-chip b{font-size:10px}.alloy-chip .ans{display:block;min-height:12px;font-size:7.2px;margin-top:2px}
+.statement-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}.statement{border-bottom:1px solid #bbb;padding:2px 0;font-size:8.1px;font-weight:750;display:grid;grid-template-columns:1fr 53px;gap:4px;align-items:center}.statement .ans{height:18px;border:1px solid #111;border-radius:4px;display:grid;place-items:center;font-size:7.3px}.exit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}.exit{border:1.3px solid #111;border-radius:5px;padding:3px;text-align:center;font-size:7.7px;font-weight:850;min-height:47px}.exit b{display:block;font-size:10px}.exit .ans{display:block;min-height:12px;margin-top:2px;font-size:7.2px}
+.draw-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}.draw-box{height:118px;border:1.5px dashed #555;border-radius:7px;position:relative;background:linear-gradient(#fff,#fff),repeating-linear-gradient(to bottom,transparent 0,transparent 20px,#e8e8e8 21px,transparent 22px);background-blend-mode:normal}.draw-box .prompt{position:absolute;left:5px;top:4px;font-size:8px;font-weight:900;color:#555}.draw-box .hint{position:absolute;left:5px;right:5px;bottom:4px;font-size:7px;font-weight:800;color:#777;text-align:center}.wide-draw{height:132px;border:1.5px dashed #555;border-radius:7px;position:relative}.wide-draw:before{content:'dots first';position:absolute;left:7px;top:5px;font-size:8px;font-weight:900;color:#555}.wide-draw:after{content:'bond line later';position:absolute;right:7px;top:5px;font-size:8px;font-weight:900;color:#555}.wide-draw .arrow{position:absolute;left:48%;top:48%;font-size:24px;font-weight:900;color:#aaa}.page-number{position:absolute;bottom:3mm;right:9mm;font-size:9px;font-weight:700}.small{font-size:8px}.center{text-align:center}
+@media print{@page{size:A4 portrait;margin:0}html,body{background:#fff;padding:0}.toolbar{display:none}.page{margin:0;box-shadow:none;page-break-after:always}.page:last-child{page-break-after:auto}}
+</style>
+</head>
+<body>
+<div class="toolbar"><div class="label">Year 9 bonding + alloys • visual companion worksheet</div><button id="printBtn">Print</button><button id="showAllBtn">Show answers</button><button id="resetBtn">Reset</button></div>
+
+<section class="page">
+<div class="header"><div><h1>Ionic Dot Diagrams + Covalent Bond Starts</h1><div class="subtitle">transfer electrons • full outer shells • dots first</div></div><div class="student"><span>Name:</span><span class="line"></span><span>Date:</span><span class="line"></span></div></div>
+<div class="columns">
+<div class="column">
+
+<div class="section"><h2><span class="tag">Start</span>1. Three rules from the lesson</h2>
+<div class="rule-strip"><div class="rule i">IONIC<br><b>TRANSFER e⁻</b></div><div class="rule c">COVALENT<br><b>SHARE e⁻</b></div><div class="rule a">ALLOY<br><b>MIXED ATOMS</b></div></div>
+<div class="mini-qa"><div class="mini-q">metal + non-metal<span class="ans" data-answer="ionic"></span></div><div class="mini-q">non-metal + non-metal<span class="ans" data-answer="covalent"></span></div></div>
+</div>
+
+<div class="section"><h2><span class="tag">Ionic</span>2. NaCl — one electron transfers</h2>
+<div class="ion-work"><svg viewBox="0 0 330 130" aria-label="NaCl ionic dot diagram">
+<text x="165" y="12" text-anchor="middle" font-size="9" font-weight="900">Na gives 1 electron to Cl</text>
+<rect x="28" y="27" width="105" height="82" rx="12" fill="#fff0e9" stroke="#111" stroke-width="2.5"/><text x="80" y="70" text-anchor="middle" font-size="22" font-weight="900">Na</text><text x="119" y="40" font-size="13" font-weight="900">+</text>
+<rect x="196" y="27" width="105" height="82" rx="12" fill="#e7f5ff" stroke="#111" stroke-width="2.5"/><text x="248" y="70" text-anchor="middle" font-size="22" font-weight="900">Cl</text><text x="286" y="40" font-size="13" font-weight="900">−</text>
+<g fill="#7137a8" stroke="#111" stroke-width=".8"><circle cx="218" cy="40" r="4"/><circle cx="278" cy="40" r="4"/><circle cx="218" cy="96" r="4"/><circle cx="278" cy="96" r="4"/><circle cx="204" cy="58" r="4"/><circle cx="204" cy="82" r="4"/><circle cx="292" cy="58" r="4"/><circle cx="292" cy="82" r="4"/></g>
+<path d="M132 65 C150 41 175 41 194 63" fill="none" stroke="#d60000" stroke-width="3.5" stroke-dasharray="7 5"/><polygon points="188,55 199,64 188,71" fill="#d60000"/>
+<text x="165" y="122" text-anchor="middle" font-size="10" font-weight="900">Na⁺ + Cl⁻ → NaCl</text></svg></div>
+<div class="dot-label">The chloride ion is shown with a full outer shell of 8 dots.</div>
+<div class="mini-qa"><div class="mini-q">electrons are…<span class="ans" data-answer="transferred"></span></div><div class="mini-q">how many move?<span class="ans" data-answer="1"></span></div><div class="mini-q">sodium ion?<span class="ans" data-answer="Na⁺"></span></div><div class="mini-q">chloride ion?<span class="ans" data-answer="Cl⁻"></span></div></div>
+</div>
+
+<div class="section"><h2><span class="tag">Ionic</span>3. MgO — two electrons transfer</h2>
+<div class="ion-work"><svg viewBox="0 0 330 130" aria-label="MgO ionic dot diagram">
+<text x="165" y="12" text-anchor="middle" font-size="9" font-weight="900">Mg gives 2 electrons to O</text>
+<rect x="28" y="27" width="105" height="82" rx="12" fill="#fff0e9" stroke="#111" stroke-width="2.5"/><text x="80" y="70" text-anchor="middle" font-size="22" font-weight="900">Mg</text><text x="113" y="40" font-size="13" font-weight="900">2+</text>
+<rect x="196" y="27" width="105" height="82" rx="12" fill="#e7f5ff" stroke="#111" stroke-width="2.5"/><text x="248" y="70" text-anchor="middle" font-size="22" font-weight="900">O</text><text x="280" y="40" font-size="13" font-weight="900">2−</text>
+<g fill="#7137a8" stroke="#111" stroke-width=".8"><circle cx="218" cy="40" r="4"/><circle cx="278" cy="40" r="4"/><circle cx="218" cy="96" r="4"/><circle cx="278" cy="96" r="4"/><circle cx="204" cy="58" r="4"/><circle cx="204" cy="82" r="4"/><circle cx="292" cy="58" r="4"/><circle cx="292" cy="82" r="4"/></g>
+<path d="M132 53 C150 31 174 31 194 52 M132 81 C151 102 176 102 194 82" fill="none" stroke="#d60000" stroke-width="3" stroke-dasharray="7 5"/><polygon points="188,45 199,53 188,60" fill="#d60000"/><polygon points="188,75 199,82 188,89" fill="#d60000"/>
+<text x="165" y="122" text-anchor="middle" font-size="10" font-weight="900">Mg²⁺ + O²⁻ → MgO</text></svg></div>
+<div class="mini-qa"><div class="mini-q">how many e⁻ move?<span class="ans" data-answer="2"></span></div><div class="mini-q">magnesium ion?<span class="ans" data-answer="Mg²⁺"></span></div><div class="mini-q">oxide ion?<span class="ans" data-answer="O²⁻"></span></div><div class="mini-q">why stay together?<span class="ans" data-answer="opposite charges attract"></span></div></div>
+</div>
+
+<div class="section"><h2><span class="tag">Draw</span>Your turn — ionic dot diagrams</h2><div class="draw-grid"><div class="draw-box"><div class="prompt">NaCl</div><div class="hint">charges + 8 outer dots on Cl⁻</div></div><div class="draw-box"><div class="prompt">MgO</div><div class="hint">charges + 8 outer dots on O²⁻</div></div></div></div>
+
+</div>
+<div class="column">
+
+<div class="section"><h2><span class="tag">Practice</span>4. Formula → ions</h2>
+<div class="formula-grid">
+<div class="formula-card"><b>NaCl</b><span class="ans" data-answer="Na⁺ + Cl⁻"></span></div><div class="formula-card"><b>MgO</b><span class="ans" data-answer="Mg²⁺ + O²⁻"></span></div><div class="formula-card"><b>LiF</b><span class="ans" data-answer="Li⁺ + F⁻"></span></div>
+<div class="formula-card"><b>CaO</b><span class="ans" data-answer="Ca²⁺ + O²⁻"></span></div><div class="formula-card"><b>KCl</b><span class="ans" data-answer="K⁺ + Cl⁻"></span></div><div class="formula-card"><b>CaCl₂</b><span class="ans" data-answer="Ca²⁺ + 2Cl⁻"></span></div>
+</div>
+<div class="fact"><strong>Remember:</strong> ionic = transfer e⁻ → ions with full outer shells.</div>
+</div>
+
+<div class="section"><h2><span class="tag">Covalent</span>5. Cl₂ — dots first, line later</h2>
+<div class="sequence-grid">
+<div class="seq"><h3>1. outer dots</h3><svg viewBox="0 0 110 90"><text x="30" y="49" text-anchor="middle" font-size="18" font-weight="900">Cl</text><text x="80" y="49" text-anchor="middle" font-size="18" font-weight="900">Cl</text><g fill="#7137a8"><circle cx="13" cy="28" r="3.5"/><circle cx="13" cy="56" r="3.5"/><circle cx="30" cy="18" r="3.5"/><circle cx="30" cy="70" r="3.5"/><circle cx="43" cy="29" r="3.5"/><circle cx="43" cy="57" r="3.5"/><circle cx="67" cy="29" r="3.5"/><circle cx="67" cy="57" r="3.5"/><circle cx="80" cy="18" r="3.5"/><circle cx="80" cy="70" r="3.5"/><circle cx="97" cy="28" r="3.5"/><circle cx="97" cy="56" r="3.5"/><circle cx="48" cy="43" r="3.5"/><circle cx="62" cy="43" r="3.5"/></g></svg><div class="tiny">one dot from each Cl moves into the middle</div></div>
+<div class="seq"><h3>2. shared pair</h3><svg viewBox="0 0 110 90"><circle cx="40" cy="43" r="28" fill="#ecfff1" stroke="#111" stroke-width="2"/><circle cx="70" cy="43" r="28" fill="#ecfff1" stroke="#111" stroke-width="2"/><text x="40" y="49" text-anchor="middle" font-size="16" font-weight="900">Cl</text><text x="70" y="49" text-anchor="middle" font-size="16" font-weight="900">Cl</text><circle cx="52" cy="36" r="4" fill="#7137a8"/><circle cx="58" cy="50" r="4" fill="#7137a8"/></svg><span class="ans" data-answer="1 shared pair"></span></div>
+<div class="seq"><h3>3. bond line</h3><svg viewBox="0 0 110 90"><text x="29" y="49" text-anchor="middle" font-size="19" font-weight="900">Cl</text><line x1="45" y1="43" x2="65" y2="43" stroke="#0d8b44" stroke-width="5"/><text x="81" y="49" text-anchor="middle" font-size="19" font-weight="900">Cl</text></svg><span class="ans" data-answer="single bond"></span></div>
+</div>
+<div class="fact green"><strong>1 shared pair = 1 line = single bond.</strong></div>
+</div>
+
+<div class="section"><h2><span class="tag">Quick</span>6. Complete the rule</h2>
+<div class="bond-key"><div>1 shared pair<br><span class="ans" data-answer="single"></span></div><div>2 shared pairs<br><span class="ans" data-answer="double"></span></div><div>3 shared pairs<br><span class="ans" data-answer="triple"></span></div></div>
+<div class="q">What do covalent atoms do with electrons?</div><div class="answer-box" data-answer="They share electrons."></div>
+</div>
+
+<div class="section"><h2><span class="tag">Draw</span>Copy the Cl₂ sequence yourself</h2><div class="wide-draw"><div class="arrow">→</div></div><div class="fact green"><strong>Goal:</strong> show the shared pair as dots first, then draw <strong>Cl—Cl</strong>.</div></div>
+
+</div>
+</div>
+<div class="page-number">Page 1 of 2</div>
+</section>
+
+<section class="page">
+<div class="header"><div><h1>Single, Double, Triple Bonds + Alloys</h1><div class="subtitle">count shared pairs • turn dots into lines • alloys last</div></div><div class="student"><span>Name:</span><span class="line"></span><span>Class:</span><span class="line"></span></div></div>
+<div class="page2grid">
+
+<div class="panel"><h2><span class="tag">Covalent</span>7. Count the shared pairs, then name the bond</h2>
+<div class="bond-practice">
+<div class="bond-card"><svg viewBox="0 0 120 78"><text x="28" y="45" text-anchor="middle" font-size="18" font-weight="900">Cl</text><text x="92" y="45" text-anchor="middle" font-size="18" font-weight="900">Cl</text><circle cx="56" cy="33" r="4" fill="#7137a8"/><circle cx="64" cy="47" r="4" fill="#7137a8"/></svg><span class="ans" data-answer="Cl₂ • 1 pair • single • Cl—Cl"></span></div>
+<div class="bond-card"><svg viewBox="0 0 120 78"><text x="28" y="45" text-anchor="middle" font-size="18" font-weight="900">O</text><text x="92" y="45" text-anchor="middle" font-size="18" font-weight="900">O</text><circle cx="55" cy="28" r="4" fill="#7137a8"/><circle cx="65" cy="28" r="4" fill="#7137a8"/><circle cx="55" cy="50" r="4" fill="#7137a8"/><circle cx="65" cy="50" r="4" fill="#7137a8"/></svg><span class="ans" data-answer="O₂ • 2 pairs • double • O=O"></span></div>
+<div class="bond-card"><svg viewBox="0 0 120 78"><text x="28" y="45" text-anchor="middle" font-size="18" font-weight="900">N</text><text x="92" y="45" text-anchor="middle" font-size="18" font-weight="900">N</text><circle cx="55" cy="22" r="4" fill="#7137a8"/><circle cx="65" cy="22" r="4" fill="#7137a8"/><circle cx="55" cy="39" r="4" fill="#7137a8"/><circle cx="65" cy="39" r="4" fill="#7137a8"/><circle cx="55" cy="56" r="4" fill="#7137a8"/><circle cx="65" cy="56" r="4" fill="#7137a8"/></svg><span class="ans" data-answer="N₂ • 3 pairs • triple • N≡N"></span></div>
+</div>
+<div class="mini-qa"><div class="mini-q">Which has a double bond?<span class="ans" data-answer="O₂"></span></div><div class="mini-q">Which has a triple bond?<span class="ans" data-answer="N₂"></span></div><div class="mini-q">Cl₂ line?<span class="ans" data-answer="Cl—Cl"></span></div><div class="mini-q">N₂ line?<span class="ans" data-answer="N≡N"></span></div></div>
+</div>
+
+<div class="panel"><h2><span class="tag">Compare</span>8. Ionic or covalent?</h2>
+<div class="statement-grid">
+<div class="statement"><span>electrons transfer</span><span class="ans" data-answer="ionic"></span></div><div class="statement"><span>electrons share</span><span class="ans" data-answer="covalent"></span></div>
+<div class="statement"><span>metal + non-metal</span><span class="ans" data-answer="ionic"></span></div><div class="statement"><span>non-metal + non-metal</span><span class="ans" data-answer="covalent"></span></div>
+<div class="statement"><span>draw charged ions</span><span class="ans" data-answer="ionic"></span></div><div class="statement"><span>draw shared pairs</span><span class="ans" data-answer="covalent"></span></div>
+<div class="statement"><span>full outer shell shown on ion</span><span class="ans" data-answer="ionic"></span></div><div class="statement"><span>pair → bond line</span><span class="ans" data-answer="covalent"></span></div>
+</div>
+</div>
+
+<div class="panel" style="display:grid;grid-template-rows:auto auto auto;gap:2.2mm;min-height:0">
+<div><h2><span class="tag">Alloys</span>9. Pure metal vs alloy</h2>
+<div class="alloy-visual">
+<div class="alloy-box"><svg viewBox="0 0 180 100"><text x="90" y="12" text-anchor="middle" font-size="10" font-weight="900">PURE METAL</text><g fill="#dcecff" stroke="#111" stroke-width="2"><circle cx="35" cy="35" r="14"/><circle cx="75" cy="35" r="14"/><circle cx="115" cy="35" r="14"/><circle cx="155" cy="35" r="14"/><circle cx="55" cy="70" r="14"/><circle cx="95" cy="70" r="14"/><circle cx="135" cy="70" r="14"/></g><path d="M25 92H155" stroke="#1f4e8c" stroke-width="3"/><polygon points="153,87 162,92 153,97" fill="#1f4e8c"/></svg><span class="ans" data-answer="regular layers • slide more easily • more malleable"></span></div>
+<div class="alloy-box"><svg viewBox="0 0 180 100"><text x="90" y="12" text-anchor="middle" font-size="10" font-weight="900">ALLOY</text><g stroke="#111" stroke-width="2"><circle cx="35" cy="35" r="14" fill="#dcecff"/><circle cx="75" cy="35" r="20" fill="#ffb36b"/><circle cx="120" cy="35" r="14" fill="#dcecff"/><circle cx="155" cy="35" r="14" fill="#dcecff"/><circle cx="55" cy="72" r="14" fill="#dcecff"/><circle cx="100" cy="70" r="19" fill="#ffb36b"/><circle cx="145" cy="72" r="14" fill="#dcecff"/></g><path d="M25 92H155" stroke="#6f4e37" stroke-width="3" stroke-dasharray="7 5"/></svg><span class="ans" data-answer="different-sized atoms • distorted layers • harder/stronger"></span></div>
+</div>
+<div class="property-grid"><div class="prop">alloy = mixture containing a metal<span class="ans" data-answer="YES"></span></div><div class="prop">different-sized atoms<span class="ans" data-answer="YES"></span></div><div class="prop">layers slide more easily<span class="ans" data-answer="NO"></span></div><div class="prop">usually harder/stronger<span class="ans" data-answer="YES"></span></div></div>
+</div>
+
+<div><h2><span class="tag">Examples</span>10. Match the alloy to the useful property / use</h2>
+<div class="alloy-examples">
+<div class="alloy-chip"><b>steel</b><span class="ans" data-answer="strong • buildings/tools"></span></div><div class="alloy-chip"><b>stainless steel</b><span class="ans" data-answer="corrosion-resistant • cutlery"></span></div><div class="alloy-chip"><b>brass</b><span class="ans" data-answer="harder than copper • fittings"></span></div>
+<div class="alloy-chip"><b>bronze</b><span class="ans" data-answer="wear-resistant • statues"></span></div><div class="alloy-chip"><b>solder</b><span class="ans" data-answer="low melting point • joining"></span></div><div class="alloy-chip"><b>car alloys</b><span class="ans" data-answer="strong/lighter • vehicles"></span></div>
+</div>
+</div>
+
+<div><h2><span class="tag">Exit</span>11. Rapid-fire check</h2>
+<div class="exit-grid">
+<div class="exit"><b>NaCl</b>bonding<span class="ans" data-answer="ionic"></span></div><div class="exit"><b>MgO</b>e⁻ transferred<span class="ans" data-answer="2"></span></div><div class="exit"><b>Cl₂</b>bond<span class="ans" data-answer="single"></span></div><div class="exit"><b>O₂</b>bond<span class="ans" data-answer="double"></span></div>
+<div class="exit"><b>N₂</b>bond<span class="ans" data-answer="triple"></span></div><div class="exit"><b>ionic</b>key word<span class="ans" data-answer="transfer"></span></div><div class="exit"><b>covalent</b>key word<span class="ans" data-answer="share"></span></div><div class="exit"><b>alloy</b>usually<span class="ans" data-answer="harder/stronger"></span></div>
+</div><div class="q">Why is an alloy usually harder than a pure metal?</div><div class="answer-box lines2" data-answer="Different-sized atoms distort the layers, so the layers cannot slide past each other as easily."></div>
+</div>
+</div>
+</div>
+<div class="page-number">Page 2 of 2</div>
+</section>
+
+<script>
+const answerEls=[...document.querySelectorAll('.answer-box,.inline-answer,.ans')];let nextIndex=0;
+function reveal(el){if(!el.classList.contains('revealed')){el.textContent=el.dataset.answer||'';el.classList.add('revealed')}const i=answerEls.indexOf(el);if(i>=nextIndex)nextIndex=i+1}
+function hide(el){el.textContent='';el.classList.remove('revealed')}
+answerEls.forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();el.classList.contains('revealed')?hide(el):reveal(el)}));
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();while(nextIndex<answerEls.length&&answerEls[nextIndex].classList.contains('revealed'))nextIndex++;if(nextIndex<answerEls.length){reveal(answerEls[nextIndex]);answerEls[nextIndex].scrollIntoView({behavior:'smooth',block:'center'})}}});
+document.getElementById('showAllBtn').addEventListener('click',()=>{answerEls.forEach(reveal);nextIndex=answerEls.length});
+document.getElementById('resetBtn').addEventListener('click',()=>{answerEls.forEach(hide);nextIndex=0;window.scrollTo({top:0,behavior:'smooth'})});
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299"}' crossorigin="anonymous"></script>
+</body></html>

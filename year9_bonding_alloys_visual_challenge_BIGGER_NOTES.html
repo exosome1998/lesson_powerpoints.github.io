@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Year 9 Science — Bonding, Dot Diagrams & Alloys Challenge</title>
+<style>
+:root{
+  --green:#00a651;--red:#e60000;--orange:#ff8a00;--blue:#0077b6;--purple:#7b2cbf;
+  --yellow:#fff200;--ink:#111;--soft:#f7fbff;--metal:#dcecff;--ionp:#ff9a7d;--ionn:#7fd0ff;--alloy:#6f4e37;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#dfe5eb;color:var(--ink);font-family:"Arial Narrow","Roboto Condensed",Arial,sans-serif;overflow:hidden}
+body{display:grid;place-items:center}
+#deck{width:1365px;height:768px;background:#fff;box-shadow:0 24px 70px rgba(0,0,0,.25);position:relative;overflow:hidden;transform-origin:center center}
+#progress{position:absolute;left:0;bottom:0;height:7px;background:var(--green);width:0;z-index:45;transition:width .2s ease}
+#counter{position:absolute;left:18px;bottom:12px;color:#555;font-size:16px;z-index:40}
+#score{position:absolute;right:196px;bottom:12px;font-size:16px;font-weight:900;color:#333;z-index:40}
+.btnbar{position:absolute;right:18px;bottom:15px;display:flex;gap:8px;z-index:40}
+.btnbar button,.utility button{font-size:16px;border:0;border-radius:999px;padding:9px 14px;background:#111;color:#fff;cursor:pointer}
+.btnbar button:disabled{opacity:.35;cursor:default}
+.utility{position:absolute;left:18px;top:14px;display:flex;gap:8px;z-index:40}
+.utility button{padding:8px 12px}
+.utility button[data-cat="metallic"]{background:var(--blue)}
+.utility button[data-cat="ionic"]{background:var(--orange)}
+.utility button[data-cat="covalent"]{background:var(--green)}
+.utility button[data-cat="mixed"]{background:var(--purple)}
+.utility button[data-cat="alloy"]{background:var(--alloy)}
+.utility button.active{outline:4px solid var(--yellow);outline-offset:2px}
+.slide{position:absolute;inset:0;padding:62px 52px 70px;background:#fff;overflow:hidden}
+h1,h2,h3,p{margin:0}
+h2{font-size:43px;line-height:1.02;font-weight:900}
+.hl{background:var(--yellow);padding:.02em .14em}
+.clickhint{position:absolute;right:52px;top:24px;font-size:16px;border:2px solid #ddd;border-radius:999px;padding:6px 12px;background:#fafafa;color:#555}
+.qtag{display:inline-block;border:4px solid #111;border-radius:999px;padding:5px 12px;font-size:17px;font-weight:900;margin-bottom:10px;background:#fff}
+.qtag.metallic{border-color:var(--blue);background:#eef8ff}
+.qtag.ionic{border-color:var(--orange);background:#fff5e8}
+.qtag.covalent{border-color:var(--green);background:#effff3}
+.qtag.mixed{border-color:var(--purple);background:#f6efff}
+.qtag.alloy{border-color:var(--alloy);background:#f7efe7}
+.qLayout{display:grid;grid-template-columns:730px 1fr;gap:30px;align-items:center;margin-top:20px;height:525px}
+.visual{border:5px solid #111;border-radius:28px;background:var(--soft);height:500px;padding:12px;display:grid;place-items:center}
+.visual svg{width:100%;height:100%}
+.visual .formulaHero{font-size:110px;font-weight:900;letter-spacing:2px;text-align:center}
+.visual .formulaSub{font-size:25px;font-weight:900;text-align:center;color:#444;margin-top:12px}
+.visual .pairGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:90%}
+.pairChip{border:5px solid #111;border-radius:22px;padding:22px;text-align:center;font-size:50px;font-weight:900}
+.answers{display:flex;flex-direction:column;gap:13px}
+.option{border:5px solid #111;border-radius:20px;background:#fff;padding:11px 14px;min-height:86px;cursor:pointer;display:grid;grid-template-columns:58px 1fr 42px;align-items:center;gap:12px;text-align:left}
+.option:hover{background:#fafafa}
+.option:disabled{cursor:default}
+.letter{width:52px;height:52px;border:4px solid #111;border-radius:15px;display:grid;place-items:center;font-size:27px;font-weight:900;background:var(--yellow)}
+.optionText{font-size:24px;font-weight:900;line-height:1.02}
+.mark{font-size:35px;font-weight:900;text-align:center}
+.option.correct{background:#effff2;border-color:var(--green)}
+.option.correct .letter{background:#c9f7d2;border-color:var(--green)}
+.option.wrong{background:#fff0f0;border-color:var(--red)}
+.option.wrong .letter{background:#ffd9d9;border-color:var(--red)}
+.option.showCorrect{border-color:var(--green);background:#f5fff7}
+.feedback{border:5px solid #111;border-radius:18px;padding:10px 13px;background:var(--yellow);font-size:21px;font-weight:900;line-height:1.05;min-height:76px;display:flex;align-items:center}
+.feedback.good{background:#effff2;border-color:var(--green)}
+.feedback.bad{background:#fff0f0;border-color:var(--red)}
+.smallRule{font-size:17px;color:#444;font-weight:900;margin-top:4px}
+.legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.legend span{border:3px solid #111;border-radius:999px;padding:5px 9px;background:#fff;font-size:15px;font-weight:900}
+.atomLabel{fill:#111;font-size:23px;font-weight:900;text-anchor:middle;dominant-baseline:middle}
+.label{fill:#111;font-size:22px;font-weight:900;text-anchor:middle}
+.smallLabel{fill:#333;font-size:17px;font-weight:900;text-anchor:middle}
+.electron{fill:var(--purple);stroke:#111;stroke-width:2}
+.ionPlus{fill:var(--ionp);stroke:#111;stroke-width:3}
+.ionMinus{fill:var(--ionn);stroke:#111;stroke-width:3}
+.bond{stroke:var(--green);stroke-width:7;stroke-linecap:round}
+.endScreen{height:620px;display:grid;place-items:center;text-align:center}
+.endBox{border:7px solid #111;border-radius:32px;background:#fff;padding:34px 48px;max-width:900px}
+.endBox h1{font-size:62px;line-height:1}
+.endScore{font-size:105px;font-weight:900;color:var(--green);margin:12px 0}
+.endBox p{font-size:26px;font-weight:900}
+.endBox button{margin-top:22px;border:0;border-radius:999px;background:#111;color:#fff;font-size:22px;font-weight:900;padding:13px 22px;cursor:pointer}
+@media print{html,body{overflow:auto;background:#fff}#deck{width:100%!important;height:auto!important;transform:none!important;box-shadow:none}.btnbar,.utility,#progress,#counter,#score{display:none}}
+
+/* --- Visual note-taking pages --- */
+.notePage{height:610px;display:grid;grid-template-rows:auto 1fr auto;gap:14px}
+.noteHead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.noteHead h2{font-size:44px}
+.noteInstruction{border:4px solid #111;border-radius:999px;background:var(--yellow);padding:8px 14px;font-size:19px;font-weight:900;white-space:nowrap}
+.noteCardGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;align-content:start;margin-top:2px}
+.noteCard{border:5px solid #111;border-radius:24px;background:#fff;padding:12px 14px;min-height:222px;display:grid;grid-template-rows:96px auto auto auto;align-content:start;gap:8px;box-shadow:0 5px 0 rgba(0,0,0,.06)}
+.noteCard .noteViz{display:grid;place-items:center;background:#f7fbff;border-radius:16px}
+.noteCard .noteViz svg{width:124px;height:88px;display:block}
+.noteCard .noteKey{font-size:28px;font-weight:900;line-height:1}
+.noteCard .noteWhy{font-size:20px;font-weight:900;line-height:1.05;color:#333}
+.noteCard .noteExample{font-size:20px;font-weight:900;line-height:1.05;background:#fff7cf;border:3px solid #111;border-radius:14px;padding:7px 10px;display:inline-flex;align-items:center;justify-self:start}
+.noteCard .noteExample b{font-size:22px}
+.noteFoot{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.noteRule{border:5px solid #111;border-radius:18px;background:var(--yellow);padding:10px 14px;font-size:25px;font-weight:900;line-height:1.02;flex:1;text-align:center}
+.noteCue{font-size:18px;color:#555;font-weight:900}
+.notePage.metallic .noteCard{border-color:#496a91}
+.notePage.ionic .noteCard{border-color:var(--orange)}
+.notePage.covalent .noteCard{border-color:var(--green)}
+.notePage.mixed .noteCard{border-color:var(--purple)}
+.notePage.alloy .noteCard{border-color:var(--alloy)}
+.noteNameGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;height:100%}
+.noteNameCard{border:5px solid #111;border-radius:22px;background:#fff;padding:12px;text-align:center;min-height:158px;display:grid;place-items:center;box-shadow:0 5px 0 rgba(0,0,0,.06)}
+.noteNameCard .f{font-size:42px;font-weight:900;line-height:1}
+.noteNameCard .n{font-size:21px;font-weight:900;background:#effff2;border:3px solid #111;border-radius:12px;padding:7px 10px;margin-top:8px;line-height:1.04}
+.notePage.ionic .noteNameCard{border-color:var(--orange)}
+.notePage.covalent .noteNameCard{border-color:var(--green)}
+.notePage.alloy .noteNameCard{border-color:var(--alloy)}
+.noteCompare{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.noteCompareCard{border:5px solid #111;border-radius:22px;padding:10px;background:#fff;text-align:center}
+.noteCompareCard svg{width:100%;height:125px}
+.noteCompareCard h3{font-size:27px;margin-bottom:5px}
+.noteCompareCard .line{border-top:2px solid #111;padding:6px 3px;font-size:18px;font-weight:900}
+.noteCompareCard.m{border-color:#496a91}.noteCompareCard.i{border-color:var(--orange)}.noteCompareCard.c{border-color:var(--green)}
+
+</style>
+</head>
+<body>
+<div id="deck">
+  <div id="progress"></div>
+  <div id="counter"></div>
+  <div id="score"></div>
+
+  <div class="utility">
+    <button data-cat="all">ALL</button>
+    <button data-cat="metallic">METALLIC</button>
+    <button data-cat="ionic">IONIC</button>
+    <button data-cat="covalent">COVALENT</button>
+    <button data-cat="mixed">MIXED</button>
+    <button data-cat="alloy">ALLOYS</button>
+  </div>
+
+  <div class="btnbar">
+    <button id="prev">Back</button>
+    <button id="next">Next</button>
+  </div>
+
+  <section class="slide" id="slide"></section>
+</div>
+
+<script>
+const V = {
+  electronDot:(x,y,r=7)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#7b2cbf" stroke="#111" stroke-width="1.6"/>`,
+  ionBox:(symbol,charge,x,dots=8,fill='#ecfff1')=>{
+    const pos=[[x-34,133],[x+34,133],[x-34,307],[x+34,307],[x-77,193],[x-77,247],[x+77,193],[x+77,247]];
+    return `<rect x="${x-92}" y="120" width="184" height="205" rx="20" fill="${fill}" stroke="#111" stroke-width="5"/>
+      <text x="${x}" y="232" class="atomLabel" style="font-size:48px">${symbol}</text>
+      <text x="${x+72}" y="147" class="atomLabel" style="font-size:28px">${charge}</text>
+      ${pos.slice(0,dots).map(([a,b])=>V.electronDot(a,b)).join('')}`;
+  },
+  ionicDot:(kind='NaCl')=>{
+    if(kind==='MgO') return `<svg viewBox="0 0 700 470" aria-label="MgO ionic dot diagram">
+      <text x="350" y="42" class="label">Mg transfers 2 electrons to O</text>
+      ${V.ionBox('Mg','2+',205,0,'#fff0e9')}${V.ionBox('O','2−',495,8,'#e7f5ff')}
+      <path d="M292 195C345 145 390 145 410 185M292 250C345 300 390 300 410 260" fill="none" stroke="#e60000" stroke-width="5" stroke-dasharray="10 7"/>
+      <text x="350" y="388" class="label">both ions have full outer shells</text>
+      <text x="350" y="425" class="smallLabel">Mg²⁺ + O²⁻ → MgO</text>
+    </svg>`;
+    return `<svg viewBox="0 0 700 470" aria-label="NaCl ionic dot diagram">
+      <text x="350" y="42" class="label">Na transfers 1 electron to Cl</text>
+      ${V.ionBox('Na','+',205,0,'#fff0e9')}${V.ionBox('Cl','−',495,8,'#e7f5ff')}
+      <path d="M292 220C345 165 390 165 410 205" fill="none" stroke="#e60000" stroke-width="5" stroke-dasharray="10 7"/>
+      <text x="350" y="388" class="label">8 electrons shown around Cl⁻</text>
+      <text x="350" y="425" class="smallLabel">Na⁺ + Cl⁻ → NaCl</text>
+    </svg>`;
+  },
+  covalentDots:(kind='Cl2',showBond=false)=>{
+    const info={Cl2:['Cl','Cl',1,6,'Cl₂'],O2:['O','O',2,4,'O₂'],N2:['N','N',3,2,'N₂']}[kind];
+    const [a,b,pairs,lone,total]=info;
+    const x1=265,x2=435,y=225;
+    const leftLone=[[x1-65,y-38],[x1-65,y+38],[x1,y-76],[x1,y+76],[x1-82,y-8],[x1-82,y+8]].slice(0,lone);
+    const rightLone=[[x2+65,y-38],[x2+65,y+38],[x2,y-76],[x2,y+76],[x2+82,y-8],[x2+82,y+8]].slice(0,lone);
+    const pairYs=pairs===1?[225]:pairs===2?[210,240]:[195,225,255];
+    return `<svg viewBox="0 0 700 470" aria-label="${total} covalent dot diagram">
+      <text x="350" y="42" class="label">${showBond?'shared pairs become bond lines':'shared electron pairs in the overlap'}</text>
+      <circle cx="${x1}" cy="${y}" r="92" fill="#ecfff1" stroke="#111" stroke-width="5"/>
+      <circle cx="${x2}" cy="${y}" r="92" fill="#ecfff1" stroke="#111" stroke-width="5"/>
+      <text x="${x1}" y="${y}" class="atomLabel" style="font-size:44px">${a}</text><text x="${x2}" y="${y}" class="atomLabel" style="font-size:44px">${b}</text>
+      ${leftLone.map(([x,y])=>V.electronDot(x,y)).join('')}${rightLone.map(([x,y])=>V.electronDot(x,y)).join('')}
+      ${showBond?pairYs.map((yy)=>`<path class="bond" d="M330 ${yy}H370"/>`).join(''):pairYs.map((yy)=>V.electronDot(342,yy,7)+V.electronDot(358,yy,7)).join('')}
+      <text x="350" y="370" class="label">${total}: ${pairs===1?'single':pairs===2?'double':'triple'} bond</text>
+      <text x="350" y="410" class="smallLabel">${pairs} shared pair${pairs>1?'s':''} = ${pairs} bond line${pairs>1?'s':''}</text>
+    </svg>`;
+  },
+  covalentStage:(kind='Cl2',stage='start')=>{
+    const cfg={
+      Cl2:{a:'Cl',b:'Cl',pairs:1,lone:6,total:'Cl₂',name:'single bond'},
+      O2:{a:'O',b:'O',pairs:2,lone:4,total:'O₂',name:'double bond'},
+      N2:{a:'N',b:'N',pairs:3,lone:2,total:'N₂',name:'triple bond'}
+    }[kind];
+    const {a,b,pairs,lone,total,name}=cfg;
+    const start = stage==='start';
+    const x1=start?64:78, x2=start?146:132, y=100, r=38;
+    const leftLone=[[x1-24,y-27],[x1-24,y+27],[x1,y-40],[x1,y+40],[x1-37,y-9],[x1-37,y+9]].slice(0,lone);
+    const rightLone=[[x2+24,y-27],[x2+24,y+27],[x2,y-40],[x2,y+40],[x2+37,y-9],[x2+37,y+9]].slice(0,lone);
+    const leftShared=pairs===1?[[x1+29,y]]:pairs===2?[[x1+30,y-10],[x1+30,y+10]]:[[x1+30,y-18],[x1+30,y],[x1+30,y+18]];
+    const rightShared=pairs===1?[[x2-29,y]]:pairs===2?[[x2-30,y-10],[x2-30,y+10]]:[[x2-30,y-18],[x2-30,y],[x2-30,y+18]];
+    const pairYs=pairs===1?[100]:pairs===2?[90,110]:[82,100,118];
+    const title = stage==='start'?'1. draw the dots':stage==='pairs'?'2. shared pairs in the middle':'3. turn pairs into bond lines';
+    const subtitle = stage==='start'?"show each atom's outer electrons":stage==='pairs'?`${pairs} shared pair${pairs>1?'s':''}`:`${total} = ${name}`;
+    return `<svg viewBox="0 0 210 240" aria-label="${total} ${title}">
+      <rect x="6" y="6" width="198" height="228" rx="20" fill="#fff" stroke="#111" stroke-width="4"/>
+      <text x="105" y="26" text-anchor="middle" font-size="16" font-weight="900">${title}</text>
+      <text x="105" y="45" text-anchor="middle" font-size="12" font-weight="900" fill="#555">${subtitle}</text>
+      <circle cx="${x1}" cy="${y}" r="${r}" fill="#ecfff1" stroke="#111" stroke-width="4"/>
+      <circle cx="${x2}" cy="${y}" r="${r}" fill="#ecfff1" stroke="#111" stroke-width="4"/>
+      <text x="${x1}" y="${y+4}" text-anchor="middle" font-size="26" font-weight="900">${a}</text>
+      <text x="${x2}" y="${y+4}" text-anchor="middle" font-size="26" font-weight="900">${b}</text>
+      ${leftLone.map(([x,y])=>V.electronDot(x,y,4.5)).join('')}
+      ${rightLone.map(([x,y])=>V.electronDot(x,y,4.5)).join('')}
+      ${start?leftShared.map(([x,y])=>V.electronDot(x,y,4.5)).join('')+rightShared.map(([x,y])=>V.electronDot(x,y,4.5)).join(''):''}
+      ${stage==='pairs'?pairYs.map((yy)=>V.electronDot(101,yy,4.5)+V.electronDot(109,yy,4.5)).join(''):''}
+      ${stage==='lines'?pairYs.map((yy)=>`<path class="bond" d="M92 ${yy}H118"/>`).join(''):''}
+      <text x="105" y="186" text-anchor="middle" font-size="22" font-weight="900">${stage==='lines'?(pairs===1?`${a}—${b}`:pairs===2?`${a}=${b}`:`${a}≡${b}`):total}</text>
+      <text x="105" y="210" text-anchor="middle" font-size="13" font-weight="900" fill="#333">${pairs} shared pair${pairs>1?'s':''}</text>
+    </svg>`;
+  },
+  covalentSequence:(kind='Cl2')=>{
+    const cfg={Cl2:['Cl₂','single bond'],O2:['O₂','double bond'],N2:['N₂','triple bond']}[kind];
+    const [total,name]=cfg;
+    return `<div style="width:100%;height:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:stretch">
+      <div style="display:grid;grid-template-rows:auto 1fr;gap:8px">${V.covalentStage(kind,'start')}</div>
+      <div style="display:grid;grid-template-rows:auto 1fr;gap:8px">${V.covalentStage(kind,'pairs')}</div>
+      <div style="display:grid;grid-template-rows:auto 1fr;gap:8px">${V.covalentStage(kind,'lines')}</div>
+      <div style="grid-column:1/4;text-align:center;font-size:24px;font-weight:900;color:#333;padding-top:4px">${total}: dots first → bond later (${name})</div>
+    </div>`;
+  },
+  covalentMini:(kind='Cl2')=>{
+    const cfg={Cl2:['Cl','Cl',1,'Cl₂'],O2:['O','O',2,'O₂'],N2:['N','N',3,'N₂']}[kind];
+    const [a,b,pairs,total]=cfg;
+    const ys=pairs===1?[24]:pairs===2?[20,28]:[16,24,32];
+    return `<svg viewBox="0 0 100 70">
+      <text x="10" y="28" font-size="15" font-weight="900">${a}</text>
+      ${ys.map((yy)=>V.electronDot(28,yy,3.2)+V.electronDot(36,yy,3.2)).join('')}
+      <text x="43" y="28" font-size="15" font-weight="900">${b}</text>
+      <path d="M50 35H62" stroke="#e60000" stroke-width="3"/>
+      <polygon points="60,30 68,35 60,40" fill="#e60000"/>
+      <text x="75" y="28" text-anchor="middle" font-size="15" font-weight="900">${a}${pairs===1?'—':pairs===2?'=':'≡'}${b}</text>
+      <text x="50" y="60" text-anchor="middle" font-size="12" font-weight="900">${total}</text>
+    </svg>`;
+  },
+  alloyStructure:(alloy=false)=>`<svg viewBox="0 0 700 470" aria-label="${alloy?'alloy':'pure metal'} structure">
+    <text x="350" y="40" class="label">${alloy?'different-sized atoms distort the layers':'same-sized atoms in regular layers'}</text>
+    ${[[140,130],[260,130],[380,130],[500,130],[200,235],[320,235],[440,235],[560,235],[140,340],[260,340],[380,340],[500,340]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${alloy&&[2,7,10].includes(i)?48:38}" fill="${alloy&&[2,7,10].includes(i)?'#ffb36b':'#dcecff'}" stroke="#111" stroke-width="4"/>`).join('')}
+    <path d="M90 410H610" stroke="#0077b6" stroke-width="5" ${alloy?'stroke-dasharray="10 8"':''}/>
+    <text x="350" y="448" class="smallLabel">${alloy?'layers cannot slide past each other as easily':'layers can slide more easily'}</text>
+  </svg>`,
+  alloyCompare:()=>`<svg viewBox="0 0 700 470"><text x="180" y="45" class="label">PURE METAL</text><text x="520" y="45" class="label">ALLOY</text>
+    ${[[120,130],[200,130],[280,130],[160,220],[240,220],[120,310],[200,310],[280,310]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="30" fill="#dcecff" stroke="#111" stroke-width="3"/>`).join('')}
+    ${[[440,130],[520,130],[600,130],[480,220],[560,220],[440,310],[520,310],[600,310]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${[1,4].includes(i)?39:30}" fill="${[1,4].includes(i)?'#ffb36b':'#dcecff'}" stroke="#111" stroke-width="3"/>`).join('')}
+    <text x="180" y="390" class="smallLabel">softer / more malleable</text><text x="520" y="390" class="smallLabel">usually harder / stronger</text></svg>`
+};
+
+function formulaVisual(formula, note='name the compound'){
+  return `<div><div class="formulaHero">${formula}</div><div class="formulaSub">${note}</div></div>`;
+}
+function pairVisual(a,b){
+  return `<div class="pairGrid"><div class="pairChip" style="background:#e7f2ff">${a}</div><div class="pairChip" style="background:#ecfff1">${b}</div></div>`;
+}
+
+const Q = [
+ {cat:'ionic',q:'What happens to electrons when an ionic bond forms?',v:V.ionicDot('NaCl'),o:['They are transferred','They are shared','They disappear'],a:0,r:'Ionic bonding forms when electrons transfer from a metal atom to a non-metal atom.'},
+ {cat:'ionic',q:'In NaCl, which ion has the full outer shell of 8 electrons shown?',v:V.ionicDot('NaCl'),o:['Na⁺','Cl⁻','Both are neutral atoms'],a:1,r:'The chloride ion has gained one electron and is drawn with 8 electrons in its outer shell.'},
+ {cat:'ionic',q:'What charges form in sodium chloride?',v:V.ionicDot('NaCl'),o:['Na⁺ and Cl⁻','Na⁻ and Cl⁺','Na²⁺ and Cl²⁻'],a:0,r:'Sodium loses one electron to become Na⁺; chlorine gains one to become Cl⁻.'},
+ {cat:'ionic',q:'How many electrons are transferred from Mg to O in MgO?',v:V.ionicDot('MgO'),o:['1','2','3'],a:1,r:'Magnesium loses two outer electrons; oxygen gains two, producing Mg²⁺ and O²⁻.'},
+ {cat:'ionic',q:'Why do the ions in MgO stay together?',v:V.ionicDot('MgO'),o:['Opposite charges attract','They share electrons','The atoms are all metals'],a:0,r:'Electrostatic attraction between Mg²⁺ and O²⁻ is the ionic bond.'},
+ {cat:'ionic',q:'Which pair would usually form an ionic compound?',v:pairVisual('Mg','O'),o:['Mg and O','Cl and Cl','N and N'],a:0,r:'A metal + non-metal combination usually gives ionic bonding.'},
+ {cat:'ionic',q:'Name NaCl.',v:formulaVisual('NaCl','metal name + non-metal ending -ide'),o:['sodium chloride','sodium chlorine','nitrogen chloride'],a:0,r:'Na = sodium; Cl becomes chloride.'},
+ {cat:'ionic',q:'Name MgO.',v:formulaVisual('MgO','metal name + non-metal ending -ide'),o:['magnesium oxide','magnesium oxygen','manganese oxide'],a:0,r:'Mg = magnesium; O becomes oxide.'},
+
+ {cat:'covalent',q:'Step 1 for Cl₂: what do the atoms do in covalent bonding?',v:V.covalentSequence('Cl2'),o:['Share electrons','Transfer electrons','Lose all electrons'],a:0,r:'Covalent bonds form when non-metal atoms share electrons.'},
+ {cat:'covalent',q:'Step 2 for Cl₂: how many shared pairs are in the dot diagram?',v:V.covalentSequence('Cl2'),o:['1','2','3'],a:0,r:'Cl₂ shows one shared pair, so it becomes a single bond.'},
+ {cat:'covalent',q:'Step 3 for Cl₂: which bond line should you draw after the dots?',v:V.covalentSequence('Cl2'),o:['Cl—Cl','Cl=Cl','Cl≡Cl'],a:0,r:'One shared pair is replaced by one line, so Cl₂ is Cl—Cl.'},
+ {cat:'covalent',q:'For O₂, how many shared pairs appear before you draw the bond lines?',v:V.covalentSequence('O2'),o:['1','2','3'],a:1,r:'O₂ shows two shared pairs in the dot diagram.'},
+ {cat:'covalent',q:'When the O₂ shared pairs become lines, what type of bond is formed?',v:V.covalentSequence('O2'),o:['Single','Double','Triple'],a:1,r:'Two shared pairs become two lines, so O₂ has a double bond.'},
+ {cat:'covalent',q:'For N₂, how many shared pairs appear in the dot diagram?',v:V.covalentSequence('N2'),o:['1','2','3'],a:2,r:'N₂ shows three shared pairs.'},
+ {cat:'covalent',q:'When the N₂ shared pairs become lines, what type of bond is formed?',v:V.covalentSequence('N2'),o:['Single','Double','Triple'],a:2,r:'Three shared pairs become three lines, so N₂ has a triple bond.'},
+ {cat:'covalent',q:'Which molecule has a double bond?',v:formulaVisual('Cl₂   O₂   N₂','single • double • triple'),o:['Cl₂','O₂','N₂'],a:1,r:'O₂ is O=O, so it has a double bond.'},
+ {cat:'covalent',q:'Which molecule has a triple bond?',v:formulaVisual('Cl₂   O₂   N₂','single • double • triple'),o:['Cl₂','O₂','N₂'],a:2,r:'N₂ is N≡N, so it has a triple bond.'},
+
+ {cat:'mixed',q:'Which rule is correct?',v:formulaVisual('IONIC vs COVALENT','transfer or share?'),o:['Ionic transfers; covalent shares','Ionic shares; covalent transfers','Both always transfer'],a:0,r:'Ionic = transfer. Covalent = share.'},
+ {cat:'mixed',q:'Which diagram should show ions with full outer shells?',v:V.ionicDot('NaCl'),o:['Ionic dot diagram','Metallic structure','Pure metal layers'],a:0,r:'Ionic dot diagrams show the resulting ions, including complete outer shells.'},
+
+ {cat:'alloy',q:'What is an alloy?',v:V.alloyStructure(true),o:['A mixture containing a metal','A pure non-metal','A single type of atom only'],a:0,r:'An alloy is a mixture containing a metal and one or more other elements.'},
+ {cat:'alloy',q:'Why are alloys usually harder than pure metals?',v:V.alloyCompare(),o:['Different-sized atoms make layers harder to slide','They have no particles','Their electrons stop moving'],a:0,r:'Different-sized atoms distort the regular layers, making sliding more difficult.'},
+ {cat:'alloy',q:'Which structure is more regular?',v:V.alloyCompare(),o:['Pure metal','Alloy','Both are identical'],a:0,r:'Pure metals contain one type of atom, so their layers are more regular.'},
+ {cat:'alloy',q:'Which is usually easier to bend or shape?',v:V.alloyCompare(),o:['Pure metal','Alloy','Neither'],a:0,r:'Regular layers in a pure metal can slide more easily, so it is usually more malleable.'},
+ {cat:'alloy',q:'Which statement about alloys is best?',v:V.alloyStructure(true),o:['They can be designed for useful properties','They are always softer than pure metals','They are ionic compounds'],a:0,r:'Alloys are mixtures chosen to give useful physical properties such as greater hardness or strength.'}
+];
+
+const NOTE = {
+  ionicDots:{cat:'ionic',title:'Ionic dot diagrams',rule:'transfer e⁻ → full shell',rows:[
+    {v:`<svg viewBox="0 0 100 70"><text x="20" y="42" font-size="22" font-weight="900">Na</text><path d="M35 32H65" stroke="#e60000" stroke-width="4"/><polygon points="62,25 74,32 62,39" fill="#e60000"/><text x="78" y="42" font-size="22" font-weight="900">Cl</text></svg>`,k:'TRANSFER e⁻',w:'metal loses • non-metal gains',e:'Na → Cl'},
+    {v:`<svg viewBox="0 0 100 70"><rect x="8" y="10" width="84" height="50" rx="10" fill="#e7f5ff" stroke="#111" stroke-width="3"/><text x="50" y="42" text-anchor="middle" font-size="22" font-weight="900">Cl⁻ ••••••••</text></svg>`,k:'DRAW 8 DOTS',w:'negative ion gets full shell',e:'Cl⁻ = <b>8 e⁻</b>'},
+    {v:`<svg viewBox="0 0 100 70"><text x="50" y="44" text-anchor="middle" font-size="24" font-weight="900">Na⁺  Cl⁻</text></svg>`,k:'ADD CHARGES',w:'+ if lost • − if gained',e:'<b>Na⁺</b> • <b>Cl⁻</b>'},
+    {v:`<svg viewBox="0 0 100 70"><text x="50" y="44" text-anchor="middle" font-size="22" font-weight="900">Mg²⁺ O²⁻</text></svg>`,k:'2 e⁻ can transfer',w:'Mg loses 2 • O gains 2',e:'<b>Mg²⁺</b> • <b>O²⁻</b>'}
+  ]},
+  ionicExamples:{cat:'ionic',title:'Ionic examples',rule:'formula → ions',names:[['NaCl','Na⁺ + Cl⁻'],['MgO','Mg²⁺ + O²⁻'],['LiF','Li⁺ + F⁻'],['CaO','Ca²⁺ + O²⁻'],['KCl','K⁺ + Cl⁻'],['CaCl₂','Ca²⁺ + 2Cl⁻']]},
+  covalentDots:{cat:'covalent',title:'Covalent: dots → lines',rule:'dots first → lines later',rows:[
+    {v:`${V.covalentMini('Cl2')}`,k:'Cl₂ = SINGLE',w:'1 shared pair',e:'dots → <b>Cl—Cl</b>'},
+    {v:`${V.covalentMini('O2')}`,k:'O₂ = DOUBLE',w:'2 shared pairs',e:'dots → <b>O=O</b>'},
+    {v:`${V.covalentMini('N2')}`,k:'N₂ = TRIPLE',w:'3 shared pairs',e:'dots → <b>N≡N</b>'},
+    {v:`<svg viewBox="0 0 100 70"><circle cx="28" cy="35" r="4" fill="#7b2cbf" stroke="#111" stroke-width="1"/><circle cx="38" cy="35" r="4" fill="#7b2cbf" stroke="#111" stroke-width="1"/><path d="M58 35H88" stroke="#00a651" stroke-width="5"/><text x="73" y="18" text-anchor="middle" font-size="12" font-weight="900">dots → line</text></svg>`,k:'PAIR → LINE',w:'each shared pair becomes 1 line',e:'1 = <b>single</b> • 2 = <b>double</b> • 3 = <b>triple</b>'}
+  ]},
+  bondQuick:{cat:'covalent',title:'Bond quick-check',rule:'1 pair single • 2 double • 3 triple',names:[['Cl₂','Cl—Cl'],['O₂','O=O'],['N₂','N≡N'],['single','1 shared pair'],['double','2 shared pairs'],['triple','3 shared pairs']]},
+  alloyProps:{cat:'alloy',title:'Alloys: key ideas',rule:'mixed atoms make sliding harder',rows:[
+    {v:`<svg viewBox="0 0 100 70"><circle cx="28" cy="34" r="18" fill="#dcecff" stroke="#111" stroke-width="2"/><circle cx="65" cy="34" r="25" fill="#ffb36b" stroke="#111" stroke-width="2"/></svg>`,k:'Mixed atoms',w:'different sizes',e:'<b>steel</b> = Fe + C'},
+    {v:`<svg viewBox="0 0 100 70"><path d="M10 20H90M10 50H90" stroke="#111" stroke-width="3"/><circle cx="52" cy="35" r="18" fill="#ffb36b" stroke="#111" stroke-width="2"/></svg>`,k:'Layers distorted',w:'atoms do not line up',e:'harder to slide'},
+    {v:`<svg viewBox="0 0 100 70"><text x="50" y="46" text-anchor="middle" font-size="34">🔨</text></svg>`,k:'Harder / stronger',w:'layers stick more',e:'tools • buildings'},
+    {v:`<svg viewBox="0 0 100 70"><path d="M12 40H88" stroke="#0077b6" stroke-width="7"/><text x="50" y="20" text-anchor="middle" font-size="14" font-weight="900">PURE METAL</text></svg>`,k:'Pure metal bends',w:'same-size atoms slide',e:'more malleable'}
+  ]},
+  alloyExamples:{cat:'alloy',title:'Alloy examples',rule:'alloy chosen for the job',names:[['steel','strong • buildings/tools'],['stainless steel','corrosion-resistant • cutlery'],['brass','harder than copper • fittings'],['bronze','wear-resistant • statues'],['solder','low mp • joining'],['car alloys','strong/lighter • vehicles']]}
+};
+
+const NOTE_AFTER = {
+  3:'ionicDots',
+  7:'ionicExamples',
+  14:'covalentDots',
+  16:'bondQuick',
+  22:'alloyProps',
+  23:'alloyExamples'
+};
+
+const ALL_ITEMS=[];
+Q.forEach((q,qi)=>{
+  ALL_ITEMS.push({type:'q',qi,cat:q.cat});
+  if(NOTE_AFTER[qi]) ALL_ITEMS.push({type:'note',key:NOTE_AFTER[qi],cat:NOTE[NOTE_AFTER[qi]].cat});
+});
+
+let idx=0;
+let answers=Array(Q.length).fill(null);
+let currentFilter='all';
+let filtered=[...ALL_ITEMS];
+
+const slide=document.getElementById('slide');
+const progress=document.getElementById('progress');
+const counter=document.getElementById('counter');
+const scoreEl=document.getElementById('score');
+const prevBtn=document.getElementById('prev');
+const nextBtn=document.getElementById('next');
+const catBtns=[...document.querySelectorAll('.utility button[data-cat]')];
+
+function score(){return answers.reduce((s,a,i)=>s+(a===Q[i].a?1:0),0)}
+function answeredCount(){return answers.filter(a=>a!==null).length}
+function currentItem(){return filtered[idx]}
+
+function updateUtility(){
+  catBtns.forEach(b=>b.classList.toggle('active',b.dataset.cat===currentFilter));
+}
+function setFilter(cat){
+  currentFilter=cat;
+  filtered=ALL_ITEMS.filter(item=>cat==='all'||item.cat===cat);
+  idx=0;
+  updateUtility();
+  render();
+}
+catBtns.forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.cat)));
+
+function optionHTML(q,qi,oi){
+  const answered=answers[qi]!==null;
+  let cls='option',mark='';
+  if(answered){
+    if(oi===q.a){cls+=answers[qi]===oi?' correct':' showCorrect';mark='✓'}
+    else if(answers[qi]===oi){cls+=' wrong';mark='✕'}
+  }
+  return `<button class="${cls}" data-opt="${oi}" ${answered?'disabled':''}>
+    <span class="letter">${String.fromCharCode(65+oi)}</span>
+    <span class="optionText">${q.o[oi]}</span>
+    <span class="mark">${mark}</span>
+  </button>`;
+}
+function feedbackHTML(q,qi){
+  if(answers[qi]===null) return `<div class="feedback">Choose A, B or C.<div class="smallRule">&nbsp; Keyboard: 1 / 2 / 3</div></div>`;
+  const good=answers[qi]===q.a;
+  return `<div class="feedback ${good?'good':'bad'}"><div><b>${good?'✓ Correct':'✕ Not quite'}</b><div class="smallRule">${q.r}</div></div></div>`;
+}
+
+function renderRows(n){
+  return `<div class="noteCardGrid">${n.rows.map(r=>`
+    <div class="noteCard">
+      <div class="noteViz">${r.v}</div>
+      <div class="noteKey">${r.k}</div>
+      <div class="noteWhy">${r.w}</div>
+      <div class="noteExample">${r.e}</div>
+    </div>`).join('')}</div>`;
+}
+function renderNames(n){
+  return `<div class="noteNameGrid">${n.names.map(([f,name])=>`
+    <div class="noteNameCard"><div><div class="f">${f}</div><div class="n">${name}</div></div></div>`).join('')}</div>`;
+}
+function renderMolecules(n){
+  const mini = {
+    'H₂':'H—H','O₂':'O=O','H₂O':'H—O—H','NH₃':'N + 3H','CH₄':'C + 4H','CO₂':'O=C=O'
+  };
+  return `<div class="noteNameGrid">${n.molecules.map(([f,name,pic])=>`
+    <div class="noteNameCard">
+      <div>
+        <div style="font-size:23px;font-weight:900;margin-bottom:4px">${pic}</div>
+        <div class="f">${f}</div>
+        <div class="n">${name}</div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+function renderCompare(){
+  return `<div class="noteCompare">
+    <div class="noteCompareCard m">
+      <h3>METALLIC</h3>
+      <svg viewBox="0 0 240 125"><circle class="ionPlus" cx="55" cy="42" r="24"/><circle class="ionPlus" cx="120" cy="42" r="24"/><circle class="ionPlus" cx="185" cy="42" r="24"/><circle class="electron" cx="87" cy="18" r="7"/><circle class="electron" cx="152" cy="75" r="7"/><circle class="ionPlus" cx="87" cy="95" r="24"/><circle class="ionPlus" cx="152" cy="95" r="24"/></svg>
+      <div class="line">metal atoms</div><div class="line">moving e⁻</div><div class="line">conducts</div><div class="line">Mg, Al, Cu</div>
+    </div>
+    <div class="noteCompareCard i">
+      <h3>IONIC</h3>
+      <svg viewBox="0 0 240 125"><circle class="ionPlus" cx="60" cy="40" r="26"/><circle class="ionMinus" cx="130" cy="40" r="26"/><circle class="ionPlus" cx="200" cy="40" r="26"/><circle class="ionMinus" cx="95" cy="95" r="26"/><circle class="ionPlus" cx="165" cy="95" r="26"/></svg>
+      <div class="line">metal + non-metal</div><div class="line">transfer e⁻</div><div class="line">high mp</div><div class="line">NaCl, MgO</div>
+    </div>
+    <div class="noteCompareCard c">
+      <h3>COVALENT</h3>
+      <svg viewBox="0 0 240 125"><circle cx="90" cy="62" r="42" fill="#ecfff1" stroke="#111" stroke-width="3"/><circle cx="150" cy="62" r="42" fill="#ecfff1" stroke="#111" stroke-width="3"/><circle class="electron" cx="115" cy="50" r="7"/><circle class="electron" cx="125" cy="75" r="7"/></svg>
+      <div class="line">non-metals</div><div class="line">share e⁻</div><div class="line">usually no conduction</div><div class="line">H₂O, CO₂</div>
+    </div>
+  </div>`;
+}
+function renderNote(item){
+  const n=NOTE[item.key];
+  let body='';
+  if(n.rows) body=renderRows(n);
+  else if(n.names) body=renderNames(n);
+  else if(n.molecules) body=renderMolecules(n);
+  else if(n.compare) body=renderCompare();
+
+  slide.innerHTML=`
+    <div class="notePage ${n.cat}">
+      <div class="noteHead">
+        <div><div class="qtag ${n.cat}">NOTE PAGE</div><h2><span class="hl">${n.title}</span></h2></div>
+        <div class="noteInstruction">✍ copy key words only</div>
+      </div>
+      ${body}
+      <div class="noteFoot">
+        <div class="noteRule">${n.rule}</div>
+        <div class="noteCue">picture → key word → example</div>
+      </div>
+    </div>`;
+  counter.textContent=`${idx+1} / ${filtered.length} • NOTE PAGE`;
+  progress.style.width=`${((idx+1)/filtered.length)*100}%`;
+  scoreEl.textContent=`Score ${score()} • Attempted ${answeredCount()}/${Q.length}`;
+  prevBtn.disabled=idx===0;
+  nextBtn.disabled=false;
+  nextBtn.textContent=idx===filtered.length-1?'Finish':'Next';
+}
+
+function renderQuestion(item){
+  const qi=item.qi,q=Q[qi],answered=answers[qi]!==null;
+  slide.innerHTML=`
+    <span class="clickhint">${answered?'Answer checked':'Choose before moving on'}</span>
+    <div class="qtag ${q.cat}">${q.cat.toUpperCase()}</div>
+    <h2>Question ${qi+1}: <span class="hl">${q.q}</span></h2>
+    <div class="qLayout">
+      <div class="visual">${q.v}</div>
+      <div class="answers">
+        ${q.o.map((_,oi)=>optionHTML(q,qi,oi)).join('')}
+        ${feedbackHTML(q,qi)}
+      </div>
+    </div>`;
+  slide.querySelectorAll('.option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(answers[qi]!==null)return;
+      answers[qi]=Number(btn.dataset.opt);
+      render();
+    });
+  });
+  counter.textContent=`${idx+1} / ${filtered.length} • overall Q${qi+1}/${Q.length}`;
+  progress.style.width=`${((idx+1)/filtered.length)*100}%`;
+  scoreEl.textContent=`Score ${score()} • Attempted ${answeredCount()}/${Q.length}`;
+  prevBtn.disabled=idx===0;
+  nextBtn.disabled=false;
+  nextBtn.textContent=idx===filtered.length-1?'Finish':'Next';
+}
+
+function renderEnd(){
+  slide.innerHTML=`<div class="endScreen"><div class="endBox">
+    <h1><span class="hl">Question challenge complete</span></h1>
+    <div class="endScore">${score()} / ${Q.length}</div>
+    <p>${answeredCount()} questions attempted</p>
+    <div class="legend"><span>metallic = move e⁻</span><span>ionic = transfer e⁻</span><span>covalent = share e⁻</span></div>
+    <button id="restart">Restart all questions</button>
+  </div></div>`;
+  document.getElementById('restart').onclick=()=>{answers=Array(Q.length).fill(null);setFilter('all')};
+  counter.textContent='Complete';
+  progress.style.width='100%';
+  scoreEl.textContent=`Score ${score()} / ${Q.length}`;
+  prevBtn.disabled=false;
+  nextBtn.disabled=true;
+}
+function render(){
+  if(idx>=filtered.length){renderEnd();return}
+  const item=currentItem();
+  if(item.type==='note') renderNote(item); else renderQuestion(item);
+}
+
+prevBtn.addEventListener('click',()=>{if(idx>0){idx--;render()}});
+nextBtn.addEventListener('click',()=>{if(idx<filtered.length){idx++;render()}});
+document.addEventListener('keydown',e=>{
+  if(idx>=filtered.length)return;
+  const item=currentItem();
+  if(['1','2','3'].includes(e.key)&&item.type==='q'&&answers[item.qi]===null){
+    answers[item.qi]=Number(e.key)-1;render();
+  }
+  if(e.key==='ArrowRight'){e.preventDefault();if(!nextBtn.disabled)nextBtn.click()}
+  if(e.key==='ArrowLeft'){e.preventDefault();if(!prevBtn.disabled)prevBtn.click()}
+  if(e.key.toLowerCase()==='r'){answers=Array(Q.length).fill(null);setFilter('all')}
+});
+updateUtility();
+render();
+
+(function fit(){
+  const scale=Math.min(innerWidth/1365,innerHeight/768,1);
+  document.getElementById('deck').style.transform=`scale(${scale})`;
+})();
+addEventListener('resize',()=>{
+  const scale=Math.min(innerWidth/1365,innerHeight/768,1);
+  document.getElementById('deck').style.transform=`scale(${scale})`;
+});
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299"}' crossorigin="anonymous"></script>
+</body>
+</html>
