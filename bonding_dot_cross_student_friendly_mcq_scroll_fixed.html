@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ionic & Covalent Bonding — Student Friendly Quiz</title>
+<style>
+:root{
+  --ink:#111; --red:#ff2a1c; --green:#10b966; --blue:#1678c8; --purple:#922bbd;
+  --cream:#fbf1da; --pale-green:#e8f3be; --pale-blue:#e5f3fa; --grey:#f5f5f5; --orange:#f28c28;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111;font-family:"Arial Narrow","Liberation Sans Narrow","DejaVu Sans Condensed",Arial,sans-serif;color:var(--ink)}
+#deck{position:relative;width:100vw;height:100vh;background:#111}
+.slide{position:absolute;inset:0;width:1280px;height:720px;margin:auto;background:#fff;display:none;overflow-x:hidden;overflow-y:auto;padding:38px 62px 76px;transform-origin:center center;cursor:default;scrollbar-width:thin;scrollbar-color:#c8c8c8 transparent;overscroll-behavior:contain;touch-action:pan-y}
+.slide::-webkit-scrollbar{width:10px}.slide::-webkit-scrollbar-track{background:transparent}.slide::-webkit-scrollbar-thumb{background:#c8c8c8;border-radius:10px;border:2px solid #fff}
+.slide.active{display:block}
+h1,h2,h3,p,ul,ol{margin:0}
+h1{font-size:70px;font-weight:900;letter-spacing:-1.5px;line-height:.98}
+h2{font-size:54px;font-weight:900;line-height:1}
+h3{font-size:38px;font-weight:900;line-height:1.05}
+.huge{font-size:94px;font-weight:900;line-height:.95}.big{font-size:58px;font-weight:900;line-height:1}.body{font-size:35px;line-height:1.2}.small{font-size:28px;line-height:1.18}.tiny{font-size:20px}
+.red{color:var(--red)}.green{color:var(--green)}.blue{color:var(--blue)}.purple{color:var(--purple)}.center{text-align:center}.muted{color:#666}
+.rule{height:4px;background:#111;margin:12px 0 18px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{border:2px solid #222;border-radius:18px;padding:18px;background:#fff}.soft{background:var(--grey);border:none}.callout{padding:16px 20px;border-left:9px solid var(--red);background:#fafafa;font-size:32px;line-height:1.15}.question{font-size:52px;font-weight:900;line-height:1.04}.prompt{font-size:46px;font-weight:900;color:var(--red)}
+.svgbox{display:flex;align-items:center;justify-content:center;width:100%;height:100%}svg{max-width:100%;max-height:100%}.footer{display:none}
+.fragment{opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease}.fragment.visible{opacity:1;visibility:visible;transform:none}
+.banner{display:grid;grid-template-columns:190px 1fr 1fr;width:1030px;margin:20px auto 0;border:2px solid #222}.banner>div{min-height:178px;display:flex;align-items:center;justify-content:center;padding:12px;border-right:2px solid #222}.banner>div:last-child{border-right:0}.banner .name{background:var(--cream);font-size:31px;font-weight:900;text-align:center}.banner .atoms{background:var(--pale-green)}.banner .product{background:var(--pale-blue)}
+.compare{border-collapse:collapse;width:1100px;margin:24px auto 0;font-size:28px}.compare th,.compare td{border:2px solid #222;padding:12px 14px;text-align:left}.compare th{background:#eee}.mini{font-size:25px}
+.mcq-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.option{border:3px solid #222;border-radius:18px;padding:16px 12px;min-height:78px;background:#fff;font:900 32px/1.05 "Arial Narrow","Liberation Sans Narrow",Arial,sans-serif;color:#111;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease,background .12s ease}
+.option:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.12)}
+.option.selected{border-color:var(--blue);background:#edf6ff;box-shadow:0 0 0 4px rgba(22,120,200,.12)}
+.mcq.graded .option.correct{border-color:var(--green);background:#eefaf3;color:#087c43}
+.mcq.graded .option.selected:not(.correct){border-color:var(--red);background:#fff0ee;color:#b41610}
+.answer-panel{margin-top:16px}
+.answer-panel.green-answer{border-left-color:var(--green)}
+.answer-panel.purple-answer{border-left-color:var(--purple)}
+.quiz-tight .question{font-size:48px}.quiz-tight .mcq-row{margin-top:14px}.quiz-tight .option{font-size:30px;min-height:70px;padding:12px 10px}
+.hint{font-size:24px;color:#666;margin-top:9px;text-align:center}
+@media print{html,body{background:#fff;overflow:visible}.slide{display:block!important;position:relative;transform:none!important;page-break-after:always}.fragment{opacity:1!important;visibility:visible!important;transform:none!important}.option.correct{border-color:var(--green)!important;background:#eefaf3!important}}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<section class="slide">
+  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+    <div class="green huge">Dot-cross diagrams</div>
+    <div class="red huge fragment" style="margin-top:18px">Ionic + covalent</div>
+    <div class="body fragment" style="margin-top:30px">Share or transfer electrons?</div>
+  </div>
+  <div class="footer">1</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Which electrons matter?</h1>
+  <div class="question fragment" style="margin-top:20px">Which electrons are used in bonding?</div>
+  <div class="mcq fragment" data-answer="outer shell">
+    <div class="mcq-row">
+      <button class="option" data-value="inner shell">Inner shell</button>
+      <button class="option correct" data-value="outer shell">Outer shell</button>
+      <button class="option" data-value="nucleus">Nucleus</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:20px;height:360px">
+    <div class="callout green-answer">Bonding uses the <b>outer-shell electrons</b>.<br><span class="small">These are the ones we draw.</span></div>
+    <div class="svgbox" id="outerShellVisual"></div>
+  </div>
+  <div class="footer">2</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Why do atoms bond?</h1>
+  <div class="question fragment" style="margin-top:20px">For most atoms here, how many outer electrons is stable?</div>
+  <div class="mcq fragment" data-answer="8">
+    <div class="mcq-row">
+      <button class="option" data-value="2">2</button>
+      <button class="option" data-value="4">4</button>
+      <button class="option correct" data-value="8">8</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:18px;height:350px">
+    <div><div class="big green">Usually 8</div><div class="body" style="margin-top:18px">Hydrogen is stable with 2.</div></div>
+    <div class="svgbox" id="stableShellVisual"></div>
+  </div>
+  <div class="footer">3</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Two ways atoms can get stable</h1>
+  <div class="question fragment" style="margin-top:20px">Non-metal + non-metal: what happens to electrons?</div>
+  <div class="mcq fragment" data-answer="share">
+    <div class="mcq-row">
+      <button class="option correct" data-value="share">Share</button>
+      <button class="option" data-value="transfer">Transfer</button>
+      <button class="option" data-value="disappear">Disappear</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:24px;height:300px">
+    <div class="card soft center"><div class="big green">Covalent</div><div class="body" style="margin-top:12px">share electrons</div><div class="small" style="margin-top:10px">non-metal + non-metal</div></div>
+    <div class="card soft center"><div class="big purple">Ionic</div><div class="body" style="margin-top:12px">transfer electrons</div><div class="small" style="margin-top:10px">metal + non-metal</div></div>
+  </div>
+  <div class="footer">4</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1 class="green">Covalent: H<sub>2</sub></h1>
+  <div class="question fragment" style="margin-top:18px">Each H has 1 electron. How many more does each need?</div>
+  <div class="mcq fragment" data-answer="1">
+    <div class="mcq-row">
+      <button class="option correct" data-value="1">1 more</button>
+      <button class="option" data-value="2">2 more</button>
+      <button class="option" data-value="7">7 more</button>
+    </div>
+  </div>
+  <div class="banner fragment">
+    <div class="name">Hydrogen<br>H<sub>2</sub></div>
+    <div class="atoms"><div class="svgbox" id="h2Atoms"></div></div>
+    <div class="product"><div class="svgbox" id="h2Product"></div></div>
+  </div>
+  <div class="callout answer-panel green-answer fragment">They share <b>1 pair</b> → one single bond.</div>
+  <div class="footer">5</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Try chlorine, Cl<sub>2</sub></h1>
+  <div class="question fragment" style="margin-top:18px">Each Cl has 7 outer electrons. How many does each need?</div>
+  <div class="mcq fragment" data-answer="1">
+    <div class="mcq-row">
+      <button class="option correct" data-value="1">1 more</button>
+      <button class="option" data-value="2">2 more</button>
+      <button class="option" data-value="7">7 more</button>
+    </div>
+  </div>
+  <div class="banner fragment">
+    <div class="name">Chlorine<br>Cl<sub>2</sub></div>
+    <div class="atoms"><div class="svgbox" id="cl2Atoms"></div></div>
+    <div class="product"><div class="svgbox" id="cl2Product"></div></div>
+  </div>
+  <div class="callout answer-panel green-answer fragment">They share <b>1 pair</b> → one single bond.</div>
+  <div class="footer">6</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Oxygen, O<sub>2</sub></h1>
+  <div class="question fragment" style="margin-top:18px">Oxygen is 2,6. How many shared pairs are needed?</div>
+  <div class="mcq fragment" data-answer="2">
+    <div class="mcq-row">
+      <button class="option" data-value="1">1 pair</button>
+      <button class="option correct" data-value="2">2 pairs</button>
+      <button class="option" data-value="3">3 pairs</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:14px;height:325px">
+    <div class="svgbox" id="o2Before"></div>
+    <div class="svgbox" id="o2After"></div>
+  </div>
+  <div class="callout answer-panel green-answer fragment">2 shared pairs = <b>double bond</b>.</div>
+  <div class="footer">7</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Nitrogen, N<sub>2</sub></h1>
+  <div class="question fragment" style="margin-top:18px">Nitrogen is 2,5. How many shared pairs are needed?</div>
+  <div class="mcq fragment" data-answer="3">
+    <div class="mcq-row">
+      <button class="option" data-value="1">1 pair</button>
+      <button class="option" data-value="2">2 pairs</button>
+      <button class="option correct" data-value="3">3 pairs</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:14px;height:325px">
+    <div class="svgbox" id="n2Before"></div>
+    <div class="svgbox" id="n2After"></div>
+  </div>
+  <div class="callout answer-panel green-answer fragment">3 shared pairs = <b>triple bond</b>.</div>
+  <div class="footer">8</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Water, H<sub>2</sub>O</h1>
+  <div class="question fragment" style="margin-top:16px">Oxygen needs 2 more electrons. How many H atoms should bond to it?</div>
+  <div class="mcq fragment" data-answer="2">
+    <div class="mcq-row">
+      <button class="option" data-value="1">1 H atom</button>
+      <button class="option correct" data-value="2">2 H atoms</button>
+      <button class="option" data-value="3">3 H atoms</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:14px;height:330px;grid-template-columns:.8fr 1.2fr">
+    <div class="card soft center"><div class="body"><b>Think:</b></div><div class="big" style="margin-top:16px">H &nbsp; O &nbsp; H</div><div class="small" style="margin-top:18px">one shared pair on each side</div></div>
+    <div class="svgbox" id="waterModel"></div>
+  </div>
+  <div class="footer">9</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1 class="purple">Now ionic bonding</h1>
+  <div class="question fragment" style="margin-top:20px">In ionic bonding, what happens to electrons?</div>
+  <div class="mcq fragment" data-answer="transfer">
+    <div class="mcq-row">
+      <button class="option" data-value="share">They are shared</button>
+      <button class="option correct" data-value="transfer">They are transferred</button>
+      <button class="option" data-value="destroyed">They are destroyed</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:24px;height:270px">
+    <div class="card soft center"><div class="big purple">Metal</div><div class="body" style="margin-top:12px">loses e<sup>−</sup></div><div class="small" style="margin-top:8px">positive ion</div></div>
+    <div class="card soft center"><div class="big red">Non-metal</div><div class="body" style="margin-top:12px">gains e<sup>−</sup></div><div class="small" style="margin-top:8px">negative ion</div></div>
+  </div>
+  <div class="footer">10</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Sodium chloride, NaCl</h1>
+  <div class="question fragment" style="margin-top:16px">Na is 2,8,1 and Cl is 2,8,7. What is the easiest move?</div>
+  <div class="mcq fragment" data-answer="1">
+    <div class="mcq-row">
+      <button class="option correct" data-value="1">Transfer 1 e<sup>−</sup></button>
+      <button class="option" data-value="2">Transfer 2 e<sup>−</sup></button>
+      <button class="option" data-value="share">Share 1 pair</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:12px;height:320px">
+    <div class="svgbox" id="naclTransfer"></div>
+    <div class="svgbox" id="naclIons"></div>
+  </div>
+  <div class="callout answer-panel purple-answer fragment">Na becomes Na<sup>+</sup>. Cl becomes Cl<sup>−</sup>.</div>
+  <div class="footer">11</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Magnesium oxide, MgO</h1>
+  <div class="question fragment" style="margin-top:16px">Mg has 2 outer electrons. O needs 2. What happens?</div>
+  <div class="mcq fragment" data-answer="2">
+    <div class="mcq-row">
+      <button class="option" data-value="1">Transfer 1 e<sup>−</sup></button>
+      <button class="option correct" data-value="2">Transfer 2 e<sup>−</sup></button>
+      <button class="option" data-value="share">Share 2 pairs</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:12px;height:325px">
+    <div class="svgbox" id="mgoTransfer"></div>
+    <div class="svgbox" id="mgoIons"></div>
+  </div>
+  <div class="footer">12</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Calcium fluoride, CaF<sub>2</sub></h1>
+  <div class="question fragment" style="margin-top:14px">Ca gives away 2 electrons. Each F only needs 1. How many F atoms are needed?</div>
+  <div class="mcq fragment" data-answer="2">
+    <div class="mcq-row">
+      <button class="option" data-value="1">1 fluorine</button>
+      <button class="option correct" data-value="2">2 fluorines</button>
+      <button class="option" data-value="3">3 fluorines</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:12px;height:315px;grid-template-columns:.8fr 1.2fr">
+    <div class="card soft center"><div class="big">Ca</div><div class="small" style="margin-top:14px">gives 1 e<sup>−</sup> to each F</div><div class="big" style="margin-top:18px">F &nbsp;&nbsp; F</div></div>
+    <div class="svgbox" id="caf2Ions"></div>
+  </div>
+  <div class="footer">13</div>
+</section>
+
+<section class="slide">
+  <h1>Quick comparison</h1>
+  <table class="compare fragment">
+    <tr><th></th><th class="green">Covalent</th><th class="purple">Ionic</th></tr>
+    <tr><td><b>Atoms</b></td><td>non-metal + non-metal</td><td>metal + non-metal</td></tr>
+    <tr><td><b>Electrons</b></td><td>shared</td><td>transferred</td></tr>
+    <tr><td><b>Result</b></td><td>molecule</td><td>positive + negative ions</td></tr>
+    <tr><td><b>Examples</b></td><td>H<sub>2</sub>O, O<sub>2</sub>, N<sub>2</sub></td><td>NaCl, MgO, CaF<sub>2</sub></td></tr>
+  </table>
+  <div class="question center fragment" style="margin-top:24px">Ask yourself: <span class="green">share</span> or <span class="purple">transfer</span>?</div>
+  <div class="footer">14</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Question 1</h1>
+  <div class="question" style="margin-top:22px">Is HCl ionic or covalent?</div>
+  <div class="mcq fragment" data-answer="covalent">
+    <div class="mcq-row">
+      <button class="option" data-value="ionic">Ionic</button>
+      <button class="option correct" data-value="covalent">Covalent</button>
+      <button class="option" data-value="neither">Neither</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:20px;height:330px">
+    <div><div class="big green">Covalent</div><div class="body" style="margin-top:16px">H + Cl are both non-metals.</div></div>
+    <div class="svgbox" id="hclVisual"></div>
+  </div>
+  <div class="footer">15</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Question 2</h1>
+  <div class="question" style="margin-top:22px">Is MgCl<sub>2</sub> ionic or covalent?</div>
+  <div class="mcq fragment" data-answer="ionic">
+    <div class="mcq-row">
+      <button class="option correct" data-value="ionic">Ionic</button>
+      <button class="option" data-value="covalent">Covalent</button>
+      <button class="option" data-value="metallic">Metallic</button>
+    </div>
+  </div>
+  <div class="callout purple-answer fragment" style="margin-top:30px;font-size:38px"><b>Ionic.</b> Mg is a metal; Cl is a non-metal.<br><span class="small">Mg loses 2 electrons → one to each Cl.</span></div>
+  <div class="footer">16</div>
+</section>
+
+<section class="slide quiz-tight">
+  <h1>Question 3</h1>
+  <div class="question" style="margin-top:22px">How many shared pairs are in O<sub>2</sub>?</div>
+  <div class="mcq fragment" data-answer="2">
+    <div class="mcq-row">
+      <button class="option" data-value="1">1 pair</button>
+      <button class="option correct" data-value="2">2 pairs</button>
+      <button class="option" data-value="3">3 pairs</button>
+    </div>
+  </div>
+  <div class="two-col fragment" style="margin-top:14px;height:330px">
+    <div><div class="big green">2 shared pairs</div><div class="body" style="margin-top:14px">That is a <b>double bond</b>.</div></div>
+    <div class="svgbox" id="o2Check"></div>
+  </div>
+  <div class="footer">17</div>
+</section>
+
+<section class="slide">
+  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+    <div class="huge green">Remember</div>
+    <div class="big fragment" style="margin-top:28px">Covalent = <span class="green">share</span></div>
+    <div class="big fragment" style="margin-top:16px">Ionic = <span class="purple">transfer</span></div>
+    <div class="body fragment" style="margin-top:30px">Always check the outer shell.</div>
+  </div>
+  <div class="footer">18</div>
+</section>
+
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0,fragmentIndex=0,deckScale=1;
+function scaleDeck(){deckScale=Math.min(innerWidth/1280,innerHeight/720);slides.forEach(sl=>sl.style.transform=`scale(${deckScale})`)}
+function ensureVisible(el){
+  if(!el) return;
+  const slide=slides[current];
+  requestAnimationFrame(()=>{
+    const r=el.getBoundingClientRect(), sr=slide.getBoundingClientRect();
+    const bottomPad=28, topPad=18;
+    if(r.bottom>sr.bottom-bottomPad){
+      slide.scrollBy({top:(r.bottom-(sr.bottom-bottomPad))/deckScale+24,behavior:'smooth'});
+    }else if(r.top<sr.top+topPad){
+      slide.scrollBy({top:(r.top-(sr.top+topPad))/deckScale-24,behavior:'smooth'});
+    }
+  });
+}
+function frags(){return [...slides[current].querySelectorAll('.fragment')]}
+function gradeVisible(){
+  const f=frags();
+  slides[current].querySelectorAll('.mcq').forEach(mcq=>{
+    const idx=f.indexOf(mcq);
+    mcq.classList.toggle('graded', idx>=0 && fragmentIndex>idx+1);
+  });
+}
+function applyFragments(){const f=frags();f.forEach((el,i)=>el.classList.toggle('visible',i<fragmentIndex));gradeVisible()}
+function showSlide(i,frag=0){current=(i+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle('active',j===current));slides[current].scrollTop=0;fragmentIndex=Math.max(0,Math.min(frag,frags().length));applyFragments();if(fragmentIndex>0) ensureVisible(frags()[fragmentIndex-1])}
+function nextStep(){const f=frags();if(fragmentIndex<f.length){const revealed=f[fragmentIndex];fragmentIndex++;applyFragments();ensureVisible(revealed)}else showSlide(current+1,0)}
+function prevStep(){if(fragmentIndex>0){fragmentIndex--;applyFragments()}else{const p=(current-1+slides.length)%slides.length;showSlide(p,[...slides[p].querySelectorAll('.fragment')].length)}}
+document.querySelectorAll('.mcq').forEach(mcq=>{
+  mcq.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    mcq.querySelectorAll('.option').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }));
+});
+addEventListener('resize',scaleDeck);
+addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();nextStep()}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prevStep()}
+  if(e.key.toLowerCase()==='f')document.documentElement.requestFullscreen?.()
+});
+document.getElementById('deck').addEventListener('click',e=>{
+  if(e.target.closest('.option')) return;
+  nextStep();
+});
+scaleDeck();
+const params=new URLSearchParams(location.search);
+const start=Math.max(0,Math.min(slides.length-1,(parseInt(params.get('slide')||'1',10)-1)));
+showSlide(start, params.get('all')==='1' ? [...slides[start].querySelectorAll('.fragment')].length : 0);
+
+const NS='http://www.w3.org/2000/svg';
+function svg(w=520,h=360){const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox',`0 0 ${w} ${h}`);s.setAttribute('width','100%');s.setAttribute('height','100%');return s}
+function el(s,tag,attrs={}){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));s.appendChild(e);return e}
+function txt(s,x,y,t,size=42,weight=800,fill='#111',anchor='middle'){const e=el(s,'text',{x,y,'font-size':size,'font-family':'Arial, sans-serif','font-weight':weight,fill,'text-anchor':anchor,'dominant-baseline':'middle'});e.textContent=t;return e}
+function circle(s,cx,cy,r,stroke='#111',sw=3,fill='none'){return el(s,'circle',{cx,cy,r,fill,stroke,'stroke-width':sw})}
+function line(s,x1,y1,x2,y2,stroke='#111',sw=3){return el(s,'line',{x1,y1,x2,y2,stroke,'stroke-width':sw})}
+function dot(s,x,y,r=6,fill='#111'){return el(s,'circle',{cx:x,cy:y,r,fill})}
+function crossMark(s,x,y,size=20,fill='#111'){return txt(s,x,y,'×',size,900,fill)}
+function arrow(s,x1,y1,x2,y2,color='#e22'){line(s,x1,y1,x2,y2,color,5);const a=Math.atan2(y2-y1,x2-x1),L=16;const p1=[x2-L*Math.cos(a-.55),y2-L*Math.sin(a-.55)],p2=[x2-L*Math.cos(a+.55),y2-L*Math.sin(a+.55)];el(s,'polygon',{points:`${x2},${y2} ${p1[0]},${p1[1]} ${p2[0]},${p2[1]}`,fill:color})}
+function lonePair(s,x,y,vertical=false,kind='dot',color='#111'){if(vertical){kind==='dot'?(dot(s,x,y-8,6,color),dot(s,x,y+8,6,color)):(crossMark(s,x,y-8,18,color),crossMark(s,x,y+8,18,color))}else{kind==='dot'?(dot(s,x-8,y,6,color),dot(s,x+8,y,6,color)):(crossMark(s,x-8,y,18,color),crossMark(s,x+8,y,18,color))}}
+function atomDots(target,symbol,valence,color='#018f60'){const s=svg(240,170);txt(s,120,85,symbol,64);const pos=[[120,20],[120,150],[35,85],[205,85]];let e=valence,idx=0;while(e>=2&&idx<4){lonePair(s,pos[idx][0],pos[idx][1],idx>1,'dot',color);e-=2;idx++}if(e===1){const p=pos[idx]||[205,85];dot(s,p[0],p[1],6,color)}target.appendChild(s)}
+function bannerAtoms(target,spec){const wrap=document.createElement('div');wrap.style.display='flex';wrap.style.alignItems='center';wrap.style.justifyContent='center';wrap.style.gap='12px';spec.forEach((sp,i)=>{const d=document.createElement('div');d.style.width='140px';d.style.height='150px';atomDots(d,sp[0],sp[1],sp[2]||'#018f60');wrap.appendChild(d);if(i<spec.length-1){const plus=document.createElement('div');plus.textContent='+';plus.style.fontSize='44px';plus.style.fontWeight='900';wrap.appendChild(plus)}});target.appendChild(wrap)}
+function lewisDiatomic(target,a,b,bonds=1,color='#018f60'){const s=svg(520,220),x1=170,x2=350,y=110;txt(s,x1,y,a,64);txt(s,x2,y,b,64);for(let i=0;i<bonds;i++){const yy=y+(i-(bonds-1)/2)*30;dot(s,250,yy,7,color);dot(s,270,yy,7,color)}const val={H:1,F:7,Cl:7,O:6,N:5};function pairs(x,side,sym){if(sym==='H')return;const n=Math.round(((val[sym]||0)-bonds)/2);const pos=side==='L'?[[x,y-55],[x,y+55],[x-62,y]]:[[x,y-55],[x,y+55],[x+62,y]];for(let i=0;i<n&&i<3;i++)lonePair(s,pos[i][0],pos[i][1],i===2,'dot',color)}pairs(x1,'L',a);pairs(x2,'R',b);target.appendChild(s)}
+function covalentDiatomic(target,a,b,bonds=1){const s=svg(560,360),x1=210,x2=350,y=185,r=120;circle(s,x1,y,r,'#222',2);circle(s,x2,y,r,'#222',2);txt(s,x1,y,a,56);txt(s,x2,y,b,56);for(let i=0;i<bonds;i++){const yy=y+(i-(bonds-1)/2)*34;dot(s,273,yy,7,'#111');crossMark(s,287,yy,24,'#111')}const val={H:1,F:7,Cl:7,O:6,N:5};function addPairs(which,kind,count){const x=which==='L'?x1:x2;const positions=[[x,y-122],[x,y+122],[which==='L'?x-122:x+122,y]];for(let i=0;i<count;i++){const [px,py]=positions[i];lonePair(s,px,py,Math.abs(px-x)>50,kind)}}const lpL=Math.max(0,((val[a]||1)-bonds)/2),lpR=Math.max(0,((val[b]||1)-bonds)/2);if(a!=='H')addPairs('L','dot',Math.round(lpL));if(b!=='H')addPairs('R','cross',Math.round(lpR));target.appendChild(s)}
+function water(target){const s=svg(520,430),cx=260,cy=160;circle(s,cx,cy,120);txt(s,cx,cy,'O',58);const hs=[[155,320],[365,320]];hs.forEach((p)=>{circle(s,p[0],p[1],78);txt(s,p[0],p[1],'H',46);const vx=p[0]-cx,vy=p[1]-cy,len=Math.hypot(vx,vy),ux=vx/len,uy=vy/len;const mx=cx+ux*98,my=cy+uy*98;dot(s,mx-uy*7,my+ux*7,6,'#f28c28');crossMark(s,mx+uy*7,my-ux*7,22,'#f28c28')});lonePair(s,220,47,false,'dot','#f28c28');lonePair(s,300,47,false,'dot','#f28c28');txt(s,260,404,'2 single bonds',24,800,'#10b966');target.appendChild(s)}
+function shellAtom(target,symbol,shells,outerColor='#e22',label=''){const s=svg(460,420),cx=230,cy=205;const rs=[55,100,148,185];shells.forEach((n,si)=>{circle(s,cx,cy,rs[si],'#222',2);if(si===shells.length-1){for(let i=0;i<n;i++){const a=-Math.PI/2+i*2*Math.PI/n;dot(s,cx+rs[si]*Math.cos(a),cy+rs[si]*Math.sin(a),8,outerColor)}}});txt(s,cx,cy,symbol,52);if(label)txt(s,cx,396,label,24,800,outerColor);target.appendChild(s)}
+function simpleIon(s,x,y,symbol,charge,electronCount,kind='dot',accent='#111'){const w=170,h=170;el(s,'rect',{x:x-w/2,y:y-h/2,width:w,height:h,fill:'#fff',stroke:'#111','stroke-width':4,rx:4});txt(s,x,y,symbol,48);txt(s,x+w/2-10,y-h/2+15,charge,26,900,'#111','end');const pos=[[x,y-h/2+18],[x,y+h/2-18],[x-w/2+18,y],[x+w/2-18,y]];let pairs=Math.floor(electronCount/2),single=electronCount%2;for(let i=0;i<pairs&&i<4;i++)lonePair(s,pos[i][0],pos[i][1],i>1,kind,accent);if(single){const p=pos[pairs];dot(s,p[0],p[1],5,accent)}}
+function transferDiagram(target,metal,nonmetal,count=1){const s=svg(900,360),mx=235,my=180,nx=665,ny=180;circle(s,mx,my,110,'#222',2);circle(s,nx,ny,110,'#222',2);txt(s,mx,my,metal,58);txt(s,nx,ny,nonmetal,58);for(let i=0;i<count;i++){const yy=145+i*60;dot(s,mx+92,yy,8,'#922bbd');arrow(s,mx+125,yy,nx-125,yy,'#ff2a1c');crossMark(s,nx-92,yy,24,'#ff2a1c')}txt(s,450,330,`${count} electron${count>1?'s':''} transferred`,25,800,'#922bbd');target.appendChild(s)}
+function oneIonPair(target,leftSym,leftCharge,rightSym,rightCharge){const s=svg(760,300);simpleIon(s,220,150,leftSym,leftCharge,0,'dot','#922bbd');txt(s,380,150,'+',50);simpleIon(s,540,150,rightSym,rightCharge,8,'cross','#ff2a1c');target.appendChild(s)}
+function threeIons(target,centerSym,centerCharge,rightSym,rightCharge){const s=svg(980,300);simpleIon(s,180,150,centerSym,centerCharge,0,'dot','#922bbd');txt(s,330,150,'+',46);simpleIon(s,490,150,rightSym,rightCharge,8,'cross','#ff2a1c');txt(s,650,150,'+',46);simpleIon(s,810,150,rightSym,rightCharge,8,'cross','#ff2a1c');target.appendChild(s)}
+function outerShell(target){const s=svg(520,420),cx=260,cy=195;circle(s,cx,cy,70,'#aaa',2);circle(s,cx,cy,155,'#1678c8',5);txt(s,cx,cy,'O',58);for(let i=0;i<6;i++){const a=-Math.PI/2+i*2*Math.PI/6;dot(s,cx+155*Math.cos(a),cy+155*Math.sin(a),9,'#ff2a1c')}txt(s,260,388,'outer-shell electrons',26,900,'#ff2a1c');target.appendChild(s)}
+
+outerShell(document.getElementById('outerShellVisual'));
+shellAtom(document.getElementById('stableShellVisual'),'Ne',[2,8],'#10b966','full outer shell');
+bannerAtoms(document.getElementById('h2Atoms'),[['H',1,'#4a2b9b'],['H',1,'#111']]);lewisDiatomic(document.getElementById('h2Product'),'H','H',1,'#111');
+bannerAtoms(document.getElementById('cl2Atoms'),[['Cl',7,'#0b9e59'],['Cl',7,'#0b9e59']]);lewisDiatomic(document.getElementById('cl2Product'),'Cl','Cl',1,'#0b9e59');
+bannerAtoms(document.getElementById('o2Before'),[['O',6,'#d7194a'],['O',6,'#d7194a']]);covalentDiatomic(document.getElementById('o2After'),'O','O',2);
+bannerAtoms(document.getElementById('n2Before'),[['N',5,'#8c3f2c'],['N',5,'#8c3f2c']]);covalentDiatomic(document.getElementById('n2After'),'N','N',3);
+water(document.getElementById('waterModel'));
+transferDiagram(document.getElementById('naclTransfer'),'Na','Cl',1);oneIonPair(document.getElementById('naclIons'),'Na','+','Cl','−');
+transferDiagram(document.getElementById('mgoTransfer'),'Mg','O',2);oneIonPair(document.getElementById('mgoIons'),'Mg','2+','O','2−');
+threeIons(document.getElementById('caf2Ions'),'Ca','2+','F','−');
+covalentDiatomic(document.getElementById('hclVisual'),'H','Cl',1);covalentDiatomic(document.getElementById('o2Check'),'O','O',2);
+
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"1c1c7799c54e46349cc23295b5e08299"}' crossorigin="anonymous"></script>
+</body>
+</html>
